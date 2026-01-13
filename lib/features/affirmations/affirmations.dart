@@ -6,6 +6,7 @@ library;
 // Data
 export 'data/models/affirmation.dart';
 export 'data/repositories/affirmation_repository.dart';
+export 'data/repositories/hive_affirmation_repository.dart';
 
 // Domain
 export 'domain/usecases/create_affirmation.dart';

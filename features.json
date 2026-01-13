@@ -109,7 +109,7 @@
       "description": "Create AffirmationRepository for CRUD operations with Hive, abstracting storage implementation",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-017", "FR-018"]
     },
     {
