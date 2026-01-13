@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T09:31:18.753Z",
+  "lastUpdated": "2026-01-13T09:38:46.890Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 3,
-    "totalSessions": 3,
-    "totalTimeMs": 2376759,
-    "totalTimeFormatted": "39m 36s",
-    "averageFeatureTimeMs": 792253,
-    "averageFeatureTimeFormatted": "13m 12s",
-    "averageSessionTimeMs": 792253,
-    "averageSessionTimeFormatted": "13m 12s"
+    "completedFeatures": 4,
+    "totalSessions": 4,
+    "totalTimeMs": 2822892,
+    "totalTimeFormatted": "47m 2s",
+    "averageFeatureTimeMs": 705723,
+    "averageFeatureTimeFormatted": "11m 45s",
+    "averageSessionTimeMs": 705723,
+    "averageSessionTimeFormatted": "11m 45s"
   },
   "features": [
     {
@@ -61,6 +61,22 @@
         "b9abba2e92a08f2a0d168f9781ff54a6da0c9b67"
       ],
       "durationFormatted": "30m 17s"
+    },
+    {
+      "featureId": "INFRA-004",
+      "featureName": "INFRA-004",
+      "description": "Set up Provider/Riverpod for state management with AffirmationProvider and SettingsProvider",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T09:31:20.756Z",
+      "completedAt": "2026-01-13T09:38:46.889Z",
+      "durationMs": 446133,
+      "sessionId": "session-mkce6r78-p0yhm5",
+      "sessionsCount": 1,
+      "commits": [
+        "f7702cc25e9aa1b0b581683b5a3046b7acdf9a3d"
+      ],
+      "durationFormatted": "7m 26s"
     }
   ],
   "sessions": [
@@ -114,22 +130,39 @@
         "b9abba2e92a08f2a0d168f9781ff54a6da0c9b67"
       ],
       "durationFormatted": "30m 17s"
+    },
+    {
+      "sessionId": "session-mkce6r78-p0yhm5",
+      "startedAt": "2026-01-13T09:31:20.756Z",
+      "endedAt": "2026-01-13T09:38:46.889Z",
+      "durationMs": 446133,
+      "featuresWorkedOn": [
+        "INFRA-004"
+      ],
+      "featuresCompleted": [
+        "INFRA-004"
+      ],
+      "status": "completed",
+      "commits": [
+        "f7702cc25e9aa1b0b581683b5a3046b7acdf9a3d"
+      ],
+      "durationFormatted": "7m 26s"
     }
   ],
   "byCategory": {
     "infrastructure": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 2376759,
-      "averageTimeMs": 792253
+      "completed": 4,
+      "totalTimeMs": 2822892,
+      "averageTimeMs": 705723
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 2376759,
-      "averageTimeMs": 792253
+      "completed": 4,
+      "totalTimeMs": 2822892,
+      "averageTimeMs": 705723
     }
   }
 }
