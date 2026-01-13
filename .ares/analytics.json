@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T08:54:37.260Z",
+  "lastUpdated": "2026-01-13T09:00:58.877Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 1,
-    "totalSessions": 1,
-    "totalTimeMs": 179272,
-    "totalTimeFormatted": "2m 59s",
-    "averageFeatureTimeMs": 179272,
-    "averageFeatureTimeFormatted": "2m 59s",
-    "averageSessionTimeMs": 179272,
-    "averageSessionTimeFormatted": "2m 59s"
+    "completedFeatures": 2,
+    "totalSessions": 2,
+    "totalTimeMs": 558886,
+    "totalTimeFormatted": "9m 18s",
+    "averageFeatureTimeMs": 279443,
+    "averageFeatureTimeFormatted": "4m 39s",
+    "averageSessionTimeMs": 279443,
+    "averageSessionTimeFormatted": "4m 39s"
   },
   "features": [
     {
@@ -29,6 +29,22 @@
         "851c05909c6cf99a662b4948c559966c7025faa4"
       ],
       "durationFormatted": "2m 59s"
+    },
+    {
+      "featureId": "INFRA-002",
+      "featureName": "INFRA-002",
+      "description": "Implement feature-based folder structure: lib/core/, lib/features/affirmations/, lib/features/settings/, lib/features/onboarding/, lib/widgets/native_widget/",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T08:54:39.262Z",
+      "completedAt": "2026-01-13T09:00:58.876Z",
+      "durationMs": 379614,
+      "sessionId": "session-mkccvkim-qupbxg",
+      "sessionsCount": 1,
+      "commits": [
+        "4d507b6acd00b081607e45bd9342ee4d24137a57"
+      ],
+      "durationFormatted": "6m 19s"
     }
   ],
   "sessions": [
@@ -48,22 +64,39 @@
         "851c05909c6cf99a662b4948c559966c7025faa4"
       ],
       "durationFormatted": "2m 59s"
+    },
+    {
+      "sessionId": "session-mkccvkim-qupbxg",
+      "startedAt": "2026-01-13T08:54:39.262Z",
+      "endedAt": "2026-01-13T09:00:58.876Z",
+      "durationMs": 379614,
+      "featuresWorkedOn": [
+        "INFRA-002"
+      ],
+      "featuresCompleted": [
+        "INFRA-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "4d507b6acd00b081607e45bd9342ee4d24137a57"
+      ],
+      "durationFormatted": "6m 19s"
     }
   ],
   "byCategory": {
     "infrastructure": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 179272,
-      "averageTimeMs": 179272
+      "completed": 2,
+      "totalTimeMs": 558886,
+      "averageTimeMs": 279443
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 179272,
-      "averageTimeMs": 179272
+      "completed": 2,
+      "totalTimeMs": 558886,
+      "averageTimeMs": 279443
     }
   }
 }
