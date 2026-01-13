@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T09:54:14.415Z",
+  "lastUpdated": "2026-01-13T10:00:17.648Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 7,
-    "totalSessions": 7,
-    "totalTimeMs": 3744407,
-    "totalTimeFormatted": "1h 2m",
-    "averageFeatureTimeMs": 534915,
-    "averageFeatureTimeFormatted": "8m 54s",
-    "averageSessionTimeMs": 534915,
-    "averageSessionTimeFormatted": "8m 54s"
+    "completedFeatures": 8,
+    "totalSessions": 8,
+    "totalTimeMs": 4105637,
+    "totalTimeFormatted": "1h 8m",
+    "averageFeatureTimeMs": 513205,
+    "averageFeatureTimeFormatted": "8m 33s",
+    "averageSessionTimeMs": 513205,
+    "averageSessionTimeFormatted": "8m 33s"
   },
   "features": [
     {
@@ -125,6 +125,22 @@
         "829ae3fb04738b6231e128724a7f3a4651894036"
       ],
       "durationFormatted": "6m 16s"
+    },
+    {
+      "featureId": "FUNC-004",
+      "featureName": "FUNC-004",
+      "description": "Implement functionality to delete affirmations with confirmation dialog",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T09:54:16.417Z",
+      "completedAt": "2026-01-13T10:00:17.647Z",
+      "durationMs": 361230,
+      "sessionId": "session-mkcf08o1-b7bc6v",
+      "sessionsCount": 1,
+      "commits": [
+        "393269d2881726d13fcd2a51ad2b925250b7291b"
+      ],
+      "durationFormatted": "6m 1s"
     }
   ],
   "sessions": [
@@ -246,6 +262,23 @@
         "829ae3fb04738b6231e128724a7f3a4651894036"
       ],
       "durationFormatted": "6m 16s"
+    },
+    {
+      "sessionId": "session-mkcf08o1-b7bc6v",
+      "startedAt": "2026-01-13T09:54:16.417Z",
+      "endedAt": "2026-01-13T10:00:17.647Z",
+      "durationMs": 361230,
+      "featuresWorkedOn": [
+        "FUNC-004"
+      ],
+      "featuresCompleted": [
+        "FUNC-004"
+      ],
+      "status": "completed",
+      "commits": [
+        "393269d2881726d13fcd2a51ad2b925250b7291b"
+      ],
+      "durationFormatted": "6m 1s"
     }
   ],
   "byCategory": {
@@ -257,17 +290,17 @@
     },
     "functional": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 921515,
-      "averageTimeMs": 307172
+      "completed": 4,
+      "totalTimeMs": 1282745,
+      "averageTimeMs": 320686
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 7,
-      "totalTimeMs": 3744407,
-      "averageTimeMs": 534915
+      "completed": 8,
+      "totalTimeMs": 4105637,
+      "averageTimeMs": 513205
     }
   }
 }
