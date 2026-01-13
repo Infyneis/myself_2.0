@@ -1,16 +1,16 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:50:26.175Z",
+  "lastUpdated": "2026-01-13T20:53:27.773Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 70,
-    "totalSessions": 105,
-    "totalTimeMs": 21815611,
-    "totalTimeFormatted": "6h 3m",
-    "averageFeatureTimeMs": 303189,
-    "averageFeatureTimeFormatted": "5m 3s",
-    "averageSessionTimeMs": 207768,
+    "completedFeatures": 71,
+    "totalSessions": 106,
+    "totalTimeMs": 21995201,
+    "totalTimeFormatted": "6h 6m",
+    "averageFeatureTimeMs": 301448,
+    "averageFeatureTimeFormatted": "5m 1s",
+    "averageSessionTimeMs": 207502,
     "averageSessionTimeFormatted": "3m 27s"
   },
   "features": [
@@ -1127,6 +1127,22 @@
         "e5e3f38d28207329f5f11d52bf4b24992492ce44"
       ],
       "durationFormatted": "3m 36s"
+    },
+    {
+      "featureId": "TEST-010",
+      "featureName": "TEST-010",
+      "description": "Write integration tests for widget and app data synchronization",
+      "category": "testing",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T20:50:28.181Z",
+      "completedAt": "2026-01-13T20:53:27.771Z",
+      "durationMs": 179590,
+      "sessionId": "session-mkd2g442-jjtwy7",
+      "sessionsCount": 1,
+      "commits": [
+        "d1bf9a4f5b63ffe49033cd382ab6c82be190e9e3"
+      ],
+      "durationFormatted": "2m 59s"
     }
   ],
   "sessions": [
@@ -2838,6 +2854,23 @@
         "e5e3f38d28207329f5f11d52bf4b24992492ce44"
       ],
       "durationFormatted": "3m 36s"
+    },
+    {
+      "sessionId": "session-mkd2g442-jjtwy7",
+      "startedAt": "2026-01-13T20:50:28.181Z",
+      "endedAt": "2026-01-13T20:53:27.771Z",
+      "durationMs": 179590,
+      "featuresWorkedOn": [
+        "TEST-010"
+      ],
+      "featuresCompleted": [
+        "TEST-010"
+      ],
+      "status": "completed",
+      "commits": [
+        "d1bf9a4f5b63ffe49033cd382ab6c82be190e9e3"
+      ],
+      "durationFormatted": "2m 59s"
     }
   ],
   "byCategory": {
@@ -2873,9 +2906,9 @@
     },
     "testing": {
       "total": 0,
-      "completed": 9,
-      "totalTimeMs": 2712463,
-      "averageTimeMs": 301385
+      "completed": 10,
+      "totalTimeMs": 2892053,
+      "averageTimeMs": 289205
     }
   },
   "byPriority": {
@@ -2887,9 +2920,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 14,
-      "totalTimeMs": 4274275,
-      "averageTimeMs": 305305
+      "completed": 15,
+      "totalTimeMs": 4453865,
+      "averageTimeMs": 296924
     },
     "could-have": {
       "total": 0,
