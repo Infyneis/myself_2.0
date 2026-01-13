@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T13:16:11.165Z",
+  "lastUpdated": "2026-01-13T13:20:21.371Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 17,
-    "totalSessions": 44,
-    "totalTimeMs": 7724327,
-    "totalTimeFormatted": "2h 8m",
-    "averageFeatureTimeMs": 423543,
-    "averageFeatureTimeFormatted": "7m 3s",
-    "averageSessionTimeMs": 175553,
-    "averageSessionTimeFormatted": "2m 55s"
+    "completedFeatures": 18,
+    "totalSessions": 45,
+    "totalTimeMs": 7972529,
+    "totalTimeFormatted": "2h 12m",
+    "averageFeatureTimeMs": 413802,
+    "averageFeatureTimeFormatted": "6m 53s",
+    "averageSessionTimeMs": 177167,
+    "averageSessionTimeFormatted": "2m 57s"
   },
   "features": [
     {
@@ -285,6 +285,22 @@
         "9b8a6fe5b07b935e0bb4790a7cd82c7e9cf45d0a"
       ],
       "durationFormatted": "3m 10s"
+    },
+    {
+      "featureId": "UI-002",
+      "featureName": "UI-002",
+      "description": "Implement theme switching between light, dark, and system modes with proper color adaptation",
+      "category": "ui",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T13:16:13.168Z",
+      "completedAt": "2026-01-13T13:20:21.370Z",
+      "durationMs": 248202,
+      "sessionId": "session-mkcm7y0f-xjdxfx",
+      "sessionsCount": 1,
+      "commits": [
+        "3dfbc71a5c815d4ccd1b7e2876af43e79ce8e337"
+      ],
+      "durationFormatted": "4m 8s"
     }
   ],
   "sessions": [
@@ -981,6 +997,23 @@
         "9b8a6fe5b07b935e0bb4790a7cd82c7e9cf45d0a"
       ],
       "durationFormatted": "3m 10s"
+    },
+    {
+      "sessionId": "session-mkcm7y0f-xjdxfx",
+      "startedAt": "2026-01-13T13:16:13.168Z",
+      "endedAt": "2026-01-13T13:20:21.370Z",
+      "durationMs": 248202,
+      "featuresWorkedOn": [
+        "UI-002"
+      ],
+      "featuresCompleted": [
+        "UI-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "3dfbc71a5c815d4ccd1b7e2876af43e79ce8e337"
+      ],
+      "durationFormatted": "4m 8s"
     }
   ],
   "byCategory": {
@@ -998,17 +1031,17 @@
     },
     "ui": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 190479,
-      "averageTimeMs": 190479
+      "completed": 2,
+      "totalTimeMs": 438681,
+      "averageTimeMs": 219341
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 13,
-      "totalTimeMs": 5222133,
-      "averageTimeMs": 401703
+      "completed": 14,
+      "totalTimeMs": 5470335,
+      "averageTimeMs": 390738
     },
     "should-have": {
       "total": 0,
