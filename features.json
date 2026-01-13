@@ -91,7 +91,7 @@
       "description": "Support multi-line text input and display for affirmations",
       "category": "functional",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-005"]
     },
     {
