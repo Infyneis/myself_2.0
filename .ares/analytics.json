@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:28:11.931Z",
+  "lastUpdated": "2026-01-13T20:37:19.247Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 67,
-    "totalSessions": 102,
-    "totalTimeMs": 20487387,
-    "totalTimeFormatted": "5h 41m",
-    "averageFeatureTimeMs": 296940,
-    "averageFeatureTimeFormatted": "4m 56s",
-    "averageSessionTimeMs": 200857,
-    "averageSessionTimeFormatted": "3m 20s"
+    "completedFeatures": 68,
+    "totalSessions": 103,
+    "totalTimeMs": 21032697,
+    "totalTimeFormatted": "5h 50m",
+    "averageFeatureTimeMs": 300592,
+    "averageFeatureTimeFormatted": "5m 0s",
+    "averageSessionTimeMs": 204201,
+    "averageSessionTimeFormatted": "3m 24s"
   },
   "features": [
     {
@@ -1081,6 +1081,20 @@
         "eb640a811a56eaf66469060f54e546e8168b00e1"
       ],
       "durationFormatted": "6m 50s"
+    },
+    {
+      "featureId": "TEST-007",
+      "featureName": "TEST-007",
+      "description": "Write widget tests for theme switching functionality",
+      "category": "testing",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T20:28:13.936Z",
+      "completedAt": "2026-01-13T20:37:19.246Z",
+      "durationMs": 545310,
+      "sessionId": "session-mkd1nilq-scbz8v",
+      "sessionsCount": 1,
+      "commits": [],
+      "durationFormatted": "9m 5s"
     }
   ],
   "sessions": [
@@ -2743,6 +2757,21 @@
         "eb640a811a56eaf66469060f54e546e8168b00e1"
       ],
       "durationFormatted": "6m 50s"
+    },
+    {
+      "sessionId": "session-mkd1nilq-scbz8v",
+      "startedAt": "2026-01-13T20:28:13.936Z",
+      "endedAt": "2026-01-13T20:37:19.246Z",
+      "durationMs": 545310,
+      "featuresWorkedOn": [
+        "TEST-007"
+      ],
+      "featuresCompleted": [
+        "TEST-007"
+      ],
+      "status": "completed",
+      "commits": [],
+      "durationFormatted": "9m 5s"
     }
   ],
   "byCategory": {
@@ -2778,9 +2807,9 @@
     },
     "testing": {
       "total": 0,
-      "completed": 6,
-      "totalTimeMs": 1384239,
-      "averageTimeMs": 230707
+      "completed": 7,
+      "totalTimeMs": 1929549,
+      "averageTimeMs": 275650
     }
   },
   "byPriority": {
@@ -2792,9 +2821,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 12,
-      "totalTimeMs": 3162864,
-      "averageTimeMs": 263572
+      "completed": 13,
+      "totalTimeMs": 3708174,
+      "averageTimeMs": 285244
     },
     "could-have": {
       "total": 0,

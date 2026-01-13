@@ -30,6 +30,27 @@
       "featureId": "TEST-007",
       "message": "Starting work on feature: Write widget tests for theme switching functionality",
       "timestamp": "2026-01-13T20:28:14.189Z"
+    },
+    {
+      "sessionId": "session-mkd1nilq-scbz8v",
+      "action": "completed",
+      "featureId": "TEST-007",
+      "message": "Feature completed: Write widget tests for theme switching functionality",
+      "timestamp": "2026-01-13T20:37:19.245Z"
+    },
+    {
+      "sessionId": "session-mkd1z8wy-ujlwfn",
+      "action": "started",
+      "featureId": "TEST-008",
+      "message": "Starting work on feature: Write integration tests for complete onboarding user flow",
+      "timestamp": "2026-01-13T20:37:21.492Z"
     }
   ]
-}
+},
+  {
+    "timestamp": "2026-01-13T21:45:44+01:00",
+    "feature_id": "TEST-008",
+    "status": "COMPLETED",
+    "message": "Feature completed: Write integration tests for complete onboarding user flow",
+    "commit": "39da889"
+  }
