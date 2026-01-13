@@ -37,7 +37,7 @@
       "description": "Set up Provider/Riverpod for state management with AffirmationProvider and SettingsProvider",
       "category": "infrastructure",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {

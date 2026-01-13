@@ -7,9 +7,17 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'core/storage/hive_service.dart';
+import 'features/affirmations/data/repositories/affirmation_repository.dart';
+import 'features/affirmations/data/repositories/hive_affirmation_repository.dart';
+import 'features/affirmations/domain/usecases/get_random_affirmation.dart';
+import 'features/affirmations/presentation/providers/affirmation_provider.dart';
+import 'features/settings/data/hive_settings_repository.dart';
+import 'features/settings/data/settings_repository.dart';
+import 'features/settings/presentation/providers/settings_provider.dart';
 
 /// Main entry point for Myself 2.0.
 void main() async {
@@ -19,7 +27,47 @@ void main() async {
   // Initialize Hive for local storage
   await HiveService.initialize();
 
-  // TODO: Initialize providers (INFRA-004)
+  // Create repositories
+  final affirmationRepository = HiveAffirmationRepository();
+  final settingsRepository = HiveSettingsRepository();
 
-  runApp(const MyselfApp());
+  // Create use cases
+  final getRandomAffirmation = GetRandomAffirmation(
+    repository: affirmationRepository,
+  );
+
+  // Create providers
+  final affirmationProvider = AffirmationProvider(
+    repository: affirmationRepository,
+    getRandomAffirmationUseCase: getRandomAffirmation,
+  );
+
+  final settingsProvider = SettingsProvider(
+    repository: settingsRepository,
+  );
+
+  // Load initial data
+  await Future.wait([
+    affirmationProvider.loadAffirmations(),
+    settingsProvider.loadSettings(),
+  ]);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        // Provide repositories for potential injection elsewhere
+        Provider<AffirmationRepository>.value(value: affirmationRepository),
+        Provider<SettingsRepository>.value(value: settingsRepository),
+
+        // Provide the main state management providers
+        ChangeNotifierProvider<AffirmationProvider>.value(
+          value: affirmationProvider,
+        ),
+        ChangeNotifierProvider<SettingsProvider>.value(
+          value: settingsProvider,
+        ),
+      ],
+      child: const MyselfApp(),
+    ),
+  );
 }
