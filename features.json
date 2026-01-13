@@ -163,7 +163,7 @@
       "description": "Implement theme switching between light, dark, and system modes with proper color adaptation",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-025"]
     },
     {
