@@ -799,7 +799,7 @@
       "description": "Ensure app runs correctly on iOS 14.0 and above",
       "category": "infrastructure",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-005"
       ]
