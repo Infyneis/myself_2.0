@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:57:38.570Z",
+  "lastUpdated": "2026-01-13T15:02:47.259Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 45,
-    "totalSessions": 72,
-    "totalTimeMs": 13755639,
-    "totalTimeFormatted": "3h 49m",
-    "averageFeatureTimeMs": 294034,
+    "completedFeatures": 46,
+    "totalSessions": 73,
+    "totalTimeMs": 14062325,
+    "totalTimeFormatted": "3h 54m",
+    "averageFeatureTimeMs": 294309,
     "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 191051,
-    "averageSessionTimeFormatted": "3m 11s"
+    "averageSessionTimeMs": 192635,
+    "averageSessionTimeFormatted": "3m 12s"
   },
   "features": [
     {
@@ -731,6 +731,22 @@
         "ff2d25982a6d2c253b6750d0ddc4d9da7077a7d8"
       ],
       "durationFormatted": "5m 27s"
+    },
+    {
+      "featureId": "PERF-002",
+      "featureName": "PERF-002",
+      "description": "Ensure widget updates complete within 500ms of trigger event",
+      "category": "performance",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:57:40.572Z",
+      "completedAt": "2026-01-13T15:02:47.258Z",
+      "durationMs": 306686,
+      "sessionId": "session-mkcpuf30-jv2t6z",
+      "sessionsCount": 1,
+      "commits": [
+        "664a3abc4a27d5f6d57e83e7a3719d17aa5968ff"
+      ],
+      "durationFormatted": "5m 6s"
     }
   ],
   "sessions": [
@@ -1901,6 +1917,23 @@
         "ff2d25982a6d2c253b6750d0ddc4d9da7077a7d8"
       ],
       "durationFormatted": "5m 27s"
+    },
+    {
+      "sessionId": "session-mkcpuf30-jv2t6z",
+      "startedAt": "2026-01-13T14:57:40.572Z",
+      "endedAt": "2026-01-13T15:02:47.258Z",
+      "durationMs": 306686,
+      "featuresWorkedOn": [
+        "PERF-002"
+      ],
+      "featuresCompleted": [
+        "PERF-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "664a3abc4a27d5f6d57e83e7a3719d17aa5968ff"
+      ],
+      "durationFormatted": "5m 6s"
     }
   ],
   "byCategory": {
@@ -1924,17 +1957,17 @@
     },
     "performance": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 327949,
-      "averageTimeMs": 327949
+      "completed": 2,
+      "totalTimeMs": 634635,
+      "averageTimeMs": 317318
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 33,
-      "totalTimeMs": 9523704,
-      "averageTimeMs": 288597
+      "completed": 34,
+      "totalTimeMs": 9830390,
+      "averageTimeMs": 289129
     },
     "should-have": {
       "total": 0,

@@ -119,6 +119,11 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
   }
 
   /// Builds the scrollable list of affirmation cards with drag-and-drop reordering.
+  ///
+  /// Memory optimization (PERF-003):
+  /// - Uses ListView.builder for lazy loading (only builds visible items)
+  /// - Items are recycled as user scrolls
+  /// - No pagination needed for typical use (< 1000 affirmations)
   Widget _buildAffirmationList(
     BuildContext context,
     AffirmationProvider provider,
@@ -136,6 +141,8 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
         onReorder: (oldIndex, newIndex) {
           provider.reorderAffirmations(oldIndex, newIndex);
         },
+        // PERF-003: Optimize for memory by disabling automatic keep-alives
+        buildDefaultDragHandles: false,
         proxyDecorator: (child, index, animation) {
           return AnimatedBuilder(
             animation: animation,

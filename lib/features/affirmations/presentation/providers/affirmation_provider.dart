@@ -13,6 +13,7 @@ import '../../domain/usecases/edit_affirmation.dart';
 import '../../domain/usecases/export_affirmations.dart';
 import '../../domain/usecases/get_random_affirmation.dart';
 import '../../../../widgets/native_widget/widget_data_sync.dart';
+import '../../../../core/utils/memory_optimizer.dart';
 
 /// Provider for managing affirmation state.
 ///
@@ -62,7 +63,11 @@ class AffirmationProvider extends ChangeNotifier {
   String? _error;
 
   /// List of all affirmations.
-  List<Affirmation> get affirmations => List.unmodifiable(_affirmations);
+  ///
+  /// Returns an unmodifiable view to prevent accidental mutations
+  /// and reduce memory usage (PERF-003).
+  List<Affirmation> get affirmations =>
+      MemoryOptimizer.unmodifiableCopy(_affirmations);
 
   /// Currently displayed affirmation.
   Affirmation? get currentAffirmation => _currentAffirmation;
@@ -431,5 +436,16 @@ class AffirmationProvider extends ChangeNotifier {
   void _setLoading(bool loading) {
     _isLoading = loading;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    // PERF-003: Clear references and help GC
+    _affirmations.clear();
+    _currentAffirmation = null;
+    _lastDisplayedId = null;
+
+    MemoryOptimizer.disposeAndCleanup();
+    super.dispose();
   }
 }

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'app.dart';
 import 'core/storage/hive_service.dart';
 import 'core/utils/performance_monitor.dart';
+import 'core/utils/memory_optimizer.dart';
 import 'features/affirmations/data/repositories/affirmation_repository.dart';
 import 'features/affirmations/data/repositories/hive_affirmation_repository.dart';
 import 'features/affirmations/domain/usecases/get_random_affirmation.dart';
@@ -28,6 +29,12 @@ import 'widgets/native_widget/widget_data_sync.dart';
 /// - Critical services initialized synchronously/in parallel
 /// - Non-critical operations deferred until after first frame
 /// - Target: Cold start < 2 seconds
+///
+/// Memory optimization (PERF-003):
+/// - Image cache limited to 50 images / 10MB
+/// - Lazy box loading for Hive
+/// - Memory-efficient list builders
+/// - Target: Memory footprint < 50MB
 void main() async {
   // Start performance monitoring for PERF-001
   final perfMonitor = PerformanceMonitor.start();
@@ -35,6 +42,10 @@ void main() async {
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
   perfMonitor.logCheckpoint('Flutter binding initialized');
+
+  // PERF-003: Configure memory-efficient image cache
+  MemoryOptimizer.configureImageCache();
+  perfMonitor.logCheckpoint('Memory optimizer configured');
 
   // Initialize Hive for local storage (critical - must complete before app runs)
   await HiveService.initialize();
