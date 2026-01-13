@@ -1,16 +1,16 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T15:17:30.468Z",
+  "lastUpdated": "2026-01-13T15:21:03.418Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 49,
-    "totalSessions": 76,
-    "totalTimeMs": 14939522,
-    "totalTimeFormatted": "4h 8m",
-    "averageFeatureTimeMs": 294192,
-    "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 196573,
+    "completedFeatures": 50,
+    "totalSessions": 77,
+    "totalTimeMs": 15150469,
+    "totalTimeFormatted": "4h 12m",
+    "averageFeatureTimeMs": 292527,
+    "averageFeatureTimeFormatted": "4m 52s",
+    "averageSessionTimeMs": 196759,
     "averageSessionTimeFormatted": "3m 16s"
   },
   "features": [
@@ -795,6 +795,22 @@
         "f2f34f4e2c2a54283533fd7cf8d47df40bfd710e"
       ],
       "durationFormatted": "4m 47s"
+    },
+    {
+      "featureId": "SEC-002",
+      "featureName": "SEC-002",
+      "description": "Ensure core functionality works without internet permission",
+      "category": "security",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T15:17:32.470Z",
+      "completedAt": "2026-01-13T15:21:03.417Z",
+      "durationMs": 210947,
+      "sessionId": "session-mkcqjyra-saktz2",
+      "sessionsCount": 1,
+      "commits": [
+        "613ce074f56d36b8e1d803cb92e8725c29f07744"
+      ],
+      "durationFormatted": "3m 30s"
     }
   ],
   "sessions": [
@@ -2033,6 +2049,23 @@
         "f2f34f4e2c2a54283533fd7cf8d47df40bfd710e"
       ],
       "durationFormatted": "4m 47s"
+    },
+    {
+      "sessionId": "session-mkcqjyra-saktz2",
+      "startedAt": "2026-01-13T15:17:32.470Z",
+      "endedAt": "2026-01-13T15:21:03.417Z",
+      "durationMs": 210947,
+      "featuresWorkedOn": [
+        "SEC-002"
+      ],
+      "featuresCompleted": [
+        "SEC-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "613ce074f56d36b8e1d803cb92e8725c29f07744"
+      ],
+      "durationFormatted": "3m 30s"
     }
   ],
   "byCategory": {
@@ -2062,17 +2095,17 @@
     },
     "security": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 287919,
-      "averageTimeMs": 287919
+      "completed": 2,
+      "totalTimeMs": 498866,
+      "averageTimeMs": 249433
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 37,
-      "totalTimeMs": 10707587,
-      "averageTimeMs": 289394
+      "completed": 38,
+      "totalTimeMs": 10918534,
+      "averageTimeMs": 287330
     },
     "should-have": {
       "total": 0,
