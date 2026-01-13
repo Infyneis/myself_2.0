@@ -30,6 +30,9 @@ abstract class SettingsKeys {
 
   /// Key for breathing animation enabled setting.
   static const String breathingAnimationEnabled = 'breathingAnimationEnabled';
+
+  /// Key for onboarding completion status.
+  static const String hasCompletedOnboarding = 'hasCompletedOnboarding';
 }
 
 /// Hive-backed implementation of [SettingsRepository].
@@ -80,6 +83,11 @@ class HiveSettingsRepository implements SettingsRepository {
       defaultValue: true,
     ) as bool;
 
+    final hasCompletedOnboarding = _settingsBox.get(
+      SettingsKeys.hasCompletedOnboarding,
+      defaultValue: false,
+    ) as bool;
+
     return Settings(
       themeMode: ThemeMode.values[themeModeIndex],
       refreshMode: RefreshMode.values[refreshModeIndex],
@@ -87,6 +95,7 @@ class HiveSettingsRepository implements SettingsRepository {
       fontSizeMultiplier: fontSizeMultiplier,
       widgetRotationEnabled: widgetRotationEnabled,
       breathingAnimationEnabled: breathingAnimationEnabled,
+      hasCompletedOnboarding: hasCompletedOnboarding,
     );
   }
 
@@ -106,6 +115,10 @@ class HiveSettingsRepository implements SettingsRepository {
     await _settingsBox.put(
       SettingsKeys.breathingAnimationEnabled,
       settings.breathingAnimationEnabled,
+    );
+    await _settingsBox.put(
+      SettingsKeys.hasCompletedOnboarding,
+      settings.hasCompletedOnboarding,
     );
   }
 
@@ -137,6 +150,11 @@ class HiveSettingsRepository implements SettingsRepository {
   @override
   Future<void> updateBreathingAnimationEnabled(bool enabled) async {
     await _settingsBox.put(SettingsKeys.breathingAnimationEnabled, enabled);
+  }
+
+  @override
+  Future<void> updateHasCompletedOnboarding(bool completed) async {
+    await _settingsBox.put(SettingsKeys.hasCompletedOnboarding, completed);
   }
 
   @override

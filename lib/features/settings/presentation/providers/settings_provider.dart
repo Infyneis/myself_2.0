@@ -44,6 +44,9 @@ class SettingsProvider extends ChangeNotifier {
   /// Whether breathing animation is enabled.
   bool get breathingAnimationEnabled => _settings.breathingAnimationEnabled;
 
+  /// Whether the user has completed onboarding.
+  bool get hasCompletedOnboarding => _settings.hasCompletedOnboarding;
+
   /// Whether data is currently being loaded.
   bool get isLoading => _isLoading;
 
@@ -131,6 +134,18 @@ class SettingsProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _error = 'Failed to update breathing animation: $e';
+      notifyListeners();
+    }
+  }
+
+  /// Marks onboarding as completed.
+  Future<void> completeOnboarding() async {
+    try {
+      await _repository.updateHasCompletedOnboarding(true);
+      _settings = _settings.copyWith(hasCompletedOnboarding: true);
+      notifyListeners();
+    } catch (e) {
+      _error = 'Failed to update onboarding status: $e';
       notifyListeners();
     }
   }

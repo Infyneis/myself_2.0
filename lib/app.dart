@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import 'core/theme/app_theme.dart';
 import 'features/affirmations/presentation/screens/home_screen.dart';
+import 'features/onboarding/presentation/screens/onboarding_flow.dart';
 import 'features/settings/data/settings_model.dart' as settings_model;
 import 'features/settings/presentation/providers/settings_provider.dart';
 
@@ -38,6 +39,9 @@ class MyselfApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SettingsProvider>(
       builder: (context, settingsProvider, child) {
+        // Determine initial screen based on onboarding status
+        final hasCompletedOnboarding = settingsProvider.hasCompletedOnboarding;
+
         return MaterialApp(
           title: 'Myself 2.0',
           debugShowCheckedModeBanner: false,
@@ -47,9 +51,41 @@ class MyselfApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: _convertThemeMode(settingsProvider.themeMode),
 
-          // Home screen
-          home: const HomeScreen(),
+          // Show onboarding for first launch, home screen otherwise
+          home: hasCompletedOnboarding
+              ? const HomeScreen()
+              : _OnboardingWrapper(),
         );
+      },
+    );
+  }
+}
+
+/// Wrapper widget for onboarding flow that rebuilds app when complete.
+///
+/// This is necessary because we need to rebuild the entire MaterialApp
+/// after onboarding is complete to show the home screen.
+class _OnboardingWrapper extends StatefulWidget {
+  @override
+  State<_OnboardingWrapper> createState() => _OnboardingWrapperState();
+}
+
+class _OnboardingWrapperState extends State<_OnboardingWrapper> {
+  bool _onboardingComplete = false;
+
+  @override
+  Widget build(BuildContext context) {
+    // If onboarding is complete, show home screen
+    if (_onboardingComplete) {
+      return const HomeScreen();
+    }
+
+    // Otherwise, show onboarding flow
+    return OnboardingFlow(
+      onComplete: () {
+        setState(() {
+          _onboardingComplete = true;
+        });
       },
     );
   }

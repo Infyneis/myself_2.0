@@ -35,6 +35,9 @@ abstract class SettingsRepository {
   /// Updates the breathing animation setting.
   Future<void> updateBreathingAnimationEnabled(bool enabled);
 
+  /// Updates the onboarding completion status.
+  Future<void> updateHasCompletedOnboarding(bool completed);
+
   /// Resets settings to defaults.
   Future<void> resetToDefaults();
 }

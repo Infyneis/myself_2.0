@@ -58,6 +58,11 @@ class MockSettingsRepository implements SettingsRepository {
   }
 
   @override
+  Future<void> updateHasCompletedOnboarding(bool completed) async {
+    _settings = _settings.copyWith(hasCompletedOnboarding: completed);
+  }
+
+  @override
   Future<void> resetToDefaults() async {
     _settings = settings_model.Settings.defaultSettings;
   }
