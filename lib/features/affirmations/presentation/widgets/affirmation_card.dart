@@ -170,6 +170,7 @@ class AffirmationCard extends StatelessWidget {
           ),
         ),
       ),
+      ),
     );
   }
 }

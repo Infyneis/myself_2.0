@@ -46,122 +46,154 @@ class WelcomeScreen extends StatelessWidget {
               const Spacer(),
 
               // Zen illustration
-              _buildZenIllustration(context, isDarkMode)
-                  .animate()
-                  .fadeIn(
-                    duration: 600.ms,
-                    curve: Curves.easeOut,
-                  )
-                  .scale(
-                    begin: const Offset(0.9, 0.9),
-                    end: const Offset(1.0, 1.0),
-                    duration: 600.ms,
-                    curve: Curves.easeOutBack,
-                  ),
+              Semantics(
+                label: 'Myself 2.0 zen meditation icon',
+                image: true,
+                child: ExcludeSemantics(
+                  child: _buildZenIllustration(context, isDarkMode)
+                      .animate()
+                      .fadeIn(
+                        duration: 600.ms,
+                        curve: Curves.easeOut,
+                      )
+                      .scale(
+                        begin: const Offset(0.9, 0.9),
+                        end: const Offset(1.0, 1.0),
+                        duration: 600.ms,
+                        curve: Curves.easeOutBack,
+                      ),
+                ),
+              ),
 
               const SizedBox(height: AppDimensions.spacingXxl),
 
               // Welcome title
-              Text(
-                'Welcome to\nMyself 2.0',
-                style: theme.textTheme.displayLarge?.copyWith(
-                  height: 1.2,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.center,
-              )
-                  .animate()
-                  .fadeIn(
-                    delay: 200.ms,
-                    duration: 500.ms,
+              Semantics(
+                header: true,
+                label: 'Welcome to Myself 2.0',
+                child: ExcludeSemantics(
+                  child: Text(
+                    'Welcome to\nMyself 2.0',
+                    style: theme.textTheme.displayLarge?.copyWith(
+                      height: 1.2,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.center,
                   )
-                  .slideY(
-                    begin: 0.2,
-                    end: 0,
-                    delay: 200.ms,
-                    duration: 500.ms,
-                    curve: Curves.easeOut,
-                  ),
+                      .animate()
+                      .fadeIn(
+                        delay: 200.ms,
+                        duration: 500.ms,
+                      )
+                      .slideY(
+                        begin: 0.2,
+                        end: 0,
+                        delay: 200.ms,
+                        duration: 500.ms,
+                        curve: Curves.easeOut,
+                      ),
+                ),
+              ),
 
               const SizedBox(height: AppDimensions.spacingL),
 
               // App description
-              Text(
-                'Your personal sanctuary for daily affirmations.\n\n'
-                'Create meaningful affirmations, see them on your home screen widget, '
-                'and cultivate a mindful practice of self-compassion.',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-                  height: 1.6,
-                ),
-                textAlign: TextAlign.center,
-              )
-                  .animate()
-                  .fadeIn(
-                    delay: 400.ms,
-                    duration: 500.ms,
+              Semantics(
+                label: 'Your personal sanctuary for daily affirmations. '
+                    'Create meaningful affirmations, see them on your home screen widget, '
+                    'and cultivate a mindful practice of self-compassion.',
+                child: ExcludeSemantics(
+                  child: Text(
+                    'Your personal sanctuary for daily affirmations.\n\n'
+                    'Create meaningful affirmations, see them on your home screen widget, '
+                    'and cultivate a mindful practice of self-compassion.',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                      height: 1.6,
+                    ),
+                    textAlign: TextAlign.center,
                   )
-                  .slideY(
-                    begin: 0.2,
-                    end: 0,
-                    delay: 400.ms,
-                    duration: 500.ms,
-                    curve: Curves.easeOut,
-                  ),
+                      .animate()
+                      .fadeIn(
+                        delay: 400.ms,
+                        duration: 500.ms,
+                      )
+                      .slideY(
+                        begin: 0.2,
+                        end: 0,
+                        delay: 400.ms,
+                        duration: 500.ms,
+                        curve: Curves.easeOut,
+                      ),
+                ),
+              ),
 
               const SizedBox(height: AppDimensions.spacingXxl),
 
               // Get Started button
-              SizedBox(
-                width: double.infinity,
-                height: 56,
-                child: ElevatedButton(
-                  onPressed: onGetStarted,
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppDimensions.borderRadiusSmall,
+              Semantics(
+                button: true,
+                enabled: true,
+                label: 'Get Started',
+                hint: 'Begin your journey with Myself 2.0',
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton(
+                    onPressed: onGetStarted,
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          AppDimensions.borderRadiusSmall,
+                        ),
+                      ),
+                    ),
+                    child: ExcludeSemantics(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Get Started',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          const SizedBox(width: AppDimensions.spacingS),
+                          const Icon(Icons.arrow_forward_rounded, size: 20),
+                        ],
                       ),
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Get Started',
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
-                      const SizedBox(width: AppDimensions.spacingS),
-                      const Icon(Icons.arrow_forward_rounded, size: 20),
-                    ],
-                  ),
-                ),
-              )
-                  .animate()
-                  .fadeIn(
-                    delay: 600.ms,
-                    duration: 500.ms,
-                  )
-                  .slideY(
-                    begin: 0.2,
-                    end: 0,
-                    delay: 600.ms,
-                    duration: 500.ms,
-                    curve: Curves.easeOut,
-                  ),
+                )
+                    .animate()
+                    .fadeIn(
+                      delay: 600.ms,
+                      duration: 500.ms,
+                    )
+                    .slideY(
+                      begin: 0.2,
+                      end: 0,
+                      delay: 600.ms,
+                      duration: 500.ms,
+                      curve: Curves.easeOut,
+                    ),
+              ),
 
               const Spacer(),
 
               // Feature highlights
-              _buildFeatureHighlights(context)
-                  .animate()
-                  .fadeIn(
-                    delay: 800.ms,
-                    duration: 500.ms,
-                  ),
+              Semantics(
+                label: 'Key features: Create affirmations, Add home screen widget, Practice mindfulness',
+                child: ExcludeSemantics(
+                  child: _buildFeatureHighlights(context)
+                      .animate()
+                      .fadeIn(
+                        delay: 800.ms,
+                        duration: 500.ms,
+                      ),
+                ),
+              ),
             ],
           ),
         ),
