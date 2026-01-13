@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import '../../data/models/affirmation.dart';
 import '../../data/repositories/affirmation_repository.dart';
 import '../../domain/usecases/create_affirmation.dart';
+import '../../domain/usecases/delete_affirmation.dart';
 import '../../domain/usecases/edit_affirmation.dart';
 import '../../domain/usecases/get_random_affirmation.dart';
 
@@ -27,17 +28,21 @@ class AffirmationProvider extends ChangeNotifier {
     GetRandomAffirmation? getRandomAffirmationUseCase,
     CreateAffirmationUseCase? createAffirmationUseCase,
     EditAffirmationUseCase? editAffirmationUseCase,
+    DeleteAffirmationUseCase? deleteAffirmationUseCase,
   })  : _repository = repository,
         _getRandomAffirmation = getRandomAffirmationUseCase,
         _createAffirmationUseCase = createAffirmationUseCase ??
             CreateAffirmationUseCase(repository: repository),
         _editAffirmationUseCase = editAffirmationUseCase ??
-            EditAffirmationUseCase(repository: repository);
+            EditAffirmationUseCase(repository: repository),
+        _deleteAffirmationUseCase = deleteAffirmationUseCase ??
+            DeleteAffirmationUseCase(repository: repository);
 
   final AffirmationRepository _repository;
   final GetRandomAffirmation? _getRandomAffirmation;
   final CreateAffirmationUseCase _createAffirmationUseCase;
   final EditAffirmationUseCase _editAffirmationUseCase;
+  final DeleteAffirmationUseCase _deleteAffirmationUseCase;
 
   List<Affirmation> _affirmations = [];
   Affirmation? _currentAffirmation;
@@ -245,14 +250,42 @@ class AffirmationProvider extends ChangeNotifier {
   }
 
   /// Deletes an affirmation by ID.
-  Future<void> deleteAffirmation(String id) async {
+  ///
+  /// This method directly deletes the affirmation without confirmation.
+  /// For deletion with confirmation dialog, use [deleteAffirmationWithConfirmation].
+  ///
+  /// Returns `true` if deletion was successful, `false` otherwise.
+  /// Check [error] property for failure details.
+  ///
+  /// Example:
+  /// ```dart
+  /// final success = await provider.deleteAffirmation('affirmation-uuid');
+  /// if (!success) {
+  ///   print(provider.error);
+  /// }
+  /// ```
+  Future<bool> deleteAffirmation(String id) async {
     _setLoading(true);
     try {
-      await _repository.delete(id);
-      _affirmations = _affirmations.where((a) => a.id != id).toList();
-      _error = null;
+      final result = await _deleteAffirmationUseCase.call(id: id);
+
+      switch (result) {
+        case DeleteAffirmationSuccess(:final id):
+          _affirmations = _affirmations.where((a) => a.id != id).toList();
+          // Clear current affirmation if it was deleted
+          if (_currentAffirmation?.id == id) {
+            _currentAffirmation = null;
+            _lastDisplayedId = null;
+          }
+          _error = null;
+          return true;
+        case DeleteAffirmationFailure(:final message):
+          _error = message;
+          return false;
+      }
     } catch (e) {
       _error = 'Failed to delete affirmation: $e';
+      return false;
     } finally {
       _setLoading(false);
     }

@@ -6,6 +6,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:myself_2_0/features/affirmations/data/models/affirmation.dart';
 import 'package:myself_2_0/features/affirmations/data/repositories/affirmation_repository.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/create_affirmation.dart';
+import 'package:myself_2_0/features/affirmations/domain/usecases/delete_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/edit_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/get_random_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/presentation/providers/affirmation_provider.dart';
@@ -19,11 +20,14 @@ class MockCreateAffirmationUseCase extends Mock implements CreateAffirmationUseC
 
 class MockEditAffirmationUseCase extends Mock implements EditAffirmationUseCase {}
 
+class MockDeleteAffirmationUseCase extends Mock implements DeleteAffirmationUseCase {}
+
 void main() {
   late MockAffirmationRepository mockRepository;
   late MockGetRandomAffirmation mockGetRandomAffirmation;
   late MockCreateAffirmationUseCase mockCreateAffirmationUseCase;
   late MockEditAffirmationUseCase mockEditAffirmationUseCase;
+  late MockDeleteAffirmationUseCase mockDeleteAffirmationUseCase;
   late AffirmationProvider provider;
 
   // Register fallback values for mocktail
@@ -43,11 +47,13 @@ void main() {
     mockGetRandomAffirmation = MockGetRandomAffirmation();
     mockCreateAffirmationUseCase = MockCreateAffirmationUseCase();
     mockEditAffirmationUseCase = MockEditAffirmationUseCase();
+    mockDeleteAffirmationUseCase = MockDeleteAffirmationUseCase();
     provider = AffirmationProvider(
       repository: mockRepository,
       getRandomAffirmationUseCase: mockGetRandomAffirmation,
       createAffirmationUseCase: mockCreateAffirmationUseCase,
       editAffirmationUseCase: mockEditAffirmationUseCase,
+      deleteAffirmationUseCase: mockDeleteAffirmationUseCase,
     );
   });
 
@@ -186,18 +192,71 @@ void main() {
         );
 
         when(() => mockRepository.getAll()).thenAnswer((_) async => [affirmation]);
-        when(() => mockRepository.delete('1')).thenAnswer((_) async => true);
+        when(() => mockDeleteAffirmationUseCase.call(id: '1'))
+            .thenAnswer((_) async => const DeleteAffirmationSuccess(id: '1'));
 
         // Load initial data
         await provider.loadAffirmations();
         expect(provider.affirmations.length, equals(1));
 
         // Act
+        final success = await provider.deleteAffirmation('1');
+
+        // Assert
+        expect(success, isTrue);
+        expect(provider.affirmations, isEmpty);
+        verify(() => mockDeleteAffirmationUseCase.call(id: '1')).called(1);
+      });
+
+      test('should return false and set error when deletion fails', () async {
+        // Arrange
+        final affirmation = Affirmation(
+          id: '1',
+          text: 'To be deleted',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+
+        when(() => mockRepository.getAll()).thenAnswer((_) async => [affirmation]);
+        when(() => mockDeleteAffirmationUseCase.call(id: '1'))
+            .thenAnswer((_) async => const DeleteAffirmationFailure(message: 'Failed to delete'));
+
+        // Load initial data
+        await provider.loadAffirmations();
+
+        // Act
+        final success = await provider.deleteAffirmation('1');
+
+        // Assert
+        expect(success, isFalse);
+        expect(provider.error, equals('Failed to delete'));
+      });
+
+      test('should clear current affirmation if it was deleted', () async {
+        // Arrange
+        final affirmation = Affirmation(
+          id: '1',
+          text: 'Current affirmation',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+
+        when(() => mockRepository.getAll()).thenAnswer((_) async => [affirmation]);
+        when(() => mockGetRandomAffirmation.call(lastDisplayedId: null))
+            .thenAnswer((_) async => affirmation);
+        when(() => mockDeleteAffirmationUseCase.call(id: '1'))
+            .thenAnswer((_) async => const DeleteAffirmationSuccess(id: '1'));
+
+        // Load initial data and set current affirmation
+        await provider.loadAffirmations();
+        await provider.selectRandomAffirmation();
+        expect(provider.currentAffirmation, isNotNull);
+
+        // Act
         await provider.deleteAffirmation('1');
 
         // Assert
-        expect(provider.affirmations, isEmpty);
-        verify(() => mockRepository.delete('1')).called(1);
+        expect(provider.currentAffirmation, isNull);
       });
     });
 

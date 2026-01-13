@@ -73,7 +73,7 @@
       "description": "Implement functionality to delete affirmations with confirmation dialog",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-003"]
     },
     {
