@@ -7,6 +7,7 @@ library;
 import 'package:flutter/foundation.dart';
 import '../../data/models/affirmation.dart';
 import '../../data/repositories/affirmation_repository.dart';
+import '../../domain/usecases/create_affirmation.dart';
 import '../../domain/usecases/get_random_affirmation.dart';
 
 /// Provider for managing affirmation state.
@@ -23,11 +24,15 @@ class AffirmationProvider extends ChangeNotifier {
   AffirmationProvider({
     required AffirmationRepository repository,
     GetRandomAffirmation? getRandomAffirmationUseCase,
+    CreateAffirmationUseCase? createAffirmationUseCase,
   })  : _repository = repository,
-        _getRandomAffirmation = getRandomAffirmationUseCase;
+        _getRandomAffirmation = getRandomAffirmationUseCase,
+        _createAffirmationUseCase = createAffirmationUseCase ??
+            CreateAffirmationUseCase(repository: repository);
 
   final AffirmationRepository _repository;
   final GetRandomAffirmation? _getRandomAffirmation;
+  final CreateAffirmationUseCase _createAffirmationUseCase;
 
   List<Affirmation> _affirmations = [];
   Affirmation? _currentAffirmation;
@@ -82,7 +87,7 @@ class AffirmationProvider extends ChangeNotifier {
     }
   }
 
-  /// Creates a new affirmation.
+  /// Creates a new affirmation from an existing Affirmation object.
   Future<void> createAffirmation(Affirmation affirmation) async {
     _setLoading(true);
     try {
@@ -91,6 +96,54 @@ class AffirmationProvider extends ChangeNotifier {
       _error = null;
     } catch (e) {
       _error = 'Failed to create affirmation: $e';
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  /// Creates a new affirmation from free-form text input.
+  ///
+  /// This method:
+  /// - Validates the text (non-empty, max 280 characters)
+  /// - Generates a unique UUID for the affirmation
+  /// - Persists the affirmation to storage
+  /// - Updates the local state
+  ///
+  /// Returns `true` if creation was successful, `false` otherwise.
+  /// Check [error] property for failure details.
+  ///
+  /// Example:
+  /// ```dart
+  /// final success = await provider.createAffirmationFromText(
+  ///   'I am confident and capable',
+  /// );
+  /// if (!success) {
+  ///   print(provider.error);
+  /// }
+  /// ```
+  Future<bool> createAffirmationFromText({
+    required String text,
+    bool isActive = true,
+  }) async {
+    _setLoading(true);
+    try {
+      final result = await _createAffirmationUseCase.call(
+        text: text,
+        isActive: isActive,
+      );
+
+      switch (result) {
+        case CreateAffirmationSuccess(:final affirmation):
+          _affirmations = [..._affirmations, affirmation];
+          _error = null;
+          return true;
+        case CreateAffirmationFailure(:final message):
+          _error = message;
+          return false;
+      }
+    } catch (e) {
+      _error = 'Failed to create affirmation: $e';
+      return false;
     } finally {
       _setLoading(false);
     }

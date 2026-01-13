@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:myself_2_0/features/affirmations/data/models/affirmation.dart';
 import 'package:myself_2_0/features/affirmations/data/repositories/affirmation_repository.dart';
+import 'package:myself_2_0/features/affirmations/domain/usecases/create_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/get_random_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/presentation/providers/affirmation_provider.dart';
 
@@ -13,9 +14,12 @@ class MockAffirmationRepository extends Mock implements AffirmationRepository {}
 
 class MockGetRandomAffirmation extends Mock implements GetRandomAffirmation {}
 
+class MockCreateAffirmationUseCase extends Mock implements CreateAffirmationUseCase {}
+
 void main() {
   late MockAffirmationRepository mockRepository;
   late MockGetRandomAffirmation mockGetRandomAffirmation;
+  late MockCreateAffirmationUseCase mockCreateAffirmationUseCase;
   late AffirmationProvider provider;
 
   // Register fallback values for mocktail
@@ -33,9 +37,11 @@ void main() {
   setUp(() {
     mockRepository = MockAffirmationRepository();
     mockGetRandomAffirmation = MockGetRandomAffirmation();
+    mockCreateAffirmationUseCase = MockCreateAffirmationUseCase();
     provider = AffirmationProvider(
       repository: mockRepository,
       getRandomAffirmationUseCase: mockGetRandomAffirmation,
+      createAffirmationUseCase: mockCreateAffirmationUseCase,
     );
   });
 
@@ -263,6 +269,147 @@ void main() {
 
         // Assert
         expect(provider.hasAffirmations, isTrue);
+      });
+    });
+
+    group('createAffirmationFromText', () {
+      test('should create affirmation from text and return true on success', () async {
+        // Arrange
+        const text = 'I am confident and capable';
+        final createdAffirmation = Affirmation.create(text: text);
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => CreateAffirmationSuccess(createdAffirmation));
+
+        // Act
+        final result = await provider.createAffirmationFromText(text: text);
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.affirmations.length, equals(1));
+        expect(provider.affirmations.first.text, equals(text));
+        expect(provider.error, isNull);
+      });
+
+      test('should return false and set error on validation failure', () async {
+        // Arrange
+        const text = '';
+        const errorMessage = 'Affirmation text cannot be empty';
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => const CreateAffirmationFailure(errorMessage));
+
+        // Act
+        final result = await provider.createAffirmationFromText(text: text);
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.affirmations, isEmpty);
+        expect(provider.error, equals(errorMessage));
+      });
+
+      test('should return false and set error when text exceeds 280 characters', () async {
+        // Arrange
+        final longText = 'a' * 281;
+        const errorMessage = 'Affirmation text cannot exceed 280 characters';
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => const CreateAffirmationFailure(errorMessage));
+
+        // Act
+        final result = await provider.createAffirmationFromText(text: longText);
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.error, contains('280'));
+      });
+
+      test('should pass isActive parameter to use case', () async {
+        // Arrange
+        const text = 'Test affirmation';
+        final createdAffirmation = Affirmation.create(text: text, isActive: false);
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: false,
+        )).thenAnswer((_) async => CreateAffirmationSuccess(createdAffirmation));
+
+        // Act
+        final result = await provider.createAffirmationFromText(
+          text: text,
+          isActive: false,
+        );
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.affirmations.first.isActive, isFalse);
+        verify(() => mockCreateAffirmationUseCase.call(
+          text: text,
+          isActive: false,
+        )).called(1);
+      });
+
+      test('should set isLoading during operation', () async {
+        // Arrange
+        const text = 'Test affirmation';
+        final createdAffirmation = Affirmation.create(text: text);
+        var wasLoadingDuringCall = false;
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async {
+          wasLoadingDuringCall = provider.isLoading;
+          return CreateAffirmationSuccess(createdAffirmation);
+        });
+
+        // Act
+        await provider.createAffirmationFromText(text: text);
+
+        // Assert
+        expect(wasLoadingDuringCall, isTrue);
+        expect(provider.isLoading, isFalse);
+      });
+
+      test('should handle exception from use case', () async {
+        // Arrange
+        const text = 'Test affirmation';
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenThrow(Exception('Unexpected error'));
+
+        // Act
+        final result = await provider.createAffirmationFromText(text: text);
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.error, contains('Failed to create affirmation'));
+      });
+
+      test('should generate UUID for the created affirmation', () async {
+        // Arrange
+        const text = 'Test affirmation';
+        final createdAffirmation = Affirmation.create(text: text);
+
+        when(() => mockCreateAffirmationUseCase.call(
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => CreateAffirmationSuccess(createdAffirmation));
+
+        // Act
+        await provider.createAffirmationFromText(text: text);
+
+        // Assert
+        expect(provider.affirmations.first.id, isNotEmpty);
+        expect(provider.affirmations.first.id.length, equals(36)); // UUID v4 format
       });
     });
   });
