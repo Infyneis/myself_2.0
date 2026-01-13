@@ -15,12 +15,12 @@ import '../providers/settings_provider.dart';
 ///
 /// Displays options for:
 /// - Theme toggle (light/dark/system) - UI-002
-/// - Refresh interval selection
-/// - Language selection
-/// - Font size adjustment
-/// - Widget rotation toggle
+/// - Refresh interval selection - FR-023
+/// - Language selection - FR-024
+/// - Font size adjustment - FR-026
+/// - Widget rotation toggle - FR-022
 ///
-/// Note: Full implementation will be completed in UI-011.
+/// Implements UI-011.
 class SettingsScreen extends StatelessWidget {
   /// Creates a SettingsScreen widget.
   const SettingsScreen({super.key});
@@ -41,30 +41,22 @@ class SettingsScreen extends StatelessWidget {
               _buildSectionHeader(context, 'Appearance'),
               const SizedBox(height: AppDimensions.spacingS),
               _buildThemeSelector(context, settingsProvider),
+              const SizedBox(height: AppDimensions.spacingS),
+              _buildFontSizeCard(context, settingsProvider),
               const SizedBox(height: AppDimensions.spacingL),
 
-              // Placeholder for other settings
+              // Widget Settings Section
               _buildSectionHeader(context, 'Widget Settings'),
               const SizedBox(height: AppDimensions.spacingS),
-              _buildPlaceholderTile(
-                context,
-                'Refresh Mode',
-                'Coming soon in UI-011',
-              ),
+              _buildRefreshModeCard(context, settingsProvider),
+              const SizedBox(height: AppDimensions.spacingS),
+              _buildWidgetRotationCard(context, settingsProvider),
               const SizedBox(height: AppDimensions.spacingL),
 
+              // Preferences Section
               _buildSectionHeader(context, 'Preferences'),
               const SizedBox(height: AppDimensions.spacingS),
-              _buildPlaceholderTile(
-                context,
-                'Language',
-                'Coming soon in UI-011',
-              ),
-              _buildPlaceholderTile(
-                context,
-                'Font Size',
-                'Coming soon in UI-011',
-              ),
+              _buildLanguageCard(context, settingsProvider),
             ],
           );
         },
@@ -223,17 +215,418 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  /// Builds a placeholder settings tile.
-  Widget _buildPlaceholderTile(
+  /// Builds the refresh mode selector card.
+  Widget _buildRefreshModeCard(
     BuildContext context,
-    String title,
-    String subtitle,
+    SettingsProvider settingsProvider,
   ) {
     return Card(
-      child: ListTile(
-        title: Text(title),
-        subtitle: Text(subtitle),
-        enabled: false,
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.spacingM),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Refresh Interval',
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+            const SizedBox(height: AppDimensions.spacingS),
+            Text(
+              'How often should the widget affirmation update?',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.7),
+                  ),
+            ),
+            const SizedBox(height: AppDimensions.spacingM),
+            _buildRefreshOption(
+              context,
+              settingsProvider,
+              settings_model.RefreshMode.onUnlock,
+              'Every Unlock',
+              'Show a new affirmation each time you unlock your phone',
+              Icons.lock_open,
+            ),
+            const SizedBox(height: AppDimensions.spacingS),
+            _buildRefreshOption(
+              context,
+              settingsProvider,
+              settings_model.RefreshMode.hourly,
+              'Hourly',
+              'Update every hour',
+              Icons.schedule,
+            ),
+            const SizedBox(height: AppDimensions.spacingS),
+            _buildRefreshOption(
+              context,
+              settingsProvider,
+              settings_model.RefreshMode.daily,
+              'Daily',
+              'Update once per day',
+              Icons.today,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Builds a single refresh mode option.
+  Widget _buildRefreshOption(
+    BuildContext context,
+    SettingsProvider settingsProvider,
+    settings_model.RefreshMode refreshMode,
+    String label,
+    String description,
+    IconData icon,
+  ) {
+    final isSelected = settingsProvider.refreshMode == refreshMode;
+
+    return InkWell(
+      onTap: () async {
+        await settingsProvider.setRefreshMode(refreshMode);
+      },
+      borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+      child: Container(
+        padding: const EdgeInsets.all(AppDimensions.spacingM),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+          border: Border.all(
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            width: isSelected ? 2 : 1,
+          ),
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+              : Colors.transparent,
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            const SizedBox(width: AppDimensions.spacingM),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.normal,
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.primary
+                              : null,
+                        ),
+                  ),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.6),
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            if (isSelected)
+              Icon(
+                Icons.check_circle,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Builds the language selector card.
+  Widget _buildLanguageCard(
+    BuildContext context,
+    SettingsProvider settingsProvider,
+  ) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.spacingM),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Language',
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+            const SizedBox(height: AppDimensions.spacingS),
+            Text(
+              'Choose your preferred language',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.7),
+                  ),
+            ),
+            const SizedBox(height: AppDimensions.spacingM),
+            _buildLanguageOption(
+              context,
+              settingsProvider,
+              'fr',
+              'Français',
+              'French',
+              Icons.language,
+            ),
+            const SizedBox(height: AppDimensions.spacingS),
+            _buildLanguageOption(
+              context,
+              settingsProvider,
+              'en',
+              'English',
+              'English',
+              Icons.language,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Builds a single language option.
+  Widget _buildLanguageOption(
+    BuildContext context,
+    SettingsProvider settingsProvider,
+    String languageCode,
+    String label,
+    String description,
+    IconData icon,
+  ) {
+    final isSelected = settingsProvider.language == languageCode;
+
+    return InkWell(
+      onTap: () async {
+        await settingsProvider.setLanguage(languageCode);
+      },
+      borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+      child: Container(
+        padding: const EdgeInsets.all(AppDimensions.spacingM),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+          border: Border.all(
+            color: isSelected
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
+            width: isSelected ? 2 : 1,
+          ),
+          color: isSelected
+              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
+              : Colors.transparent,
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: isSelected
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
+            ),
+            const SizedBox(width: AppDimensions.spacingM),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight:
+                              isSelected ? FontWeight.w600 : FontWeight.normal,
+                          color: isSelected
+                              ? Theme.of(context).colorScheme.primary
+                              : null,
+                        ),
+                  ),
+                  Text(
+                    description,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.6),
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            if (isSelected)
+              Icon(
+                Icons.check_circle,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Builds the font size adjustment card.
+  Widget _buildFontSizeCard(
+    BuildContext context,
+    SettingsProvider settingsProvider,
+  ) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.spacingM),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Font Size',
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+            const SizedBox(height: AppDimensions.spacingS),
+            Text(
+              'Adjust text size for better readability',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onSurface
+                        .withValues(alpha: 0.7),
+                  ),
+            ),
+            const SizedBox(height: AppDimensions.spacingM),
+            // Preview text
+            Center(
+              child: Container(
+                padding: const EdgeInsets.all(AppDimensions.spacingM),
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.borderRadiusSmall),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .surfaceContainerHighest
+                      .withValues(alpha: 0.3),
+                ),
+                child: Text(
+                  'Preview Text',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontSize: 16 * settingsProvider.fontSizeMultiplier,
+                      ),
+                ),
+              ),
+            ),
+            const SizedBox(height: AppDimensions.spacingM),
+            // Slider
+            Row(
+              children: [
+                Icon(
+                  Icons.text_fields,
+                  size: 16,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.7),
+                ),
+                Expanded(
+                  child: Slider(
+                    value: settingsProvider.fontSizeMultiplier,
+                    min: 0.8,
+                    max: 1.4,
+                    divisions: 6,
+                    label:
+                        '${(settingsProvider.fontSizeMultiplier * 100).round()}%',
+                    onChanged: (value) async {
+                      await settingsProvider.setFontSizeMultiplier(value);
+                    },
+                  ),
+                ),
+                Icon(
+                  Icons.text_fields,
+                  size: 24,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.7),
+                ),
+              ],
+            ),
+            Center(
+              child: Text(
+                '${(settingsProvider.fontSizeMultiplier * 100).round()}%',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.6),
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Builds the widget rotation toggle card.
+  Widget _buildWidgetRotationCard(
+    BuildContext context,
+    SettingsProvider settingsProvider,
+  ) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(AppDimensions.spacingM),
+        child: Row(
+          children: [
+            Icon(
+              Icons.refresh,
+              color: Theme.of(context)
+                  .colorScheme
+                  .onSurface
+                  .withValues(alpha: 0.7),
+            ),
+            const SizedBox(width: AppDimensions.spacingM),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Widget Rotation',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                  const SizedBox(height: AppDimensions.spacingXs),
+                  Text(
+                    'Automatically rotate affirmations in widget',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.6),
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            Switch(
+              value: settingsProvider.widgetRotationEnabled,
+              onChanged: (value) async {
+                await settingsProvider.setWidgetRotationEnabled(value);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
