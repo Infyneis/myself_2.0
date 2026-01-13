@@ -34,6 +34,7 @@ struct MyselfWidgetEntry: TimelineEntry {
     let themeMode: String
     let fontSizeMultiplier: Double
     let hasAffirmations: Bool
+    let widgetRotationEnabled: Bool
 }
 
 // MARK: - Timeline Provider
@@ -78,7 +79,8 @@ struct MyselfWidgetProvider: TimelineProvider {
             affirmationId: "",
             themeMode: "system",
             fontSizeMultiplier: 1.0,
-            hasAffirmations: true
+            hasAffirmations: true,
+            widgetRotationEnabled: true
         )
     }
 
@@ -92,6 +94,9 @@ struct MyselfWidgetProvider: TimelineProvider {
     ///
     /// Creates a timeline with multiple entries scheduled throughout the day
     /// to maximize the likelihood of showing fresh content when user unlocks device.
+    ///
+    /// Respects WIDGET-011: Widget Rotation Toggle setting to control whether
+    /// widgets should automatically rotate affirmations.
     func getTimeline(in context: Context, completion: @escaping (Timeline<MyselfWidgetEntry>) -> Void) {
         // Access shared UserDefaults via App Group
         let userDefaults = UserDefaults(suiteName: "group.com.infyneis.myself_2_0")
@@ -103,9 +108,11 @@ struct MyselfWidgetProvider: TimelineProvider {
         let fontSizeMultiplier = userDefaults?.double(forKey: "font_size_multiplier") ?? 1.0
         let hasAffirmations = userDefaults?.bool(forKey: "has_affirmations") ?? false
         let refreshMode = userDefaults?.string(forKey: "refresh_mode") ?? "onUnlock"
+        let widgetRotationEnabled = userDefaults?.bool(forKey: "widget_rotation_enabled") ?? true
 
-        // Determine refresh interval based on user setting
-        let refreshInterval = getRefreshInterval(for: refreshMode)
+        // Determine refresh interval based on user setting and rotation enabled state
+        // If rotation is disabled, use a very long interval to effectively prevent rotation
+        let refreshInterval = widgetRotationEnabled ? getRefreshInterval(for: refreshMode) : 24 * 60 * 60
 
         // Create timeline entries
         let entries = createTimelineEntries(
@@ -114,6 +121,7 @@ struct MyselfWidgetProvider: TimelineProvider {
             themeMode: themeMode,
             fontSizeMultiplier: fontSizeMultiplier,
             hasAffirmations: hasAffirmations,
+            widgetRotationEnabled: widgetRotationEnabled,
             refreshInterval: refreshInterval
         )
 
@@ -131,6 +139,7 @@ struct MyselfWidgetProvider: TimelineProvider {
     ///   - themeMode: Theme mode setting (light/dark/system)
     ///   - fontSizeMultiplier: Font size multiplier for accessibility
     ///   - hasAffirmations: Whether user has any affirmations
+    ///   - widgetRotationEnabled: Whether widget rotation is enabled (WIDGET-011)
     ///   - refreshInterval: Time interval between refreshes in seconds
     ///
     /// - Returns: Array of timeline entries
@@ -140,6 +149,7 @@ struct MyselfWidgetProvider: TimelineProvider {
         themeMode: String,
         fontSizeMultiplier: Double,
         hasAffirmations: Bool,
+        widgetRotationEnabled: Bool,
         refreshInterval: TimeInterval
     ) -> [MyselfWidgetEntry] {
         var entries: [MyselfWidgetEntry] = []
@@ -158,7 +168,8 @@ struct MyselfWidgetProvider: TimelineProvider {
                 affirmationId: affirmationId,
                 themeMode: themeMode,
                 fontSizeMultiplier: fontSizeMultiplier,
-                hasAffirmations: hasAffirmations
+                hasAffirmations: hasAffirmations,
+                widgetRotationEnabled: widgetRotationEnabled
             )
 
             entries.append(entry)
@@ -497,7 +508,8 @@ struct MyselfWidget_Previews: PreviewProvider {
             affirmationId: "preview-1",
             themeMode: "light",
             fontSizeMultiplier: 1.0,
-            hasAffirmations: true
+            hasAffirmations: true,
+            widgetRotationEnabled: true
         ))
         .previewContext(WidgetPreviewContext(family: .systemSmall))
         .previewDisplayName("Small - Light")
@@ -508,7 +520,8 @@ struct MyselfWidget_Previews: PreviewProvider {
             affirmationId: "preview-1",
             themeMode: "dark",
             fontSizeMultiplier: 1.0,
-            hasAffirmations: true
+            hasAffirmations: true,
+            widgetRotationEnabled: true
         ))
         .previewContext(WidgetPreviewContext(family: .systemSmall))
         .previewDisplayName("Small - Dark")
@@ -520,7 +533,8 @@ struct MyselfWidget_Previews: PreviewProvider {
             affirmationId: "preview-2",
             themeMode: "light",
             fontSizeMultiplier: 1.0,
-            hasAffirmations: true
+            hasAffirmations: true,
+            widgetRotationEnabled: true
         ))
         .previewContext(WidgetPreviewContext(family: .systemMedium))
         .previewDisplayName("Medium - Light")
@@ -532,7 +546,8 @@ struct MyselfWidget_Previews: PreviewProvider {
             affirmationId: "preview-3",
             themeMode: "light",
             fontSizeMultiplier: 1.0,
-            hasAffirmations: true
+            hasAffirmations: true,
+            widgetRotationEnabled: true
         ))
         .previewContext(WidgetPreviewContext(family: .systemLarge))
         .previewDisplayName("Large - Light")
@@ -544,7 +559,8 @@ struct MyselfWidget_Previews: PreviewProvider {
             affirmationId: "",
             themeMode: "light",
             fontSizeMultiplier: 1.0,
-            hasAffirmations: false
+            hasAffirmations: false,
+            widgetRotationEnabled: true
         ))
         .previewContext(WidgetPreviewContext(family: .systemMedium))
         .previewDisplayName("Medium - Empty State")

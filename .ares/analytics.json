@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:38:31.398Z",
+  "lastUpdated": "2026-01-13T14:42:48.134Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 41,
-    "totalSessions": 68,
-    "totalTimeMs": 12616479,
-    "totalTimeFormatted": "3h 30m",
-    "averageFeatureTimeMs": 294936,
-    "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 185536,
-    "averageSessionTimeFormatted": "3m 5s"
+    "completedFeatures": 42,
+    "totalSessions": 69,
+    "totalTimeMs": 12871211,
+    "totalTimeFormatted": "3h 34m",
+    "averageFeatureTimeMs": 293979,
+    "averageFeatureTimeFormatted": "4m 53s",
+    "averageSessionTimeMs": 186539,
+    "averageSessionTimeFormatted": "3m 6s"
   },
   "features": [
     {
@@ -667,6 +667,22 @@
         "bf78862b80a7eb11c7b4e846dac171564912346e"
       ],
       "durationFormatted": "4m 36s"
+    },
+    {
+      "featureId": "WIDGET-010",
+      "featureName": "WIDGET-010",
+      "description": "Adapt widget appearance to system light/dark mode with translucent background and blur effect",
+      "category": "ui",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:38:33.401Z",
+      "completedAt": "2026-01-13T14:42:48.133Z",
+      "durationMs": 254732,
+      "sessionId": "session-mkcp5tx5-o2qqo9",
+      "sessionsCount": 1,
+      "commits": [
+        "ca1fbcee1cd6a474433674cb7ae34e2b6f1f24f2"
+      ],
+      "durationFormatted": "4m 14s"
     }
   ],
   "sessions": [
@@ -1769,6 +1785,23 @@
         "bf78862b80a7eb11c7b4e846dac171564912346e"
       ],
       "durationFormatted": "4m 36s"
+    },
+    {
+      "sessionId": "session-mkcp5tx5-o2qqo9",
+      "startedAt": "2026-01-13T14:38:33.401Z",
+      "endedAt": "2026-01-13T14:42:48.133Z",
+      "durationMs": 254732,
+      "featuresWorkedOn": [
+        "WIDGET-010"
+      ],
+      "featuresCompleted": [
+        "WIDGET-010"
+      ],
+      "status": "completed",
+      "commits": [
+        "ca1fbcee1cd6a474433674cb7ae34e2b6f1f24f2"
+      ],
+      "durationFormatted": "4m 14s"
     }
   ],
   "byCategory": {
@@ -1786,17 +1819,17 @@
     },
     "ui": {
       "total": 0,
-      "completed": 16,
-      "totalTimeMs": 2703480,
-      "averageTimeMs": 168968
+      "completed": 17,
+      "totalTimeMs": 2958212,
+      "averageTimeMs": 174012
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 31,
-      "totalTimeMs": 8941023,
-      "averageTimeMs": 288420
+      "completed": 32,
+      "totalTimeMs": 9195755,
+      "averageTimeMs": 287367
     },
     "should-have": {
       "total": 0,

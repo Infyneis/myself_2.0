@@ -68,6 +68,22 @@ class MyselfAppWidgetProvider : AppWidgetProvider() {
         private const val KEY_HAS_AFFIRMATIONS = "flutter.has_affirmations"
         private const val KEY_THEME_MODE = "flutter.theme_mode"
         private const val KEY_FONT_SIZE_MULTIPLIER = "flutter.font_size_multiplier"
+        private const val KEY_WIDGET_ROTATION_ENABLED = "flutter.widget_rotation_enabled"
+
+        /**
+         * Checks if widget rotation is enabled in settings
+         *
+         * This setting controls whether widgets should automatically rotate
+         * affirmations on unlock events (WIDGET-011)
+         *
+         * @param context The context to access SharedPreferences
+         * @return true if widget rotation is enabled, false otherwise (default: true)
+         */
+        fun isWidgetRotationEnabled(context: Context): Boolean {
+            val prefs = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+            // Default to true if setting is not found (backwards compatibility)
+            return prefs.getBoolean(KEY_WIDGET_ROTATION_ENABLED, true)
+        }
 
         /**
          * Updates all widget instances

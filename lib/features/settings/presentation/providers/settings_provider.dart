@@ -7,6 +7,7 @@ library;
 import 'package:flutter/foundation.dart';
 import '../../data/settings_model.dart';
 import '../../data/settings_repository.dart';
+import '../../../../widgets/native_widget/widget_data_sync.dart';
 
 /// Provider for managing settings state.
 ///
@@ -15,9 +16,12 @@ class SettingsProvider extends ChangeNotifier {
   /// Creates a SettingsProvider instance.
   SettingsProvider({
     required SettingsRepository repository,
-  }) : _repository = repository;
+    WidgetDataSync? widgetDataSync,
+  }) : _repository = repository,
+       _widgetDataSync = widgetDataSync;
 
   final SettingsRepository _repository;
+  final WidgetDataSync? _widgetDataSync;
 
   Settings _settings = Settings.defaultSettings;
   bool _isLoading = false;
@@ -119,6 +123,10 @@ class SettingsProvider extends ChangeNotifier {
     try {
       await _repository.updateWidgetRotationEnabled(enabled);
       _settings = _settings.copyWith(widgetRotationEnabled: enabled);
+
+      // Sync settings with widget (WIDGET-011)
+      await _widgetDataSync?.syncSettings(_settings);
+
       notifyListeners();
     } catch (e) {
       _error = 'Failed to update widget rotation: $e';

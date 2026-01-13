@@ -54,6 +54,7 @@ void main() async {
 
   final settingsProvider = SettingsProvider(
     repository: settingsRepository,
+    widgetDataSync: widgetDataSync,
   );
 
   // Load initial data

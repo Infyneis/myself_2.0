@@ -12,10 +12,12 @@ import android.util.Log
  * the user unlocks their phone.
  *
  * This receiver implements WIDGET-006: Android Unlock Broadcast Receiver
+ * and respects WIDGET-011: Widget Rotation Toggle setting
  *
  * ## Functionality
  * - Listens for ACTION_USER_PRESENT broadcast (triggered when device is unlocked)
- * - Triggers widget update to display a new random affirmation
+ * - Checks if widget rotation is enabled in settings (WIDGET-011)
+ * - Triggers widget update to display a new random affirmation if enabled
  * - Ensures widgets stay fresh and engaging every time user unlocks their phone
  *
  * ## Security
@@ -38,7 +40,8 @@ class UnlockBroadcastReceiver : BroadcastReceiver() {
      * Called when the BroadcastReceiver receives an Intent broadcast.
      *
      * This method is invoked when the user unlocks their phone (ACTION_USER_PRESENT).
-     * It triggers an update of all Myself widget instances to display a fresh affirmation.
+     * It checks if widget rotation is enabled (WIDGET-011) and triggers an update
+     * of all Myself widget instances to display a fresh affirmation if enabled.
      *
      * @param context The Context in which the receiver is running
      * @param intent The Intent being received (should be ACTION_USER_PRESENT)
@@ -51,12 +54,20 @@ class UnlockBroadcastReceiver : BroadcastReceiver() {
 
         // Verify this is the unlock broadcast
         if (intent.action == Intent.ACTION_USER_PRESENT) {
-            Log.d(TAG, "Device unlocked - updating widgets")
+            Log.d(TAG, "Device unlocked - checking widget rotation setting")
 
             try {
-                // Trigger widget update
-                MyselfAppWidgetProvider.updateAllWidgets(context)
-                Log.d(TAG, "Widget update triggered successfully")
+                // Check if widget rotation is enabled (WIDGET-011)
+                val rotationEnabled = MyselfAppWidgetProvider.isWidgetRotationEnabled(context)
+
+                if (rotationEnabled) {
+                    Log.d(TAG, "Widget rotation enabled - updating widgets")
+                    // Trigger widget update
+                    MyselfAppWidgetProvider.updateAllWidgets(context)
+                    Log.d(TAG, "Widget update triggered successfully")
+                } else {
+                    Log.d(TAG, "Widget rotation disabled - skipping update")
+                }
             } catch (e: Exception) {
                 Log.e(TAG, "Failed to update widgets on unlock", e)
             }
