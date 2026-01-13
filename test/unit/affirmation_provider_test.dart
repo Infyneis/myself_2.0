@@ -781,5 +781,215 @@ void main() {
         expect(result, isNull);
       });
     });
+
+    group('reorderAffirmations', () {
+      test('should reorder affirmations moving item down', () async {
+        // Arrange
+        final affirmations = [
+          Affirmation(
+            id: '1',
+            text: 'First',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 0,
+          ),
+          Affirmation(
+            id: '2',
+            text: 'Second',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 1,
+          ),
+          Affirmation(
+            id: '3',
+            text: 'Third',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 2,
+          ),
+        ];
+        when(() => mockRepository.getAll()).thenAnswer((_) async => affirmations);
+        when(() => mockRepository.reorder(any())).thenAnswer((_) async {});
+
+        await provider.loadAffirmations();
+
+        // Act - move item from index 0 to index 2
+        final result = await provider.reorderAffirmations(0, 2);
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.affirmations[0].id, equals('2'));
+        expect(provider.affirmations[1].id, equals('1'));
+        expect(provider.affirmations[2].id, equals('3'));
+        verify(() => mockRepository.reorder(['2', '1', '3'])).called(1);
+      });
+
+      test('should reorder affirmations moving item up', () async {
+        // Arrange
+        final affirmations = [
+          Affirmation(
+            id: '1',
+            text: 'First',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 0,
+          ),
+          Affirmation(
+            id: '2',
+            text: 'Second',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 1,
+          ),
+          Affirmation(
+            id: '3',
+            text: 'Third',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 2,
+          ),
+        ];
+        when(() => mockRepository.getAll()).thenAnswer((_) async => affirmations);
+        when(() => mockRepository.reorder(any())).thenAnswer((_) async {});
+
+        await provider.loadAffirmations();
+
+        // Act - move item from index 2 to index 0
+        final result = await provider.reorderAffirmations(2, 0);
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.affirmations[0].id, equals('3'));
+        expect(provider.affirmations[1].id, equals('1'));
+        expect(provider.affirmations[2].id, equals('2'));
+        verify(() => mockRepository.reorder(['3', '1', '2'])).called(1);
+      });
+
+      test('should return true and persist reorder on success', () async {
+        // Arrange
+        final affirmations = [
+          Affirmation(
+            id: '1',
+            text: 'First',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          ),
+          Affirmation(
+            id: '2',
+            text: 'Second',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          ),
+        ];
+        when(() => mockRepository.getAll()).thenAnswer((_) async => affirmations);
+        when(() => mockRepository.reorder(any())).thenAnswer((_) async {});
+
+        await provider.loadAffirmations();
+
+        // Act
+        final result = await provider.reorderAffirmations(0, 2);
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.error, isNull);
+        verify(() => mockRepository.reorder(any())).called(1);
+      });
+
+      test('should return false and revert on repository error', () async {
+        // Arrange
+        final affirmations = [
+          Affirmation(
+            id: '1',
+            text: 'First',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 0,
+          ),
+          Affirmation(
+            id: '2',
+            text: 'Second',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+            sortOrder: 1,
+          ),
+        ];
+        when(() => mockRepository.getAll()).thenAnswer((_) async => affirmations);
+        when(() => mockRepository.reorder(any())).thenThrow(Exception('Storage error'));
+
+        await provider.loadAffirmations();
+
+        // Act
+        final result = await provider.reorderAffirmations(0, 2);
+
+        // Assert
+        expect(result, isFalse);
+        // Note: error is cleared after loadAffirmations is called to revert
+        // The important thing is that the operation returned false
+        // and the list was reverted (verified by getAll being called twice)
+        // Verify it reloaded to revert (called twice: initial + revert)
+        verify(() => mockRepository.getAll()).called(2);
+      });
+
+      test('should notify listeners immediately for responsive UI', () async {
+        // Arrange
+        final affirmations = [
+          Affirmation(
+            id: '1',
+            text: 'First',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          ),
+          Affirmation(
+            id: '2',
+            text: 'Second',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          ),
+        ];
+        when(() => mockRepository.getAll()).thenAnswer((_) async => affirmations);
+        when(() => mockRepository.reorder(any())).thenAnswer((_) async {});
+
+        await provider.loadAffirmations();
+
+        var listenerCalled = false;
+        provider.addListener(() => listenerCalled = true);
+
+        // Act
+        await provider.reorderAffirmations(0, 2);
+
+        // Assert - listener should be called
+        expect(listenerCalled, isTrue);
+      });
+
+      test('should handle moving to same position', () async {
+        // Arrange
+        final affirmations = [
+          Affirmation(
+            id: '1',
+            text: 'First',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          ),
+          Affirmation(
+            id: '2',
+            text: 'Second',
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          ),
+        ];
+        when(() => mockRepository.getAll()).thenAnswer((_) async => affirmations);
+        when(() => mockRepository.reorder(any())).thenAnswer((_) async {});
+
+        await provider.loadAffirmations();
+
+        // Act - move item to same position (no change)
+        final result = await provider.reorderAffirmations(0, 1);
+
+        // Assert - should still work and persist
+        expect(result, isTrue);
+        expect(provider.affirmations[0].id, equals('1'));
+        expect(provider.affirmations[1].id, equals('2'));
+      });
+    });
   });
 }

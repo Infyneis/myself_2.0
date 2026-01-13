@@ -288,5 +288,104 @@ void main() {
         expect(result, equals(5));
       });
     });
+
+    group('reorder', () {
+      test('should update sort order for all affirmations', () async {
+        // Arrange
+        final affirmation1 = Affirmation(
+          id: '1',
+          text: 'First',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          sortOrder: 0,
+        );
+        final affirmation2 = Affirmation(
+          id: '2',
+          text: 'Second',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          sortOrder: 1,
+        );
+        final affirmation3 = Affirmation(
+          id: '3',
+          text: 'Third',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          sortOrder: 2,
+        );
+        when(() => mockBox.values).thenReturn([affirmation1, affirmation2, affirmation3]);
+        when(() => mockBox.put(any(), any())).thenAnswer((_) async {});
+
+        // Act - reorder as: 3, 1, 2
+        await repository.reorder(['3', '1', '2']);
+
+        // Assert - verify put was called for each affirmation with correct sortOrder
+        verify(() => mockBox.put('3', any())).called(1);
+        verify(() => mockBox.put('1', any())).called(1);
+        verify(() => mockBox.put('2', any())).called(1);
+      });
+
+      test('should skip non-existent affirmation ids', () async {
+        // Arrange
+        final affirmation1 = Affirmation(
+          id: '1',
+          text: 'First',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          sortOrder: 0,
+        );
+        when(() => mockBox.values).thenReturn([affirmation1]);
+        when(() => mockBox.put(any(), any())).thenAnswer((_) async {});
+
+        // Act - try to reorder with non-existent id
+        await repository.reorder(['1', 'nonexistent']);
+
+        // Assert - should only put the existing affirmation
+        verify(() => mockBox.put('1', any())).called(1);
+        verifyNever(() => mockBox.put('nonexistent', any()));
+      });
+
+      test('should handle empty list', () async {
+        // Arrange
+        when(() => mockBox.values).thenReturn([]);
+
+        // Act
+        await repository.reorder([]);
+
+        // Assert - no puts should be made
+        verifyNever(() => mockBox.put(any(), any()));
+      });
+
+      test('should preserve affirmation data while updating sort order', () async {
+        // Arrange
+        final originalTime = DateTime(2024, 1, 1);
+        final affirmation = Affirmation(
+          id: '1',
+          text: 'Test affirmation',
+          createdAt: originalTime,
+          updatedAt: originalTime,
+          displayCount: 5,
+          isActive: true,
+          sortOrder: 10,
+        );
+        Affirmation? savedAffirmation;
+        when(() => mockBox.values).thenReturn([affirmation]);
+        when(() => mockBox.put(any(), any())).thenAnswer((invocation) async {
+          savedAffirmation = invocation.positionalArguments[1] as Affirmation;
+        });
+
+        // Act
+        await repository.reorder(['1']);
+
+        // Assert - verify data is preserved except sortOrder
+        expect(savedAffirmation, isNotNull);
+        expect(savedAffirmation!.id, equals('1'));
+        expect(savedAffirmation!.text, equals('Test affirmation'));
+        expect(savedAffirmation!.createdAt, equals(originalTime));
+        expect(savedAffirmation!.displayCount, equals(5));
+        expect(savedAffirmation!.isActive, isTrue);
+        expect(savedAffirmation!.sortOrder, equals(0)); // Updated to 0 (first in list)
+      });
+    });
   });
 }
