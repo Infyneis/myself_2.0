@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:59:14.223Z",
+  "lastUpdated": "2026-01-13T21:30:16.080Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 72,
-    "totalSessions": 107,
-    "totalTimeMs": 22339634,
-    "totalTimeFormatted": "6h 12m",
-    "averageFeatureTimeMs": 302045,
-    "averageFeatureTimeFormatted": "5m 2s",
-    "averageSessionTimeMs": 208782,
-    "averageSessionTimeFormatted": "3m 28s"
+    "completedFeatures": 73,
+    "totalSessions": 108,
+    "totalTimeMs": 24199473,
+    "totalTimeFormatted": "6h 43m",
+    "averageFeatureTimeMs": 323384,
+    "averageFeatureTimeFormatted": "5m 23s",
+    "averageSessionTimeMs": 224069,
+    "averageSessionTimeFormatted": "3m 44s"
   },
   "features": [
     {
@@ -1159,6 +1159,22 @@
         "5f3f7fb0438b1afa2c36489028a25e9204c72752"
       ],
       "durationFormatted": "5m 44s"
+    },
+    {
+      "featureId": "DOC-002",
+      "featureName": "DOC-002",
+      "description": "Create in-app instructions for adding home screen widget on iOS and Android",
+      "category": "documentation",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T20:59:16.240Z",
+      "completedAt": "2026-01-13T21:30:16.079Z",
+      "durationMs": 1859839,
+      "sessionId": "session-mkd2rfke-1txw0n",
+      "sessionsCount": 1,
+      "commits": [
+        "f162e6b50de06b511d240c9edf9f6f6a5993777c"
+      ],
+      "durationFormatted": "30m 59s"
     }
   ],
   "sessions": [
@@ -2904,6 +2920,23 @@
         "5f3f7fb0438b1afa2c36489028a25e9204c72752"
       ],
       "durationFormatted": "5m 44s"
+    },
+    {
+      "sessionId": "session-mkd2rfke-1txw0n",
+      "startedAt": "2026-01-13T20:59:16.240Z",
+      "endedAt": "2026-01-13T21:30:16.079Z",
+      "durationMs": 1859839,
+      "featuresWorkedOn": [
+        "DOC-002"
+      ],
+      "featuresCompleted": [
+        "DOC-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "f162e6b50de06b511d240c9edf9f6f6a5993777c"
+      ],
+      "durationFormatted": "30m 59s"
     }
   ],
   "byCategory": {
@@ -2945,9 +2978,9 @@
     },
     "documentation": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 344433,
-      "averageTimeMs": 344433
+      "completed": 2,
+      "totalTimeMs": 2204272,
+      "averageTimeMs": 1102136
     }
   },
   "byPriority": {
@@ -2959,9 +2992,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 16,
-      "totalTimeMs": 4798298,
-      "averageTimeMs": 299894
+      "completed": 17,
+      "totalTimeMs": 6658137,
+      "averageTimeMs": 391655
     },
     "could-have": {
       "total": 0,
