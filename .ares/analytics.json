@@ -1,0 +1,69 @@
+{
+  "projectName": "My Project",
+  "createdAt": "2026-01-13T08:54:37.259Z",
+  "lastUpdated": "2026-01-13T08:54:37.260Z",
+  "summary": {
+    "totalFeatures": 0,
+    "completedFeatures": 1,
+    "totalSessions": 1,
+    "totalTimeMs": 179272,
+    "totalTimeFormatted": "2m 59s",
+    "averageFeatureTimeMs": 179272,
+    "averageFeatureTimeFormatted": "2m 59s",
+    "averageSessionTimeMs": 179272,
+    "averageSessionTimeFormatted": "2m 59s"
+  },
+  "features": [
+    {
+      "featureId": "INFRA-001",
+      "featureName": "INFRA-001",
+      "description": "Initialize Flutter project with proper structure, pubspec.yaml dependencies (provider, hive, home_widget, uuid, intl, google_fonts, flutter_animate), and basic configuration",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T08:51:37.986Z",
+      "completedAt": "2026-01-13T08:54:37.258Z",
+      "durationMs": 179272,
+      "sessionId": "session-mkccron6-jozdeh",
+      "sessionsCount": 1,
+      "commits": [
+        "851c05909c6cf99a662b4948c559966c7025faa4"
+      ],
+      "durationFormatted": "2m 59s"
+    }
+  ],
+  "sessions": [
+    {
+      "sessionId": "session-mkccron6-jozdeh",
+      "startedAt": "2026-01-13T08:51:37.986Z",
+      "endedAt": "2026-01-13T08:54:37.258Z",
+      "durationMs": 179272,
+      "featuresWorkedOn": [
+        "INFRA-001"
+      ],
+      "featuresCompleted": [
+        "INFRA-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "851c05909c6cf99a662b4948c559966c7025faa4"
+      ],
+      "durationFormatted": "2m 59s"
+    }
+  ],
+  "byCategory": {
+    "infrastructure": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 179272,
+      "averageTimeMs": 179272
+    }
+  },
+  "byPriority": {
+    "must-have": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 179272,
+      "averageTimeMs": 179272
+    }
+  }
+}
