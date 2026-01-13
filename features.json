@@ -581,7 +581,7 @@
       "description": "Verify no third-party SDKs that collect user data are included",
       "category": "security",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-012"
       ]
