@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:33:52.493Z",
+  "lastUpdated": "2026-01-13T14:38:31.398Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 40,
-    "totalSessions": 67,
-    "totalTimeMs": 12339578,
-    "totalTimeFormatted": "3h 25m",
-    "averageFeatureTimeMs": 295387,
-    "averageFeatureTimeFormatted": "4m 55s",
-    "averageSessionTimeMs": 184173,
-    "averageSessionTimeFormatted": "3m 4s"
+    "completedFeatures": 41,
+    "totalSessions": 68,
+    "totalTimeMs": 12616479,
+    "totalTimeFormatted": "3h 30m",
+    "averageFeatureTimeMs": 294936,
+    "averageFeatureTimeFormatted": "4m 54s",
+    "averageSessionTimeMs": 185536,
+    "averageSessionTimeFormatted": "3m 5s"
   },
   "features": [
     {
@@ -651,6 +651,22 @@
         "93c952f1a3f90b4a7c7c08ea90f139f3989a31db"
       ],
       "durationFormatted": "5m 29s"
+    },
+    {
+      "featureId": "WIDGET-009",
+      "featureName": "WIDGET-009",
+      "description": "Trigger widget refresh when affirmations are added, modified, or deleted in the app",
+      "category": "functional",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T14:33:54.496Z",
+      "completedAt": "2026-01-13T14:38:31.397Z",
+      "durationMs": 276901,
+      "sessionId": "session-mkcozups-n2m5ix",
+      "sessionsCount": 1,
+      "commits": [
+        "bf78862b80a7eb11c7b4e846dac171564912346e"
+      ],
+      "durationFormatted": "4m 36s"
     }
   ],
   "sessions": [
@@ -1736,6 +1752,23 @@
         "93c952f1a3f90b4a7c7c08ea90f139f3989a31db"
       ],
       "durationFormatted": "5m 29s"
+    },
+    {
+      "sessionId": "session-mkcozups-n2m5ix",
+      "startedAt": "2026-01-13T14:33:54.496Z",
+      "endedAt": "2026-01-13T14:38:31.397Z",
+      "durationMs": 276901,
+      "featuresWorkedOn": [
+        "WIDGET-009"
+      ],
+      "featuresCompleted": [
+        "WIDGET-009"
+      ],
+      "status": "completed",
+      "commits": [
+        "bf78862b80a7eb11c7b4e846dac171564912346e"
+      ],
+      "durationFormatted": "4m 36s"
     }
   ],
   "byCategory": {
@@ -1747,9 +1780,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 20,
-      "totalTimeMs": 6289107,
-      "averageTimeMs": 314455
+      "completed": 21,
+      "totalTimeMs": 6566008,
+      "averageTimeMs": 312667
     },
     "ui": {
       "total": 0,
@@ -1767,9 +1800,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 6,
-      "totalTimeMs": 1343390,
-      "averageTimeMs": 223898
+      "completed": 7,
+      "totalTimeMs": 1620291,
+      "averageTimeMs": 231470
     },
     "could-have": {
       "total": 0,
