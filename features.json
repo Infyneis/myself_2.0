@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "projectName": "Myself 2.0",
   "createdAt": "2026-01-13T08:42:07.105Z",
-  "updatedAt": "2026-01-13T09:45:00.000Z",
+  "updatedAt": "2026-01-13T13:53:54.000Z",
   "features": [
     {
       "id": "INFRA-001",
@@ -271,7 +271,7 @@
       "description": "Implement complete first-launch onboarding: welcome -> create first affirmation -> success animation -> widget setup instructions",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
@@ -280,7 +280,7 @@
       "description": "Create success animation displayed after creating first affirmation during onboarding",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
