@@ -217,7 +217,7 @@
       "description": "Create screen for creating/editing affirmations with text input, character counter, and save/cancel actions",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-001", "FR-002"]
     },
     {
