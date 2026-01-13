@@ -23,7 +23,7 @@ class AffirmationAdapter extends TypeAdapter<Affirmation> {
       updatedAt: fields[3] as DateTime,
       displayCount: fields[4] as int,
       isActive: fields[5] as bool,
-      sortOrder: (fields[6] as int?) ?? 0,
+      sortOrder: fields[6] as int,
     );
   }
 
