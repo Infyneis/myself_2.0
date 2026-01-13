@@ -46,7 +46,7 @@
       "description": "Create Affirmation class with id (UUID), text (max 280 chars), createdAt, updatedAt, displayCount, isActive fields. Include Hive type adapter",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-006"]
     },
     {

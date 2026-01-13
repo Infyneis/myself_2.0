@@ -5,11 +5,15 @@
 library;
 
 import 'package:hive/hive.dart';
+import 'package:uuid/uuid.dart';
 
 part 'affirmation.g.dart';
 
 /// Hive type ID for Affirmation model.
 const int affirmationTypeId = 0;
+
+/// Maximum allowed length for affirmation text.
+const int maxAffirmationTextLength = 280;
 
 /// Represents a single affirmation.
 ///
@@ -22,6 +26,8 @@ const int affirmationTypeId = 0;
 @HiveType(typeId: affirmationTypeId)
 class Affirmation extends HiveObject {
   /// Creates a new Affirmation instance.
+  ///
+  /// The [text] must not exceed [maxAffirmationTextLength] characters.
   Affirmation({
     required this.id,
     required this.text,
@@ -29,7 +35,38 @@ class Affirmation extends HiveObject {
     required this.updatedAt,
     this.displayCount = 0,
     this.isActive = true,
-  });
+  }) : assert(
+         text.length <= maxAffirmationTextLength,
+         'Affirmation text cannot exceed $maxAffirmationTextLength characters',
+       );
+
+  /// Factory constructor to create a new affirmation with auto-generated UUID.
+  ///
+  /// Automatically generates a unique ID and sets creation/update timestamps.
+  /// The [text] must not exceed [maxAffirmationTextLength] characters.
+  ///
+  /// Throws [ArgumentError] if [text] exceeds [maxAffirmationTextLength].
+  factory Affirmation.create({
+    required String text,
+    bool isActive = true,
+  }) {
+    if (text.length > maxAffirmationTextLength) {
+      throw ArgumentError(
+        'Affirmation text cannot exceed $maxAffirmationTextLength characters. '
+        'Got ${text.length} characters.',
+      );
+    }
+
+    final now = DateTime.now();
+    return Affirmation(
+      id: const Uuid().v4(),
+      text: text,
+      createdAt: now,
+      updatedAt: now,
+      displayCount: 0,
+      isActive: isActive,
+    );
+  }
 
   /// Unique identifier (UUID)
   @HiveField(0)
@@ -99,5 +136,31 @@ class Affirmation extends HiveObject {
   String toString() {
     return 'Affirmation(id: $id, text: $text, createdAt: $createdAt, '
         'updatedAt: $updatedAt, displayCount: $displayCount, isActive: $isActive)';
+  }
+
+  /// Returns the remaining character count for this affirmation's text.
+  int get remainingCharacters => maxAffirmationTextLength - text.length;
+
+  /// Returns true if the text is within the allowed character limit.
+  bool get isValidLength => text.length <= maxAffirmationTextLength;
+
+  /// Returns true if the text is empty or only contains whitespace.
+  bool get isEmpty => text.trim().isEmpty;
+
+  /// Returns true if the text has valid content (not empty and within limits).
+  bool get isValid => !isEmpty && isValidLength;
+
+  /// Validates the given text against the maximum length constraint.
+  ///
+  /// Returns `null` if valid, or an error message if invalid.
+  static String? validateText(String text) {
+    if (text.trim().isEmpty) {
+      return 'Affirmation text cannot be empty';
+    }
+    if (text.length > maxAffirmationTextLength) {
+      return 'Affirmation text cannot exceed $maxAffirmationTextLength characters. '
+          'Currently: ${text.length} characters.';
+    }
+    return null;
   }
 }
