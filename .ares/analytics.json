@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:02:41.301Z",
+  "lastUpdated": "2026-01-13T14:06:27.386Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 33,
-    "totalSessions": 60,
-    "totalTimeMs": 10482409,
-    "totalTimeFormatted": "2h 54m",
-    "averageFeatureTimeMs": 301767,
-    "averageFeatureTimeFormatted": "5m 1s",
-    "averageSessionTimeMs": 174707,
-    "averageSessionTimeFormatted": "2m 54s"
+    "completedFeatures": 34,
+    "totalSessions": 61,
+    "totalTimeMs": 10706492,
+    "totalTimeFormatted": "2h 58m",
+    "averageFeatureTimeMs": 299482,
+    "averageFeatureTimeFormatted": "4m 59s",
+    "averageSessionTimeMs": 175516,
+    "averageSessionTimeFormatted": "2m 55s"
   },
   "features": [
     {
@@ -541,6 +541,22 @@
         "b0f33f3447a413d5f4bc6f0cb476c36d28a1fb90"
       ],
       "durationFormatted": "4m 5s"
+    },
+    {
+      "featureId": "WIDGET-002",
+      "featureName": "WIDGET-002",
+      "description": "Implement data sharing between Flutter app and native widgets using SharedDefaults (iOS) and SharedPreferences (Android)",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:02:43.303Z",
+      "completedAt": "2026-01-13T14:06:27.386Z",
+      "durationMs": 224083,
+      "sessionId": "session-mkcnvqw7-koxntx",
+      "sessionsCount": 1,
+      "commits": [
+        "331f0c6d1dbc8c3b967394ff7a497e85e76d1275"
+      ],
+      "durationFormatted": "3m 44s"
     }
   ],
   "sessions": [
@@ -1509,6 +1525,23 @@
         "b0f33f3447a413d5f4bc6f0cb476c36d28a1fb90"
       ],
       "durationFormatted": "4m 5s"
+    },
+    {
+      "sessionId": "session-mkcnvqw7-koxntx",
+      "startedAt": "2026-01-13T14:02:43.303Z",
+      "endedAt": "2026-01-13T14:06:27.386Z",
+      "durationMs": 224083,
+      "featuresWorkedOn": [
+        "WIDGET-002"
+      ],
+      "featuresCompleted": [
+        "WIDGET-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "331f0c6d1dbc8c3b967394ff7a497e85e76d1275"
+      ],
+      "durationFormatted": "3m 44s"
     }
   ],
   "byCategory": {
@@ -1520,9 +1553,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 13,
-      "totalTimeMs": 4431938,
-      "averageTimeMs": 340918
+      "completed": 14,
+      "totalTimeMs": 4656021,
+      "averageTimeMs": 332573
     },
     "ui": {
       "total": 0,
@@ -1534,9 +1567,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 24,
-      "totalTimeMs": 7083854,
-      "averageTimeMs": 295161
+      "completed": 25,
+      "totalTimeMs": 7307937,
+      "averageTimeMs": 292317
     },
     "should-have": {
       "total": 0,
