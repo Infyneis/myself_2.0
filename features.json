@@ -810,7 +810,7 @@
       "description": "Ensure app runs correctly on Android 8.0 (API 26) and above",
       "category": "infrastructure",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-006"
       ]

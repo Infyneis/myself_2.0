@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Widget configuration for Myself 2.0 affirmation widgets
+     Compatibility: Android 8.0+ (API 26+)
+     - previewImage: Used on API 26-30 for widget picker preview
+     - previewLayout: Used on API 31+ for scalable preview (takes precedence)
+     - targetCellWidth/targetCellHeight: Used on API 31+ for default size
+     - minWidth/minHeight: Used on API 26-30 for default size
+-->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="110dp"
     android:minHeight="110dp"
@@ -7,6 +14,7 @@
     android:description="@string/widget_description"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
+    android:previewImage="@drawable/widget_preview"
     android:previewLayout="@layout/widget_medium"
     android:targetCellWidth="2"
     android:targetCellHeight="2"
