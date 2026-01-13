@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:21:19.222Z",
+  "lastUpdated": "2026-01-13T20:28:11.931Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 66,
-    "totalSessions": 101,
-    "totalTimeMs": 20076683,
-    "totalTimeFormatted": "5h 34m",
-    "averageFeatureTimeMs": 295216,
-    "averageFeatureTimeFormatted": "4m 55s",
-    "averageSessionTimeMs": 198779,
-    "averageSessionTimeFormatted": "3m 18s"
+    "completedFeatures": 67,
+    "totalSessions": 102,
+    "totalTimeMs": 20487387,
+    "totalTimeFormatted": "5h 41m",
+    "averageFeatureTimeMs": 296940,
+    "averageFeatureTimeFormatted": "4m 56s",
+    "averageSessionTimeMs": 200857,
+    "averageSessionTimeFormatted": "3m 20s"
   },
   "features": [
     {
@@ -1065,6 +1065,22 @@
         "4d288cd2fb64b049a94094b38cd96530aacce84a"
       ],
       "durationFormatted": "3m 21s"
+    },
+    {
+      "featureId": "TEST-006",
+      "featureName": "TEST-006",
+      "description": "Write widget tests for affirmation create/edit screen",
+      "category": "testing",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T20:21:21.227Z",
+      "completedAt": "2026-01-13T20:28:11.931Z",
+      "durationMs": 410704,
+      "sessionId": "session-mkd1eo5l-lcgrol",
+      "sessionsCount": 1,
+      "commits": [
+        "eb640a811a56eaf66469060f54e546e8168b00e1"
+      ],
+      "durationFormatted": "6m 50s"
     }
   ],
   "sessions": [
@@ -2710,6 +2726,23 @@
         "4d288cd2fb64b049a94094b38cd96530aacce84a"
       ],
       "durationFormatted": "3m 21s"
+    },
+    {
+      "sessionId": "session-mkd1eo5l-lcgrol",
+      "startedAt": "2026-01-13T20:21:21.227Z",
+      "endedAt": "2026-01-13T20:28:11.931Z",
+      "durationMs": 410704,
+      "featuresWorkedOn": [
+        "TEST-006"
+      ],
+      "featuresCompleted": [
+        "TEST-006"
+      ],
+      "status": "completed",
+      "commits": [
+        "eb640a811a56eaf66469060f54e546e8168b00e1"
+      ],
+      "durationFormatted": "6m 50s"
     }
   ],
   "byCategory": {
@@ -2745,17 +2778,17 @@
     },
     "testing": {
       "total": 0,
-      "completed": 5,
-      "totalTimeMs": 973535,
-      "averageTimeMs": 194707
+      "completed": 6,
+      "totalTimeMs": 1384239,
+      "averageTimeMs": 230707
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 50,
-      "totalTimeMs": 14530669,
-      "averageTimeMs": 290613
+      "completed": 51,
+      "totalTimeMs": 14941373,
+      "averageTimeMs": 292968
     },
     "should-have": {
       "total": 0,

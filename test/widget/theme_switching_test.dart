@@ -11,6 +11,7 @@ import 'package:myself_2_0/features/settings/data/settings_model.dart'
 import 'package:myself_2_0/features/settings/data/settings_repository.dart';
 import 'package:myself_2_0/features/settings/presentation/providers/settings_provider.dart';
 import 'package:myself_2_0/features/settings/presentation/screens/settings_screen.dart';
+import 'package:myself_2_0/generated/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 /// Mock settings repository for testing.
@@ -78,20 +79,27 @@ void main() {
       settingsProvider = SettingsProvider(repository: mockRepository);
     });
 
+    Widget createTestWidget(SettingsProvider provider) {
+      return MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('en'),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        home: ChangeNotifierProvider<SettingsProvider>.value(
+          value: provider,
+          child: const SettingsScreen(),
+        ),
+      );
+    }
+
     testWidgets('SettingsScreen displays all three theme options',
         (WidgetTester tester) async {
       await settingsProvider.loadSettings();
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Verify all three theme options are displayed
       expect(find.text('Light'), findsOneWidget);
@@ -104,16 +112,7 @@ void main() {
       // Set initial theme to system (default)
       await settingsProvider.loadSettings();
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Default is system mode
       expect(settingsProvider.themeMode, settings_model.ThemeMode.system);
@@ -123,16 +122,7 @@ void main() {
         (WidgetTester tester) async {
       await settingsProvider.loadSettings();
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Find and tap the Light theme option
       await tester.tap(find.text('Light'));
@@ -146,16 +136,7 @@ void main() {
         (WidgetTester tester) async {
       await settingsProvider.loadSettings();
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Find and tap the Dark theme option
       await tester.tap(find.text('Dark'));
@@ -171,16 +152,7 @@ void main() {
       await settingsProvider.loadSettings();
       await settingsProvider.setThemeMode(settings_model.ThemeMode.light);
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Find and tap the System theme option
       await tester.tap(find.text('System'));
@@ -195,16 +167,7 @@ void main() {
       await settingsProvider.loadSettings();
       await settingsProvider.setThemeMode(settings_model.ThemeMode.dark);
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Verify check_circle icon is shown for selected theme
       expect(find.byIcon(Icons.check_circle), findsOneWidget);
@@ -214,16 +177,7 @@ void main() {
         (WidgetTester tester) async {
       await settingsProvider.loadSettings();
 
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Switch to dark mode
       await tester.tap(find.text('Dark'));
@@ -233,16 +187,7 @@ void main() {
       expect(settingsProvider.themeMode, settings_model.ThemeMode.dark);
 
       // Rebuild widget
-      await tester.pumpWidget(
-        ChangeNotifierProvider<SettingsProvider>.value(
-          value: settingsProvider,
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            home: const SettingsScreen(),
-          ),
-        ),
-      );
+      await tester.pumpWidget(createTestWidget(settingsProvider));
 
       // Theme should still be dark
       expect(settingsProvider.themeMode, settings_model.ThemeMode.dark);
