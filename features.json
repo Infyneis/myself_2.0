@@ -181,7 +181,7 @@
       "description": "Implement subtle fade-in animation (300-500ms) for affirmation transitions and optional breathing animation",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-014"]
     },
     {
