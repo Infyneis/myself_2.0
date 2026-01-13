@@ -592,7 +592,7 @@
       "description": "Implement full VoiceOver support for iOS with proper semantic labels",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-013"
       ]
