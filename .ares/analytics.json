@@ -1,16 +1,16 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:46:47.355Z",
+  "lastUpdated": "2026-01-13T20:50:26.175Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 69,
-    "totalSessions": 104,
-    "totalTimeMs": 21598798,
-    "totalTimeFormatted": "5h 59m",
-    "averageFeatureTimeMs": 304440,
-    "averageFeatureTimeFormatted": "5m 4s",
-    "averageSessionTimeMs": 207681,
+    "completedFeatures": 70,
+    "totalSessions": 105,
+    "totalTimeMs": 21815611,
+    "totalTimeFormatted": "6h 3m",
+    "averageFeatureTimeMs": 303189,
+    "averageFeatureTimeFormatted": "5m 3s",
+    "averageSessionTimeMs": 207768,
     "averageSessionTimeFormatted": "3m 27s"
   },
   "features": [
@@ -1111,6 +1111,22 @@
         "dea0559fd1e465d1d089e0bb1615fd24e9511968"
       ],
       "durationFormatted": "9m 26s"
+    },
+    {
+      "featureId": "TEST-009",
+      "featureName": "TEST-009",
+      "description": "Write integration tests for full create, edit, delete user flows",
+      "category": "testing",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T20:46:49.361Z",
+      "completedAt": "2026-01-13T20:50:26.174Z",
+      "durationMs": 216813,
+      "sessionId": "session-mkd2bf9p-vom5nq",
+      "sessionsCount": 1,
+      "commits": [
+        "e5e3f38d28207329f5f11d52bf4b24992492ce44"
+      ],
+      "durationFormatted": "3m 36s"
     }
   ],
   "sessions": [
@@ -2805,6 +2821,23 @@
         "dea0559fd1e465d1d089e0bb1615fd24e9511968"
       ],
       "durationFormatted": "9m 26s"
+    },
+    {
+      "sessionId": "session-mkd2bf9p-vom5nq",
+      "startedAt": "2026-01-13T20:46:49.361Z",
+      "endedAt": "2026-01-13T20:50:26.174Z",
+      "durationMs": 216813,
+      "featuresWorkedOn": [
+        "TEST-009"
+      ],
+      "featuresCompleted": [
+        "TEST-009"
+      ],
+      "status": "completed",
+      "commits": [
+        "e5e3f38d28207329f5f11d52bf4b24992492ce44"
+      ],
+      "durationFormatted": "3m 36s"
     }
   ],
   "byCategory": {
@@ -2840,17 +2873,17 @@
     },
     "testing": {
       "total": 0,
-      "completed": 8,
-      "totalTimeMs": 2495650,
-      "averageTimeMs": 311956
+      "completed": 9,
+      "totalTimeMs": 2712463,
+      "averageTimeMs": 301385
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 51,
-      "totalTimeMs": 14941373,
-      "averageTimeMs": 292968
+      "completed": 52,
+      "totalTimeMs": 15158186,
+      "averageTimeMs": 291504
     },
     "should-have": {
       "total": 0,

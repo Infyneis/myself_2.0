@@ -772,7 +772,7 @@
       "description": "Write integration tests for widget and app data synchronization",
       "category": "testing",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
