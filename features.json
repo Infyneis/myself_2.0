@@ -736,7 +736,7 @@
       "description": "Write widget tests for affirmation create/edit screen",
       "category": "testing",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {

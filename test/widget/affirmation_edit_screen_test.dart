@@ -17,6 +17,7 @@ import 'package:myself_2_0/features/affirmations/data/repositories/affirmation_r
 import 'package:myself_2_0/features/affirmations/presentation/providers/affirmation_provider.dart';
 import 'package:myself_2_0/features/affirmations/presentation/screens/affirmation_edit_screen.dart';
 import 'package:myself_2_0/features/affirmations/presentation/widgets/affirmation_input.dart';
+import 'package:myself_2_0/generated/l10n/app_localizations.dart';
 
 // Mocks
 class MockAffirmationRepository extends Mock implements AffirmationRepository {}
@@ -34,6 +35,11 @@ void main() {
 
   Widget createTestWidget(AffirmationProvider provider, {String? affirmationId}) {
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('en'),
       home: ChangeNotifierProvider<AffirmationProvider>.value(
         value: provider,
         child: AffirmationEditScreen(affirmationId: affirmationId),
@@ -86,10 +92,10 @@ void main() {
       await tester.pumpWidget(createTestWidget(provider));
       await tester.pumpAndSettle();
 
-      // Assert
+      // Assert - The placeholder text appears multiple times (help text and hint text)
       expect(
-        find.text('Write your affirmation below. Press Enter for new lines.'),
-        findsOneWidget,
+        find.text('Enter your affirmation...'),
+        findsAtLeastNWidgets(1),
       );
     });
 
@@ -169,7 +175,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Assert - Preview section should appear
-      expect(find.text('Preview'), findsOneWidget);
+      expect(find.text('Affirmation card'), findsOneWidget);
       // The text appears twice: once in the input field and once in the preview
       expect(find.text(testText), findsNWidgets(2));
     });
@@ -196,11 +202,11 @@ void main() {
         // Assert - Unsaved changes dialog should appear
         expect(find.text('Unsaved Changes'), findsOneWidget);
         expect(
-          find.text('You have unsaved changes. Are you sure you want to discard them?'),
+          find.text('You have unsaved changes. Are you sure you want to leave?'),
           findsOneWidget,
         );
         expect(find.text('Cancel'), findsOneWidget);
-        expect(find.text('Discard'), findsOneWidget);
+        expect(find.text('Leave'), findsOneWidget);
       }
     });
 
@@ -367,7 +373,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Assert - Preview should show the multi-line text
-      expect(find.text('Preview'), findsOneWidget);
+      expect(find.text('Affirmation card'), findsOneWidget);
       expect(find.text(multiLineText), findsNWidgets(2)); // Input + Preview
     });
   });
