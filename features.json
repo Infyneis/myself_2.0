@@ -669,7 +669,7 @@
       "description": "Implement all UI strings in English (secondary language)",
       "category": "functional",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "FR-024"
       ]
