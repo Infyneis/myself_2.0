@@ -45,5 +45,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>AppGroupId</key>
+	<string>group.com.infyneis.myself_2_0</string>
 </dict>
 </plist>

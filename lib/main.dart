@@ -18,6 +18,7 @@ import 'features/affirmations/presentation/providers/affirmation_provider.dart';
 import 'features/settings/data/hive_settings_repository.dart';
 import 'features/settings/data/settings_repository.dart';
 import 'features/settings/presentation/providers/settings_provider.dart';
+import 'widgets/native_widget/widget_service.dart';
 
 /// Main entry point for Myself 2.0.
 void main() async {
@@ -26,6 +27,10 @@ void main() async {
 
   // Initialize Hive for local storage
   await HiveService.initialize();
+
+  // Initialize widget service for home screen widget (WIDGET-001)
+  final widgetService = WidgetService();
+  await widgetService.initialize();
 
   // Create repositories
   final affirmationRepository = HiveAffirmationRepository();
@@ -58,6 +63,9 @@ void main() async {
         // Provide repositories for potential injection elsewhere
         Provider<AffirmationRepository>.value(value: affirmationRepository),
         Provider<SettingsRepository>.value(value: settingsRepository),
+
+        // Provide widget service for home screen widget
+        Provider<WidgetService>.value(value: widgetService),
 
         // Provide the main state management providers
         ChangeNotifierProvider<AffirmationProvider>.value(
