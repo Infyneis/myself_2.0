@@ -235,7 +235,7 @@
       "description": "Create reusable AffirmationInput widget with multi-line support, character limit indicator, and validation",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-001", "FR-005", "FR-006"]
     },
     {
