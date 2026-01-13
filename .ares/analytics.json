@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:48:29.871Z",
+  "lastUpdated": "2026-01-13T10:54:58.942Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 15,
-    "totalSessions": 16,
-    "totalTimeMs": 6981831,
-    "totalTimeFormatted": "1h 56m",
-    "averageFeatureTimeMs": 441512,
-    "averageFeatureTimeFormatted": "7m 21s",
-    "averageSessionTimeMs": 436364,
-    "averageSessionTimeFormatted": "7m 16s"
+    "completedFeatures": 16,
+    "totalSessions": 17,
+    "totalTimeMs": 7368899,
+    "totalTimeFormatted": "2h 2m",
+    "averageFeatureTimeMs": 438109,
+    "averageFeatureTimeFormatted": "7m 18s",
+    "averageSessionTimeMs": 433465,
+    "averageSessionTimeFormatted": "7m 13s"
   },
   "features": [
     {
@@ -253,6 +253,22 @@
         "4634fca0725b60c7f79f28a558025500b9855f33"
       ],
       "durationFormatted": "4m 48s"
+    },
+    {
+      "featureId": "FUNC-012",
+      "featureName": "FUNC-012",
+      "description": "Implement import functionality to load affirmations from a text file",
+      "category": "functional",
+      "priority": "could-have",
+      "startedAt": "2026-01-13T10:48:31.874Z",
+      "completedAt": "2026-01-13T10:54:58.942Z",
+      "durationMs": 387068,
+      "sessionId": "session-mkcgy0le-cwws8y",
+      "sessionsCount": 1,
+      "commits": [
+        "691ce174b4e6a11b5527d19a998121c7d02b8639"
+      ],
+      "durationFormatted": "6m 27s"
     }
   ],
   "sessions": [
@@ -525,6 +541,23 @@
         "4634fca0725b60c7f79f28a558025500b9855f33"
       ],
       "durationFormatted": "4m 48s"
+    },
+    {
+      "sessionId": "session-mkcgy0le-cwws8y",
+      "startedAt": "2026-01-13T10:48:31.874Z",
+      "endedAt": "2026-01-13T10:54:58.942Z",
+      "durationMs": 387068,
+      "featuresWorkedOn": [
+        "FUNC-012"
+      ],
+      "featuresCompleted": [
+        "FUNC-012"
+      ],
+      "status": "completed",
+      "commits": [
+        "691ce174b4e6a11b5527d19a998121c7d02b8639"
+      ],
+      "durationFormatted": "6m 27s"
     }
   ],
   "byCategory": {
@@ -536,9 +569,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 11,
-      "totalTimeMs": 3799789,
-      "averageTimeMs": 345435
+      "completed": 12,
+      "totalTimeMs": 4186857,
+      "averageTimeMs": 348905
     }
   },
   "byPriority": {
@@ -556,9 +589,9 @@
     },
     "could-have": {
       "total": 0,
-      "completed": 2,
-      "totalTimeMs": 1143998,
-      "averageTimeMs": 571999
+      "completed": 3,
+      "totalTimeMs": 1531066,
+      "averageTimeMs": 510355
     }
   }
 }
