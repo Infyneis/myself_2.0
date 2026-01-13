@@ -181,56 +181,74 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, settingsProvider, _) {
         final breathingEnabled = settingsProvider.breathingAnimationEnabled;
 
-        return Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppDimensions.spacingL),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Main affirmation card with zen animation
-                Card(
-                  elevation: AppDimensions.elevationSoft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppDimensions.spacingXl),
-                    child: Column(
-                      children: [
-                        // Affirmation text with fade-in animation
-                        _buildAnimatedAffirmation(
-                          context,
-                          currentAffirmation.text,
-                          currentAffirmation.id,
-                          breathingEnabled,
-                        ),
-                      ],
+        // Wrap the content with GestureDetector to handle tap and swipe gestures
+        return GestureDetector(
+          // Handle tap gesture to show next affirmation
+          onTap: () => _showNextAffirmation(provider),
+          // Handle horizontal swipe gestures (left or right) to show next affirmation
+          onHorizontalDragEnd: (details) {
+            // Only trigger if there's significant horizontal velocity
+            if (details.primaryVelocity != null &&
+                details.primaryVelocity!.abs() > 100) {
+              _showNextAffirmation(provider);
+            }
+          },
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppDimensions.spacingL),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Main affirmation card with zen animation
+                  Card(
+                    elevation: AppDimensions.elevationSoft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppDimensions.spacingXl),
+                      child: Column(
+                        children: [
+                          // Affirmation text with fade-in animation
+                          _buildAnimatedAffirmation(
+                            context,
+                            currentAffirmation.text,
+                            currentAffirmation.id,
+                            breathingEnabled,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-                const SizedBox(height: AppDimensions.spacingXl),
+                  const SizedBox(height: AppDimensions.spacingXl),
 
-                // Helper text to guide user
-                Text(
-                  'Your daily affirmation',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withValues(alpha: 0.5),
-                        letterSpacing: 1.2,
+                  // Helper text to guide user
+                  Text(
+                    'Tap or swipe for next affirmation',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.5),
+                          letterSpacing: 1.2,
+                        ),
+                    textAlign: TextAlign.center,
+                  )
+                      .animate()
+                      .fadeIn(
+                        delay: 200.ms,
+                        duration: 400.ms,
                       ),
-                  textAlign: TextAlign.center,
-                )
-                    .animate()
-                    .fadeIn(
-                      delay: 200.ms,
-                      duration: 400.ms,
-                    ),
-              ],
+                ],
+              ),
             ),
           ),
         );
       },
     );
+  }
+
+  /// Shows the next random affirmation with smooth transition.
+  void _showNextAffirmation(AffirmationProvider provider) {
+    provider.selectRandomAffirmation();
   }
 
   /// Builds the animated affirmation text with optional breathing animation.
