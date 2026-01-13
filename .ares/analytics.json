@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:33:14.967Z",
+  "lastUpdated": "2026-01-13T10:36:24.197Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 11,
-    "totalSessions": 12,
-    "totalTimeMs": 6074944,
-    "totalTimeFormatted": "1h 41m",
-    "averageFeatureTimeMs": 519618,
-    "averageFeatureTimeFormatted": "8m 39s",
-    "averageSessionTimeMs": 506245,
-    "averageSessionTimeFormatted": "8m 26s"
+    "completedFeatures": 12,
+    "totalSessions": 13,
+    "totalTimeMs": 6262170,
+    "totalTimeFormatted": "1h 44m",
+    "averageFeatureTimeMs": 491918,
+    "averageFeatureTimeFormatted": "8m 11s",
+    "averageSessionTimeMs": 481705,
+    "averageSessionTimeFormatted": "8m 1s"
   },
   "features": [
     {
@@ -189,6 +189,22 @@
         "ffaff665b137a229238de86abefaa4bbcf05b8cc"
       ],
       "durationFormatted": "14m 15s"
+    },
+    {
+      "featureId": "FUNC-008",
+      "featureName": "FUNC-008",
+      "description": "Create AffirmationRepository for CRUD operations with Hive, abstracting storage implementation",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T10:33:16.970Z",
+      "completedAt": "2026-01-13T10:36:24.196Z",
+      "durationMs": 187226,
+      "sessionId": "session-mkcgeene-f9b75t",
+      "sessionsCount": 1,
+      "commits": [
+        "2742fb3cbaa4fd7e1623ef8544696350dbbf3566"
+      ],
+      "durationFormatted": "3m 7s"
     }
   ],
   "sessions": [
@@ -393,6 +409,23 @@
         "ffaff665b137a229238de86abefaa4bbcf05b8cc"
       ],
       "durationFormatted": "14m 15s"
+    },
+    {
+      "sessionId": "session-mkcgeene-f9b75t",
+      "startedAt": "2026-01-13T10:33:16.970Z",
+      "endedAt": "2026-01-13T10:36:24.196Z",
+      "durationMs": 187226,
+      "featuresWorkedOn": [
+        "FUNC-008"
+      ],
+      "featuresCompleted": [
+        "FUNC-008"
+      ],
+      "status": "completed",
+      "commits": [
+        "2742fb3cbaa4fd7e1623ef8544696350dbbf3566"
+      ],
+      "durationFormatted": "3m 7s"
     }
   ],
   "byCategory": {
@@ -404,17 +437,17 @@
     },
     "functional": {
       "total": 0,
-      "completed": 7,
-      "totalTimeMs": 2892902,
-      "averageTimeMs": 413272
+      "completed": 8,
+      "totalTimeMs": 3080128,
+      "averageTimeMs": 385016
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 9,
-      "totalTimeMs": 4413027,
-      "averageTimeMs": 490336
+      "completed": 10,
+      "totalTimeMs": 4600253,
+      "averageTimeMs": 460025
     },
     "should-have": {
       "total": 0,
