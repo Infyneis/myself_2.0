@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T13:29:08.428Z",
+  "lastUpdated": "2026-01-13T13:31:02.666Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 21,
-    "totalSessions": 48,
-    "totalTimeMs": 8493575,
-    "totalTimeFormatted": "2h 21m",
-    "averageFeatureTimeMs": 379499,
-    "averageFeatureTimeFormatted": "6m 19s",
-    "averageSessionTimeMs": 176949,
-    "averageSessionTimeFormatted": "2m 56s"
+    "completedFeatures": 22,
+    "totalSessions": 49,
+    "totalTimeMs": 8605810,
+    "totalTimeFormatted": "2h 23m",
+    "averageFeatureTimeMs": 367351,
+    "averageFeatureTimeFormatted": "6m 7s",
+    "averageSessionTimeMs": 175629,
+    "averageSessionTimeFormatted": "2m 55s"
   },
   "features": [
     {
@@ -349,6 +349,22 @@
         "459edcbf1d676682bd32417131fca51e1babf0a5"
       ],
       "durationFormatted": "3m 2s"
+    },
+    {
+      "featureId": "UI-006",
+      "featureName": "UI-006",
+      "description": "Add refresh button on home screen to cycle through affirmations",
+      "category": "ui",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T13:29:10.430Z",
+      "completedAt": "2026-01-13T13:31:02.665Z",
+      "durationMs": 112235,
+      "sessionId": "session-mkcmolr2-oywr90",
+      "sessionsCount": 1,
+      "commits": [
+        "4e4783ae5fbf8bab789d03c811d9c136383ef510"
+      ],
+      "durationFormatted": "1m 52s"
     }
   ],
   "sessions": [
@@ -1113,6 +1129,23 @@
         "459edcbf1d676682bd32417131fca51e1babf0a5"
       ],
       "durationFormatted": "3m 2s"
+    },
+    {
+      "sessionId": "session-mkcmolr2-oywr90",
+      "startedAt": "2026-01-13T13:29:10.430Z",
+      "endedAt": "2026-01-13T13:31:02.665Z",
+      "durationMs": 112235,
+      "featuresWorkedOn": [
+        "UI-006"
+      ],
+      "featuresCompleted": [
+        "UI-006"
+      ],
+      "status": "interrupted",
+      "commits": [
+        "4e4783ae5fbf8bab789d03c811d9c136383ef510"
+      ],
+      "durationFormatted": "1m 52s"
     }
   ],
   "byCategory": {
@@ -1130,9 +1163,9 @@
     },
     "ui": {
       "total": 0,
-      "completed": 5,
-      "totalTimeMs": 959727,
-      "averageTimeMs": 191945
+      "completed": 6,
+      "totalTimeMs": 1071962,
+      "averageTimeMs": 178660
     }
   },
   "byPriority": {
@@ -1144,9 +1177,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 2,
-      "totalTimeMs": 629448,
-      "averageTimeMs": 314724
+      "completed": 3,
+      "totalTimeMs": 741683,
+      "averageTimeMs": 247228
     },
     "could-have": {
       "total": 0,

@@ -208,7 +208,7 @@
       "description": "Create screen displaying all affirmations in a card-based list with edit/delete actions",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-004"]
     },
     {
