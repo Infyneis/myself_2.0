@@ -570,7 +570,7 @@
       "description": "Implement platform-native encryption for local data storage",
       "category": "security",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-011"
       ]

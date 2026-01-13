@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../features/affirmations/data/models/affirmation.dart';
+import '../security/encryption_service.dart';
 
 /// Box names for Hive storage.
 abstract class HiveBoxNames {
@@ -60,8 +61,9 @@ class HiveService {
     if (_affirmationsBox == null || !_affirmationsBox!.isOpen) {
       _affirmationsBox = await Hive.openBox<Affirmation>(
         HiveBoxNames.affirmations,
+        encryptionCipher: EncryptionService.getEncryptionCipher(),
       );
-      debugPrint('HiveService: Opened affirmations box (lazy).');
+      debugPrint('HiveService: Opened affirmations box (lazy, encrypted).');
     }
     return _affirmationsBox!;
   }
@@ -78,8 +80,11 @@ class HiveService {
 
     // Lazy box opening for performance (PERF-001)
     if (_settingsBox == null || !_settingsBox!.isOpen) {
-      _settingsBox = await Hive.openBox<dynamic>(HiveBoxNames.settings);
-      debugPrint('HiveService: Opened settings box (lazy).');
+      _settingsBox = await Hive.openBox<dynamic>(
+        HiveBoxNames.settings,
+        encryptionCipher: EncryptionService.getEncryptionCipher(),
+      );
+      debugPrint('HiveService: Opened settings box (lazy, encrypted).');
     }
     return _settingsBox!;
   }
@@ -96,8 +101,11 @@ class HiveService {
 
     // Lazy box opening for performance (PERF-001)
     if (_appStateBox == null || !_appStateBox!.isOpen) {
-      _appStateBox = await Hive.openBox<dynamic>(HiveBoxNames.appState);
-      debugPrint('HiveService: Opened appState box (lazy).');
+      _appStateBox = await Hive.openBox<dynamic>(
+        HiveBoxNames.appState,
+        encryptionCipher: EncryptionService.getEncryptionCipher(),
+      );
+      debugPrint('HiveService: Opened appState box (lazy, encrypted).');
     }
     return _appStateBox!;
   }
@@ -113,6 +121,10 @@ class HiveService {
   /// Performance optimization (PERF-001):
   /// - Boxes are opened lazily on first access instead of eagerly during init
   /// - This reduces initial startup time
+  ///
+  /// Security (NFR-011):
+  /// - Initializes platform-native encryption for all Hive boxes
+  /// - Uses AES-256 encryption with securely stored keys
   ///
   /// Throws [HiveError] if initialization fails.
   static Future<void> initialize() async {
@@ -133,6 +145,10 @@ class HiveService {
         await Hive.initFlutter(hivePath);
       }
 
+      // NFR-011: Initialize encryption for secure data storage
+      await EncryptionService.initialize();
+      debugPrint('HiveService: Encryption initialized.');
+
       // Register type adapters
       _registerAdapters();
 
@@ -141,7 +157,7 @@ class HiveService {
       // Boxes will be opened when first accessed via getters
 
       _initialized = true;
-      debugPrint('HiveService: Initialization complete (lazy box opening).');
+      debugPrint('HiveService: Initialization complete (lazy box opening, encrypted).');
     } catch (e, stackTrace) {
       debugPrint('HiveService: Initialization failed: $e');
       debugPrint('Stack trace: $stackTrace');
