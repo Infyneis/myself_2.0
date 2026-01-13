@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T09:47:55.525Z",
+  "lastUpdated": "2026-01-13T09:54:14.415Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 6,
-    "totalSessions": 6,
-    "totalTimeMs": 3367519,
-    "totalTimeFormatted": "56m 7s",
-    "averageFeatureTimeMs": 561253,
-    "averageFeatureTimeFormatted": "9m 21s",
-    "averageSessionTimeMs": 561253,
-    "averageSessionTimeFormatted": "9m 21s"
+    "completedFeatures": 7,
+    "totalSessions": 7,
+    "totalTimeMs": 3744407,
+    "totalTimeFormatted": "1h 2m",
+    "averageFeatureTimeMs": 534915,
+    "averageFeatureTimeFormatted": "8m 54s",
+    "averageSessionTimeMs": 534915,
+    "averageSessionTimeFormatted": "8m 54s"
   },
   "features": [
     {
@@ -109,6 +109,22 @@
         "809d9b4c39bf8173db902d4614b3c29ac0522734"
       ],
       "durationFormatted": "4m 18s"
+    },
+    {
+      "featureId": "FUNC-003",
+      "featureName": "FUNC-003",
+      "description": "Implement functionality to edit existing affirmations, updating the updatedAt timestamp and preserving other metadata",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T09:47:57.526Z",
+      "completedAt": "2026-01-13T09:54:14.414Z",
+      "durationMs": 376888,
+      "sessionId": "session-mkces4ba-0cjkk4",
+      "sessionsCount": 1,
+      "commits": [
+        "829ae3fb04738b6231e128724a7f3a4651894036"
+      ],
+      "durationFormatted": "6m 16s"
     }
   ],
   "sessions": [
@@ -213,6 +229,23 @@
         "809d9b4c39bf8173db902d4614b3c29ac0522734"
       ],
       "durationFormatted": "4m 18s"
+    },
+    {
+      "sessionId": "session-mkces4ba-0cjkk4",
+      "startedAt": "2026-01-13T09:47:57.526Z",
+      "endedAt": "2026-01-13T09:54:14.414Z",
+      "durationMs": 376888,
+      "featuresWorkedOn": [
+        "FUNC-003"
+      ],
+      "featuresCompleted": [
+        "FUNC-003"
+      ],
+      "status": "completed",
+      "commits": [
+        "829ae3fb04738b6231e128724a7f3a4651894036"
+      ],
+      "durationFormatted": "6m 16s"
     }
   ],
   "byCategory": {
@@ -224,17 +257,17 @@
     },
     "functional": {
       "total": 0,
-      "completed": 2,
-      "totalTimeMs": 544627,
-      "averageTimeMs": 272314
+      "completed": 3,
+      "totalTimeMs": 921515,
+      "averageTimeMs": 307172
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 6,
-      "totalTimeMs": 3367519,
-      "averageTimeMs": 561253
+      "completed": 7,
+      "totalTimeMs": 3744407,
+      "averageTimeMs": 534915
     }
   }
 }
