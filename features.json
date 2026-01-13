@@ -262,7 +262,7 @@
       "description": "Create welcome screen with illustration and brief app explanation for first-time users",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
