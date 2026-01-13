@@ -658,7 +658,7 @@
       "description": "Implement all UI strings in French (primary language)",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "FR-024"
       ]

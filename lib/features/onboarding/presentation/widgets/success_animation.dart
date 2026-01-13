@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 /// Success animation widget.
 ///
@@ -55,6 +56,7 @@ class _SuccessAnimationState extends State<SuccessAnimation> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = theme.colorScheme.primary;
+    final l10n = AppLocalizations.of(context)!;
 
     return Container(
       color: theme.colorScheme.surface,
@@ -89,7 +91,7 @@ class _SuccessAnimationState extends State<SuccessAnimation> {
 
             // Success title
             Text(
-              'Perfect!',
+              l10n.congratulations,
               style: theme.textTheme.displaySmall?.copyWith(
                 fontWeight: FontWeight.w400,
                 color: primaryColor,
@@ -113,7 +115,7 @@ class _SuccessAnimationState extends State<SuccessAnimation> {
                 horizontal: AppDimensions.spacingXl,
               ),
               child: Text(
-                'Your first affirmation is ready!\nLet\'s set up your home screen widget.',
+                '${l10n.firstAffirmationCreated}!\n${l10n.widgetSetupDescription}',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   height: 1.6,

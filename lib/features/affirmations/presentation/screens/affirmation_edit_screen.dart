@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/models/affirmation.dart';
 import '../providers/affirmation_provider.dart';
 import '../widgets/affirmation_input.dart';
@@ -83,6 +84,8 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return PopScope(
       canPop: !hasChanges,
       onPopInvokedWithResult: (didPop, result) async {
@@ -95,21 +98,21 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Semantics(
-            label: isEditing ? 'Edit Affirmation' : 'New Affirmation',
+            label: isEditing ? l10n.editAffirmationTitle : l10n.newAffirmation,
             header: true,
-            child: Text(isEditing ? 'Edit Affirmation' : 'New Affirmation'),
+            child: Text(isEditing ? l10n.editAffirmationTitle : l10n.newAffirmation),
           ),
           actions: [
             Semantics(
               button: true,
               enabled: !_isSaving,
-              label: 'Save',
-              hint: 'Save affirmation and return to previous screen',
+              label: l10n.save,
+              hint: l10n.affirmationSaved,
               child: TextButton(
                 onPressed: _isSaving ? null : _saveAffirmation,
                 child: _isSaving
                     ? Semantics(
-                        label: 'Saving affirmation',
+                        label: l10n.affirmationSaved,
                         liveRegion: true,
                         child: const SizedBox(
                           width: 20,
@@ -117,7 +120,7 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         ),
                       )
-                    : const Text('Save'),
+                    : Text(l10n.save),
               ),
             ),
           ],
@@ -130,9 +133,9 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
               children: [
                 // Help text for multi-line input
                 Semantics(
-                  hint: 'Instructions for text input',
+                  hint: l10n.affirmationPlaceholder,
                   child: Text(
-                    'Write your affirmation below. Press Enter for new lines.',
+                    l10n.affirmationPlaceholder,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
@@ -143,14 +146,12 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
                 // Multi-line text input
                 Semantics(
                   textField: true,
-                  label: 'Affirmation text',
-                  hint: 'Enter your affirmation text. Maximum 280 characters',
+                  label: l10n.affirmationPlaceholder,
+                  hint: l10n.affirmationPlaceholder,
                   child: AffirmationInput(
                     controller: _textController,
                     focusNode: _focusNode,
-                    hintText: isEditing
-                        ? 'Edit your affirmation...'
-                        : 'I am worthy of love and respect.\n\nEvery day I grow stronger.',
+                    hintText: l10n.affirmationPlaceholder,
                     autofocus: !isEditing, // Autofocus only for new affirmations
                     onChanged: (_) {
                       // Trigger rebuild to update save button state
@@ -166,7 +167,7 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
                   Semantics(
                     header: true,
                     child: Text(
-                      'Preview',
+                      l10n.affirmationCard,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
@@ -207,21 +208,20 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
   }
 
   Future<bool> _showUnsavedChangesDialog() async {
+    final l10n = AppLocalizations.of(context)!;
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Unsaved Changes'),
-        content: const Text(
-          'You have unsaved changes. Are you sure you want to discard them?',
-        ),
+        title: Text(l10n.unsavedChanges),
+        content: Text(l10n.unsavedChangesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(l10n.leave),
           ),
         ],
       ),

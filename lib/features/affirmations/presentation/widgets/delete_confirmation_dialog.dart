@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 /// A confirmation dialog for deleting an affirmation.
 ///
@@ -54,6 +55,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     // Truncate text for preview
     final previewText = affirmationText.length > 50
@@ -63,14 +65,14 @@ class DeleteConfirmationDialog extends StatelessWidget {
     return Semantics(
       scopesRoute: true,
       namesRoute: true,
-      label: 'Delete Affirmation Dialog',
+      label: l10n.deleteAffirmationTitle,
       child: AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
         ),
         title: Semantics(
           header: true,
-          label: 'Warning: Delete Affirmation',
+          label: l10n.deleteAffirmationTitle,
           child: Row(
             children: [
               ExcludeSemantics(
@@ -84,7 +86,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
               Expanded(
                 child: ExcludeSemantics(
                   child: Text(
-                    'Delete Affirmation',
+                    l10n.deleteAffirmationTitle,
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -101,7 +103,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Are you sure you want to delete this affirmation?',
+              l10n.deleteAffirmationMessage,
               style: theme.textTheme.bodyMedium,
             ),
             const SizedBox(height: AppDimensions.spacingM),
@@ -131,9 +133,9 @@ class DeleteConfirmationDialog extends StatelessWidget {
             ),
             const SizedBox(height: AppDimensions.spacingM),
             Semantics(
-              label: 'Warning: This action cannot be undone',
+              label: l10n.deleteAffirmationMessage,
               child: Text(
-                'This action cannot be undone.',
+                l10n.deleteAffirmationMessage,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: AppColors.error,
                 ),
@@ -147,8 +149,8 @@ class DeleteConfirmationDialog extends StatelessWidget {
         Semantics(
           button: true,
           enabled: true,
-          label: 'Cancel',
-          hint: 'Keep the affirmation and close this dialog',
+          label: l10n.cancel,
+          hint: l10n.cancel,
           child: TextButton(
             onPressed: () => Navigator.of(context).pop(false),
             style: TextButton.styleFrom(
@@ -162,7 +164,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Cancel',
+              l10n.cancel,
               style: TextStyle(
                 color: isDark ? AppColors.softWhite : AppColors.stone,
               ),
@@ -173,8 +175,8 @@ class DeleteConfirmationDialog extends StatelessWidget {
         Semantics(
           button: true,
           enabled: true,
-          label: 'Delete',
-          hint: 'Permanently delete this affirmation',
+          label: l10n.delete,
+          hint: l10n.deleteAffirmation,
           child: ElevatedButton(
             onPressed: () => Navigator.of(context).pop(true),
             style: ElevatedButton.styleFrom(
@@ -189,7 +191,7 @@ class DeleteConfirmationDialog extends StatelessWidget {
                 vertical: AppDimensions.spacingS,
               ),
             ),
-            child: const Text('Delete'),
+            child: Text(l10n.delete),
           ),
         ),
       ],

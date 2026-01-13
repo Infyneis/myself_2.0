@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 /// Widget setup instructions screen.
 ///
@@ -39,6 +40,7 @@ class WidgetSetupInstructions extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isIOS = Platform.isIOS;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: SafeArea(
@@ -56,7 +58,7 @@ class WidgetSetupInstructions extends StatelessWidget {
                 child: TextButton(
                   onPressed: onSkip,
                   child: Text(
-                    'Skip for now',
+                    l10n.skipForNow,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.primary,
                     ),
@@ -68,7 +70,7 @@ class WidgetSetupInstructions extends StatelessWidget {
 
               // Title
               Text(
-                'Add Your Widget',
+                l10n.widgetSetupTitle,
                 style: theme.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.w400,
                 ),
@@ -87,7 +89,7 @@ class WidgetSetupInstructions extends StatelessWidget {
 
               // Subtitle
               Text(
-                'See your affirmations every time you unlock your phone',
+                l10n.widgetSetupDescription,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                   height: 1.6,
@@ -134,7 +136,7 @@ class WidgetSetupInstructions extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'I\'ve Added It',
+                        l10n.gotIt,
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.5,

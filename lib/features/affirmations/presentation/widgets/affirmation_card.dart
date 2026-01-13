@@ -9,6 +9,7 @@ import 'package:flutter/semantics.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/dimensions.dart';
 import '../../../../core/theme/text_styles.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/models/affirmation.dart';
 
 /// A card widget displaying a single affirmation.
@@ -59,6 +60,7 @@ class AffirmationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final brightness = theme.brightness;
+    final l10n = AppLocalizations.of(context)!;
 
     // Zen colors based on theme brightness
     final cardColor = brightness == Brightness.light
@@ -71,9 +73,9 @@ class AffirmationCard extends StatelessWidget {
     final mutedColor = AppColors.stone;
 
     // Build semantic label for VoiceOver
-    String semanticLabel = 'Affirmation: ${affirmation.text}';
+    String semanticLabel = '${l10n.affirmationCard}: ${affirmation.text}';
     if (onEdit != null || onDelete != null) {
-      semanticLabel += '. Swipe up or down for actions';
+      semanticLabel += '. ${l10n.editAffirmation}';
     }
 
     return Semantics(
@@ -82,9 +84,9 @@ class AffirmationCard extends StatelessWidget {
       enabled: true,
       customSemanticsActions: {
         if (onEdit != null)
-          const CustomSemanticsAction(label: 'Edit'): () => onEdit!(),
+          CustomSemanticsAction(label: l10n.editAffirmation): () => onEdit!(),
         if (onDelete != null)
-          const CustomSemanticsAction(label: 'Delete'): () => onDelete!(),
+          CustomSemanticsAction(label: l10n.deleteAffirmation): () => onDelete!(),
       },
       child: Card(
       margin: const EdgeInsets.symmetric(
@@ -139,7 +141,7 @@ class AffirmationCard extends StatelessWidget {
                           color: mutedColor,
                         ),
                         onPressed: onEdit,
-                        tooltip: 'Edit',
+                        tooltip: l10n.editAffirmation,
                         iconSize: 20,
                         constraints: const BoxConstraints(
                           minWidth: AppDimensions.minTouchTarget,
@@ -154,7 +156,7 @@ class AffirmationCard extends StatelessWidget {
                           color: mutedColor,
                         ),
                         onPressed: onDelete,
-                        tooltip: 'Delete',
+                        tooltip: l10n.deleteAffirmation,
                         iconSize: 20,
                         constraints: const BoxConstraints(
                           minWidth: AppDimensions.minTouchTarget,

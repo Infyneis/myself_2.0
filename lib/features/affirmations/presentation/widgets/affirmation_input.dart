@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 /// A text input widget for entering affirmations.
 ///
@@ -68,13 +69,14 @@ class AffirmationInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Semantics(
-          label: 'Affirmation text input',
-          hint: 'Enter your affirmation. Press enter to add new lines.',
+          label: l10n.affirmationPlaceholder,
+          hint: l10n.affirmationPlaceholder,
           textField: true,
           child: TextField(
             controller: controller,
@@ -92,7 +94,7 @@ class AffirmationInput extends StatelessWidget {
               LengthLimitingTextInputFormatter(maxLength),
             ],
             decoration: InputDecoration(
-              hintText: hintText ?? 'Enter your affirmation...',
+              hintText: hintText ?? l10n.affirmationPlaceholder,
               hintMaxLines: 5, // Allow multi-line hints
               counterText: '', // Hide default counter, we show our own
               border: OutlineInputBorder(

@@ -11,6 +11,7 @@ import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/models/affirmation.dart';
 import '../helpers/delete_affirmation_helper.dart';
 import '../providers/affirmation_provider.dart';
@@ -44,12 +45,14 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
-          label: 'My Affirmations',
+          label: l10n.myAffirmations,
           header: true,
-          child: const Text('My Affirmations'),
+          child: Text(l10n.myAffirmations),
         ),
         centerTitle: true,
       ),
@@ -59,7 +62,7 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
           if (provider.isLoading && provider.affirmations.isEmpty) {
             return Center(
               child: Semantics(
-                label: 'Loading affirmations',
+                label: l10n.errorLoadingAffirmations,
                 liveRegion: true,
                 child: const CircularProgressIndicator(),
               ),
@@ -77,7 +80,7 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Semantics(
-                        label: 'Error',
+                        label: l10n.errorLoadingAffirmations,
                         image: true,
                         child: Icon(
                           Icons.error_outline,
@@ -89,7 +92,7 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
                       Semantics(
                         header: true,
                         child: Text(
-                          'Something went wrong',
+                          l10n.errorLoadingAffirmations,
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
@@ -103,11 +106,11 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
                       Semantics(
                         button: true,
                         enabled: true,
-                        label: 'Retry',
-                        hint: 'Tap to retry loading affirmations',
+                        label: l10n.tryAgain,
+                        hint: l10n.errorLoadingAffirmations,
                         child: ElevatedButton(
                           onPressed: () => provider.loadAffirmations(),
-                          child: const Text('Retry'),
+                          child: Text(l10n.tryAgain),
                         ),
                       ),
                     ],
@@ -133,17 +136,18 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
           // Only show FAB if there are affirmations (empty state has its own button)
           if (!provider.hasAffirmations) return const SizedBox.shrink();
 
+          final l10n = AppLocalizations.of(context)!;
           return Semantics(
             button: true,
             enabled: true,
-            label: 'Add new affirmation',
-            hint: 'Create a new affirmation',
+            label: l10n.addAffirmation,
+            hint: l10n.createNewAffirmation,
             child: SizedBox(
               width: AppDimensions.minTouchTarget + 12, // FAB standard size
               height: AppDimensions.minTouchTarget + 12, // FAB standard size
               child: FloatingActionButton(
                 onPressed: () => _navigateToAddAffirmation(context),
-                tooltip: 'Add Affirmation',
+                tooltip: l10n.addAffirmation,
                 child: const Icon(Icons.add),
               ),
             ),
@@ -263,19 +267,21 @@ class _ReorderableAffirmationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     // Build semantic label for VoiceOver
-    String semanticLabel = 'Affirmation ${index + 1}: ${affirmation.text}';
+    String semanticLabel = '${l10n.affirmationCard} ${index + 1}: ${affirmation.text}';
 
     return Semantics(
       label: semanticLabel,
       button: onTap != null,
       enabled: true,
-      hint: 'Double tap to edit. Swipe up or down for more actions',
+      hint: l10n.editAffirmation,
       customSemanticsActions: {
         if (onEdit != null)
-          const CustomSemanticsAction(label: 'Edit'): () => onEdit!(),
+          CustomSemanticsAction(label: l10n.editAffirmation): () => onEdit!(),
         if (onDelete != null)
-          const CustomSemanticsAction(label: 'Delete'): () => onDelete!(),
+          CustomSemanticsAction(label: l10n.deleteAffirmation): () => onDelete!(),
       },
       child: Card(
         margin: const EdgeInsets.symmetric(
@@ -328,7 +334,7 @@ class _ReorderableAffirmationCard extends StatelessWidget {
                               child: IconButton(
                                 icon: const Icon(Icons.edit_outlined),
                                 onPressed: onEdit,
-                                tooltip: 'Edit',
+                                tooltip: l10n.editAffirmation,
                               ),
                             ),
                           if (onDelete != null)
@@ -340,7 +346,7 @@ class _ReorderableAffirmationCard extends StatelessWidget {
                               child: IconButton(
                                 icon: const Icon(Icons.delete_outline),
                                 onPressed: onDelete,
-                                tooltip: 'Delete',
+                                tooltip: l10n.deleteAffirmation,
                               ),
                             ),
                         ],

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 /// Welcome screen widget.
 ///
@@ -32,6 +33,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: SafeArea(
@@ -47,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
 
               // Zen illustration
               Semantics(
-                label: 'Myself 2.0 zen meditation icon',
+                label: l10n.appTitle,
                 image: true,
                 child: ExcludeSemantics(
                   child: _buildZenIllustration(context, isDarkMode)
@@ -70,10 +72,10 @@ class WelcomeScreen extends StatelessWidget {
               // Welcome title
               Semantics(
                 header: true,
-                label: 'Welcome to Myself 2.0',
+                label: l10n.welcomeTitle,
                 child: ExcludeSemantics(
                   child: Text(
-                    'Welcome to\nMyself 2.0',
+                    l10n.welcomeTitle,
                     style: theme.textTheme.displayLarge?.copyWith(
                       height: 1.2,
                       fontWeight: FontWeight.w400,
@@ -99,14 +101,10 @@ class WelcomeScreen extends StatelessWidget {
 
               // App description
               Semantics(
-                label: 'Your personal sanctuary for daily affirmations. '
-                    'Create meaningful affirmations, see them on your home screen widget, '
-                    'and cultivate a mindful practice of self-compassion.',
+                label: l10n.welcomeDescription,
                 child: ExcludeSemantics(
                   child: Text(
-                    'Your personal sanctuary for daily affirmations.\n\n'
-                    'Create meaningful affirmations, see them on your home screen widget, '
-                    'and cultivate a mindful practice of self-compassion.',
+                    l10n.welcomeDescription,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                       height: 1.6,
@@ -134,8 +132,8 @@ class WelcomeScreen extends StatelessWidget {
               Semantics(
                 button: true,
                 enabled: true,
-                label: 'Get Started',
-                hint: 'Begin your journey with Myself 2.0',
+                label: l10n.letsBegin,
+                hint: l10n.welcomeSubtitle,
                 child: SizedBox(
                   width: double.infinity,
                   height: 56,
@@ -153,7 +151,7 @@ class WelcomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Get Started',
+                            l10n.letsBegin,
                             style: theme.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
                               letterSpacing: 0.5,

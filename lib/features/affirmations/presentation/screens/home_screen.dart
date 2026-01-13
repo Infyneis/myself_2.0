@@ -9,6 +9,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 import '../../../settings/presentation/providers/settings_provider.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
 import '../providers/affirmation_provider.dart';
@@ -53,12 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
-          label: 'Myself 2.0',
+          label: l10n.appTitle,
           header: true,
-          child: const Text('Myself 2.0'),
+          child: Text(l10n.appTitle),
         ),
         centerTitle: true,
         actions: [
@@ -66,8 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
           Semantics(
             button: true,
             enabled: true,
-            label: 'My Affirmations',
-            hint: 'Navigate to view all your affirmations',
+            label: l10n.myAffirmations,
+            hint: l10n.myAffirmationsHint,
             child: IconButton(
               icon: const Icon(Icons.list_rounded),
               onPressed: () {
@@ -77,15 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              tooltip: 'My Affirmations',
+              tooltip: l10n.myAffirmations,
             ),
           ),
           // Navigation to settings
           Semantics(
             button: true,
             enabled: true,
-            label: 'Settings',
-            hint: 'Navigate to app settings',
+            label: l10n.settings,
+            hint: l10n.settingsHint,
             child: IconButton(
               icon: const Icon(Icons.settings_rounded),
               onPressed: () {
@@ -95,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               },
-              tooltip: 'Settings',
+              tooltip: l10n.settings,
             ),
           ),
         ],
@@ -160,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               }
                             });
                           },
-                          child: const Text('Retry'),
+                          child: Text(l10n.tryAgain),
                         ),
                       ),
                     ],
@@ -189,6 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
     BuildContext context,
     AffirmationProvider provider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     final currentAffirmation = provider.currentAffirmation;
 
     // If no current affirmation is selected yet, show a placeholder
@@ -200,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const CircularProgressIndicator(),
             const SizedBox(height: AppDimensions.spacingM),
             Text(
-              'Loading affirmation...',
+              '${l10n.refresh}...',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -219,8 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Wrap the content with GestureDetector to handle tap and swipe gestures
         return Semantics(
-          label: 'Current affirmation: ${currentAffirmation.text}',
-          hint: 'Tap or swipe to show next affirmation',
+          label: '${l10n.affirmationCard}: ${currentAffirmation.text}',
+          hint: l10n.tapToRefresh,
           button: true,
           enabled: true,
           onTap: () => _showNextAffirmation(provider),
@@ -270,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // Helper text to guide user
                   Text(
-                    'Tap or swipe for next affirmation',
+                    l10n.tapToRefresh,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -306,11 +310,13 @@ class _HomeScreenState extends State<HomeScreen> {
     BuildContext context,
     AffirmationProvider provider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Semantics(
       button: true,
       enabled: true,
-      label: 'Refresh affirmation',
-      hint: 'Show next random affirmation',
+      label: l10n.refreshAffirmation,
+      hint: l10n.showNewAffirmation,
       child: Container(
         constraints: const BoxConstraints(
           minWidth: AppDimensions.minTouchTarget,
@@ -319,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: IconButton(
           onPressed: () => _showNextAffirmation(provider),
           icon: const Icon(Icons.refresh_rounded),
-          tooltip: 'Next affirmation',
+          tooltip: l10n.refresh,
           iconSize: 28,
           style: IconButton.styleFrom(
             foregroundColor: Theme.of(context).colorScheme.primary,

@@ -7,6 +7,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../generated/l10n/app_localizations.dart';
 import '../../../affirmations/presentation/providers/affirmation_provider.dart';
 import '../../../settings/presentation/providers/settings_provider.dart';
 import '../widgets/success_animation.dart';
@@ -84,10 +85,12 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
   /// This wraps the affirmation edit screen with custom
   /// instructions and UI for the onboarding flow.
   Widget _buildCreateFirstAffirmationScreen({required Key key}) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       key: key,
       appBar: AppBar(
-        title: const Text('Create Your First Affirmation'),
+        title: Text(l10n.createFirstAffirmation),
         leading: Container(
           constraints: const BoxConstraints(
             minWidth: 44.0,
@@ -119,7 +122,7 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Write something meaningful to yourself',
+                    l10n.createFirstAffirmationMessage,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                         ),
@@ -127,7 +130,7 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'This will appear on your home screen widget',
+                    l10n.widgetSetupDescription,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -235,6 +238,8 @@ class _OnboardingAffirmationEditState
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -247,8 +252,7 @@ class _OnboardingAffirmationEditState
             maxLines: 8,
             maxLength: 280,
             decoration: InputDecoration(
-              hintText: 'I am worthy of love and respect.\n\n'
-                  'Every day I grow stronger and more confident.',
+              hintText: l10n.affirmationPlaceholder,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -280,9 +284,9 @@ class _OnboardingAffirmationEditState
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          'Create Affirmation',
-                          style: TextStyle(
+                        Text(
+                          l10n.createFirstAffirmation,
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             letterSpacing: 0.5,
@@ -300,15 +304,16 @@ class _OnboardingAffirmationEditState
   }
 
   Future<void> _saveAffirmation() async {
+    final l10n = AppLocalizations.of(context)!;
     final text = _textController.text.trim();
 
     if (text.isEmpty) {
-      _showErrorSnackBar('Please write your affirmation');
+      _showErrorSnackBar(l10n.affirmationCannotBeEmpty);
       return;
     }
 
     if (text.length > 280) {
-      _showErrorSnackBar('Affirmation must be 280 characters or less');
+      _showErrorSnackBar(l10n.affirmationTooLong);
       return;
     }
 
@@ -325,7 +330,7 @@ class _OnboardingAffirmationEditState
       widget.onSave();
     } else {
       _showErrorSnackBar(
-        provider.error ?? 'Failed to create affirmation',
+        provider.error ?? l10n.errorSavingAffirmation,
       );
     }
   }

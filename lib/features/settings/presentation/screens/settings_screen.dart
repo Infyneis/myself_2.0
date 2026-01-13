@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/settings_model.dart' as settings_model;
 import '../providers/settings_provider.dart';
 
@@ -27,12 +28,14 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         title: Semantics(
-          label: 'Settings',
+          label: l10n.settings,
           header: true,
-          child: const Text('Settings'),
+          child: Text(l10n.settings),
         ),
         centerTitle: false,
       ),
@@ -42,7 +45,7 @@ class SettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(AppDimensions.spacingM),
             children: [
               // Theme Section
-              _buildSectionHeader(context, 'Appearance'),
+              _buildSectionHeader(context, l10n.appearance),
               const SizedBox(height: AppDimensions.spacingS),
               _buildThemeSelector(context, settingsProvider),
               const SizedBox(height: AppDimensions.spacingS),
@@ -50,7 +53,7 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: AppDimensions.spacingL),
 
               // Widget Settings Section
-              _buildSectionHeader(context, 'Widget Settings'),
+              _buildSectionHeader(context, l10n.widgetSettings),
               const SizedBox(height: AppDimensions.spacingS),
               _buildRefreshModeCard(context, settingsProvider),
               const SizedBox(height: AppDimensions.spacingS),
@@ -58,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: AppDimensions.spacingL),
 
               // Preferences Section
-              _buildSectionHeader(context, 'Preferences'),
+              _buildSectionHeader(context, l10n.preferences),
               const SizedBox(height: AppDimensions.spacingS),
               _buildLanguageCard(context, settingsProvider),
             ],
@@ -91,6 +94,8 @@ class SettingsScreen extends StatelessWidget {
     BuildContext context,
     SettingsProvider settingsProvider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
@@ -98,14 +103,14 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Theme',
+              l10n.theme,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
             const SizedBox(height: AppDimensions.spacingS),
             Text(
-              'Choose your preferred theme',
+              l10n.chooseTheme,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -118,8 +123,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               settings_model.ThemeMode.light,
-              'Light',
-              'Bright and clear',
+              l10n.themeLight,
+              l10n.themeLightDescription,
               Icons.light_mode,
             ),
             const SizedBox(height: AppDimensions.spacingS),
@@ -127,8 +132,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               settings_model.ThemeMode.dark,
-              'Dark',
-              'Easy on the eyes',
+              l10n.themeDark,
+              l10n.themeDarkDescription,
               Icons.dark_mode,
             ),
             const SizedBox(height: AppDimensions.spacingS),
@@ -136,8 +141,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               settings_model.ThemeMode.system,
-              'System',
-              'Matches your device',
+              l10n.themeSystem,
+              l10n.themeSystemDescription,
               Icons.brightness_auto,
             ),
           ],
@@ -242,6 +247,8 @@ class SettingsScreen extends StatelessWidget {
     BuildContext context,
     SettingsProvider settingsProvider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
@@ -249,14 +256,14 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Refresh Interval',
+              l10n.refreshMode,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
             const SizedBox(height: AppDimensions.spacingS),
             Text(
-              'How often should the widget affirmation update?',
+              l10n.refreshModeDescription,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -269,8 +276,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               settings_model.RefreshMode.onUnlock,
-              'Every Unlock',
-              'Show a new affirmation each time you unlock your phone',
+              l10n.refreshModeUnlock,
+              l10n.refreshModeUnlockDescription,
               Icons.lock_open,
             ),
             const SizedBox(height: AppDimensions.spacingS),
@@ -278,8 +285,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               settings_model.RefreshMode.hourly,
-              'Hourly',
-              'Update every hour',
+              l10n.refreshModeHourly,
+              l10n.refreshModeHourlyDescription,
               Icons.schedule,
             ),
             const SizedBox(height: AppDimensions.spacingS),
@@ -287,8 +294,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               settings_model.RefreshMode.daily,
-              'Daily',
-              'Update once per day',
+              l10n.refreshModeDaily,
+              l10n.refreshModeDailyDescription,
               Icons.today,
             ),
           ],
@@ -393,6 +400,8 @@ class SettingsScreen extends StatelessWidget {
     BuildContext context,
     SettingsProvider settingsProvider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
@@ -400,14 +409,14 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Language',
+              l10n.language,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
             const SizedBox(height: AppDimensions.spacingS),
             Text(
-              'Choose your preferred language',
+              l10n.languageDescription,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -420,8 +429,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               'fr',
-              'Français',
-              'French',
+              l10n.languageFrench,
+              l10n.languageFrench,
               Icons.language,
             ),
             const SizedBox(height: AppDimensions.spacingS),
@@ -429,8 +438,8 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               'en',
-              'English',
-              'English',
+              l10n.languageEnglish,
+              l10n.languageEnglish,
               Icons.language,
             ),
           ],
@@ -535,6 +544,8 @@ class SettingsScreen extends StatelessWidget {
     BuildContext context,
     SettingsProvider settingsProvider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
@@ -542,14 +553,14 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Font Size',
+              l10n.fontSize,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
             ),
             const SizedBox(height: AppDimensions.spacingS),
             Text(
-              'Adjust text size for better readability',
+              l10n.fontSizeDescription,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -656,13 +667,15 @@ class SettingsScreen extends StatelessWidget {
     BuildContext context,
     SettingsProvider settingsProvider,
   ) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         child: Semantics(
           toggled: settingsProvider.widgetRotationEnabled,
-          label: 'Widget Rotation',
-          hint: 'Automatically rotate affirmations in widget',
+          label: l10n.widgetRotation,
+          hint: l10n.widgetRotationDescription,
           child: Row(
             children: [
               ExcludeSemantics(
@@ -681,14 +694,14 @@ class SettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Widget Rotation',
+                        l10n.widgetRotation,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                       ),
                       const SizedBox(height: AppDimensions.spacingXs),
                       Text(
-                        'Automatically rotate affirmations in widget',
+                        l10n.widgetRotationDescription,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Theme.of(context)
                                   .colorScheme
@@ -701,7 +714,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               Semantics(
-                label: settingsProvider.widgetRotationEnabled ? 'On' : 'Off',
+                label: settingsProvider.widgetRotationEnabled ? l10n.enabled : l10n.disabled,
                 child: Switch(
                   value: settingsProvider.widgetRotationEnabled,
                   onChanged: (value) async {

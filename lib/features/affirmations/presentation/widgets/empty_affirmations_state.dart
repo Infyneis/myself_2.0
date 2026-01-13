@@ -9,6 +9,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/dimensions.dart';
+import '../../../../generated/l10n/app_localizations.dart';
 
 /// Widget displayed when the user has no saved affirmations.
 ///
@@ -31,10 +32,11 @@ class EmptyAffirmationsState extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context)!;
 
     return Semantics(
-      label: 'No affirmations yet. Start your journey of self-affirmation. Create your first positive thought to begin.',
-      hint: 'Create your first affirmation button available',
+      label: '${l10n.noAffirmationsYet}. ${l10n.createFirstAffirmationMessage}',
+      hint: l10n.createFirstAffirmation,
       child: Center(
         child: SingleChildScrollView(
         padding: const EdgeInsets.all(AppDimensions.spacingL),
@@ -59,7 +61,7 @@ class EmptyAffirmationsState extends StatelessWidget {
             // Title
             ExcludeSemantics(
               child: Text(
-                'No Affirmations Yet',
+                l10n.noAffirmationsYet,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -79,7 +81,7 @@ class EmptyAffirmationsState extends StatelessWidget {
                   horizontal: AppDimensions.spacingL,
                 ),
                 child: Text(
-                  'Start your journey of self-affirmation.\nCreate your first positive thought to begin.',
+                  l10n.createFirstAffirmationMessage,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     color: isDarkMode ? AppColors.stone : AppColors.stone,
                     height: 1.6,
@@ -98,12 +100,12 @@ class EmptyAffirmationsState extends StatelessWidget {
             Semantics(
               button: true,
               enabled: true,
-              label: 'Create Your First Affirmation',
-              hint: 'Tap to create a new affirmation',
+              label: l10n.createFirstAffirmation,
+              hint: l10n.createNewAffirmation,
               child: FilledButton.icon(
                 onPressed: onAddAffirmation,
                 icon: const Icon(Icons.add_circle_outline),
-                label: const Text('Create Your First Affirmation'),
+                label: Text(l10n.createFirstAffirmation),
                 style: FilledButton.styleFrom(
                   minimumSize: const Size(280, AppDimensions.minTouchTarget + 4),
                   padding: const EdgeInsets.symmetric(
