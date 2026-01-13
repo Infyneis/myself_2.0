@@ -790,7 +790,7 @@
       "description": "Create in-app instructions for adding home screen widget on iOS and Android",
       "category": "documentation",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
