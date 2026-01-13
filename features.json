@@ -226,7 +226,7 @@
       "description": "Create reusable AffirmationCard widget with zen styling, rounded corners (16px), soft elevation, and proper text display",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
