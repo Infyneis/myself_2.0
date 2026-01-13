@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:12:56.074Z",
+  "lastUpdated": "2026-01-13T10:18:57.226Z",
   "summary": {
     "totalFeatures": 0,
     "completedFeatures": 10,
-    "totalSessions": 10,
-    "totalTimeMs": 4860056,
-    "totalTimeFormatted": "1h 21m",
+    "totalSessions": 11,
+    "totalTimeMs": 5219206,
+    "totalTimeFormatted": "1h 26m",
     "averageFeatureTimeMs": 486006,
     "averageFeatureTimeFormatted": "8m 6s",
-    "averageSessionTimeMs": 486006,
-    "averageSessionTimeFormatted": "8m 6s"
+    "averageSessionTimeMs": 474473,
+    "averageSessionTimeFormatted": "7m 54s"
   },
   "features": [
     {
@@ -345,6 +345,21 @@
         "e8fe664f93fec4a3d2cb357229f52a4c59a3ff5e"
       ],
       "durationFormatted": "7m 27s"
+    },
+    {
+      "sessionId": "session-mkcfoa58-qwdjyn",
+      "startedAt": "2026-01-13T10:12:58.076Z",
+      "endedAt": "2026-01-13T10:18:57.226Z",
+      "durationMs": 359150,
+      "featuresWorkedOn": [
+        "FUNC-007"
+      ],
+      "featuresCompleted": [],
+      "status": "interrupted",
+      "commits": [
+        "7c9ebbff1c2f3d87c8b775b692d617ba70cd538b"
+      ],
+      "durationFormatted": "5m 59s"
     }
   ],
   "byCategory": {
