@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T15:55:53.145Z",
+  "lastUpdated": "2026-01-13T16:02:03.119Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 57,
-    "totalSessions": 84,
-    "totalTimeMs": 17226169,
-    "totalTimeFormatted": "4h 47m",
-    "averageFeatureTimeMs": 293019,
-    "averageFeatureTimeFormatted": "4m 53s",
-    "averageSessionTimeMs": 205073,
-    "averageSessionTimeFormatted": "3m 25s"
+    "completedFeatures": 58,
+    "totalSessions": 85,
+    "totalTimeMs": 17594139,
+    "totalTimeFormatted": "4h 53m",
+    "averageFeatureTimeMs": 294311,
+    "averageFeatureTimeFormatted": "4m 54s",
+    "averageSessionTimeMs": 206990,
+    "averageSessionTimeFormatted": "3m 26s"
   },
   "features": [
     {
@@ -921,6 +921,22 @@
         "44d6b5bc4768a743e201bb6a7d5fc3927dc1fd98"
       ],
       "durationFormatted": "4m 53s"
+    },
+    {
+      "featureId": "L10N-001",
+      "featureName": "L10N-001",
+      "description": "Configure Flutter localization with intl package, ARB files for French and English",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T15:55:55.148Z",
+      "completedAt": "2026-01-13T16:02:03.118Z",
+      "durationMs": 367970,
+      "sessionId": "session-mkcrxbik-sk81kd",
+      "sessionsCount": 1,
+      "commits": [
+        "2c84907d28e5c7f2cc79b9c11a4399b38cea620c"
+      ],
+      "durationFormatted": "6m 7s"
     }
   ],
   "sessions": [
@@ -2293,6 +2309,23 @@
         "44d6b5bc4768a743e201bb6a7d5fc3927dc1fd98"
       ],
       "durationFormatted": "4m 53s"
+    },
+    {
+      "sessionId": "session-mkcrxbik-sk81kd",
+      "startedAt": "2026-01-13T15:55:55.148Z",
+      "endedAt": "2026-01-13T16:02:03.118Z",
+      "durationMs": 367970,
+      "featuresWorkedOn": [
+        "L10N-001"
+      ],
+      "featuresCompleted": [
+        "L10N-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "2c84907d28e5c7f2cc79b9c11a4399b38cea620c"
+      ],
+      "durationFormatted": "6m 7s"
     }
   ],
   "byCategory": {
@@ -2304,9 +2337,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 23,
-      "totalTimeMs": 7122487,
-      "averageTimeMs": 309673
+      "completed": 24,
+      "totalTimeMs": 7490457,
+      "averageTimeMs": 312102
     },
     "ui": {
       "total": 0,
@@ -2330,9 +2363,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 43,
-      "totalTimeMs": 12465189,
-      "averageTimeMs": 289888
+      "completed": 44,
+      "totalTimeMs": 12833159,
+      "averageTimeMs": 291663
     },
     "should-have": {
       "total": 0,
