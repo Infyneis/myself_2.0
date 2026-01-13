@@ -145,7 +145,7 @@
       "description": "Implement import functionality to load affirmations from a text file",
       "category": "functional",
       "priority": "could-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-020"]
     },
     {
