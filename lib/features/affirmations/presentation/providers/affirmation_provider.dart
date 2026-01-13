@@ -12,6 +12,7 @@ import '../../domain/usecases/delete_affirmation.dart';
 import '../../domain/usecases/edit_affirmation.dart';
 import '../../domain/usecases/export_affirmations.dart';
 import '../../domain/usecases/get_random_affirmation.dart';
+import '../../../../widgets/native_widget/widget_data_sync.dart';
 
 /// Provider for managing affirmation state.
 ///
@@ -21,6 +22,7 @@ import '../../domain/usecases/get_random_affirmation.dart';
 /// - CRUD operations
 /// - Random selection functionality
 /// - Export functionality
+/// - Widget synchronization (WIDGET-009)
 ///
 /// Note: Full implementation will be completed in INFRA-004.
 class AffirmationProvider extends ChangeNotifier {
@@ -32,6 +34,7 @@ class AffirmationProvider extends ChangeNotifier {
     EditAffirmationUseCase? editAffirmationUseCase,
     DeleteAffirmationUseCase? deleteAffirmationUseCase,
     ExportAffirmationsUseCase? exportAffirmationsUseCase,
+    WidgetDataSync? widgetDataSync,
   })  : _repository = repository,
         _getRandomAffirmation = getRandomAffirmationUseCase,
         _createAffirmationUseCase = createAffirmationUseCase ??
@@ -41,7 +44,8 @@ class AffirmationProvider extends ChangeNotifier {
         _deleteAffirmationUseCase = deleteAffirmationUseCase ??
             DeleteAffirmationUseCase(repository: repository),
         _exportAffirmationsUseCase = exportAffirmationsUseCase ??
-            ExportAffirmationsUseCase(repository: repository);
+            ExportAffirmationsUseCase(repository: repository),
+        _widgetDataSync = widgetDataSync;
 
   final AffirmationRepository _repository;
   final GetRandomAffirmation? _getRandomAffirmation;
@@ -49,6 +53,7 @@ class AffirmationProvider extends ChangeNotifier {
   final EditAffirmationUseCase _editAffirmationUseCase;
   final DeleteAffirmationUseCase _deleteAffirmationUseCase;
   final ExportAffirmationsUseCase _exportAffirmationsUseCase;
+  final WidgetDataSync? _widgetDataSync;
 
   List<Affirmation> _affirmations = [];
   Affirmation? _currentAffirmation;
@@ -152,6 +157,13 @@ class AffirmationProvider extends ChangeNotifier {
         case CreateAffirmationSuccess(:final affirmation):
           _affirmations = [..._affirmations, affirmation];
           _error = null;
+
+          // WIDGET-009: Sync widget when affirmation is created
+          await _widgetDataSync?.onAffirmationCreated(
+            newAffirmation: affirmation,
+            allAffirmations: _affirmations,
+          );
+
           return true;
         case CreateAffirmationFailure(:final message):
           _error = message;
@@ -231,6 +243,14 @@ class AffirmationProvider extends ChangeNotifier {
             ];
           }
           _error = null;
+
+          // WIDGET-009: Sync widget when affirmation is updated
+          await _widgetDataSync?.onAffirmationUpdated(
+            updatedAffirmation: affirmation,
+            allAffirmations: _affirmations,
+            currentAffirmationId: _currentAffirmation?.id,
+          );
+
           return true;
         case EditAffirmationFailure(:final message):
           _error = message;
@@ -284,6 +304,14 @@ class AffirmationProvider extends ChangeNotifier {
             _lastDisplayedId = null;
           }
           _error = null;
+
+          // WIDGET-009: Sync widget when affirmation is deleted
+          await _widgetDataSync?.onAffirmationDeleted(
+            deletedId: id,
+            allAffirmations: _affirmations,
+            currentAffirmationId: _currentAffirmation?.id,
+          );
+
           return true;
         case DeleteAffirmationFailure(:final message):
           _error = message;
@@ -337,6 +365,10 @@ class AffirmationProvider extends ChangeNotifier {
       final orderedIds = _affirmations.map((a) => a.id).toList();
       await _repository.reorder(orderedIds);
       _error = null;
+
+      // WIDGET-009: Sync widget when affirmations are reordered
+      await _widgetDataSync?.syncAffirmationsList(_affirmations);
+
       return true;
     } catch (e) {
       _error = 'Failed to save new order: $e';

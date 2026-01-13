@@ -379,7 +379,7 @@
       "description": "Trigger widget refresh when affirmations are added, modified, or deleted in the app",
       "category": "functional",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-013"]
     },
     {

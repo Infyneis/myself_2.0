@@ -19,6 +19,7 @@ import 'features/settings/data/hive_settings_repository.dart';
 import 'features/settings/data/settings_repository.dart';
 import 'features/settings/presentation/providers/settings_provider.dart';
 import 'widgets/native_widget/widget_service.dart';
+import 'widgets/native_widget/widget_data_sync.dart';
 
 /// Main entry point for Myself 2.0.
 void main() async {
@@ -31,6 +32,9 @@ void main() async {
   // Initialize widget service for home screen widget (WIDGET-001)
   final widgetService = WidgetService();
   await widgetService.initialize();
+
+  // Create widget data sync for WIDGET-009
+  final widgetDataSync = WidgetDataSync(widgetService: widgetService);
 
   // Create repositories
   final affirmationRepository = HiveAffirmationRepository();
@@ -45,6 +49,7 @@ void main() async {
   final affirmationProvider = AffirmationProvider(
     repository: affirmationRepository,
     getRandomAffirmationUseCase: getRandomAffirmation,
+    widgetDataSync: widgetDataSync,
   );
 
   final settingsProvider = SettingsProvider(
