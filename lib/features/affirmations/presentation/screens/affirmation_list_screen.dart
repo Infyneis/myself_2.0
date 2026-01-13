@@ -138,10 +138,14 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
             enabled: true,
             label: 'Add new affirmation',
             hint: 'Create a new affirmation',
-            child: FloatingActionButton(
-              onPressed: () => _navigateToAddAffirmation(context),
-              tooltip: 'Add Affirmation',
-              child: const Icon(Icons.add),
+            child: SizedBox(
+              width: AppDimensions.minTouchTarget + 12, // FAB standard size
+              height: AppDimensions.minTouchTarget + 12, // FAB standard size
+              child: FloatingActionButton(
+                onPressed: () => _navigateToAddAffirmation(context),
+                tooltip: 'Add Affirmation',
+                child: const Icon(Icons.add),
+              ),
             ),
           );
         },
@@ -316,16 +320,28 @@ class _ReorderableAffirmationCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           if (onEdit != null)
-                            IconButton(
-                              icon: const Icon(Icons.edit_outlined),
-                              onPressed: onEdit,
-                              tooltip: 'Edit',
+                            Container(
+                              constraints: const BoxConstraints(
+                                minWidth: AppDimensions.minTouchTarget,
+                                minHeight: AppDimensions.minTouchTarget,
+                              ),
+                              child: IconButton(
+                                icon: const Icon(Icons.edit_outlined),
+                                onPressed: onEdit,
+                                tooltip: 'Edit',
+                              ),
                             ),
                           if (onDelete != null)
-                            IconButton(
-                              icon: const Icon(Icons.delete_outline),
-                              onPressed: onDelete,
-                              tooltip: 'Delete',
+                            Container(
+                              constraints: const BoxConstraints(
+                                minWidth: AppDimensions.minTouchTarget,
+                                minHeight: AppDimensions.minTouchTarget,
+                              ),
+                              child: IconButton(
+                                icon: const Icon(Icons.delete_outline),
+                                onPressed: onDelete,
+                                tooltip: 'Delete',
+                              ),
                             ),
                         ],
                       ),

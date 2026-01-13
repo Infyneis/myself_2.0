@@ -88,9 +88,15 @@ class _OnboardingFlowState extends State<OnboardingFlow> {
       key: key,
       appBar: AppBar(
         title: const Text('Create Your First Affirmation'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: _goToWelcome,
+        leading: Container(
+          constraints: const BoxConstraints(
+            minWidth: 44.0,
+            minHeight: 44.0,
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: _goToWelcome,
+          ),
         ),
       ),
       body: SafeArea(

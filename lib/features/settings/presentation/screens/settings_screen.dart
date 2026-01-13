@@ -173,6 +173,9 @@ class SettingsScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
         child: ExcludeSemantics(
           child: Container(
+        constraints: const BoxConstraints(
+          minHeight: AppDimensions.minTouchTarget,
+        ),
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
@@ -321,6 +324,9 @@ class SettingsScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
         child: ExcludeSemantics(
           child: Container(
+        constraints: const BoxConstraints(
+          minHeight: AppDimensions.minTouchTarget,
+        ),
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
@@ -460,6 +466,9 @@ class SettingsScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
         child: ExcludeSemantics(
           child: Container(
+        constraints: const BoxConstraints(
+          minHeight: AppDimensions.minTouchTarget,
+        ),
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
