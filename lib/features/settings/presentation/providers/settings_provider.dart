@@ -87,6 +87,10 @@ class SettingsProvider extends ChangeNotifier {
     try {
       await _repository.updateRefreshMode(mode);
       _settings = _settings.copyWith(refreshMode: mode);
+
+      // Sync settings with widget (WIDGET-012)
+      await _widgetDataSync?.syncSettings(_settings);
+
       notifyListeners();
     } catch (e) {
       _error = 'Failed to update refresh mode: $e';

@@ -406,7 +406,7 @@
       "description": "Implement setting for refresh interval: every unlock, hourly, or daily",
       "category": "functional",
       "priority": "could-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-023"]
     },
     {
