@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Myself 2.0</string>
+    <string name="widget_name">Daily Affirmation</string>
+    <string name="widget_description">Display your daily affirmation on your home screen</string>
+    <string name="widget_placeholder_text">I am confident and capable</string>
+    <string name="widget_tap_to_create">Tap to create</string>
+    <string name="widget_tap_to_start">Tap to get started</string>
+    <string name="widget_empty_title">Create Your First Affirmation</string>
+    <string name="widget_empty_subtitle">Tap to open the app and start your journey of positive self-talk</string>
+    <string name="widget_icon_description">Affirmation icon</string>
+    <string name="widget_empty_icon_description">Empty state icon</string>
+</resources>

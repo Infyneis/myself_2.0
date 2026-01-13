@@ -343,7 +343,7 @@
       "description": "Create Android AppWidgetProvider with Kotlin for small, medium, and large widget sizes",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-010"]
     },
     {
