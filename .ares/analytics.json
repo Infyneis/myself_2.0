@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:37:19.247Z",
+  "lastUpdated": "2026-01-13T20:46:47.355Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 68,
-    "totalSessions": 103,
-    "totalTimeMs": 21032697,
-    "totalTimeFormatted": "5h 50m",
-    "averageFeatureTimeMs": 300592,
-    "averageFeatureTimeFormatted": "5m 0s",
-    "averageSessionTimeMs": 204201,
-    "averageSessionTimeFormatted": "3m 24s"
+    "completedFeatures": 69,
+    "totalSessions": 104,
+    "totalTimeMs": 21598798,
+    "totalTimeFormatted": "5h 59m",
+    "averageFeatureTimeMs": 304440,
+    "averageFeatureTimeFormatted": "5m 4s",
+    "averageSessionTimeMs": 207681,
+    "averageSessionTimeFormatted": "3m 27s"
   },
   "features": [
     {
@@ -1095,6 +1095,22 @@
       "sessionsCount": 1,
       "commits": [],
       "durationFormatted": "9m 5s"
+    },
+    {
+      "featureId": "TEST-008",
+      "featureName": "TEST-008",
+      "description": "Write integration tests for complete onboarding user flow",
+      "category": "testing",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T20:37:21.253Z",
+      "completedAt": "2026-01-13T20:46:47.354Z",
+      "durationMs": 566101,
+      "sessionId": "session-mkd1z8wy-ujlwfn",
+      "sessionsCount": 1,
+      "commits": [
+        "dea0559fd1e465d1d089e0bb1615fd24e9511968"
+      ],
+      "durationFormatted": "9m 26s"
     }
   ],
   "sessions": [
@@ -2772,6 +2788,23 @@
       "status": "completed",
       "commits": [],
       "durationFormatted": "9m 5s"
+    },
+    {
+      "sessionId": "session-mkd1z8wy-ujlwfn",
+      "startedAt": "2026-01-13T20:37:21.253Z",
+      "endedAt": "2026-01-13T20:46:47.354Z",
+      "durationMs": 566101,
+      "featuresWorkedOn": [
+        "TEST-008"
+      ],
+      "featuresCompleted": [
+        "TEST-008"
+      ],
+      "status": "completed",
+      "commits": [
+        "dea0559fd1e465d1d089e0bb1615fd24e9511968"
+      ],
+      "durationFormatted": "9m 26s"
     }
   ],
   "byCategory": {
@@ -2807,9 +2840,9 @@
     },
     "testing": {
       "total": 0,
-      "completed": 7,
-      "totalTimeMs": 1929549,
-      "averageTimeMs": 275650
+      "completed": 8,
+      "totalTimeMs": 2495650,
+      "averageTimeMs": 311956
     }
   },
   "byPriority": {
@@ -2821,9 +2854,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 13,
-      "totalTimeMs": 3708174,
-      "averageTimeMs": 285244
+      "completed": 14,
+      "totalTimeMs": 4274275,
+      "averageTimeMs": 305305
     },
     "could-have": {
       "total": 0,
