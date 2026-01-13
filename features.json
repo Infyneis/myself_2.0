@@ -244,7 +244,7 @@
       "description": "Create settings screen with theme toggle, refresh interval options, language selection, and font size adjustment",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-022", "FR-023", "FR-024", "FR-025", "FR-026"]
     },
     {
