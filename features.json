@@ -172,7 +172,7 @@
       "description": "Create main home screen displaying a random affirmation with zen animation, navigation to affirmation list, and settings",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-014"]
     },
     {
