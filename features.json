@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "projectName": "Myself 2.0",
   "createdAt": "2026-01-13T08:42:07.105Z",
-  "updatedAt": "2026-01-13T14:58:36.000Z",
+  "updatedAt": "2026-01-13T15:10:00.000Z",
   "features": [
     {
       "id": "INFRA-001",
@@ -325,7 +325,7 @@
       "description": "Create iOS WidgetKit extension with SwiftUI for small (2x2), medium (4x2), and large (4x4) widget sizes",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-010"]
     },
     {
