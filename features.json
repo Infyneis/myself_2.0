@@ -691,7 +691,7 @@
       "description": "Write unit tests for all Affirmation CRUD operations in repository",
       "category": "testing",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
