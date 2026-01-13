@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T13:42:52.159Z",
+  "lastUpdated": "2026-01-13T13:45:03.936Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 26,
-    "totalSessions": 53,
-    "totalTimeMs": 9307288,
-    "totalTimeFormatted": "2h 35m",
-    "averageFeatureTimeMs": 337815,
-    "averageFeatureTimeFormatted": "5m 37s",
-    "averageSessionTimeMs": 175609,
-    "averageSessionTimeFormatted": "2m 55s"
+    "completedFeatures": 27,
+    "totalSessions": 54,
+    "totalTimeMs": 9437061,
+    "totalTimeFormatted": "2h 37m",
+    "averageFeatureTimeMs": 330110,
+    "averageFeatureTimeFormatted": "5m 30s",
+    "averageSessionTimeMs": 174760,
+    "averageSessionTimeFormatted": "2m 54s"
   },
   "features": [
     {
@@ -429,6 +429,22 @@
         "77ec8880712d194f56f922dad0c1df8a717967ee"
       ],
       "durationFormatted": "2m 50s"
+    },
+    {
+      "featureId": "UI-011",
+      "featureName": "UI-011",
+      "description": "Create settings screen with theme toggle, refresh interval options, language selection, and font size adjustment",
+      "category": "ui",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T13:42:54.162Z",
+      "completedAt": "2026-01-13T13:45:03.935Z",
+      "durationMs": 129773,
+      "sessionId": "session-mkcn69ch-teinx7",
+      "sessionsCount": 1,
+      "commits": [
+        "db1dc8a155d4fa91dbd56e747512dc0a38d17627"
+      ],
+      "durationFormatted": "2m 9s"
     }
   ],
   "sessions": [
@@ -1278,6 +1294,23 @@
         "77ec8880712d194f56f922dad0c1df8a717967ee"
       ],
       "durationFormatted": "2m 50s"
+    },
+    {
+      "sessionId": "session-mkcn69ch-teinx7",
+      "startedAt": "2026-01-13T13:42:54.162Z",
+      "endedAt": "2026-01-13T13:45:03.935Z",
+      "durationMs": 129773,
+      "featuresWorkedOn": [
+        "UI-011"
+      ],
+      "featuresCompleted": [
+        "UI-011"
+      ],
+      "status": "completed",
+      "commits": [
+        "db1dc8a155d4fa91dbd56e747512dc0a38d17627"
+      ],
+      "durationFormatted": "2m 9s"
     }
   ],
   "byCategory": {
@@ -1295,17 +1328,17 @@
     },
     "ui": {
       "total": 0,
-      "completed": 10,
-      "totalTimeMs": 1773440,
-      "averageTimeMs": 177344
+      "completed": 11,
+      "totalTimeMs": 1903213,
+      "averageTimeMs": 173019
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 20,
-      "totalTimeMs": 6510440,
-      "averageTimeMs": 325522
+      "completed": 21,
+      "totalTimeMs": 6640213,
+      "averageTimeMs": 316201
     },
     "should-have": {
       "total": 0,
