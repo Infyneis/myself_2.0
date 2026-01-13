@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T21:30:16.080Z",
+  "lastUpdated": "2026-01-13T21:33:43.387Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 73,
-    "totalSessions": 108,
-    "totalTimeMs": 24199473,
-    "totalTimeFormatted": "6h 43m",
-    "averageFeatureTimeMs": 323384,
-    "averageFeatureTimeFormatted": "5m 23s",
-    "averageSessionTimeMs": 224069,
-    "averageSessionTimeFormatted": "3m 44s"
+    "completedFeatures": 74,
+    "totalSessions": 109,
+    "totalTimeMs": 24404776,
+    "totalTimeFormatted": "6h 46m",
+    "averageFeatureTimeMs": 321789,
+    "averageFeatureTimeFormatted": "5m 21s",
+    "averageSessionTimeMs": 223897,
+    "averageSessionTimeFormatted": "3m 43s"
   },
   "features": [
     {
@@ -1175,6 +1175,22 @@
         "f162e6b50de06b511d240c9edf9f6f6a5993777c"
       ],
       "durationFormatted": "30m 59s"
+    },
+    {
+      "featureId": "COMPAT-001",
+      "featureName": "COMPAT-001",
+      "description": "Ensure app runs correctly on iOS 14.0 and above",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T21:30:18.084Z",
+      "completedAt": "2026-01-13T21:33:43.387Z",
+      "durationMs": 205303,
+      "sessionId": "session-mkd3vc6a-2tinjb",
+      "sessionsCount": 1,
+      "commits": [
+        "ea3c5727f52fa53c6a2056c654975f58d9e3fc35"
+      ],
+      "durationFormatted": "3m 25s"
     }
   ],
   "sessions": [
@@ -2937,14 +2953,31 @@
         "f162e6b50de06b511d240c9edf9f6f6a5993777c"
       ],
       "durationFormatted": "30m 59s"
+    },
+    {
+      "sessionId": "session-mkd3vc6a-2tinjb",
+      "startedAt": "2026-01-13T21:30:18.084Z",
+      "endedAt": "2026-01-13T21:33:43.387Z",
+      "durationMs": 205303,
+      "featuresWorkedOn": [
+        "COMPAT-001"
+      ],
+      "featuresCompleted": [
+        "COMPAT-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "ea3c5727f52fa53c6a2056c654975f58d9e3fc35"
+      ],
+      "durationFormatted": "3m 25s"
     }
   ],
   "byCategory": {
     "infrastructure": {
       "total": 0,
-      "completed": 4,
-      "totalTimeMs": 2822892,
-      "averageTimeMs": 705723
+      "completed": 5,
+      "totalTimeMs": 3028195,
+      "averageTimeMs": 605639
     },
     "functional": {
       "total": 0,
@@ -2986,9 +3019,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 52,
-      "totalTimeMs": 15158186,
-      "averageTimeMs": 291504
+      "completed": 53,
+      "totalTimeMs": 15363489,
+      "averageTimeMs": 289877
     },
     "should-have": {
       "total": 0,
