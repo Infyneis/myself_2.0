@@ -11,7 +11,9 @@
       "category": "infrastructure",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["NFR-007"]
+      "requirementIds": [
+        "NFR-007"
+      ]
     },
     {
       "id": "INFRA-002",
@@ -29,7 +31,10 @@
       "category": "infrastructure",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-017", "FR-018"]
+      "requirementIds": [
+        "FR-017",
+        "FR-018"
+      ]
     },
     {
       "id": "INFRA-004",
@@ -47,7 +52,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-006"]
+      "requirementIds": [
+        "FR-006"
+      ]
     },
     {
       "id": "FUNC-002",
@@ -56,7 +63,10 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-001", "FR-006"]
+      "requirementIds": [
+        "FR-001",
+        "FR-006"
+      ]
     },
     {
       "id": "FUNC-003",
@@ -65,7 +75,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-002"]
+      "requirementIds": [
+        "FR-002"
+      ]
     },
     {
       "id": "FUNC-004",
@@ -74,7 +86,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-003"]
+      "requirementIds": [
+        "FR-003"
+      ]
     },
     {
       "id": "FUNC-005",
@@ -83,7 +97,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-004"]
+      "requirementIds": [
+        "FR-004"
+      ]
     },
     {
       "id": "FUNC-006",
@@ -92,7 +108,9 @@
       "category": "functional",
       "priority": "should-have",
       "passes": true,
-      "requirementIds": ["FR-005"]
+      "requirementIds": [
+        "FR-005"
+      ]
     },
     {
       "id": "FUNC-007",
@@ -101,7 +119,9 @@
       "category": "functional",
       "priority": "could-have",
       "passes": true,
-      "requirementIds": ["FR-007"]
+      "requirementIds": [
+        "FR-007"
+      ]
     },
     {
       "id": "FUNC-008",
@@ -110,7 +130,10 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-017", "FR-018"]
+      "requirementIds": [
+        "FR-017",
+        "FR-018"
+      ]
     },
     {
       "id": "FUNC-009",
@@ -119,7 +142,10 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-008", "FR-014"]
+      "requirementIds": [
+        "FR-008",
+        "FR-014"
+      ]
     },
     {
       "id": "FUNC-010",
@@ -128,7 +154,12 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-022", "FR-023", "FR-024", "FR-025"]
+      "requirementIds": [
+        "FR-022",
+        "FR-023",
+        "FR-024",
+        "FR-025"
+      ]
     },
     {
       "id": "FUNC-011",
@@ -137,7 +168,9 @@
       "category": "functional",
       "priority": "could-have",
       "passes": true,
-      "requirementIds": ["FR-019"]
+      "requirementIds": [
+        "FR-019"
+      ]
     },
     {
       "id": "FUNC-012",
@@ -146,7 +179,9 @@
       "category": "functional",
       "priority": "could-have",
       "passes": true,
-      "requirementIds": ["FR-020"]
+      "requirementIds": [
+        "FR-020"
+      ]
     },
     {
       "id": "UI-001",
@@ -164,7 +199,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-025"]
+      "requirementIds": [
+        "FR-025"
+      ]
     },
     {
       "id": "UI-003",
@@ -173,7 +210,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-014"]
+      "requirementIds": [
+        "FR-014"
+      ]
     },
     {
       "id": "UI-004",
@@ -182,7 +221,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-014"]
+      "requirementIds": [
+        "FR-014"
+      ]
     },
     {
       "id": "UI-005",
@@ -191,7 +232,9 @@
       "category": "ui",
       "priority": "should-have",
       "passes": true,
-      "requirementIds": ["FR-015"]
+      "requirementIds": [
+        "FR-015"
+      ]
     },
     {
       "id": "UI-006",
@@ -200,7 +243,9 @@
       "category": "ui",
       "priority": "should-have",
       "passes": true,
-      "requirementIds": ["FR-016"]
+      "requirementIds": [
+        "FR-016"
+      ]
     },
     {
       "id": "UI-007",
@@ -209,7 +254,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-004"]
+      "requirementIds": [
+        "FR-004"
+      ]
     },
     {
       "id": "UI-008",
@@ -218,7 +265,10 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-001", "FR-002"]
+      "requirementIds": [
+        "FR-001",
+        "FR-002"
+      ]
     },
     {
       "id": "UI-009",
@@ -236,7 +286,11 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-001", "FR-005", "FR-006"]
+      "requirementIds": [
+        "FR-001",
+        "FR-005",
+        "FR-006"
+      ]
     },
     {
       "id": "UI-011",
@@ -245,7 +299,13 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-022", "FR-023", "FR-024", "FR-025", "FR-026"]
+      "requirementIds": [
+        "FR-022",
+        "FR-023",
+        "FR-024",
+        "FR-025",
+        "FR-026"
+      ]
     },
     {
       "id": "UI-012",
@@ -254,7 +314,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-012"]
+      "requirementIds": [
+        "FR-012"
+      ]
     },
     {
       "id": "UI-013",
@@ -290,7 +352,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-003"]
+      "requirementIds": [
+        "FR-003"
+      ]
     },
     {
       "id": "UI-017",
@@ -299,7 +363,9 @@
       "category": "ui",
       "priority": "should-have",
       "passes": true,
-      "requirementIds": ["FR-026"]
+      "requirementIds": [
+        "FR-026"
+      ]
     },
     {
       "id": "WIDGET-001",
@@ -308,7 +374,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-008"]
+      "requirementIds": [
+        "FR-008"
+      ]
     },
     {
       "id": "WIDGET-002",
@@ -317,7 +385,10 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-008", "FR-013"]
+      "requirementIds": [
+        "FR-008",
+        "FR-013"
+      ]
     },
     {
       "id": "WIDGET-003",
@@ -326,7 +397,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-010"]
+      "requirementIds": [
+        "FR-010"
+      ]
     },
     {
       "id": "WIDGET-004",
@@ -335,7 +408,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-009"]
+      "requirementIds": [
+        "FR-009"
+      ]
     },
     {
       "id": "WIDGET-005",
@@ -344,7 +419,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-010"]
+      "requirementIds": [
+        "FR-010"
+      ]
     },
     {
       "id": "WIDGET-006",
@@ -353,7 +430,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-009"]
+      "requirementIds": [
+        "FR-009"
+      ]
     },
     {
       "id": "WIDGET-007",
@@ -362,7 +441,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-011"]
+      "requirementIds": [
+        "FR-011"
+      ]
     },
     {
       "id": "WIDGET-008",
@@ -371,7 +452,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["FR-012"]
+      "requirementIds": [
+        "FR-012"
+      ]
     },
     {
       "id": "WIDGET-009",
@@ -380,7 +463,9 @@
       "category": "functional",
       "priority": "should-have",
       "passes": true,
-      "requirementIds": ["FR-013"]
+      "requirementIds": [
+        "FR-013"
+      ]
     },
     {
       "id": "WIDGET-010",
@@ -398,7 +483,9 @@
       "category": "functional",
       "priority": "should-have",
       "passes": true,
-      "requirementIds": ["FR-022"]
+      "requirementIds": [
+        "FR-022"
+      ]
     },
     {
       "id": "WIDGET-012",
@@ -407,7 +494,9 @@
       "category": "functional",
       "priority": "could-have",
       "passes": true,
-      "requirementIds": ["FR-023"]
+      "requirementIds": [
+        "FR-023"
+      ]
     },
     {
       "id": "PERF-001",
@@ -416,7 +505,9 @@
       "category": "performance",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["NFR-001"]
+      "requirementIds": [
+        "NFR-001"
+      ]
     },
     {
       "id": "PERF-002",
@@ -425,7 +516,9 @@
       "category": "performance",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["NFR-002"]
+      "requirementIds": [
+        "NFR-002"
+      ]
     },
     {
       "id": "PERF-003",
@@ -434,7 +527,9 @@
       "category": "performance",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["NFR-003"]
+      "requirementIds": [
+        "NFR-003"
+      ]
     },
     {
       "id": "PERF-004",
@@ -443,7 +538,9 @@
       "category": "performance",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["NFR-004"]
+      "requirementIds": [
+        "NFR-004"
+      ]
     },
     {
       "id": "SEC-001",
@@ -452,7 +549,9 @@
       "category": "security",
       "priority": "must-have",
       "passes": true,
-      "requirementIds": ["NFR-009"]
+      "requirementIds": [
+        "NFR-009"
+      ]
     },
     {
       "id": "SEC-002",
@@ -460,8 +559,10 @@
       "description": "Ensure core functionality works without internet permission",
       "category": "security",
       "priority": "must-have",
-      "passes": false,
-      "requirementIds": ["NFR-010"]
+      "passes": true,
+      "requirementIds": [
+        "NFR-010"
+      ]
     },
     {
       "id": "SEC-003",
@@ -470,7 +571,9 @@
       "category": "security",
       "priority": "should-have",
       "passes": false,
-      "requirementIds": ["NFR-011"]
+      "requirementIds": [
+        "NFR-011"
+      ]
     },
     {
       "id": "SEC-004",
@@ -479,7 +582,9 @@
       "category": "security",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-012"]
+      "requirementIds": [
+        "NFR-012"
+      ]
     },
     {
       "id": "A11Y-001",
@@ -488,7 +593,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-013"]
+      "requirementIds": [
+        "NFR-013"
+      ]
     },
     {
       "id": "A11Y-002",
@@ -497,7 +604,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-013"]
+      "requirementIds": [
+        "NFR-013"
+      ]
     },
     {
       "id": "A11Y-003",
@@ -506,7 +615,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-014"]
+      "requirementIds": [
+        "NFR-014"
+      ]
     },
     {
       "id": "A11Y-004",
@@ -515,7 +626,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-015"]
+      "requirementIds": [
+        "NFR-015"
+      ]
     },
     {
       "id": "A11Y-005",
@@ -524,7 +637,9 @@
       "category": "ui",
       "priority": "should-have",
       "passes": false,
-      "requirementIds": ["NFR-016"]
+      "requirementIds": [
+        "NFR-016"
+      ]
     },
     {
       "id": "L10N-001",
@@ -533,7 +648,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["FR-024"]
+      "requirementIds": [
+        "FR-024"
+      ]
     },
     {
       "id": "L10N-002",
@@ -542,7 +659,9 @@
       "category": "functional",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["FR-024"]
+      "requirementIds": [
+        "FR-024"
+      ]
     },
     {
       "id": "L10N-003",
@@ -551,7 +670,9 @@
       "category": "functional",
       "priority": "should-have",
       "passes": false,
-      "requirementIds": ["FR-024"]
+      "requirementIds": [
+        "FR-024"
+      ]
     },
     {
       "id": "L10N-004",
@@ -560,7 +681,9 @@
       "category": "functional",
       "priority": "should-have",
       "passes": false,
-      "requirementIds": ["FR-024"]
+      "requirementIds": [
+        "FR-024"
+      ]
     },
     {
       "id": "TEST-001",
@@ -677,7 +800,9 @@
       "category": "infrastructure",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-005"]
+      "requirementIds": [
+        "NFR-005"
+      ]
     },
     {
       "id": "COMPAT-002",
@@ -686,7 +811,9 @@
       "category": "infrastructure",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-006"]
+      "requirementIds": [
+        "NFR-006"
+      ]
     },
     {
       "id": "COMPAT-003",
@@ -695,7 +822,9 @@
       "category": "ui",
       "priority": "must-have",
       "passes": false,
-      "requirementIds": ["NFR-008"]
+      "requirementIds": [
+        "NFR-008"
+      ]
     }
   ]
 }
