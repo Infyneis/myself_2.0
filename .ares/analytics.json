@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:47:46.940Z",
+  "lastUpdated": "2026-01-13T14:52:08.618Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 43,
-    "totalSessions": 70,
-    "totalTimeMs": 13168014,
-    "totalTimeFormatted": "3h 39m",
-    "averageFeatureTimeMs": 294045,
-    "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 188114,
-    "averageSessionTimeFormatted": "3m 8s"
+    "completedFeatures": 44,
+    "totalSessions": 71,
+    "totalTimeMs": 13427690,
+    "totalTimeFormatted": "3h 43m",
+    "averageFeatureTimeMs": 293263,
+    "averageFeatureTimeFormatted": "4m 53s",
+    "averageSessionTimeMs": 189122,
+    "averageSessionTimeFormatted": "3m 9s"
   },
   "features": [
     {
@@ -699,6 +699,22 @@
         "085ddf6c075de9b5ffe3e508383af6db009e2e0d"
       ],
       "durationFormatted": "4m 56s"
+    },
+    {
+      "featureId": "WIDGET-012",
+      "featureName": "WIDGET-012",
+      "description": "Implement setting for refresh interval: every unlock, hourly, or daily",
+      "category": "functional",
+      "priority": "could-have",
+      "startedAt": "2026-01-13T14:47:48.941Z",
+      "completedAt": "2026-01-13T14:52:08.617Z",
+      "durationMs": 259676,
+      "sessionId": "session-mkcphqkt-5sftus",
+      "sessionsCount": 1,
+      "commits": [
+        "47607e924da05ba2b2be4c8d53e338a7fdf23804"
+      ],
+      "durationFormatted": "4m 19s"
     }
   ],
   "sessions": [
@@ -1835,6 +1851,23 @@
         "085ddf6c075de9b5ffe3e508383af6db009e2e0d"
       ],
       "durationFormatted": "4m 56s"
+    },
+    {
+      "sessionId": "session-mkcphqkt-5sftus",
+      "startedAt": "2026-01-13T14:47:48.941Z",
+      "endedAt": "2026-01-13T14:52:08.617Z",
+      "durationMs": 259676,
+      "featuresWorkedOn": [
+        "WIDGET-012"
+      ],
+      "featuresCompleted": [
+        "WIDGET-012"
+      ],
+      "status": "completed",
+      "commits": [
+        "47607e924da05ba2b2be4c8d53e338a7fdf23804"
+      ],
+      "durationFormatted": "4m 19s"
     }
   ],
   "byCategory": {
@@ -1846,9 +1879,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 22,
-      "totalTimeMs": 6862811,
-      "averageTimeMs": 311946
+      "completed": 23,
+      "totalTimeMs": 7122487,
+      "averageTimeMs": 309673
     },
     "ui": {
       "total": 0,
@@ -1872,9 +1905,9 @@
     },
     "could-have": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 1531066,
-      "averageTimeMs": 510355
+      "completed": 4,
+      "totalTimeMs": 1790742,
+      "averageTimeMs": 447686
     }
   }
 }

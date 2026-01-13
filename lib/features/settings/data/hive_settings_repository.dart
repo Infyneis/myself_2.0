@@ -49,41 +49,44 @@ class HiveSettingsRepository implements SettingsRepository {
   final Box<dynamic>? _box;
 
   /// Gets the Hive box, either injected or from HiveService.
-  Box<dynamic> get _settingsBox => _box ?? HiveService.settingsBox;
+  /// Supports lazy box opening for PERF-001 optimization.
+  Future<Box<dynamic>> get _settingsBox async =>
+      _box ?? await HiveService.settingsBox;
 
   @override
   Future<Settings> getSettings() async {
-    final themeModeIndex = _settingsBox.get(
+    final box = await _settingsBox;
+    final themeModeIndex = box.get(
       SettingsKeys.themeMode,
       defaultValue: ThemeMode.system.index,
     ) as int;
 
-    final refreshModeIndex = _settingsBox.get(
+    final refreshModeIndex = box.get(
       SettingsKeys.refreshMode,
       defaultValue: RefreshMode.onUnlock.index,
     ) as int;
 
-    final language = _settingsBox.get(
+    final language = box.get(
       SettingsKeys.language,
       defaultValue: 'fr',
     ) as String;
 
-    final fontSizeMultiplier = _settingsBox.get(
+    final fontSizeMultiplier = box.get(
       SettingsKeys.fontSizeMultiplier,
       defaultValue: 1.0,
     ) as double;
 
-    final widgetRotationEnabled = _settingsBox.get(
+    final widgetRotationEnabled = box.get(
       SettingsKeys.widgetRotationEnabled,
       defaultValue: true,
     ) as bool;
 
-    final breathingAnimationEnabled = _settingsBox.get(
+    final breathingAnimationEnabled = box.get(
       SettingsKeys.breathingAnimationEnabled,
       defaultValue: true,
     ) as bool;
 
-    final hasCompletedOnboarding = _settingsBox.get(
+    final hasCompletedOnboarding = box.get(
       SettingsKeys.hasCompletedOnboarding,
       defaultValue: false,
     ) as bool;
@@ -101,22 +104,23 @@ class HiveSettingsRepository implements SettingsRepository {
 
   @override
   Future<void> saveSettings(Settings settings) async {
-    await _settingsBox.put(SettingsKeys.themeMode, settings.themeMode.index);
-    await _settingsBox.put(SettingsKeys.refreshMode, settings.refreshMode.index);
-    await _settingsBox.put(SettingsKeys.language, settings.language);
-    await _settingsBox.put(
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.themeMode, settings.themeMode.index);
+    await box.put(SettingsKeys.refreshMode, settings.refreshMode.index);
+    await box.put(SettingsKeys.language, settings.language);
+    await box.put(
       SettingsKeys.fontSizeMultiplier,
       settings.fontSizeMultiplier,
     );
-    await _settingsBox.put(
+    await box.put(
       SettingsKeys.widgetRotationEnabled,
       settings.widgetRotationEnabled,
     );
-    await _settingsBox.put(
+    await box.put(
       SettingsKeys.breathingAnimationEnabled,
       settings.breathingAnimationEnabled,
     );
-    await _settingsBox.put(
+    await box.put(
       SettingsKeys.hasCompletedOnboarding,
       settings.hasCompletedOnboarding,
     );
@@ -124,37 +128,44 @@ class HiveSettingsRepository implements SettingsRepository {
 
   @override
   Future<void> updateThemeMode(ThemeMode themeMode) async {
-    await _settingsBox.put(SettingsKeys.themeMode, themeMode.index);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.themeMode, themeMode.index);
   }
 
   @override
   Future<void> updateRefreshMode(RefreshMode refreshMode) async {
-    await _settingsBox.put(SettingsKeys.refreshMode, refreshMode.index);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.refreshMode, refreshMode.index);
   }
 
   @override
   Future<void> updateLanguage(String language) async {
-    await _settingsBox.put(SettingsKeys.language, language);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.language, language);
   }
 
   @override
   Future<void> updateFontSizeMultiplier(double multiplier) async {
-    await _settingsBox.put(SettingsKeys.fontSizeMultiplier, multiplier);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.fontSizeMultiplier, multiplier);
   }
 
   @override
   Future<void> updateWidgetRotationEnabled(bool enabled) async {
-    await _settingsBox.put(SettingsKeys.widgetRotationEnabled, enabled);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.widgetRotationEnabled, enabled);
   }
 
   @override
   Future<void> updateBreathingAnimationEnabled(bool enabled) async {
-    await _settingsBox.put(SettingsKeys.breathingAnimationEnabled, enabled);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.breathingAnimationEnabled, enabled);
   }
 
   @override
   Future<void> updateHasCompletedOnboarding(bool completed) async {
-    await _settingsBox.put(SettingsKeys.hasCompletedOnboarding, completed);
+    final box = await _settingsBox;
+    await box.put(SettingsKeys.hasCompletedOnboarding, completed);
   }
 
   @override

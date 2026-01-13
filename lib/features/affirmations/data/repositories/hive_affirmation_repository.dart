@@ -31,11 +31,14 @@ class HiveAffirmationRepository implements AffirmationRepository {
   final Uuid _uuid;
 
   /// Gets the Hive box, either injected or from HiveService.
-  Box<Affirmation> get _affirmationsBox => _box ?? HiveService.affirmationsBox;
+  /// Supports lazy box opening for PERF-001 optimization.
+  Future<Box<Affirmation>> get _affirmationsBox async =>
+      _box ?? await HiveService.affirmationsBox;
 
   @override
   Future<List<Affirmation>> getAll() async {
-    final affirmations = _affirmationsBox.values.toList();
+    final box = await _affirmationsBox;
+    final affirmations = box.values.toList();
     // Sort by sortOrder to maintain user's custom order
     affirmations.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
     return affirmations;
@@ -43,7 +46,8 @@ class HiveAffirmationRepository implements AffirmationRepository {
 
   @override
   Future<List<Affirmation>> getActive() async {
-    final affirmations = _affirmationsBox.values.where((a) => a.isActive).toList();
+    final box = await _affirmationsBox;
+    final affirmations = box.values.where((a) => a.isActive).toList();
     // Sort by sortOrder to maintain user's custom order
     affirmations.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
     return affirmations;
@@ -51,8 +55,9 @@ class HiveAffirmationRepository implements AffirmationRepository {
 
   @override
   Future<Affirmation?> getById(String id) async {
+    final box = await _affirmationsBox;
     try {
-      return _affirmationsBox.values.firstWhere((a) => a.id == id);
+      return box.values.firstWhere((a) => a.id == id);
     } catch (_) {
       return null;
     }
@@ -60,14 +65,15 @@ class HiveAffirmationRepository implements AffirmationRepository {
 
   @override
   Future<Affirmation> create(Affirmation affirmation) async {
+    final box = await _affirmationsBox;
     // Generate a new ID if not provided or ensure uniqueness
     final id = affirmation.id.isEmpty ? _uuid.v4() : affirmation.id;
     final now = DateTime.now();
 
     // Assign the next sort order (add to end of list)
-    final maxSortOrder = _affirmationsBox.values.isEmpty
+    final maxSortOrder = box.values.isEmpty
         ? -1
-        : _affirmationsBox.values
+        : box.values
             .map((a) => a.sortOrder)
             .reduce((a, b) => a > b ? a : b);
 
@@ -81,50 +87,55 @@ class HiveAffirmationRepository implements AffirmationRepository {
       sortOrder: maxSortOrder + 1,
     );
 
-    await _affirmationsBox.put(id, newAffirmation);
+    await box.put(id, newAffirmation);
     return newAffirmation;
   }
 
   @override
   Future<Affirmation> update(Affirmation affirmation) async {
+    final box = await _affirmationsBox;
     final updatedAffirmation = affirmation.copyWith(
       updatedAt: DateTime.now(),
     );
 
-    await _affirmationsBox.put(affirmation.id, updatedAffirmation);
+    await box.put(affirmation.id, updatedAffirmation);
     return updatedAffirmation;
   }
 
   @override
   Future<bool> delete(String id) async {
+    final box = await _affirmationsBox;
     final affirmation = await getById(id);
     if (affirmation == null) {
       return false;
     }
 
-    await _affirmationsBox.delete(id);
+    await box.delete(id);
     return true;
   }
 
   @override
   Future<void> deleteAll() async {
-    await _affirmationsBox.clear();
+    final box = await _affirmationsBox;
+    await box.clear();
   }
 
   @override
   Future<int> count() async {
-    return _affirmationsBox.length;
+    final box = await _affirmationsBox;
+    return box.length;
   }
 
   @override
   Future<void> reorder(List<String> orderedIds) async {
+    final box = await _affirmationsBox;
     // Update sort order for each affirmation based on the new order
     for (int i = 0; i < orderedIds.length; i++) {
       final id = orderedIds[i];
       final affirmation = await getById(id);
       if (affirmation != null) {
         final updatedAffirmation = affirmation.copyWith(sortOrder: i);
-        await _affirmationsBox.put(id, updatedAffirmation);
+        await box.put(id, updatedAffirmation);
       }
     }
   }

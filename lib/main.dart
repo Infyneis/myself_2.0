@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'core/storage/hive_service.dart';
+import 'core/utils/performance_monitor.dart';
 import 'features/affirmations/data/repositories/affirmation_repository.dart';
 import 'features/affirmations/data/repositories/hive_affirmation_repository.dart';
 import 'features/affirmations/domain/usecases/get_random_affirmation.dart';
@@ -22,19 +23,29 @@ import 'widgets/native_widget/widget_service.dart';
 import 'widgets/native_widget/widget_data_sync.dart';
 
 /// Main entry point for Myself 2.0.
+///
+/// Performance optimization (PERF-001):
+/// - Critical services initialized synchronously/in parallel
+/// - Non-critical operations deferred until after first frame
+/// - Target: Cold start < 2 seconds
 void main() async {
+  // Start performance monitoring for PERF-001
+  final perfMonitor = PerformanceMonitor.start();
+
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
+  perfMonitor.logCheckpoint('Flutter binding initialized');
 
-  // Initialize Hive for local storage
+  // Initialize Hive for local storage (critical - must complete before app runs)
   await HiveService.initialize();
+  perfMonitor.logCheckpoint('Hive initialized (lazy box opening)');
 
-  // Initialize widget service for home screen widget (WIDGET-001)
+  // Create widget service (lazy initialization - actual setup happens on demand)
   final widgetService = WidgetService();
-  await widgetService.initialize();
 
   // Create widget data sync for WIDGET-009
   final widgetDataSync = WidgetDataSync(widgetService: widgetService);
+  perfMonitor.logCheckpoint('Services created');
 
   // Create repositories
   final affirmationRepository = HiveAffirmationRepository();
@@ -56,13 +67,14 @@ void main() async {
     repository: settingsRepository,
     widgetDataSync: widgetDataSync,
   );
+  perfMonitor.logCheckpoint('Providers created');
 
-  // Load initial data
-  await Future.wait([
-    affirmationProvider.loadAffirmations(),
-    settingsProvider.loadSettings(),
-  ]);
+  // Load only critical settings synchronously (theme mode, onboarding status)
+  // This is optimized to load minimal data needed for first frame
+  await settingsProvider.loadSettings();
+  perfMonitor.logCheckpoint('Settings loaded');
 
+  // Run the app immediately - don't wait for affirmations to load
   runApp(
     MultiProvider(
       providers: [
@@ -81,7 +93,53 @@ void main() async {
           value: settingsProvider,
         ),
       ],
-      child: const MyselfApp(),
+      child: MyselfApp(
+        // Pass initialization callbacks for deferred operations
+        onPostFrameCallback: () async {
+          // Defer non-critical operations until after first frame
+          // This ensures the UI appears as quickly as possible
+          await _initializeNonCriticalServices(
+            widgetService: widgetService,
+            affirmationProvider: affirmationProvider,
+            perfMonitor: perfMonitor,
+          );
+        },
+      ),
     ),
   );
+
+  perfMonitor.logCheckpoint('App running (first frame pending)');
+}
+
+/// Initializes non-critical services after the first frame is rendered.
+///
+/// This function is called after the first frame to ensure the UI
+/// appears as quickly as possible. Non-critical operations include:
+/// - Widget service initialization (only needed when widget is used)
+/// - Loading affirmations (shown with loading state initially)
+Future<void> _initializeNonCriticalServices({
+  required WidgetService widgetService,
+  required AffirmationProvider affirmationProvider,
+  required PerformanceMonitor perfMonitor,
+}) async {
+  try {
+    perfMonitor.logCheckpoint('First frame rendered - starting deferred init');
+
+    // Run non-critical initialization in parallel
+    await Future.wait([
+      // Initialize widget service (WIDGET-001) - lazy initialization
+      widgetService.initialize(),
+
+      // Load affirmations - UI shows loading state until ready
+      affirmationProvider.loadAffirmations(),
+    ]);
+
+    perfMonitor.logCheckpoint('Deferred initialization complete');
+    perfMonitor.logSummary();
+  } catch (e) {
+    // Log errors but don't crash - app can still function
+    // ignore: avoid_print
+    print('Warning: Non-critical initialization failed: $e');
+    perfMonitor.logSummary();
+  }
 }

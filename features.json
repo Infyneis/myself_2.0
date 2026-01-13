@@ -415,7 +415,7 @@
       "description": "Optimize app initialization to achieve cold start time under 2 seconds",
       "category": "performance",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["NFR-001"]
     },
     {

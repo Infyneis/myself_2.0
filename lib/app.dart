@@ -19,9 +19,35 @@ import 'features/settings/presentation/providers/settings_provider.dart';
 /// - Localization setup
 /// - Provider configuration
 /// - Navigation routing
-class MyselfApp extends StatelessWidget {
+class MyselfApp extends StatefulWidget {
   /// Creates the main application widget.
-  const MyselfApp({super.key});
+  const MyselfApp({
+    super.key,
+    this.onPostFrameCallback,
+  });
+
+  /// Callback to execute after the first frame is rendered.
+  ///
+  /// Used for deferring non-critical initialization to improve
+  /// cold start performance (PERF-001).
+  final Future<void> Function()? onPostFrameCallback;
+
+  @override
+  State<MyselfApp> createState() => _MyselfAppState();
+}
+
+class _MyselfAppState extends State<MyselfApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Schedule post-frame callback to run after first frame
+    // This improves cold start performance by deferring non-critical work
+    if (widget.onPostFrameCallback != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onPostFrameCallback!();
+      });
+    }
+  }
 
   /// Converts settings ThemeMode to Flutter ThemeMode.
   ThemeMode _convertThemeMode(settings_model.ThemeMode settingsThemeMode) {
