@@ -727,7 +727,7 @@
       "description": "Write widget tests for affirmation list screen rendering and interactions",
       "category": "testing",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {

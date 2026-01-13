@@ -16,6 +16,7 @@ import 'package:myself_2_0/features/affirmations/data/repositories/affirmation_r
 import 'package:myself_2_0/features/affirmations/presentation/providers/affirmation_provider.dart';
 import 'package:myself_2_0/features/affirmations/presentation/screens/affirmation_list_screen.dart';
 import 'package:myself_2_0/features/affirmations/presentation/widgets/empty_affirmations_state.dart';
+import 'package:myself_2_0/generated/l10n/app_localizations.dart';
 
 // Mocks
 class MockAffirmationRepository extends Mock implements AffirmationRepository {}
@@ -29,6 +30,11 @@ void main() {
 
   Widget createTestWidget(AffirmationProvider provider) {
     return MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('en'),
       home: ChangeNotifierProvider<AffirmationProvider>.value(
         value: provider,
         child: const AffirmationListScreen(),
@@ -45,7 +51,8 @@ void main() {
 
       // Act
       await tester.pumpWidget(createTestWidget(provider));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Assert
       expect(find.byType(EmptyAffirmationsState), findsOneWidget);
@@ -115,7 +122,8 @@ void main() {
 
       // Act
       await tester.pumpWidget(createTestWidget(provider));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Assert
       // FAB should be a SizedBox.shrink when empty
@@ -141,8 +149,9 @@ void main() {
       // Assert - should show loading indicator initially
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
-      // Wait for loading to complete
-      await tester.pumpAndSettle();
+      // Wait for loading to complete (pump with duration longer than the delay)
+      await tester.pump(const Duration(seconds: 2));
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Now should show empty state
       expect(find.byType(CircularProgressIndicator), findsNothing);
@@ -180,7 +189,8 @@ void main() {
 
       // Act
       await tester.pumpWidget(createTestWidget(provider));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Assert
       expect(find.text('My Affirmations'), findsOneWidget);
@@ -195,6 +205,11 @@ void main() {
       // Act
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('en'),
           home: Scaffold(
             body: EmptyAffirmationsState(
               onAddAffirmation: () => buttonPressed = true,
@@ -202,18 +217,20 @@ void main() {
           ),
         ),
       );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
 
       // Assert
       expect(find.text('No Affirmations Yet'), findsOneWidget);
       expect(
-        find.textContaining('Start your journey of self-affirmation'),
+        find.textContaining('Start your journey by creating your first affirmation'),
         findsOneWidget,
       );
       expect(find.text('Create Your First Affirmation'), findsOneWidget);
 
       // Tap the button
       await tester.tap(find.text('Create Your First Affirmation'));
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(buttonPressed, isTrue);
     });
@@ -222,6 +239,11 @@ void main() {
       // Act
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+          ],
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: const Locale('en'),
           home: Scaffold(
             body: EmptyAffirmationsState(
               onAddAffirmation: () {},
@@ -229,6 +251,8 @@ void main() {
           ),
         ),
       );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
 
       // Assert
       expect(find.byIcon(Icons.self_improvement_outlined), findsOneWidget);
