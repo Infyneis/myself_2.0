@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T09:00:58.877Z",
+  "lastUpdated": "2026-01-13T09:31:18.753Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 2,
-    "totalSessions": 2,
-    "totalTimeMs": 558886,
-    "totalTimeFormatted": "9m 18s",
-    "averageFeatureTimeMs": 279443,
-    "averageFeatureTimeFormatted": "4m 39s",
-    "averageSessionTimeMs": 279443,
-    "averageSessionTimeFormatted": "4m 39s"
+    "completedFeatures": 3,
+    "totalSessions": 3,
+    "totalTimeMs": 2376759,
+    "totalTimeFormatted": "39m 36s",
+    "averageFeatureTimeMs": 792253,
+    "averageFeatureTimeFormatted": "13m 12s",
+    "averageSessionTimeMs": 792253,
+    "averageSessionTimeFormatted": "13m 12s"
   },
   "features": [
     {
@@ -45,6 +45,22 @@
         "4d507b6acd00b081607e45bd9342ee4d24137a57"
       ],
       "durationFormatted": "6m 19s"
+    },
+    {
+      "featureId": "INFRA-003",
+      "featureName": "INFRA-003",
+      "description": "Configure Hive for local storage with proper initialization, type adapters for Affirmation model, and platform-specific paths",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T09:01:00.880Z",
+      "completedAt": "2026-01-13T09:31:18.753Z",
+      "durationMs": 1817873,
+      "sessionId": "session-mkcd3qz4-9nnwhd",
+      "sessionsCount": 1,
+      "commits": [
+        "b9abba2e92a08f2a0d168f9781ff54a6da0c9b67"
+      ],
+      "durationFormatted": "30m 17s"
     }
   ],
   "sessions": [
@@ -81,22 +97,39 @@
         "4d507b6acd00b081607e45bd9342ee4d24137a57"
       ],
       "durationFormatted": "6m 19s"
+    },
+    {
+      "sessionId": "session-mkcd3qz4-9nnwhd",
+      "startedAt": "2026-01-13T09:01:00.880Z",
+      "endedAt": "2026-01-13T09:31:18.753Z",
+      "durationMs": 1817873,
+      "featuresWorkedOn": [
+        "INFRA-003"
+      ],
+      "featuresCompleted": [
+        "INFRA-003"
+      ],
+      "status": "completed",
+      "commits": [
+        "b9abba2e92a08f2a0d168f9781ff54a6da0c9b67"
+      ],
+      "durationFormatted": "30m 17s"
     }
   ],
   "byCategory": {
     "infrastructure": {
       "total": 0,
-      "completed": 2,
-      "totalTimeMs": 558886,
-      "averageTimeMs": 279443
+      "completed": 3,
+      "totalTimeMs": 2376759,
+      "averageTimeMs": 792253
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 2,
-      "totalTimeMs": 558886,
-      "averageTimeMs": 279443
+      "completed": 3,
+      "totalTimeMs": 2376759,
+      "averageTimeMs": 792253
     }
   }
 }
