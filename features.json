@@ -190,7 +190,7 @@
       "description": "Enable swipe or tap gesture on home screen to display another random affirmation with smooth transition",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-015"]
     },
     {
