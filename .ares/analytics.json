@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T13:49:24.912Z",
+  "lastUpdated": "2026-01-13T13:54:24.026Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 29,
-    "totalSessions": 56,
-    "totalTimeMs": 9694031,
-    "totalTimeFormatted": "2h 41m",
-    "averageFeatureTimeMs": 316205,
-    "averageFeatureTimeFormatted": "5m 16s",
-    "averageSessionTimeMs": 173108,
-    "averageSessionTimeFormatted": "2m 53s"
+    "completedFeatures": 30,
+    "totalSessions": 57,
+    "totalTimeMs": 9991142,
+    "totalTimeFormatted": "2h 46m",
+    "averageFeatureTimeMs": 315568,
+    "averageFeatureTimeFormatted": "5m 15s",
+    "averageSessionTimeMs": 175283,
+    "averageSessionTimeFormatted": "2m 55s"
   },
   "features": [
     {
@@ -477,6 +477,22 @@
         "bf8b954f8b6393233be6e98c3cae505f43c016b3"
       ],
       "durationFormatted": "2m 27s"
+    },
+    {
+      "featureId": "UI-014",
+      "featureName": "UI-014",
+      "description": "Implement complete first-launch onboarding: welcome -> create first affirmation -> success animation -> widget setup instructions",
+      "category": "ui",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T13:49:26.914Z",
+      "completedAt": "2026-01-13T13:54:24.025Z",
+      "durationMs": 297111,
+      "sessionId": "session-mkcneoea-xnc7pp",
+      "sessionsCount": 1,
+      "commits": [
+        "873136e42093e795cb8310bebb89b7aa1a64fa3c"
+      ],
+      "durationFormatted": "4m 57s"
     }
   ],
   "sessions": [
@@ -1377,6 +1393,23 @@
         "bf8b954f8b6393233be6e98c3cae505f43c016b3"
       ],
       "durationFormatted": "2m 27s"
+    },
+    {
+      "sessionId": "session-mkcneoea-xnc7pp",
+      "startedAt": "2026-01-13T13:49:26.914Z",
+      "endedAt": "2026-01-13T13:54:24.025Z",
+      "durationMs": 297111,
+      "featuresWorkedOn": [
+        "UI-014"
+      ],
+      "featuresCompleted": [
+        "UI-014"
+      ],
+      "status": "completed",
+      "commits": [
+        "873136e42093e795cb8310bebb89b7aa1a64fa3c"
+      ],
+      "durationFormatted": "4m 57s"
     }
   ],
   "byCategory": {
@@ -1394,9 +1427,9 @@
     },
     "ui": {
       "total": 0,
-      "completed": 13,
-      "totalTimeMs": 2160183,
-      "averageTimeMs": 166168
+      "completed": 14,
+      "totalTimeMs": 2457294,
+      "averageTimeMs": 175521
     }
   },
   "byPriority": {
@@ -1408,9 +1441,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 4,
-      "totalTimeMs": 888696,
-      "averageTimeMs": 222174
+      "completed": 5,
+      "totalTimeMs": 1185807,
+      "averageTimeMs": 237161
     },
     "could-have": {
       "total": 0,
