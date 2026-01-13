@@ -361,7 +361,7 @@
       "description": "Configure widget tap action to launch main application",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-011"]
     },
     {

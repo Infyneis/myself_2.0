@@ -47,5 +47,18 @@
 	<true/>
 	<key>AppGroupId</key>
 	<string>group.com.infyneis.myself_2_0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.infyneis.myself_2_0</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>myself</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

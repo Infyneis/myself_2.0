@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:22:53.331Z",
+  "lastUpdated": "2026-01-13T14:25:12.624Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 37,
-    "totalSessions": 64,
-    "totalTimeMs": 11686426,
-    "totalTimeFormatted": "3h 14m",
-    "averageFeatureTimeMs": 301685,
-    "averageFeatureTimeFormatted": "5m 1s",
-    "averageSessionTimeMs": 182600,
-    "averageSessionTimeFormatted": "3m 2s"
+    "completedFeatures": 38,
+    "totalSessions": 65,
+    "totalTimeMs": 11823715,
+    "totalTimeFormatted": "3h 17m",
+    "averageFeatureTimeMs": 297358,
+    "averageFeatureTimeFormatted": "4m 57s",
+    "averageSessionTimeMs": 181903,
+    "averageSessionTimeFormatted": "3m 1s"
   },
   "features": [
     {
@@ -603,6 +603,22 @@
         "a65b4219882928781a8aed9733be04a7804af84d"
       ],
       "durationFormatted": "5m 42s"
+    },
+    {
+      "featureId": "WIDGET-006",
+      "featureName": "WIDGET-006",
+      "description": "Implement BroadcastReceiver for ACTION_USER_PRESENT to update widget on phone unlock",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:22:55.334Z",
+      "completedAt": "2026-01-13T14:25:12.623Z",
+      "durationMs": 137289,
+      "sessionId": "session-mkcolq3q-t616ai",
+      "sessionsCount": 1,
+      "commits": [
+        "7a51796d8efff70009b5e52309c53b8a73e550a2"
+      ],
+      "durationFormatted": "2m 17s"
     }
   ],
   "sessions": [
@@ -1637,6 +1653,23 @@
         "a65b4219882928781a8aed9733be04a7804af84d"
       ],
       "durationFormatted": "5m 42s"
+    },
+    {
+      "sessionId": "session-mkcolq3q-t616ai",
+      "startedAt": "2026-01-13T14:22:55.334Z",
+      "endedAt": "2026-01-13T14:25:12.623Z",
+      "durationMs": 137289,
+      "featuresWorkedOn": [
+        "WIDGET-006"
+      ],
+      "featuresCompleted": [
+        "WIDGET-006"
+      ],
+      "status": "completed",
+      "commits": [
+        "7a51796d8efff70009b5e52309c53b8a73e550a2"
+      ],
+      "durationFormatted": "2m 17s"
     }
   ],
   "byCategory": {
@@ -1648,9 +1681,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 17,
-      "totalTimeMs": 5635955,
-      "averageTimeMs": 331527
+      "completed": 18,
+      "totalTimeMs": 5773244,
+      "averageTimeMs": 320736
     },
     "ui": {
       "total": 0,
@@ -1662,9 +1695,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 28,
-      "totalTimeMs": 8287871,
-      "averageTimeMs": 295995
+      "completed": 29,
+      "totalTimeMs": 8425160,
+      "averageTimeMs": 290523
     },
     "should-have": {
       "total": 0,

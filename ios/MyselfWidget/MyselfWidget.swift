@@ -188,6 +188,23 @@ struct MyselfWidgetProvider: TimelineProvider {
 
 // MARK: - Widget Views
 
+/// Widget Tap-to-Launch Feature (WIDGET-007)
+///
+/// All widget sizes support tap-to-launch functionality that opens the main application.
+///
+/// ## iOS Implementation
+/// - Uses `.widgetURL()` modifier with custom URL scheme "myself://open"
+/// - URL scheme configured in Info.plist under CFBundleURLTypes
+/// - Tapping any widget size opens the main app to the home screen
+///
+/// ## Android Implementation
+/// - Uses PendingIntent attached to widget_container view
+/// - Launches MainActivity with FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TOP
+/// - Works consistently across all widget sizes (small, medium, large)
+///
+/// This provides users with quick access to the app from their home screen,
+/// encouraging engagement and making it easy to create new affirmations.
+
 /// Small widget view (2x2)
 struct MyselfWidgetSmallView: View {
     let entry: MyselfWidgetEntry
@@ -246,6 +263,7 @@ struct MyselfWidgetSmallView: View {
             .padding(12)
         }
         .preferredColorScheme(colorScheme)
+        .widgetURL(URL(string: "myself://open"))
     }
 }
 
@@ -317,6 +335,7 @@ struct MyselfWidgetMediumView: View {
             .padding(16)
         }
         .preferredColorScheme(colorScheme)
+        .widgetURL(URL(string: "myself://open"))
     }
 }
 
@@ -398,6 +417,7 @@ struct MyselfWidgetLargeView: View {
             .padding(24)
         }
         .preferredColorScheme(colorScheme)
+        .widgetURL(URL(string: "myself://open"))
     }
 }
 

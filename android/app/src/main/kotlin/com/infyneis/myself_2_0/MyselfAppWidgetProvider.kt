@@ -17,14 +17,23 @@ import androidx.core.content.ContextCompat
  * Android AppWidgetProvider for displaying affirmations on the home screen.
  * Supports small, medium, and large widget sizes with adaptive layouts.
  *
- * This provider implements WIDGET-005: Android Widget Provider
+ * This provider implements:
+ * - WIDGET-005: Android Widget Provider
+ * - WIDGET-007: Widget Tap-to-Launch Functionality
  *
  * ## Features
  * - Small (2x2), medium (4x2), and large (4x4) widget sizes
  * - Reads affirmation data from SharedPreferences
  * - Handles empty state when no affirmations exist
- * - Tap action to launch main application
+ * - Tap action to launch main application (WIDGET-007)
  * - Adapts to system light/dark theme
+ *
+ * ## Tap-to-Launch Implementation (WIDGET-007)
+ * Each widget registers a PendingIntent that launches MainActivity when tapped:
+ * - Uses FLAG_ACTIVITY_NEW_TASK to start app in new task
+ * - Uses FLAG_ACTIVITY_CLEAR_TOP to bring existing app to foreground
+ * - PendingIntent attached to widget_container view ID in all layouts
+ * - Works consistently across all widget sizes
  *
  * ## Data Sharing
  * Uses SharedPreferences with name "FlutterSharedPreferences" to read data
