@@ -14,6 +14,7 @@ import '../../data/models/affirmation.dart';
 /// - Rounded corners (16px)
 /// - Soft elevation
 /// - Comfortable padding
+/// - Multi-line text display with proper wrapping
 ///
 /// Note: Full styling will be completed in UI-009.
 class AffirmationCard extends StatelessWidget {
@@ -24,6 +25,7 @@ class AffirmationCard extends StatelessWidget {
     this.onTap,
     this.onEdit,
     this.onDelete,
+    this.maxLines,
   });
 
   /// The affirmation to display.
@@ -37,6 +39,10 @@ class AffirmationCard extends StatelessWidget {
 
   /// Callback when delete action is triggered.
   final VoidCallback? onDelete;
+
+  /// Maximum number of lines to display before truncating.
+  /// If null, all lines will be displayed.
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +59,18 @@ class AffirmationCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Multi-line text display with proper line breaks
+              // softWrap ensures text wraps naturally at word boundaries
+              // overflow with fade gives visual hint when text is truncated
               Text(
                 affirmation.text,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      height: 1.5, // Line height for better readability
+                    ),
+                softWrap: true,
+                maxLines: maxLines, // null allows unlimited lines
+                overflow:
+                    maxLines != null ? TextOverflow.fade : TextOverflow.visible,
               ),
               if (onEdit != null || onDelete != null) ...[
                 const SizedBox(height: AppDimensions.spacingS),
