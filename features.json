@@ -82,7 +82,7 @@
       "description": "Implement functionality to view all saved affirmations in a scrollable list with proper empty state handling",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-004"]
     },
     {
