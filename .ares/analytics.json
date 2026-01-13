@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:11:46.241Z",
+  "lastUpdated": "2026-01-13T14:17:08.732Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 35,
-    "totalSessions": 62,
-    "totalTimeMs": 11023344,
-    "totalTimeFormatted": "3h 3m",
-    "averageFeatureTimeMs": 299978,
-    "averageFeatureTimeFormatted": "4m 59s",
-    "averageSessionTimeMs": 177796,
-    "averageSessionTimeFormatted": "2m 57s"
+    "completedFeatures": 36,
+    "totalSessions": 63,
+    "totalTimeMs": 11343831,
+    "totalTimeFormatted": "3h 9m",
+    "averageFeatureTimeMs": 300548,
+    "averageFeatureTimeFormatted": "5m 0s",
+    "averageSessionTimeMs": 180061,
+    "averageSessionTimeFormatted": "3m 0s"
   },
   "features": [
     {
@@ -573,6 +573,20 @@
         "16274ecaa8bb77829249bd1ba02bca7333ecf115"
       ],
       "durationFormatted": "5m 16s"
+    },
+    {
+      "featureId": "WIDGET-004",
+      "featureName": "WIDGET-004",
+      "description": "Implement TimelineProvider for iOS widget with refresh on device unlock events",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:11:48.244Z",
+      "completedAt": "2026-01-13T14:17:08.731Z",
+      "durationMs": 320487,
+      "sessionId": "session-mkco7fdf-m490l4",
+      "sessionsCount": 1,
+      "commits": [],
+      "durationFormatted": "5m 20s"
     }
   ],
   "sessions": [
@@ -1575,6 +1589,21 @@
         "16274ecaa8bb77829249bd1ba02bca7333ecf115"
       ],
       "durationFormatted": "5m 16s"
+    },
+    {
+      "sessionId": "session-mkco7fdf-m490l4",
+      "startedAt": "2026-01-13T14:11:48.244Z",
+      "endedAt": "2026-01-13T14:17:08.731Z",
+      "durationMs": 320487,
+      "featuresWorkedOn": [
+        "WIDGET-004"
+      ],
+      "featuresCompleted": [
+        "WIDGET-004"
+      ],
+      "status": "completed",
+      "commits": [],
+      "durationFormatted": "5m 20s"
     }
   ],
   "byCategory": {
@@ -1586,9 +1615,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 15,
-      "totalTimeMs": 4972873,
-      "averageTimeMs": 331525
+      "completed": 16,
+      "totalTimeMs": 5293360,
+      "averageTimeMs": 330835
     },
     "ui": {
       "total": 0,
@@ -1600,9 +1629,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 26,
-      "totalTimeMs": 7624789,
-      "averageTimeMs": 293261
+      "completed": 27,
+      "totalTimeMs": 7945276,
+      "averageTimeMs": 294269
     },
     "should-have": {
       "total": 0,
