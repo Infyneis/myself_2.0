@@ -100,7 +100,7 @@
       "description": "Implement drag-and-drop reordering of affirmations in the list view",
       "category": "functional",
       "priority": "could-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-007"]
     },
     {
