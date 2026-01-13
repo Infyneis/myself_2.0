@@ -127,7 +127,7 @@
       "description": "Implement settings storage for theme, refreshMode, and language preferences using Hive",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-022", "FR-023", "FR-024", "FR-025"]
     },
     {
