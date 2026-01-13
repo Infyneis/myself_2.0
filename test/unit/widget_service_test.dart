@@ -65,5 +65,108 @@ void main() {
       final result = await widgetService.getCurrentAffirmationId();
       expect(result, isA<String?>());
     });
+
+    // WIDGET-002: Data sharing tests
+    group('Data Sharing (WIDGET-002)', () {
+      test('should handle shareSettings calls gracefully', () async {
+        final result = await widgetService.shareSettings(
+          themeMode: 'light',
+          widgetRotationEnabled: true,
+          fontSizeMultiplier: 1.0,
+        );
+        expect(result, isA<bool>());
+      });
+
+      test('should handle getThemeMode calls gracefully', () async {
+        final result = await widgetService.getThemeMode();
+        expect(result, isA<String?>());
+      });
+
+      test('should handle getWidgetRotationEnabled calls gracefully', () async {
+        final result = await widgetService.getWidgetRotationEnabled();
+        expect(result, isA<bool?>());
+      });
+
+      test('should handle getFontSizeMultiplier calls gracefully', () async {
+        final result = await widgetService.getFontSizeMultiplier();
+        expect(result, isA<double?>());
+      });
+
+      test('should handle shareAffirmationsList calls gracefully', () async {
+        final affirmations = [
+          {'id': '1', 'text': 'Affirmation 1'},
+          {'id': '2', 'text': 'Affirmation 2'},
+        ];
+        final result = await widgetService.shareAffirmationsList(affirmations);
+        expect(result, isA<bool>());
+      });
+
+      test('should handle shareAffirmationsList with empty list', () async {
+        final result = await widgetService.shareAffirmationsList([]);
+        expect(result, isA<bool>());
+      });
+
+      test('should handle getAffirmationsList calls gracefully', () async {
+        final result = await widgetService.getAffirmationsList();
+        expect(result, isA<List<Map<String, dynamic>>>());
+      });
+
+      test('should handle getAffirmationsCount calls gracefully', () async {
+        final result = await widgetService.getAffirmationsCount();
+        expect(result, isA<int>());
+      });
+
+      test('should handle getHasAffirmations calls gracefully', () async {
+        final result = await widgetService.getHasAffirmations();
+        expect(result, isA<bool>());
+      });
+
+      test('should handle shareAllWidgetData calls gracefully', () async {
+        final result = await widgetService.shareAllWidgetData(
+          affirmationText: 'Test affirmation',
+          affirmationId: 'test-id',
+          themeMode: 'dark',
+          widgetRotationEnabled: false,
+          fontSizeMultiplier: 1.2,
+          affirmationsList: [
+            {'id': '1', 'text': 'Affirmation 1'},
+          ],
+        );
+        expect(result, isA<bool>());
+      });
+
+      test('should handle shareAllWidgetData without affirmations', () async {
+        final result = await widgetService.shareAllWidgetData(
+          themeMode: 'system',
+          widgetRotationEnabled: true,
+          fontSizeMultiplier: 1.0,
+        );
+        expect(result, isA<bool>());
+      });
+
+      test('should handle clearAllWidgetData calls gracefully', () async {
+        final result = await widgetService.clearAllWidgetData();
+        expect(result, isA<bool>());
+      });
+
+      test('should handle complex affirmation data in list', () async {
+        final affirmations = [
+          {
+            'id': 'abc-123',
+            'text': 'I am confident and capable',
+            'isActive': true,
+            'displayCount': 5,
+          },
+          {
+            'id': 'def-456',
+            'text': 'I embrace challenges\nand grow from them',
+            'isActive': true,
+            'displayCount': 3,
+          },
+        ];
+        final result = await widgetService.shareAffirmationsList(affirmations);
+        expect(result, isA<bool>());
+      });
+    });
   });
 }

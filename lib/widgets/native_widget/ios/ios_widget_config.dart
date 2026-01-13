@@ -26,8 +26,20 @@ class IosWidgetConfig {
   /// Large widget size (4x4)
   static const String sizeLarge = 'large';
 
-  /// Shared defaults keys
+  /// Shared defaults keys for affirmation data
   static const String affirmationTextKey = 'affirmation_text';
   static const String affirmationIdKey = 'affirmation_id';
   static const String lastUpdateKey = 'last_update';
+
+  /// Shared defaults keys for settings data
+  static const String themeModeKey = 'theme_mode';
+  static const String widgetRotationEnabledKey = 'widget_rotation_enabled';
+  static const String fontSizeMultiplierKey = 'font_size_multiplier';
+
+  /// Shared defaults keys for multiple affirmations (for larger widgets)
+  static const String affirmationsListKey = 'affirmations_list';
+  static const String affirmationsCountKey = 'affirmations_count';
+
+  /// Shared defaults key for placeholder state
+  static const String hasAffirmationsKey = 'has_affirmations';
 }

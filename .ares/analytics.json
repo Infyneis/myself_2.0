@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T13:58:34.216Z",
+  "lastUpdated": "2026-01-13T14:02:41.301Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 32,
-    "totalSessions": 59,
-    "totalTimeMs": 10237328,
-    "totalTimeFormatted": "2h 50m",
-    "averageFeatureTimeMs": 303538,
-    "averageFeatureTimeFormatted": "5m 3s",
-    "averageSessionTimeMs": 173514,
-    "averageSessionTimeFormatted": "2m 53s"
+    "completedFeatures": 33,
+    "totalSessions": 60,
+    "totalTimeMs": 10482409,
+    "totalTimeFormatted": "2h 54m",
+    "averageFeatureTimeMs": 301767,
+    "averageFeatureTimeFormatted": "5m 1s",
+    "averageSessionTimeMs": 174707,
+    "averageSessionTimeFormatted": "2m 54s"
   },
   "features": [
     {
@@ -525,6 +525,22 @@
         "4458fe44b290e6f416720c4f7b2cf4f5cd538cbb"
       ],
       "durationFormatted": "2m 37s"
+    },
+    {
+      "featureId": "WIDGET-001",
+      "featureName": "WIDGET-001",
+      "description": "Integrate home_widget package and configure platform channels for iOS and Android widget communication",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T13:58:36.219Z",
+      "completedAt": "2026-01-13T14:02:41.300Z",
+      "durationMs": 245081,
+      "sessionId": "session-mkcnqg8r-zy7cuy",
+      "sessionsCount": 1,
+      "commits": [
+        "b0f33f3447a413d5f4bc6f0cb476c36d28a1fb90"
+      ],
+      "durationFormatted": "4m 5s"
     }
   ],
   "sessions": [
@@ -1476,6 +1492,23 @@
         "4458fe44b290e6f416720c4f7b2cf4f5cd538cbb"
       ],
       "durationFormatted": "2m 37s"
+    },
+    {
+      "sessionId": "session-mkcnqg8r-zy7cuy",
+      "startedAt": "2026-01-13T13:58:36.219Z",
+      "endedAt": "2026-01-13T14:02:41.300Z",
+      "durationMs": 245081,
+      "featuresWorkedOn": [
+        "WIDGET-001"
+      ],
+      "featuresCompleted": [
+        "WIDGET-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "b0f33f3447a413d5f4bc6f0cb476c36d28a1fb90"
+      ],
+      "durationFormatted": "4m 5s"
     }
   ],
   "byCategory": {
@@ -1487,9 +1520,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 12,
-      "totalTimeMs": 4186857,
-      "averageTimeMs": 348905
+      "completed": 13,
+      "totalTimeMs": 4431938,
+      "averageTimeMs": 340918
     },
     "ui": {
       "total": 0,
@@ -1501,9 +1534,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 23,
-      "totalTimeMs": 6838773,
-      "averageTimeMs": 297338
+      "completed": 24,
+      "totalTimeMs": 7083854,
+      "averageTimeMs": 295161
     },
     "should-have": {
       "total": 0,

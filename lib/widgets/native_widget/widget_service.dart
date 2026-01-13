@@ -2,8 +2,33 @@
 ///
 /// Provides Flutter-side interface for native widget communication.
 /// Based on REQUIREMENTS.md widget requirements.
+///
+/// ## Data Sharing Implementation
+///
+/// This service implements WIDGET-002: Data sharing between Flutter app and
+/// native widgets using platform-specific storage mechanisms:
+///
+/// ### iOS (SharedDefaults)
+/// - Uses App Groups to share data between the main app and widget extension
+/// - Data is stored in UserDefaults within the shared App Group container
+/// - App Group ID: `group.com.infyneis.myself_2_0`
+/// - Accessible from both the main app and WidgetKit extension
+///
+/// ### Android (SharedPreferences)
+/// - Uses SharedPreferences with a specific name for widget data
+/// - Accessible from both the main app and AppWidgetProvider
+/// - Data is stored in XML format in the app's private storage
+///
+/// ### Supported Data Types
+/// - Strings: Affirmation text, IDs, settings
+/// - Booleans: Feature flags, widget rotation enabled
+/// - Integers: Display counts, font size preference
+/// - Doubles: Font size multipliers
+/// - DateTime: Stored as ISO 8601 strings
+/// - Complex objects: Serialized to JSON strings
 library;
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:home_widget/home_widget.dart';
@@ -16,7 +41,9 @@ import 'ios/ios_widget_config.dart';
 /// Uses the home_widget package to communicate with native widgets
 /// on both iOS and Android.
 ///
-/// Implements WIDGET-001: Platform channel integration for widget communication.
+/// Implements:
+/// - WIDGET-001: Platform channel integration for widget communication
+/// - WIDGET-002: Data sharing using SharedDefaults (iOS) and SharedPreferences (Android)
 class WidgetService {
   /// Singleton instance of WidgetService.
   static final WidgetService _instance = WidgetService._internal();
@@ -186,6 +213,304 @@ class WidgetService {
       );
     } catch (e) {
       return null;
+    }
+  }
+
+  /// Shares settings data with the widget.
+  ///
+  /// This method shares relevant settings that the widget needs to render correctly:
+  /// - Theme mode (light/dark/system)
+  /// - Widget rotation enabled status
+  /// - Font size multiplier for accessibility
+  ///
+  /// Data is stored in:
+  /// - iOS: UserDefaults within the App Group
+  /// - Android: SharedPreferences
+  ///
+  /// Returns true if settings were successfully shared, false otherwise.
+  Future<bool> shareSettings({
+    required String themeMode,
+    required bool widgetRotationEnabled,
+    required double fontSizeMultiplier,
+  }) async {
+    try {
+      final themeModeKey = Platform.isIOS
+          ? IosWidgetConfig.themeModeKey
+          : AndroidWidgetConfig.themeModeKey;
+      final rotationKey = Platform.isIOS
+          ? IosWidgetConfig.widgetRotationEnabledKey
+          : AndroidWidgetConfig.widgetRotationEnabledKey;
+      final fontSizeKey = Platform.isIOS
+          ? IosWidgetConfig.fontSizeMultiplierKey
+          : AndroidWidgetConfig.fontSizeMultiplierKey;
+
+      await HomeWidget.saveWidgetData<String>(themeModeKey, themeMode);
+      await HomeWidget.saveWidgetData<bool>(rotationKey, widgetRotationEnabled);
+      await HomeWidget.saveWidgetData<double>(fontSizeKey, fontSizeMultiplier);
+
+      // Trigger widget update to reflect new settings
+      return await _updateNativeWidget();
+    } catch (e) {
+      // ignore: avoid_print
+      print('Warning: Failed to share settings with widget: $e');
+      return false;
+    }
+  }
+
+  /// Gets the theme mode setting from widget storage.
+  ///
+  /// Returns null if no theme mode is stored.
+  Future<String?> getThemeMode() async {
+    try {
+      return await HomeWidget.getWidgetData<String>(
+        Platform.isIOS
+            ? IosWidgetConfig.themeModeKey
+            : AndroidWidgetConfig.themeModeKey,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Gets the widget rotation enabled setting from widget storage.
+  ///
+  /// Returns null if no setting is stored.
+  Future<bool?> getWidgetRotationEnabled() async {
+    try {
+      return await HomeWidget.getWidgetData<bool>(
+        Platform.isIOS
+            ? IosWidgetConfig.widgetRotationEnabledKey
+            : AndroidWidgetConfig.widgetRotationEnabledKey,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Gets the font size multiplier setting from widget storage.
+  ///
+  /// Returns null if no setting is stored.
+  Future<double?> getFontSizeMultiplier() async {
+    try {
+      return await HomeWidget.getWidgetData<double>(
+        Platform.isIOS
+            ? IosWidgetConfig.fontSizeMultiplierKey
+            : AndroidWidgetConfig.fontSizeMultiplierKey,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Shares a list of affirmations with the widget.
+  ///
+  /// This is useful for larger widgets that can display multiple affirmations
+  /// or for widgets that need to randomly select from a pool.
+  ///
+  /// The affirmations are serialized to JSON and stored in:
+  /// - iOS: UserDefaults within the App Group
+  /// - Android: SharedPreferences
+  ///
+  /// [affirmations] - List of maps containing affirmation data.
+  ///                  Each map should have 'id' and 'text' keys at minimum.
+  ///
+  /// Returns true if affirmations were successfully shared, false otherwise.
+  Future<bool> shareAffirmationsList(
+    List<Map<String, dynamic>> affirmations,
+  ) async {
+    try {
+      final listKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationsListKey
+          : AndroidWidgetConfig.affirmationsListKey;
+      final countKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationsCountKey
+          : AndroidWidgetConfig.affirmationsCountKey;
+      final hasAffirmationsKey = Platform.isIOS
+          ? IosWidgetConfig.hasAffirmationsKey
+          : AndroidWidgetConfig.hasAffirmationsKey;
+
+      // Serialize affirmations list to JSON string
+      final jsonString = jsonEncode(affirmations);
+
+      await HomeWidget.saveWidgetData<String>(listKey, jsonString);
+      await HomeWidget.saveWidgetData<int>(countKey, affirmations.length);
+      await HomeWidget.saveWidgetData<bool>(
+        hasAffirmationsKey,
+        affirmations.isNotEmpty,
+      );
+
+      // Trigger widget update
+      return await _updateNativeWidget();
+    } catch (e) {
+      // ignore: avoid_print
+      print('Warning: Failed to share affirmations list with widget: $e');
+      return false;
+    }
+  }
+
+  /// Gets the list of affirmations from widget storage.
+  ///
+  /// Returns an empty list if no affirmations are stored or if parsing fails.
+  Future<List<Map<String, dynamic>>> getAffirmationsList() async {
+    try {
+      final jsonString = await HomeWidget.getWidgetData<String>(
+        Platform.isIOS
+            ? IosWidgetConfig.affirmationsListKey
+            : AndroidWidgetConfig.affirmationsListKey,
+      );
+
+      if (jsonString == null || jsonString.isEmpty) {
+        return [];
+      }
+
+      final decoded = jsonDecode(jsonString);
+      if (decoded is List) {
+        return decoded.cast<Map<String, dynamic>>();
+      }
+      return [];
+    } catch (e) {
+      // ignore: avoid_print
+      print('Warning: Failed to get affirmations list from widget: $e');
+      return [];
+    }
+  }
+
+  /// Gets the count of affirmations from widget storage.
+  ///
+  /// Returns 0 if no count is stored.
+  Future<int> getAffirmationsCount() async {
+    try {
+      return await HomeWidget.getWidgetData<int>(
+        Platform.isIOS
+            ? IosWidgetConfig.affirmationsCountKey
+            : AndroidWidgetConfig.affirmationsCountKey,
+      ) ?? 0;
+    } catch (e) {
+      return 0;
+    }
+  }
+
+  /// Gets whether there are any affirmations stored.
+  ///
+  /// Returns false if no data is stored.
+  Future<bool> getHasAffirmations() async {
+    try {
+      return await HomeWidget.getWidgetData<bool>(
+        Platform.isIOS
+            ? IosWidgetConfig.hasAffirmationsKey
+            : AndroidWidgetConfig.hasAffirmationsKey,
+      ) ?? false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Shares all widget data including current affirmation, settings, and list.
+  ///
+  /// This is a comprehensive method that shares all data the widget needs
+  /// in a single call. Useful for initial setup or after significant data changes.
+  ///
+  /// Returns true if all data was successfully shared, false otherwise.
+  Future<bool> shareAllWidgetData({
+    String? affirmationText,
+    String? affirmationId,
+    required String themeMode,
+    required bool widgetRotationEnabled,
+    required double fontSizeMultiplier,
+    List<Map<String, dynamic>>? affirmationsList,
+  }) async {
+    try {
+      // Share current affirmation if provided
+      if (affirmationText != null && affirmationId != null) {
+        await updateWidget(
+          affirmationText: affirmationText,
+          affirmationId: affirmationId,
+        );
+      } else {
+        // Clear current affirmation
+        await clearWidget();
+      }
+
+      // Share settings
+      await shareSettings(
+        themeMode: themeMode,
+        widgetRotationEnabled: widgetRotationEnabled,
+        fontSizeMultiplier: fontSizeMultiplier,
+      );
+
+      // Share affirmations list if provided
+      if (affirmationsList != null) {
+        await shareAffirmationsList(affirmationsList);
+      }
+
+      return true;
+    } catch (e) {
+      // ignore: avoid_print
+      print('Warning: Failed to share all widget data: $e');
+      return false;
+    }
+  }
+
+  /// Removes all widget data from shared storage.
+  ///
+  /// This clears all data stored in:
+  /// - iOS: UserDefaults within the App Group
+  /// - Android: SharedPreferences
+  ///
+  /// Useful for reset, logout, or when widget is removed.
+  ///
+  /// Returns true if all data was successfully cleared, false otherwise.
+  Future<bool> clearAllWidgetData() async {
+    try {
+      // Clear current affirmation
+      await clearWidget();
+
+      // Clear settings
+      await HomeWidget.saveWidgetData<String?>(
+        Platform.isIOS
+            ? IosWidgetConfig.themeModeKey
+            : AndroidWidgetConfig.themeModeKey,
+        null,
+      );
+      await HomeWidget.saveWidgetData<bool?>(
+        Platform.isIOS
+            ? IosWidgetConfig.widgetRotationEnabledKey
+            : AndroidWidgetConfig.widgetRotationEnabledKey,
+        null,
+      );
+      await HomeWidget.saveWidgetData<double?>(
+        Platform.isIOS
+            ? IosWidgetConfig.fontSizeMultiplierKey
+            : AndroidWidgetConfig.fontSizeMultiplierKey,
+        null,
+      );
+
+      // Clear affirmations list
+      await HomeWidget.saveWidgetData<String?>(
+        Platform.isIOS
+            ? IosWidgetConfig.affirmationsListKey
+            : AndroidWidgetConfig.affirmationsListKey,
+        null,
+      );
+      await HomeWidget.saveWidgetData<int?>(
+        Platform.isIOS
+            ? IosWidgetConfig.affirmationsCountKey
+            : AndroidWidgetConfig.affirmationsCountKey,
+        null,
+      );
+      await HomeWidget.saveWidgetData<bool?>(
+        Platform.isIOS
+            ? IosWidgetConfig.hasAffirmationsKey
+            : AndroidWidgetConfig.hasAffirmationsKey,
+        null,
+      );
+
+      // Trigger widget update
+      return await _updateNativeWidget();
+    } catch (e) {
+      // ignore: avoid_print
+      print('Warning: Failed to clear all widget data: $e');
+      return false;
     }
   }
 
