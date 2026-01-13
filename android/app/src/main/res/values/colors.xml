@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Widget colors - Light Mode -->
+    <color name="widget_background">#FAFAFA</color> <!-- Cloud White (98% opacity) -->
+    <color name="widget_background_translucent">#D9FAFAFA</color> <!-- 85% opacity -->
+    <color name="widget_text_primary">#212122</color> <!-- Deep Night -->
+    <color name="widget_text_secondary">#80212122</color> <!-- 50% opacity -->
+    <color name="widget_accent">#758F8C</color> <!-- Soft Sage -->
+</resources>

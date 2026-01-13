@@ -5,6 +5,21 @@
 //  Main widget file for Myself 2.0 iOS home screen widgets
 //  Supports small (2x2), medium (4x2), and large (4x4) widget sizes
 //
+//  Implements:
+//  - WIDGET-003: iOS WidgetKit Extension
+//  - WIDGET-004: iOS Timeline Provider with Refresh Strategy
+//  - WIDGET-007: Widget Tap-to-Launch Functionality
+//  - WIDGET-010: Widget Theme Support with Translucent Background and Blur Effect
+//
+//  ## Theme Support (WIDGET-010)
+//  All widget sizes support adaptive theming with:
+//  - Translucent backgrounds (85% opacity) using .opacity() modifier
+//  - iOS blur effects using .ultraThinMaterial and .thinMaterial
+//  - .containerBackground() for modern iOS 17+ widget backgrounds
+//  - Automatic adaptation to light/dark mode via @Environment(\.colorScheme)
+//  - Support for user theme preference (light/dark/system) from shared data
+//  - Zen color palette: Cloud White (light), Deep Night (dark), Soft Sage (accent)
+//
 
 import WidgetKit
 import SwiftUI
@@ -228,15 +243,9 @@ struct MyselfWidgetSmallView: View {
 
     var body: some View {
         ZStack {
-            // Background with subtle gradient
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    backgroundColor,
-                    backgroundColor.opacity(0.95)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            // Translucent background with blur effect
+            backgroundColor.opacity(0.85)
+                .background(.ultraThinMaterial)
 
             // Content
             VStack(alignment: .center, spacing: 8) {
@@ -261,6 +270,16 @@ struct MyselfWidgetSmallView: View {
                 }
             }
             .padding(12)
+        }
+        .containerBackground(for: .widget) {
+            // Modern iOS 17+ widget background with adaptive material
+            if colorScheme == .dark {
+                Color(red: 0.11, green: 0.11, blue: 0.12).opacity(0.7)
+                    .background(.thinMaterial)
+            } else {
+                Color(red: 0.98, green: 0.98, blue: 0.98).opacity(0.7)
+                    .background(.thinMaterial)
+            }
         }
         .preferredColorScheme(colorScheme)
         .widgetURL(URL(string: "myself://open"))
@@ -294,15 +313,9 @@ struct MyselfWidgetMediumView: View {
 
     var body: some View {
         ZStack {
-            // Background with subtle gradient
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    backgroundColor,
-                    backgroundColor.opacity(0.95)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            // Translucent background with blur effect
+            backgroundColor.opacity(0.85)
+                .background(.ultraThinMaterial)
 
             // Content
             HStack(spacing: 16) {
@@ -333,6 +346,16 @@ struct MyselfWidgetMediumView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(16)
+        }
+        .containerBackground(for: .widget) {
+            // Modern iOS 17+ widget background with adaptive material
+            if colorScheme == .dark {
+                Color(red: 0.11, green: 0.11, blue: 0.12).opacity(0.7)
+                    .background(.thinMaterial)
+            } else {
+                Color(red: 0.98, green: 0.98, blue: 0.98).opacity(0.7)
+                    .background(.thinMaterial)
+            }
         }
         .preferredColorScheme(colorScheme)
         .widgetURL(URL(string: "myself://open"))
@@ -366,15 +389,9 @@ struct MyselfWidgetLargeView: View {
 
     var body: some View {
         ZStack {
-            // Background with subtle gradient
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    backgroundColor,
-                    backgroundColor.opacity(0.95)
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            // Translucent background with blur effect
+            backgroundColor.opacity(0.85)
+                .background(.ultraThinMaterial)
 
             // Content
             VStack(spacing: 20) {
@@ -415,6 +432,16 @@ struct MyselfWidgetLargeView: View {
                     .foregroundColor(textColor.opacity(0.5))
             }
             .padding(24)
+        }
+        .containerBackground(for: .widget) {
+            // Modern iOS 17+ widget background with adaptive material
+            if colorScheme == .dark {
+                Color(red: 0.11, green: 0.11, blue: 0.12).opacity(0.7)
+                    .background(.thinMaterial)
+            } else {
+                Color(red: 0.98, green: 0.98, blue: 0.98).opacity(0.7)
+                    .background(.thinMaterial)
+            }
         }
         .preferredColorScheme(colorScheme)
         .widgetURL(URL(string: "myself://open"))

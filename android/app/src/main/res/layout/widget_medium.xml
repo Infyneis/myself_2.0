@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/widget_placeholder_text"
                 android:textSize="16sp"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/widget_text_primary"
                 android:maxLines="4"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif-medium" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/widget_tap_to_start"
                 android:textSize="13sp"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/widget_text_secondary"
                 android:visibility="gone"
                 android:layout_marginTop="4dp" />
         </LinearLayout>

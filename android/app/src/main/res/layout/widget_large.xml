@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/widget_placeholder_text"
             android:textSize="20sp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/widget_text_primary"
             android:gravity="center"
             android:maxLines="8"
             android:ellipsize="end"
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="@string/widget_empty_subtitle"
             android:textSize="14sp"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/widget_text_secondary"
             android:gravity="center"
             android:visibility="gone"
             android:layout_marginTop="12dp"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textSize="11sp"
-            android:textColor="?android:attr/textColorTertiary"
+            android:textColor="@color/widget_text_secondary"
             android:alpha="0.5" />
     </LinearLayout>
 </FrameLayout>

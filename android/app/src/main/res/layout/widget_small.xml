@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/widget_placeholder_text"
             android:textSize="14sp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="@color/widget_text_primary"
             android:gravity="center"
             android:maxLines="5"
             android:ellipsize="end"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:text="@string/widget_tap_to_create"
             android:textSize="11sp"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/widget_text_secondary"
             android:visibility="gone"
             android:layout_marginTop="4dp"
             android:textAlignment="center" />

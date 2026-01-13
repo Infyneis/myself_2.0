@@ -20,13 +20,25 @@ import androidx.core.content.ContextCompat
  * This provider implements:
  * - WIDGET-005: Android Widget Provider
  * - WIDGET-007: Widget Tap-to-Launch Functionality
+ * - WIDGET-010: Widget Theme Support with Translucent Background
  *
  * ## Features
  * - Small (2x2), medium (4x2), and large (4x4) widget sizes
  * - Reads affirmation data from SharedPreferences
  * - Handles empty state when no affirmations exist
  * - Tap action to launch main application (WIDGET-007)
- * - Adapts to system light/dark theme
+ * - Adapts to system light/dark theme with translucent background (WIDGET-010)
+ *
+ * ## Theme Support Implementation (WIDGET-010)
+ * Android widgets automatically adapt to system light/dark mode using:
+ * - Resource qualifiers: values/ for light mode, values-night/ for dark mode
+ * - Color resources: @color/widget_text_primary, @color/widget_background_translucent
+ * - Drawable resources: drawable/ for light mode, drawable-night/ for dark mode
+ * - Translucent backgrounds (85% opacity) defined in widget_background.xml
+ * - Subtle stroke borders that adapt to theme (dark in light mode, light in dark mode)
+ *
+ * The system automatically selects the appropriate resources based on the
+ * current theme configuration, providing seamless dark mode support.
  *
  * ## Tap-to-Launch Implementation (WIDGET-007)
  * Each widget registers a PendingIntent that launches MainActivity when tapped:
@@ -43,6 +55,7 @@ import androidx.core.content.ContextCompat
  * - Updates when app writes new data via home_widget
  * - Updates on device unlock (requires BroadcastReceiver - see WIDGET-006)
  * - Updates when widget is added or resized
+ * - Automatically adapts appearance when system theme changes
  */
 class MyselfAppWidgetProvider : AppWidgetProvider() {
 

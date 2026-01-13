@@ -388,7 +388,7 @@
       "description": "Adapt widget appearance to system light/dark mode with translucent background and blur effect",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
