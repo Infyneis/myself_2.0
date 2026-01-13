@@ -17,3 +17,4 @@ export 'theme/text_styles.dart';
 
 // Utils
 export 'utils/random_selector.dart';
+export 'utils/responsive_layout.dart';

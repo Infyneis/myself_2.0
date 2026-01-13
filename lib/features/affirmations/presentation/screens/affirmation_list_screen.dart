@@ -11,6 +11,7 @@ import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../core/utils/responsive_layout.dart';
 import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/models/affirmation.dart';
 import '../helpers/delete_affirmation_helper.dart';
@@ -168,12 +169,17 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
     AffirmationProvider provider,
   ) {
     final affirmations = provider.affirmations;
+    final padding = ResponsiveLayout.getAdaptivePadding(context);
 
     return RefreshIndicator(
       onRefresh: () => provider.loadAffirmations(),
-      child: ReorderableListView.builder(
-        padding: const EdgeInsets.only(
-          top: AppDimensions.spacingM,
+      child: ResponsiveLayout.constrainContentWidth(
+        context: context,
+        child: ReorderableListView.builder(
+        padding: EdgeInsets.only(
+          top: padding.top,
+          left: padding.left,
+          right: padding.right,
           bottom: AppDimensions.spacingXxl + AppDimensions.minTouchTarget,
         ),
         itemCount: affirmations.length,
@@ -207,6 +213,7 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
             onDelete: () => _deleteAffirmation(context, affirmation),
           );
         },
+      ),
       ),
     );
   }
@@ -284,8 +291,11 @@ class _ReorderableAffirmationCard extends StatelessWidget {
           CustomSemanticsAction(label: l10n.deleteAffirmation): () => onDelete!(),
       },
       child: Card(
-        margin: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.spacingM,
+        margin: EdgeInsets.symmetric(
+          horizontal: ResponsiveLayout.getAdaptiveSpacing(
+            context,
+            AppDimensions.spacingM,
+          ),
           vertical: AppDimensions.spacingS,
         ),
         child: ExcludeSemantics(

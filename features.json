@@ -821,7 +821,7 @@
       "description": "Ensure responsive layout works on screens from 4 to 13 inches",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-008"
       ]

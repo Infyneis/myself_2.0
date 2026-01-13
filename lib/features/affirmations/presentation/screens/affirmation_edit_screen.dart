@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../core/utils/responsive_layout.dart';
 import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/models/affirmation.dart';
 import '../providers/affirmation_provider.dart';
@@ -127,8 +128,11 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppDimensions.spacingM),
-            child: Column(
+            padding: ResponsiveLayout.getAdaptivePadding(context),
+            child: ResponsiveLayout.constrainContentWidth(
+              context: context,
+              maxWidth: 700,
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Help text for multi-line input
@@ -200,6 +204,7 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
                   ),
                 ],
               ],
+            ),
             ),
           ),
         ),

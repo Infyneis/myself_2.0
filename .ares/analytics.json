@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T21:33:43.387Z",
+  "lastUpdated": "2026-01-13T21:39:24.245Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 74,
-    "totalSessions": 109,
-    "totalTimeMs": 24404776,
-    "totalTimeFormatted": "6h 46m",
-    "averageFeatureTimeMs": 321789,
-    "averageFeatureTimeFormatted": "5m 21s",
-    "averageSessionTimeMs": 223897,
-    "averageSessionTimeFormatted": "3m 43s"
+    "completedFeatures": 75,
+    "totalSessions": 110,
+    "totalTimeMs": 24743628,
+    "totalTimeFormatted": "6h 52m",
+    "averageFeatureTimeMs": 322016,
+    "averageFeatureTimeFormatted": "5m 22s",
+    "averageSessionTimeMs": 224942,
+    "averageSessionTimeFormatted": "3m 44s"
   },
   "features": [
     {
@@ -1191,6 +1191,22 @@
         "ea3c5727f52fa53c6a2056c654975f58d9e3fc35"
       ],
       "durationFormatted": "3m 25s"
+    },
+    {
+      "featureId": "COMPAT-002",
+      "featureName": "COMPAT-002",
+      "description": "Ensure app runs correctly on Android 8.0 (API 26) and above",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T21:33:45.391Z",
+      "completedAt": "2026-01-13T21:39:24.243Z",
+      "durationMs": 338852,
+      "sessionId": "session-mkd3zs4u-hi9gya",
+      "sessionsCount": 1,
+      "commits": [
+        "3c9cb15c9aec296463fd7cc6821377bf20e40e53"
+      ],
+      "durationFormatted": "5m 38s"
     }
   ],
   "sessions": [
@@ -2970,14 +2986,31 @@
         "ea3c5727f52fa53c6a2056c654975f58d9e3fc35"
       ],
       "durationFormatted": "3m 25s"
+    },
+    {
+      "sessionId": "session-mkd3zs4u-hi9gya",
+      "startedAt": "2026-01-13T21:33:45.391Z",
+      "endedAt": "2026-01-13T21:39:24.243Z",
+      "durationMs": 338852,
+      "featuresWorkedOn": [
+        "COMPAT-002"
+      ],
+      "featuresCompleted": [
+        "COMPAT-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "3c9cb15c9aec296463fd7cc6821377bf20e40e53"
+      ],
+      "durationFormatted": "5m 38s"
     }
   ],
   "byCategory": {
     "infrastructure": {
       "total": 0,
-      "completed": 5,
-      "totalTimeMs": 3028195,
-      "averageTimeMs": 605639
+      "completed": 6,
+      "totalTimeMs": 3367047,
+      "averageTimeMs": 561175
     },
     "functional": {
       "total": 0,
@@ -3019,9 +3052,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 53,
-      "totalTimeMs": 15363489,
-      "averageTimeMs": 289877
+      "completed": 54,
+      "totalTimeMs": 15702341,
+      "averageTimeMs": 290784
     },
     "should-have": {
       "total": 0,

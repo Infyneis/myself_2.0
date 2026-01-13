@@ -9,6 +9,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../core/utils/responsive_layout.dart';
 import '../../../../generated/l10n/app_localizations.dart';
 import '../../../settings/presentation/providers/settings_provider.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
@@ -242,15 +243,19 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ExcludeSemantics(
               child: Center(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(AppDimensions.spacingL),
+                  padding: ResponsiveLayout.getAdaptivePadding(context),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                   // Main affirmation card with zen animation
-                  Card(
+                  // Constrain width on tablets for better readability
+                  ResponsiveLayout.constrainContentWidth(
+                    context: context,
+                    maxWidth: 600,
+                    child: Card(
                     elevation: AppDimensions.elevationSoft,
                     child: Padding(
-                      padding: const EdgeInsets.all(AppDimensions.spacingXl),
+                      padding: ResponsiveLayout.getAdaptivePadding(context),
                       child: Column(
                         children: [
                           // Affirmation text with fade-in animation
@@ -261,13 +266,19 @@ class _HomeScreenState extends State<HomeScreen> {
                             breathingEnabled,
                           ),
 
-                          const SizedBox(height: AppDimensions.spacingL),
+                          SizedBox(
+                            height: ResponsiveLayout.getAdaptiveSpacing(
+                              context,
+                              AppDimensions.spacingL,
+                            ),
+                          ),
 
                           // Refresh button to cycle through affirmations
                           _buildRefreshButton(context, provider),
                         ],
                       ),
                     ),
+                  ),
                   ),
 
                   const SizedBox(height: AppDimensions.spacingXl),

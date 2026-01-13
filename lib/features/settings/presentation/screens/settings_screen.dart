@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../../core/utils/responsive_layout.dart';
 import '../../../../generated/l10n/app_localizations.dart';
 import '../../data/settings_model.dart' as settings_model;
 import '../providers/settings_provider.dart';
@@ -41,8 +42,10 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: Consumer<SettingsProvider>(
         builder: (context, settingsProvider, child) {
-          return ListView(
-            padding: const EdgeInsets.all(AppDimensions.spacingM),
+          return ResponsiveLayout.constrainContentWidth(
+            context: context,
+            child: ListView(
+            padding: ResponsiveLayout.getAdaptivePadding(context),
             children: [
               // Theme Section
               _buildSectionHeader(context, l10n.appearance),
@@ -65,6 +68,7 @@ class SettingsScreen extends StatelessWidget {
               const SizedBox(height: AppDimensions.spacingS),
               _buildLanguageCard(context, settingsProvider),
             ],
+          ),
           );
         },
       ),
