@@ -77,13 +77,20 @@ class _MyselfAppState extends State<MyselfApp> {
           darkTheme: AppTheme.darkTheme,
           themeMode: _convertThemeMode(settingsProvider.themeMode),
 
-          // Font size accessibility support
+          // Font size accessibility support (A11Y-005)
+          // Respects both system font scaling and app's custom multiplier
           builder: (context, child) {
+            // Get the system's text scale factor (for accessibility settings)
+            final systemTextScaleFactor = MediaQuery.textScalerOf(context).scale(1.0);
+
+            // Combine system font scaling with app's custom multiplier
+            // This ensures users with visual impairments who set larger system fonts
+            // get the benefit of both settings
+            final combinedScaleFactor = systemTextScaleFactor * settingsProvider.fontSizeMultiplier;
+
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                textScaler: TextScaler.linear(
-                  settingsProvider.fontSizeMultiplier,
-                ),
+                textScaler: TextScaler.linear(combinedScaleFactor),
               ),
               child: child!,
             );

@@ -636,7 +636,7 @@
       "description": "Support system font scaling for users with visual impairments",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-016"
       ]
