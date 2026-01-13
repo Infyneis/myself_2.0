@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:06:03.198Z",
+  "lastUpdated": "2026-01-13T20:07:14.039Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 62,
-    "totalSessions": 97,
-    "totalTimeMs": 19168685,
-    "totalTimeFormatted": "5h 19m",
-    "averageFeatureTimeMs": 299617,
-    "averageFeatureTimeFormatted": "4m 59s",
-    "averageSessionTimeMs": 197615,
-    "averageSessionTimeFormatted": "3m 17s"
+    "completedFeatures": 63,
+    "totalSessions": 98,
+    "totalTimeMs": 19237521,
+    "totalTimeFormatted": "5h 20m",
+    "averageFeatureTimeMs": 295954,
+    "averageFeatureTimeFormatted": "4m 55s",
+    "averageSessionTimeMs": 196301,
+    "averageSessionTimeFormatted": "3m 16s"
   },
   "features": [
     {
@@ -1001,6 +1001,22 @@
         "8a93470a03ce7bbdd3991390255077ac0e084303"
       ],
       "durationFormatted": "1m 5s"
+    },
+    {
+      "featureId": "TEST-002",
+      "featureName": "TEST-002",
+      "description": "Write unit tests for random affirmation selection algorithm",
+      "category": "testing",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T20:06:05.203Z",
+      "completedAt": "2026-01-13T20:07:14.039Z",
+      "durationMs": 68836,
+      "sessionId": "session-mkd0v1ch-rhv2c6",
+      "sessionsCount": 1,
+      "commits": [
+        "327c41074636e933639cc7b7b32f0ab7f13c1e70"
+      ],
+      "durationFormatted": "1m 8s"
     }
   ],
   "sessions": [
@@ -2578,6 +2594,23 @@
         "8a93470a03ce7bbdd3991390255077ac0e084303"
       ],
       "durationFormatted": "1m 5s"
+    },
+    {
+      "sessionId": "session-mkd0v1ch-rhv2c6",
+      "startedAt": "2026-01-13T20:06:05.203Z",
+      "endedAt": "2026-01-13T20:07:14.039Z",
+      "durationMs": 68836,
+      "featuresWorkedOn": [
+        "TEST-002"
+      ],
+      "featuresCompleted": [
+        "TEST-002"
+      ],
+      "status": "completed",
+      "commits": [
+        "327c41074636e933639cc7b7b32f0ab7f13c1e70"
+      ],
+      "durationFormatted": "1m 8s"
     }
   ],
   "byCategory": {
@@ -2613,17 +2646,17 @@
     },
     "testing": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 65537,
-      "averageTimeMs": 65537
+      "completed": 2,
+      "totalTimeMs": 134373,
+      "averageTimeMs": 67187
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 46,
-      "totalTimeMs": 13622671,
-      "averageTimeMs": 296145
+      "completed": 47,
+      "totalTimeMs": 13691507,
+      "averageTimeMs": 291309
     },
     "should-have": {
       "total": 0,

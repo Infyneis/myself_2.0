@@ -709,7 +709,7 @@
       "description": "Write unit tests for data persistence layer with Hive",
       "category": "testing",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
