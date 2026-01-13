@@ -637,6 +637,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back'**
   String get backButton;
+
+  /// iOS widget setup step 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Long press on your home screen'**
+  String get widgetSetupStepIos1Title;
+
+  /// iOS widget setup step 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Press and hold any empty area on your home screen'**
+  String get widgetSetupStepIos1Desc;
+
+  /// iOS widget setup step 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the + button'**
+  String get widgetSetupStepIos2Title;
+
+  /// iOS widget setup step 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Look for the plus icon in the top-left corner'**
+  String get widgetSetupStepIos2Desc;
+
+  /// iOS widget setup step 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Search for \"Myself 2.0\"'**
+  String get widgetSetupStepIos3Title;
+
+  /// iOS widget setup step 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Find our app in the widget gallery'**
+  String get widgetSetupStepIos3Desc;
+
+  /// iOS widget setup step 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your widget size'**
+  String get widgetSetupStepIos4Title;
+
+  /// iOS widget setup step 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'Select small, medium, or large'**
+  String get widgetSetupStepIos4Desc;
+
+  /// iOS widget setup step 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'Add Widget'**
+  String get widgetSetupStepIos5Title;
+
+  /// iOS widget setup step 5 description
+  ///
+  /// In en, this message translates to:
+  /// **'Tap \"Add Widget\" and you\'re done!'**
+  String get widgetSetupStepIos5Desc;
+
+  /// Android widget setup step 1 title
+  ///
+  /// In en, this message translates to:
+  /// **'Long press on your home screen'**
+  String get widgetSetupStepAndroid1Title;
+
+  /// Android widget setup step 1 description
+  ///
+  /// In en, this message translates to:
+  /// **'Press and hold any empty area on your home screen'**
+  String get widgetSetupStepAndroid1Desc;
+
+  /// Android widget setup step 2 title
+  ///
+  /// In en, this message translates to:
+  /// **'Tap \"Widgets\"'**
+  String get widgetSetupStepAndroid2Title;
+
+  /// Android widget setup step 2 description
+  ///
+  /// In en, this message translates to:
+  /// **'Select the widgets option from the menu'**
+  String get widgetSetupStepAndroid2Desc;
+
+  /// Android widget setup step 3 title
+  ///
+  /// In en, this message translates to:
+  /// **'Find \"Myself 2.0\"'**
+  String get widgetSetupStepAndroid3Title;
+
+  /// Android widget setup step 3 description
+  ///
+  /// In en, this message translates to:
+  /// **'Scroll or search for our app'**
+  String get widgetSetupStepAndroid3Desc;
+
+  /// Android widget setup step 4 title
+  ///
+  /// In en, this message translates to:
+  /// **'Drag the widget'**
+  String get widgetSetupStepAndroid4Title;
+
+  /// Android widget setup step 4 description
+  ///
+  /// In en, this message translates to:
+  /// **'Hold and drag the widget to your home screen'**
+  String get widgetSetupStepAndroid4Desc;
+
+  /// Android widget setup step 5 title
+  ///
+  /// In en, this message translates to:
+  /// **'Release to place'**
+  String get widgetSetupStepAndroid5Title;
+
+  /// Android widget setup step 5 description
+  ///
+  /// In en, this message translates to:
+  /// **'Drop it where you want and you\'re done!'**
+  String get widgetSetupStepAndroid5Desc;
 }
 
 class _AppLocalizationsDelegate

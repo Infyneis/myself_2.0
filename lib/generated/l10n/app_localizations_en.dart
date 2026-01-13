@@ -291,4 +291,70 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backButton => 'Back';
+
+  @override
+  String get widgetSetupStepIos1Title => 'Long press on your home screen';
+
+  @override
+  String get widgetSetupStepIos1Desc =>
+      'Press and hold any empty area on your home screen';
+
+  @override
+  String get widgetSetupStepIos2Title => 'Tap the + button';
+
+  @override
+  String get widgetSetupStepIos2Desc =>
+      'Look for the plus icon in the top-left corner';
+
+  @override
+  String get widgetSetupStepIos3Title => 'Search for \"Myself 2.0\"';
+
+  @override
+  String get widgetSetupStepIos3Desc => 'Find our app in the widget gallery';
+
+  @override
+  String get widgetSetupStepIos4Title => 'Choose your widget size';
+
+  @override
+  String get widgetSetupStepIos4Desc => 'Select small, medium, or large';
+
+  @override
+  String get widgetSetupStepIos5Title => 'Add Widget';
+
+  @override
+  String get widgetSetupStepIos5Desc => 'Tap \"Add Widget\" and you\'re done!';
+
+  @override
+  String get widgetSetupStepAndroid1Title => 'Long press on your home screen';
+
+  @override
+  String get widgetSetupStepAndroid1Desc =>
+      'Press and hold any empty area on your home screen';
+
+  @override
+  String get widgetSetupStepAndroid2Title => 'Tap \"Widgets\"';
+
+  @override
+  String get widgetSetupStepAndroid2Desc =>
+      'Select the widgets option from the menu';
+
+  @override
+  String get widgetSetupStepAndroid3Title => 'Find \"Myself 2.0\"';
+
+  @override
+  String get widgetSetupStepAndroid3Desc => 'Scroll or search for our app';
+
+  @override
+  String get widgetSetupStepAndroid4Title => 'Drag the widget';
+
+  @override
+  String get widgetSetupStepAndroid4Desc =>
+      'Hold and drag the widget to your home screen';
+
+  @override
+  String get widgetSetupStepAndroid5Title => 'Release to place';
+
+  @override
+  String get widgetSetupStepAndroid5Desc =>
+      'Drop it where you want and you\'re done!';
 }

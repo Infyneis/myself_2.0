@@ -299,4 +299,75 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get backButton => 'Retour';
+
+  @override
+  String get widgetSetupStepIos1Title =>
+      'Appuyez longuement sur votre écran d\'accueil';
+
+  @override
+  String get widgetSetupStepIos1Desc =>
+      'Appuyez et maintenez n\'importe quelle zone vide sur votre écran d\'accueil';
+
+  @override
+  String get widgetSetupStepIos2Title => 'Appuyez sur le bouton +';
+
+  @override
+  String get widgetSetupStepIos2Desc =>
+      'Recherchez l\'icône plus dans le coin supérieur gauche';
+
+  @override
+  String get widgetSetupStepIos3Title => 'Recherchez \"Moi-même 2.0\"';
+
+  @override
+  String get widgetSetupStepIos3Desc =>
+      'Trouvez notre application dans la galerie de widgets';
+
+  @override
+  String get widgetSetupStepIos4Title => 'Choisissez la taille de votre widget';
+
+  @override
+  String get widgetSetupStepIos4Desc => 'Sélectionnez petit, moyen ou grand';
+
+  @override
+  String get widgetSetupStepIos5Title => 'Ajouter Widget';
+
+  @override
+  String get widgetSetupStepIos5Desc =>
+      'Appuyez sur \"Ajouter Widget\" et c\'est fait !';
+
+  @override
+  String get widgetSetupStepAndroid1Title =>
+      'Appuyez longuement sur votre écran d\'accueil';
+
+  @override
+  String get widgetSetupStepAndroid1Desc =>
+      'Appuyez et maintenez n\'importe quelle zone vide sur votre écran d\'accueil';
+
+  @override
+  String get widgetSetupStepAndroid2Title => 'Appuyez sur \"Widgets\"';
+
+  @override
+  String get widgetSetupStepAndroid2Desc =>
+      'Sélectionnez l\'option widgets dans le menu';
+
+  @override
+  String get widgetSetupStepAndroid3Title => 'Trouvez \"Moi-même 2.0\"';
+
+  @override
+  String get widgetSetupStepAndroid3Desc =>
+      'Faites défiler ou recherchez notre application';
+
+  @override
+  String get widgetSetupStepAndroid4Title => 'Faites glisser le widget';
+
+  @override
+  String get widgetSetupStepAndroid4Desc =>
+      'Maintenez et faites glisser le widget vers votre écran d\'accueil';
+
+  @override
+  String get widgetSetupStepAndroid5Title => 'Relâchez pour placer';
+
+  @override
+  String get widgetSetupStepAndroid5Desc =>
+      'Déposez-le où vous voulez et c\'est fait !';
 }

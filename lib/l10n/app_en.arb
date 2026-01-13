@@ -382,5 +382,86 @@
   "backButton": "Back",
   "@backButton": {
     "description": "Accessibility label for back button"
+  },
+
+  "widgetSetupStepIos1Title": "Long press on your home screen",
+  "@widgetSetupStepIos1Title": {
+    "description": "iOS widget setup step 1 title"
+  },
+  "widgetSetupStepIos1Desc": "Press and hold any empty area on your home screen",
+  "@widgetSetupStepIos1Desc": {
+    "description": "iOS widget setup step 1 description"
+  },
+  "widgetSetupStepIos2Title": "Tap the + button",
+  "@widgetSetupStepIos2Title": {
+    "description": "iOS widget setup step 2 title"
+  },
+  "widgetSetupStepIos2Desc": "Look for the plus icon in the top-left corner",
+  "@widgetSetupStepIos2Desc": {
+    "description": "iOS widget setup step 2 description"
+  },
+  "widgetSetupStepIos3Title": "Search for \"Myself 2.0\"",
+  "@widgetSetupStepIos3Title": {
+    "description": "iOS widget setup step 3 title"
+  },
+  "widgetSetupStepIos3Desc": "Find our app in the widget gallery",
+  "@widgetSetupStepIos3Desc": {
+    "description": "iOS widget setup step 3 description"
+  },
+  "widgetSetupStepIos4Title": "Choose your widget size",
+  "@widgetSetupStepIos4Title": {
+    "description": "iOS widget setup step 4 title"
+  },
+  "widgetSetupStepIos4Desc": "Select small, medium, or large",
+  "@widgetSetupStepIos4Desc": {
+    "description": "iOS widget setup step 4 description"
+  },
+  "widgetSetupStepIos5Title": "Add Widget",
+  "@widgetSetupStepIos5Title": {
+    "description": "iOS widget setup step 5 title"
+  },
+  "widgetSetupStepIos5Desc": "Tap \"Add Widget\" and you're done!",
+  "@widgetSetupStepIos5Desc": {
+    "description": "iOS widget setup step 5 description"
+  },
+  "widgetSetupStepAndroid1Title": "Long press on your home screen",
+  "@widgetSetupStepAndroid1Title": {
+    "description": "Android widget setup step 1 title"
+  },
+  "widgetSetupStepAndroid1Desc": "Press and hold any empty area on your home screen",
+  "@widgetSetupStepAndroid1Desc": {
+    "description": "Android widget setup step 1 description"
+  },
+  "widgetSetupStepAndroid2Title": "Tap \"Widgets\"",
+  "@widgetSetupStepAndroid2Title": {
+    "description": "Android widget setup step 2 title"
+  },
+  "widgetSetupStepAndroid2Desc": "Select the widgets option from the menu",
+  "@widgetSetupStepAndroid2Desc": {
+    "description": "Android widget setup step 2 description"
+  },
+  "widgetSetupStepAndroid3Title": "Find \"Myself 2.0\"",
+  "@widgetSetupStepAndroid3Title": {
+    "description": "Android widget setup step 3 title"
+  },
+  "widgetSetupStepAndroid3Desc": "Scroll or search for our app",
+  "@widgetSetupStepAndroid3Desc": {
+    "description": "Android widget setup step 3 description"
+  },
+  "widgetSetupStepAndroid4Title": "Drag the widget",
+  "@widgetSetupStepAndroid4Title": {
+    "description": "Android widget setup step 4 title"
+  },
+  "widgetSetupStepAndroid4Desc": "Hold and drag the widget to your home screen",
+  "@widgetSetupStepAndroid4Desc": {
+    "description": "Android widget setup step 4 description"
+  },
+  "widgetSetupStepAndroid5Title": "Release to place",
+  "@widgetSetupStepAndroid5Title": {
+    "description": "Android widget setup step 5 title"
+  },
+  "widgetSetupStepAndroid5Desc": "Drop it where you want and you're done!",
+  "@widgetSetupStepAndroid5Desc": {
+    "description": "Android widget setup step 5 description"
   }
 }

@@ -112,8 +112,8 @@ class WidgetSetupInstructions extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: isIOS
-                      ? _buildIOSInstructions(theme)
-                      : _buildAndroidInstructions(theme),
+                      ? _buildIOSInstructions(context, theme)
+                      : _buildAndroidInstructions(context, theme),
                 ),
               ),
 
@@ -165,7 +165,9 @@ class WidgetSetupInstructions extends StatelessWidget {
   }
 
   /// Builds iOS-specific widget setup instructions.
-  Widget _buildIOSInstructions(ThemeData theme) {
+  Widget _buildIOSInstructions(BuildContext context, ThemeData theme) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -173,8 +175,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 1,
           icon: Icons.touch_app_rounded,
-          title: 'Long press on your home screen',
-          description: 'Press and hold any empty area on your home screen',
+          title: l10n.widgetSetupStepIos1Title,
+          description: l10n.widgetSetupStepIos1Desc,
           delay: 400.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -182,8 +184,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 2,
           icon: Icons.add_circle_outline_rounded,
-          title: 'Tap the + button',
-          description: 'Look for the plus icon in the top-left corner',
+          title: l10n.widgetSetupStepIos2Title,
+          description: l10n.widgetSetupStepIos2Desc,
           delay: 500.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -191,8 +193,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 3,
           icon: Icons.search_rounded,
-          title: 'Search for "Myself 2.0"',
-          description: 'Find our app in the widget gallery',
+          title: l10n.widgetSetupStepIos3Title,
+          description: l10n.widgetSetupStepIos3Desc,
           delay: 600.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -200,8 +202,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 4,
           icon: Icons.widgets_rounded,
-          title: 'Choose your widget size',
-          description: 'Select small, medium, or large',
+          title: l10n.widgetSetupStepIos4Title,
+          description: l10n.widgetSetupStepIos4Desc,
           delay: 700.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -209,8 +211,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 5,
           icon: Icons.check_circle_outline_rounded,
-          title: 'Add Widget',
-          description: 'Tap "Add Widget" and you\'re done!',
+          title: l10n.widgetSetupStepIos5Title,
+          description: l10n.widgetSetupStepIos5Desc,
           delay: 800.ms,
         ),
       ],
@@ -218,7 +220,9 @@ class WidgetSetupInstructions extends StatelessWidget {
   }
 
   /// Builds Android-specific widget setup instructions.
-  Widget _buildAndroidInstructions(ThemeData theme) {
+  Widget _buildAndroidInstructions(BuildContext context, ThemeData theme) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -226,8 +230,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 1,
           icon: Icons.touch_app_rounded,
-          title: 'Long press on your home screen',
-          description: 'Press and hold any empty area on your home screen',
+          title: l10n.widgetSetupStepAndroid1Title,
+          description: l10n.widgetSetupStepAndroid1Desc,
           delay: 400.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -235,8 +239,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 2,
           icon: Icons.widgets_rounded,
-          title: 'Tap "Widgets"',
-          description: 'Select the widgets option from the menu',
+          title: l10n.widgetSetupStepAndroid2Title,
+          description: l10n.widgetSetupStepAndroid2Desc,
           delay: 500.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -244,8 +248,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 3,
           icon: Icons.search_rounded,
-          title: 'Find "Myself 2.0"',
-          description: 'Scroll or search for our app',
+          title: l10n.widgetSetupStepAndroid3Title,
+          description: l10n.widgetSetupStepAndroid3Desc,
           delay: 600.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -253,8 +257,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 4,
           icon: Icons.drag_indicator_rounded,
-          title: 'Drag the widget',
-          description: 'Hold and drag the widget to your home screen',
+          title: l10n.widgetSetupStepAndroid4Title,
+          description: l10n.widgetSetupStepAndroid4Desc,
           delay: 700.ms,
         ),
         const SizedBox(height: AppDimensions.spacingL),
@@ -262,8 +266,8 @@ class WidgetSetupInstructions extends StatelessWidget {
           theme: theme,
           stepNumber: 5,
           icon: Icons.check_circle_outline_rounded,
-          title: 'Release to place',
-          description: 'Drop it where you want and you\'re done!',
+          title: l10n.widgetSetupStepAndroid5Title,
+          description: l10n.widgetSetupStepAndroid5Desc,
           delay: 800.ms,
         ),
       ],

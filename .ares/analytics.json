@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:53:27.773Z",
+  "lastUpdated": "2026-01-13T20:59:14.223Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 71,
-    "totalSessions": 106,
-    "totalTimeMs": 21995201,
-    "totalTimeFormatted": "6h 6m",
-    "averageFeatureTimeMs": 301448,
-    "averageFeatureTimeFormatted": "5m 1s",
-    "averageSessionTimeMs": 207502,
-    "averageSessionTimeFormatted": "3m 27s"
+    "completedFeatures": 72,
+    "totalSessions": 107,
+    "totalTimeMs": 22339634,
+    "totalTimeFormatted": "6h 12m",
+    "averageFeatureTimeMs": 302045,
+    "averageFeatureTimeFormatted": "5m 2s",
+    "averageSessionTimeMs": 208782,
+    "averageSessionTimeFormatted": "3m 28s"
   },
   "features": [
     {
@@ -1143,6 +1143,22 @@
         "d1bf9a4f5b63ffe49033cd382ab6c82be190e9e3"
       ],
       "durationFormatted": "2m 59s"
+    },
+    {
+      "featureId": "DOC-001",
+      "featureName": "DOC-001",
+      "description": "Add dartdoc comments to all public APIs, classes, and methods",
+      "category": "documentation",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T20:53:29.783Z",
+      "completedAt": "2026-01-13T20:59:14.216Z",
+      "durationMs": 344433,
+      "sessionId": "session-mkd2k08f-mik9zb",
+      "sessionsCount": 1,
+      "commits": [
+        "5f3f7fb0438b1afa2c36489028a25e9204c72752"
+      ],
+      "durationFormatted": "5m 44s"
     }
   ],
   "sessions": [
@@ -2871,6 +2887,23 @@
         "d1bf9a4f5b63ffe49033cd382ab6c82be190e9e3"
       ],
       "durationFormatted": "2m 59s"
+    },
+    {
+      "sessionId": "session-mkd2k08f-mik9zb",
+      "startedAt": "2026-01-13T20:53:29.783Z",
+      "endedAt": "2026-01-13T20:59:14.216Z",
+      "durationMs": 344433,
+      "featuresWorkedOn": [
+        "DOC-001"
+      ],
+      "featuresCompleted": [
+        "DOC-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "5f3f7fb0438b1afa2c36489028a25e9204c72752"
+      ],
+      "durationFormatted": "5m 44s"
     }
   ],
   "byCategory": {
@@ -2909,6 +2942,12 @@
       "completed": 10,
       "totalTimeMs": 2892053,
       "averageTimeMs": 289205
+    },
+    "documentation": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 344433,
+      "averageTimeMs": 344433
     }
   },
   "byPriority": {
@@ -2920,9 +2959,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 15,
-      "totalTimeMs": 4453865,
-      "averageTimeMs": 296924
+      "completed": 16,
+      "totalTimeMs": 4798298,
+      "averageTimeMs": 299894
     },
     "could-have": {
       "total": 0,
