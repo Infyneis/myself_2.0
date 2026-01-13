@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import '../../data/models/affirmation.dart';
 import '../../data/repositories/affirmation_repository.dart';
 import '../../domain/usecases/create_affirmation.dart';
+import '../../domain/usecases/edit_affirmation.dart';
 import '../../domain/usecases/get_random_affirmation.dart';
 
 /// Provider for managing affirmation state.
@@ -25,14 +26,18 @@ class AffirmationProvider extends ChangeNotifier {
     required AffirmationRepository repository,
     GetRandomAffirmation? getRandomAffirmationUseCase,
     CreateAffirmationUseCase? createAffirmationUseCase,
+    EditAffirmationUseCase? editAffirmationUseCase,
   })  : _repository = repository,
         _getRandomAffirmation = getRandomAffirmationUseCase,
         _createAffirmationUseCase = createAffirmationUseCase ??
-            CreateAffirmationUseCase(repository: repository);
+            CreateAffirmationUseCase(repository: repository),
+        _editAffirmationUseCase = editAffirmationUseCase ??
+            EditAffirmationUseCase(repository: repository);
 
   final AffirmationRepository _repository;
   final GetRandomAffirmation? _getRandomAffirmation;
   final CreateAffirmationUseCase _createAffirmationUseCase;
+  final EditAffirmationUseCase _editAffirmationUseCase;
 
   List<Affirmation> _affirmations = [];
   Affirmation? _currentAffirmation;
@@ -167,6 +172,75 @@ class AffirmationProvider extends ChangeNotifier {
       _error = 'Failed to update affirmation: $e';
     } finally {
       _setLoading(false);
+    }
+  }
+
+  /// Edits an existing affirmation with new text.
+  ///
+  /// This method:
+  /// - Validates the text (non-empty, max 280 characters)
+  /// - Verifies the affirmation exists
+  /// - Updates the text while preserving other metadata (id, createdAt, displayCount)
+  /// - Automatically updates the updatedAt timestamp
+  ///
+  /// Returns `true` if edit was successful, `false` otherwise.
+  /// Check [error] property for failure details.
+  ///
+  /// Example:
+  /// ```dart
+  /// final success = await provider.editAffirmationFromText(
+  ///   id: 'existing-uuid',
+  ///   text: 'Updated affirmation text',
+  /// );
+  /// if (!success) {
+  ///   print(provider.error);
+  /// }
+  /// ```
+  Future<bool> editAffirmationFromText({
+    required String id,
+    required String text,
+    bool? isActive,
+  }) async {
+    _setLoading(true);
+    try {
+      final result = await _editAffirmationUseCase.call(
+        id: id,
+        text: text,
+        isActive: isActive,
+      );
+
+      switch (result) {
+        case EditAffirmationSuccess(:final affirmation):
+          final index = _affirmations.indexWhere((a) => a.id == id);
+          if (index != -1) {
+            _affirmations = [
+              ..._affirmations.sublist(0, index),
+              affirmation,
+              ..._affirmations.sublist(index + 1),
+            ];
+          }
+          _error = null;
+          return true;
+        case EditAffirmationFailure(:final message):
+          _error = message;
+          return false;
+      }
+    } catch (e) {
+      _error = 'Failed to edit affirmation: $e';
+      return false;
+    } finally {
+      _setLoading(false);
+    }
+  }
+
+  /// Gets an affirmation by its ID.
+  ///
+  /// Returns the affirmation if found, null otherwise.
+  Affirmation? getAffirmationById(String id) {
+    try {
+      return _affirmations.firstWhere((a) => a.id == id);
+    } catch (_) {
+      return null;
     }
   }
 

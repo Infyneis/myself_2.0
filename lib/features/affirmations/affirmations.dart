@@ -8,6 +8,8 @@ export 'data/models/affirmation.dart';
 export 'data/repositories/affirmation_repository.dart';
 
 // Domain
+export 'domain/usecases/create_affirmation.dart';
+export 'domain/usecases/edit_affirmation.dart';
 export 'domain/usecases/get_random_affirmation.dart';
 
 // Presentation

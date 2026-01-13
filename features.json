@@ -64,7 +64,7 @@
       "description": "Implement functionality to edit existing affirmations, updating the updatedAt timestamp and preserving other metadata",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-002"]
     },
     {

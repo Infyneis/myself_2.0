@@ -6,6 +6,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:myself_2_0/features/affirmations/data/models/affirmation.dart';
 import 'package:myself_2_0/features/affirmations/data/repositories/affirmation_repository.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/create_affirmation.dart';
+import 'package:myself_2_0/features/affirmations/domain/usecases/edit_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/get_random_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/presentation/providers/affirmation_provider.dart';
 
@@ -16,10 +17,13 @@ class MockGetRandomAffirmation extends Mock implements GetRandomAffirmation {}
 
 class MockCreateAffirmationUseCase extends Mock implements CreateAffirmationUseCase {}
 
+class MockEditAffirmationUseCase extends Mock implements EditAffirmationUseCase {}
+
 void main() {
   late MockAffirmationRepository mockRepository;
   late MockGetRandomAffirmation mockGetRandomAffirmation;
   late MockCreateAffirmationUseCase mockCreateAffirmationUseCase;
+  late MockEditAffirmationUseCase mockEditAffirmationUseCase;
   late AffirmationProvider provider;
 
   // Register fallback values for mocktail
@@ -38,10 +42,12 @@ void main() {
     mockRepository = MockAffirmationRepository();
     mockGetRandomAffirmation = MockGetRandomAffirmation();
     mockCreateAffirmationUseCase = MockCreateAffirmationUseCase();
+    mockEditAffirmationUseCase = MockEditAffirmationUseCase();
     provider = AffirmationProvider(
       repository: mockRepository,
       getRandomAffirmationUseCase: mockGetRandomAffirmation,
       createAffirmationUseCase: mockCreateAffirmationUseCase,
+      editAffirmationUseCase: mockEditAffirmationUseCase,
     );
   });
 
@@ -410,6 +416,310 @@ void main() {
         // Assert
         expect(provider.affirmations.first.id, isNotEmpty);
         expect(provider.affirmations.first.id.length, equals(36)); // UUID v4 format
+      });
+    });
+
+    group('editAffirmationFromText', () {
+      test('should edit affirmation and return true on success', () async {
+        // Arrange
+        final originalAffirmation = Affirmation(
+          id: '1',
+          text: 'Original text',
+          createdAt: DateTime(2024, 1, 1),
+          updatedAt: DateTime(2024, 1, 1),
+          displayCount: 5,
+        );
+        final editedAffirmation = originalAffirmation.copyWith(
+          text: 'Updated text',
+          updatedAt: DateTime.now(),
+        );
+
+        when(() => mockRepository.getAll())
+            .thenAnswer((_) async => [originalAffirmation]);
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => EditAffirmationSuccess(editedAffirmation));
+
+        // Load initial data
+        await provider.loadAffirmations();
+
+        // Act
+        final result = await provider.editAffirmationFromText(
+          id: '1',
+          text: 'Updated text',
+        );
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.affirmations.first.text, equals('Updated text'));
+        expect(provider.error, isNull);
+      });
+
+      test('should return false and set error when affirmation not found', () async {
+        // Arrange
+        const errorMessage = 'Affirmation not found';
+
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => const EditAffirmationFailure(errorMessage));
+
+        // Act
+        final result = await provider.editAffirmationFromText(
+          id: 'nonexistent',
+          text: 'New text',
+        );
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.error, equals(errorMessage));
+      });
+
+      test('should return false and set error when text is empty', () async {
+        // Arrange
+        const errorMessage = 'Affirmation text cannot be empty';
+
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => const EditAffirmationFailure(errorMessage));
+
+        // Act
+        final result = await provider.editAffirmationFromText(
+          id: '1',
+          text: '',
+        );
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.error, contains('empty'));
+      });
+
+      test('should return false and set error when text exceeds 280 characters', () async {
+        // Arrange
+        final longText = 'a' * 281;
+        const errorMessage = 'Affirmation text cannot exceed 280 characters';
+
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => const EditAffirmationFailure(errorMessage));
+
+        // Act
+        final result = await provider.editAffirmationFromText(
+          id: '1',
+          text: longText,
+        );
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.error, contains('280'));
+      });
+
+      test('should preserve metadata when editing text', () async {
+        // Arrange
+        final originalTime = DateTime(2024, 1, 1);
+        final originalAffirmation = Affirmation(
+          id: '1',
+          text: 'Original text',
+          createdAt: originalTime,
+          updatedAt: originalTime,
+          displayCount: 10,
+          isActive: true,
+        );
+        final editedAffirmation = originalAffirmation.copyWith(
+          text: 'New text',
+          updatedAt: DateTime.now(),
+        );
+
+        when(() => mockRepository.getAll())
+            .thenAnswer((_) async => [originalAffirmation]);
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => EditAffirmationSuccess(editedAffirmation));
+
+        // Load initial data
+        await provider.loadAffirmations();
+
+        // Act
+        await provider.editAffirmationFromText(
+          id: '1',
+          text: 'New text',
+        );
+
+        // Assert
+        expect(provider.affirmations.first.id, equals('1'));
+        expect(provider.affirmations.first.createdAt, equals(originalTime));
+        expect(provider.affirmations.first.displayCount, equals(10));
+      });
+
+      test('should update updatedAt timestamp when editing', () async {
+        // Arrange
+        final originalTime = DateTime(2024, 1, 1);
+        final newTime = DateTime.now();
+        final originalAffirmation = Affirmation(
+          id: '1',
+          text: 'Original text',
+          createdAt: originalTime,
+          updatedAt: originalTime,
+        );
+        final editedAffirmation = originalAffirmation.copyWith(
+          text: 'New text',
+          updatedAt: newTime,
+        );
+
+        when(() => mockRepository.getAll())
+            .thenAnswer((_) async => [originalAffirmation]);
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async => EditAffirmationSuccess(editedAffirmation));
+
+        // Load initial data
+        await provider.loadAffirmations();
+
+        // Act
+        await provider.editAffirmationFromText(
+          id: '1',
+          text: 'New text',
+        );
+
+        // Assert
+        expect(
+          provider.affirmations.first.updatedAt.isAfter(originalTime) ||
+              provider.affirmations.first.updatedAt == newTime,
+          isTrue,
+        );
+      });
+
+      test('should allow updating isActive status', () async {
+        // Arrange
+        final originalAffirmation = Affirmation(
+          id: '1',
+          text: 'Original text',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          isActive: true,
+        );
+        final editedAffirmation = originalAffirmation.copyWith(
+          isActive: false,
+          updatedAt: DateTime.now(),
+        );
+
+        when(() => mockRepository.getAll())
+            .thenAnswer((_) async => [originalAffirmation]);
+        when(() => mockEditAffirmationUseCase.call(
+          id: '1',
+          text: 'Original text',
+          isActive: false,
+        )).thenAnswer((_) async => EditAffirmationSuccess(editedAffirmation));
+
+        // Load initial data
+        await provider.loadAffirmations();
+
+        // Act
+        final result = await provider.editAffirmationFromText(
+          id: '1',
+          text: 'Original text',
+          isActive: false,
+        );
+
+        // Assert
+        expect(result, isTrue);
+        expect(provider.affirmations.first.isActive, isFalse);
+      });
+
+      test('should set isLoading during operation', () async {
+        // Arrange
+        final originalAffirmation = Affirmation(
+          id: '1',
+          text: 'Original',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+        var wasLoadingDuringCall = false;
+
+        when(() => mockRepository.getAll())
+            .thenAnswer((_) async => [originalAffirmation]);
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenAnswer((_) async {
+          wasLoadingDuringCall = provider.isLoading;
+          return EditAffirmationSuccess(originalAffirmation.copyWith(text: 'New'));
+        });
+
+        // Load initial data
+        await provider.loadAffirmations();
+
+        // Act
+        await provider.editAffirmationFromText(id: '1', text: 'New');
+
+        // Assert
+        expect(wasLoadingDuringCall, isTrue);
+        expect(provider.isLoading, isFalse);
+      });
+
+      test('should handle exception from use case', () async {
+        // Arrange
+        when(() => mockEditAffirmationUseCase.call(
+          id: any(named: 'id'),
+          text: any(named: 'text'),
+          isActive: any(named: 'isActive'),
+        )).thenThrow(Exception('Unexpected error'));
+
+        // Act
+        final result = await provider.editAffirmationFromText(
+          id: '1',
+          text: 'New text',
+        );
+
+        // Assert
+        expect(result, isFalse);
+        expect(provider.error, contains('Failed to edit affirmation'));
+      });
+    });
+
+    group('getAffirmationById', () {
+      test('should return affirmation when found', () async {
+        // Arrange
+        final affirmation = Affirmation(
+          id: '1',
+          text: 'Test',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+        when(() => mockRepository.getAll())
+            .thenAnswer((_) async => [affirmation]);
+
+        await provider.loadAffirmations();
+
+        // Act
+        final result = provider.getAffirmationById('1');
+
+        // Assert
+        expect(result, equals(affirmation));
+      });
+
+      test('should return null when not found', () async {
+        // Arrange
+        when(() => mockRepository.getAll()).thenAnswer((_) async => []);
+        await provider.loadAffirmations();
+
+        // Act
+        final result = provider.getAffirmationById('nonexistent');
+
+        // Assert
+        expect(result, isNull);
       });
     });
   });
