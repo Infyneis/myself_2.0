@@ -55,32 +55,48 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Myself 2.0'),
+        title: Semantics(
+          label: 'Myself 2.0',
+          header: true,
+          child: const Text('Myself 2.0'),
+        ),
         centerTitle: true,
         actions: [
           // Navigation to affirmation list
-          IconButton(
-            icon: const Icon(Icons.list_rounded),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const AffirmationListScreen(),
-                ),
-              );
-            },
-            tooltip: 'My Affirmations',
+          Semantics(
+            button: true,
+            enabled: true,
+            label: 'My Affirmations',
+            hint: 'Navigate to view all your affirmations',
+            child: IconButton(
+              icon: const Icon(Icons.list_rounded),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AffirmationListScreen(),
+                  ),
+                );
+              },
+              tooltip: 'My Affirmations',
+            ),
           ),
           // Navigation to settings
-          IconButton(
-            icon: const Icon(Icons.settings_rounded),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SettingsScreen(),
-                ),
-              );
-            },
-            tooltip: 'Settings',
+          Semantics(
+            button: true,
+            enabled: true,
+            label: 'Settings',
+            hint: 'Navigate to app settings',
+            child: IconButton(
+              icon: const Icon(Icons.settings_rounded),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
+              },
+              tooltip: 'Settings',
+            ),
           ),
         ],
       ),
@@ -88,8 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, provider, child) {
           // Show loading indicator while fetching data
           if (provider.isLoading && !provider.hasAffirmations) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Semantics(
+                label: 'Loading affirmations',
+                liveRegion: true,
+                child: const CircularProgressIndicator(),
+              ),
             );
           }
 
@@ -98,37 +118,53 @@ class _HomeScreenState extends State<HomeScreen> {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(AppDimensions.spacingL),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error_outline,
-                      size: 64,
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                    const SizedBox(height: AppDimensions.spacingM),
-                    Text(
-                      'Something went wrong',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: AppDimensions.spacingS),
-                    Text(
-                      provider.error!,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: AppDimensions.spacingL),
-                    ElevatedButton(
-                      onPressed: () {
-                        provider.loadAffirmations().then((_) {
-                          if (provider.hasAffirmations) {
-                            provider.selectRandomAffirmation();
-                          }
-                        });
-                      },
-                      child: const Text('Retry'),
-                    ),
-                  ],
+                child: Semantics(
+                  liveRegion: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Semantics(
+                        label: 'Error',
+                        image: true,
+                        child: Icon(
+                          Icons.error_outline,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                      const SizedBox(height: AppDimensions.spacingM),
+                      Semantics(
+                        header: true,
+                        child: Text(
+                          'Something went wrong',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      const SizedBox(height: AppDimensions.spacingS),
+                      Text(
+                        provider.error!,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: AppDimensions.spacingL),
+                      Semantics(
+                        button: true,
+                        enabled: true,
+                        label: 'Retry',
+                        hint: 'Tap to retry loading affirmations',
+                        child: ElevatedButton(
+                          onPressed: () {
+                            provider.loadAffirmations().then((_) {
+                              if (provider.hasAffirmations) {
+                                provider.selectRandomAffirmation();
+                              }
+                            });
+                          },
+                          child: const Text('Retry'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -182,23 +218,30 @@ class _HomeScreenState extends State<HomeScreen> {
         final breathingEnabled = settingsProvider.breathingAnimationEnabled;
 
         // Wrap the content with GestureDetector to handle tap and swipe gestures
-        return GestureDetector(
-          // Handle tap gesture to show next affirmation
+        return Semantics(
+          label: 'Current affirmation: ${currentAffirmation.text}',
+          hint: 'Tap or swipe to show next affirmation',
+          button: true,
+          enabled: true,
           onTap: () => _showNextAffirmation(provider),
-          // Handle horizontal swipe gestures (left or right) to show next affirmation
-          onHorizontalDragEnd: (details) {
-            // Only trigger if there's significant horizontal velocity
-            if (details.primaryVelocity != null &&
-                details.primaryVelocity!.abs() > 100) {
-              _showNextAffirmation(provider);
-            }
-          },
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(AppDimensions.spacingL),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+          child: GestureDetector(
+            // Handle tap gesture to show next affirmation
+            onTap: () => _showNextAffirmation(provider),
+            // Handle horizontal swipe gestures (left or right) to show next affirmation
+            onHorizontalDragEnd: (details) {
+              // Only trigger if there's significant horizontal velocity
+              if (details.primaryVelocity != null &&
+                  details.primaryVelocity!.abs() > 100) {
+                _showNextAffirmation(provider);
+              }
+            },
+            child: ExcludeSemantics(
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(AppDimensions.spacingL),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                   // Main affirmation card with zen animation
                   Card(
                     elevation: AppDimensions.elevationSoft,
@@ -242,7 +285,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         delay: 200.ms,
                         duration: 400.ms,
                       ),
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -261,24 +306,30 @@ class _HomeScreenState extends State<HomeScreen> {
     BuildContext context,
     AffirmationProvider provider,
   ) {
-    return Container(
-      constraints: const BoxConstraints(
-        minWidth: AppDimensions.minTouchTarget,
-        minHeight: AppDimensions.minTouchTarget,
-      ),
-      child: IconButton(
-        onPressed: () => _showNextAffirmation(provider),
-        icon: const Icon(Icons.refresh_rounded),
-        tooltip: 'Next affirmation',
-        iconSize: 28,
-        style: IconButton.styleFrom(
-          foregroundColor: Theme.of(context).colorScheme.primary,
-          backgroundColor: Theme.of(context)
-              .colorScheme
-              .primary
-              .withValues(alpha: 0.1),
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(AppDimensions.spacingM),
+    return Semantics(
+      button: true,
+      enabled: true,
+      label: 'Refresh affirmation',
+      hint: 'Show next random affirmation',
+      child: Container(
+        constraints: const BoxConstraints(
+          minWidth: AppDimensions.minTouchTarget,
+          minHeight: AppDimensions.minTouchTarget,
+        ),
+        child: IconButton(
+          onPressed: () => _showNextAffirmation(provider),
+          icon: const Icon(Icons.refresh_rounded),
+          tooltip: 'Next affirmation',
+          iconSize: 28,
+          style: IconButton.styleFrom(
+            foregroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context)
+                .colorScheme
+                .primary
+                .withValues(alpha: 0.1),
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(AppDimensions.spacingM),
+          ),
         ),
       ),
     )

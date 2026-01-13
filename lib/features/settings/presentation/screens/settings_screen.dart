@@ -29,7 +29,11 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Semantics(
+          label: 'Settings',
+          header: true,
+          child: const Text('Settings'),
+        ),
         centerTitle: false,
       ),
       body: Consumer<SettingsProvider>(
@@ -70,11 +74,14 @@ class SettingsScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: AppDimensions.spacingS,
       ),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+      child: Semantics(
+        header: true,
+        child: Text(
+          title,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+        ),
       ),
     );
   }
@@ -150,12 +157,22 @@ class SettingsScreen extends StatelessWidget {
   ) {
     final isSelected = settingsProvider.themeMode == themeMode;
 
-    return InkWell(
+    return Semantics(
+      button: true,
+      enabled: true,
+      selected: isSelected,
+      label: '$label theme',
+      hint: description,
       onTap: () async {
         await settingsProvider.setThemeMode(themeMode);
       },
-      borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
-      child: Container(
+      child: InkWell(
+        onTap: () async {
+          await settingsProvider.setThemeMode(themeMode);
+        },
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+        child: ExcludeSemantics(
+          child: Container(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
@@ -210,6 +227,8 @@ class SettingsScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
           ],
+        ),
+      ),
         ),
       ),
     );
@@ -286,12 +305,22 @@ class SettingsScreen extends StatelessWidget {
   ) {
     final isSelected = settingsProvider.refreshMode == refreshMode;
 
-    return InkWell(
+    return Semantics(
+      button: true,
+      enabled: true,
+      selected: isSelected,
+      label: '$label refresh mode',
+      hint: description,
       onTap: () async {
         await settingsProvider.setRefreshMode(refreshMode);
       },
-      borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
-      child: Container(
+      child: InkWell(
+        onTap: () async {
+          await settingsProvider.setRefreshMode(refreshMode);
+        },
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+        child: ExcludeSemantics(
+          child: Container(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
@@ -346,6 +375,8 @@ class SettingsScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
           ],
+        ),
+      ),
         ),
       ),
     );
@@ -413,12 +444,22 @@ class SettingsScreen extends StatelessWidget {
   ) {
     final isSelected = settingsProvider.language == languageCode;
 
-    return InkWell(
+    return Semantics(
+      button: true,
+      enabled: true,
+      selected: isSelected,
+      label: '$label language',
+      hint: description,
       onTap: () async {
         await settingsProvider.setLanguage(languageCode);
       },
-      borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
-      child: Container(
+      child: InkWell(
+        onTap: () async {
+          await settingsProvider.setLanguage(languageCode);
+        },
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
+        child: ExcludeSemantics(
+          child: Container(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
@@ -473,6 +514,8 @@ class SettingsScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primary,
               ),
           ],
+        ),
+      ),
         ),
       ),
     );
@@ -539,38 +582,48 @@ class SettingsScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppDimensions.spacingM),
             // Slider
-            Row(
-              children: [
-                Icon(
-                  Icons.text_fields,
-                  size: 16,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.7),
-                ),
-                Expanded(
-                  child: Slider(
-                    value: settingsProvider.fontSizeMultiplier,
-                    min: 0.8,
-                    max: 1.4,
-                    divisions: 6,
-                    label:
-                        '${(settingsProvider.fontSizeMultiplier * 100).round()}%',
-                    onChanged: (value) async {
-                      await settingsProvider.setFontSizeMultiplier(value);
-                    },
+            Semantics(
+              slider: true,
+              label: 'Font size',
+              value: '${(settingsProvider.fontSizeMultiplier * 100).round()} percent',
+              hint: 'Adjust font size from 80% to 140%',
+              child: Row(
+                children: [
+                  ExcludeSemantics(
+                    child: Icon(
+                      Icons.text_fields,
+                      size: 16,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.7),
+                    ),
                   ),
-                ),
-                Icon(
-                  Icons.text_fields,
-                  size: 24,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.7),
-                ),
-              ],
+                  Expanded(
+                    child: Slider(
+                      value: settingsProvider.fontSizeMultiplier,
+                      min: 0.8,
+                      max: 1.4,
+                      divisions: 6,
+                      label:
+                          '${(settingsProvider.fontSizeMultiplier * 100).round()}%',
+                      onChanged: (value) async {
+                        await settingsProvider.setFontSizeMultiplier(value);
+                      },
+                    ),
+                  ),
+                  ExcludeSemantics(
+                    child: Icon(
+                      Icons.text_fields,
+                      size: 24,
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Center(
               child: Text(
@@ -597,46 +650,58 @@ class SettingsScreen extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppDimensions.spacingM),
-        child: Row(
-          children: [
-            Icon(
-              Icons.refresh,
-              color: Theme.of(context)
-                  .colorScheme
-                  .onSurface
-                  .withValues(alpha: 0.7),
-            ),
-            const SizedBox(width: AppDimensions.spacingM),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Widget Rotation',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                  const SizedBox(height: AppDimensions.spacingXs),
-                  Text(
-                    'Automatically rotate affirmations in widget',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withValues(alpha: 0.6),
-                        ),
-                  ),
-                ],
+        child: Semantics(
+          toggled: settingsProvider.widgetRotationEnabled,
+          label: 'Widget Rotation',
+          hint: 'Automatically rotate affirmations in widget',
+          child: Row(
+            children: [
+              ExcludeSemantics(
+                child: Icon(
+                  Icons.refresh,
+                  color: Theme.of(context)
+                      .colorScheme
+                      .onSurface
+                      .withValues(alpha: 0.7),
+                ),
               ),
-            ),
-            Switch(
-              value: settingsProvider.widgetRotationEnabled,
-              onChanged: (value) async {
-                await settingsProvider.setWidgetRotationEnabled(value);
-              },
-            ),
-          ],
+              const SizedBox(width: AppDimensions.spacingM),
+              Expanded(
+                child: ExcludeSemantics(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Widget Rotation',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      const SizedBox(height: AppDimensions.spacingXs),
+                      Text(
+                        'Automatically rotate affirmations in widget',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurface
+                                  .withValues(alpha: 0.6),
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Semantics(
+                label: settingsProvider.widgetRotationEnabled ? 'On' : 'Off',
+                child: Switch(
+                  value: settingsProvider.widgetRotationEnabled,
+                  onChanged: (value) async {
+                    await settingsProvider.setWidgetRotationEnabled(value);
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

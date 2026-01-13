@@ -94,17 +94,31 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(isEditing ? 'Edit Affirmation' : 'New Affirmation'),
+          title: Semantics(
+            label: isEditing ? 'Edit Affirmation' : 'New Affirmation',
+            header: true,
+            child: Text(isEditing ? 'Edit Affirmation' : 'New Affirmation'),
+          ),
           actions: [
-            TextButton(
-              onPressed: _isSaving ? null : _saveAffirmation,
-              child: _isSaving
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Text('Save'),
+            Semantics(
+              button: true,
+              enabled: !_isSaving,
+              label: 'Save',
+              hint: 'Save affirmation and return to previous screen',
+              child: TextButton(
+                onPressed: _isSaving ? null : _saveAffirmation,
+                child: _isSaving
+                    ? Semantics(
+                        label: 'Saving affirmation',
+                        liveRegion: true,
+                        child: const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                      )
+                    : const Text('Save'),
+              ),
             ),
           ],
         ),
@@ -115,55 +129,72 @@ class _AffirmationEditScreenState extends State<AffirmationEditScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // Help text for multi-line input
-                Text(
-                  'Write your affirmation below. Press Enter for new lines.',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                Semantics(
+                  hint: 'Instructions for text input',
+                  child: Text(
+                    'Write your affirmation below. Press Enter for new lines.',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                  ),
                 ),
                 const SizedBox(height: AppDimensions.spacingM),
 
                 // Multi-line text input
-                AffirmationInput(
-                  controller: _textController,
-                  focusNode: _focusNode,
-                  hintText: isEditing
-                      ? 'Edit your affirmation...'
-                      : 'I am worthy of love and respect.\n\nEvery day I grow stronger.',
-                  autofocus: !isEditing, // Autofocus only for new affirmations
-                  onChanged: (_) {
-                    // Trigger rebuild to update save button state
-                    setState(() {});
-                  },
+                Semantics(
+                  textField: true,
+                  label: 'Affirmation text',
+                  hint: 'Enter your affirmation text. Maximum 280 characters',
+                  child: AffirmationInput(
+                    controller: _textController,
+                    focusNode: _focusNode,
+                    hintText: isEditing
+                        ? 'Edit your affirmation...'
+                        : 'I am worthy of love and respect.\n\nEvery day I grow stronger.',
+                    autofocus: !isEditing, // Autofocus only for new affirmations
+                    onChanged: (_) {
+                      // Trigger rebuild to update save button state
+                      setState(() {});
+                    },
+                  ),
                 ),
 
                 const SizedBox(height: AppDimensions.spacingL),
 
                 // Preview section for multi-line display
                 if (_textController.text.isNotEmpty) ...[
-                  Text(
-                    'Preview',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      'Preview',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                    ),
                   ),
                   const SizedBox(height: AppDimensions.spacingS),
-                  Container(
-                    padding: const EdgeInsets.all(AppDimensions.spacingM),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .surfaceContainerHighest
-                          .withValues(alpha: 0.3),
-                      borderRadius:
-                          BorderRadius.circular(AppDimensions.borderRadiusDefault),
-                    ),
-                    child: Text(
-                      _textController.text,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            height: 1.5,
-                          ),
-                      softWrap: true,
+                  Semantics(
+                    label: 'Preview: ${_textController.text}',
+                    readOnly: true,
+                    child: Container(
+                      padding: const EdgeInsets.all(AppDimensions.spacingM),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .surfaceContainerHighest
+                            .withValues(alpha: 0.3),
+                        borderRadius:
+                            BorderRadius.circular(AppDimensions.borderRadiusDefault),
+                      ),
+                      child: ExcludeSemantics(
+                        child: Text(
+                          _textController.text,
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                height: 1.5,
+                              ),
+                          softWrap: true,
+                        ),
+                      ),
                     ),
                   ),
                 ],

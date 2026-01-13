@@ -7,6 +7,7 @@ library;
 import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
@@ -45,15 +46,23 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Affirmations'),
+        title: Semantics(
+          label: 'My Affirmations',
+          header: true,
+          child: const Text('My Affirmations'),
+        ),
         centerTitle: true,
       ),
       body: Consumer<AffirmationProvider>(
         builder: (context, provider, child) {
           // Show loading indicator while fetching data
           if (provider.isLoading && provider.affirmations.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Semantics(
+                label: 'Loading affirmations',
+                liveRegion: true,
+                child: const CircularProgressIndicator(),
+              ),
             );
           }
 
@@ -62,31 +71,47 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(AppDimensions.spacingL),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.error_outline,
-                      size: 64,
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                    const SizedBox(height: AppDimensions.spacingM),
-                    Text(
-                      'Something went wrong',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: AppDimensions.spacingS),
-                    Text(
-                      provider.error!,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: AppDimensions.spacingL),
-                    ElevatedButton(
-                      onPressed: () => provider.loadAffirmations(),
-                      child: const Text('Retry'),
-                    ),
-                  ],
+                child: Semantics(
+                  liveRegion: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Semantics(
+                        label: 'Error',
+                        image: true,
+                        child: Icon(
+                          Icons.error_outline,
+                          size: 64,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
+                      const SizedBox(height: AppDimensions.spacingM),
+                      Semantics(
+                        header: true,
+                        child: Text(
+                          'Something went wrong',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      const SizedBox(height: AppDimensions.spacingS),
+                      Text(
+                        provider.error!,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: AppDimensions.spacingL),
+                      Semantics(
+                        button: true,
+                        enabled: true,
+                        label: 'Retry',
+                        hint: 'Tap to retry loading affirmations',
+                        child: ElevatedButton(
+                          onPressed: () => provider.loadAffirmations(),
+                          child: const Text('Retry'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -108,10 +133,16 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
           // Only show FAB if there are affirmations (empty state has its own button)
           if (!provider.hasAffirmations) return const SizedBox.shrink();
 
-          return FloatingActionButton(
-            onPressed: () => _navigateToAddAffirmation(context),
-            tooltip: 'Add Affirmation',
-            child: const Icon(Icons.add),
+          return Semantics(
+            button: true,
+            enabled: true,
+            label: 'Add new affirmation',
+            hint: 'Create a new affirmation',
+            child: FloatingActionButton(
+              onPressed: () => _navigateToAddAffirmation(context),
+              tooltip: 'Add Affirmation',
+              child: const Icon(Icons.add),
+            ),
           );
         },
       ),
@@ -228,19 +259,34 @@ class _ReorderableAffirmationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppDimensions.spacingM,
-        vertical: AppDimensions.spacingS,
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.spacingM),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+    // Build semantic label for VoiceOver
+    String semanticLabel = 'Affirmation ${index + 1}: ${affirmation.text}';
+
+    return Semantics(
+      label: semanticLabel,
+      button: onTap != null,
+      enabled: true,
+      hint: 'Double tap to edit. Swipe up or down for more actions',
+      customSemanticsActions: {
+        if (onEdit != null)
+          const CustomSemanticsAction(label: 'Edit'): () => onEdit!(),
+        if (onDelete != null)
+          const CustomSemanticsAction(label: 'Delete'): () => onDelete!(),
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.spacingM,
+          vertical: AppDimensions.spacingS,
+        ),
+        child: ExcludeSemantics(
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
+            child: Padding(
+              padding: const EdgeInsets.all(AppDimensions.spacingM),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
               // Drag handle on the left
               ReorderableDragStartListener(
                 index: index,
@@ -287,7 +333,9 @@ class _ReorderableAffirmationCard extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
+                ],
+              ),
+            ),
           ),
         ),
       ),

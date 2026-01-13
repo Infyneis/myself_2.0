@@ -60,107 +60,144 @@ class DeleteConfirmationDialog extends StatelessWidget {
         ? '${affirmationText.substring(0, 50)}...'
         : affirmationText;
 
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
-      ),
-      title: Row(
-        children: [
-          Icon(
-            Icons.warning_amber_rounded,
-            color: AppColors.error,
-            size: 28,
+    return Semantics(
+      scopesRoute: true,
+      namesRoute: true,
+      label: 'Delete Affirmation Dialog',
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
+        ),
+        title: Semantics(
+          header: true,
+          label: 'Warning: Delete Affirmation',
+          child: Row(
+            children: [
+              ExcludeSemantics(
+                child: Icon(
+                  Icons.warning_amber_rounded,
+                  color: AppColors.error,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: AppDimensions.spacingS),
+              Expanded(
+                child: ExcludeSemantics(
+                  child: Text(
+                    'Delete Affirmation',
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: AppDimensions.spacingS),
-          Expanded(
-            child: Text(
-              'Delete Affirmation',
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w600,
+        ),
+      content: Semantics(
+        liveRegion: true,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Are you sure you want to delete this affirmation?',
+              style: theme.textTheme.bodyMedium,
+            ),
+            const SizedBox(height: AppDimensions.spacingM),
+            Semantics(
+              label: 'Affirmation to be deleted: $previewText',
+              readOnly: true,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AppDimensions.spacingM),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? AppColors.stone.withValues(alpha: 0.2)
+                      : AppColors.mistGray,
+                  borderRadius:
+                      BorderRadius.circular(AppDimensions.borderRadiusSmall),
+                ),
+                child: ExcludeSemantics(
+                  child: Text(
+                    '"$previewText"',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontStyle: FontStyle.italic,
+                      color: isDark ? AppColors.softWhite : AppColors.stone,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: AppDimensions.spacingM),
+            Semantics(
+              label: 'Warning: This action cannot be undone',
+              child: Text(
+                'This action cannot be undone.',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: AppColors.error,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Are you sure you want to delete this affirmation?',
-            style: theme.textTheme.bodyMedium,
-          ),
-          const SizedBox(height: AppDimensions.spacingM),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(AppDimensions.spacingM),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? AppColors.stone.withValues(alpha: 0.2)
-                  : AppColors.mistGray,
-              borderRadius:
-                  BorderRadius.circular(AppDimensions.borderRadiusSmall),
+      actions: [
+        // Cancel button
+        Semantics(
+          button: true,
+          enabled: true,
+          label: 'Cancel',
+          hint: 'Keep the affirmation and close this dialog',
+          child: TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            style: TextButton.styleFrom(
+              minimumSize: const Size(
+                AppDimensions.minTouchTarget,
+                AppDimensions.minTouchTarget,
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimensions.spacingM,
+                vertical: AppDimensions.spacingS,
+              ),
             ),
             child: Text(
-              '"$previewText"',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontStyle: FontStyle.italic,
+              'Cancel',
+              style: TextStyle(
                 color: isDark ? AppColors.softWhite : AppColors.stone,
               ),
             ),
           ),
-          const SizedBox(height: AppDimensions.spacingM),
-          Text(
-            'This action cannot be undone.',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: AppColors.error,
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        // Cancel button
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          style: TextButton.styleFrom(
-            minimumSize: const Size(
-              AppDimensions.minTouchTarget,
-              AppDimensions.minTouchTarget,
-            ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimensions.spacingM,
-              vertical: AppDimensions.spacingS,
-            ),
-          ),
-          child: Text(
-            'Cancel',
-            style: TextStyle(
-              color: isDark ? AppColors.softWhite : AppColors.stone,
-            ),
-          ),
         ),
         // Delete button
-        ElevatedButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.error,
-            foregroundColor: Colors.white,
-            minimumSize: const Size(
-              AppDimensions.minTouchTarget,
-              AppDimensions.minTouchTarget,
+        Semantics(
+          button: true,
+          enabled: true,
+          label: 'Delete',
+          hint: 'Permanently delete this affirmation',
+          child: ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.error,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(
+                AppDimensions.minTouchTarget,
+                AppDimensions.minTouchTarget,
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppDimensions.spacingM,
+                vertical: AppDimensions.spacingS,
+              ),
             ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppDimensions.spacingM,
-              vertical: AppDimensions.spacingS,
-            ),
+            child: const Text('Delete'),
           ),
-          child: const Text('Delete'),
         ),
       ],
       actionsPadding: const EdgeInsets.only(
         left: AppDimensions.spacingM,
         right: AppDimensions.spacingM,
         bottom: AppDimensions.spacingM,
+      ),
       ),
     );
   }

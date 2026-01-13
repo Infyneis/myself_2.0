@@ -32,84 +32,100 @@ class EmptyAffirmationsState extends StatelessWidget {
     final theme = Theme.of(context);
     final isDarkMode = theme.brightness == Brightness.dark;
 
-    return Center(
-      child: SingleChildScrollView(
+    return Semantics(
+      label: 'No affirmations yet. Start your journey of self-affirmation. Create your first positive thought to begin.',
+      hint: 'Create your first affirmation button available',
+      child: Center(
+        child: SingleChildScrollView(
         padding: const EdgeInsets.all(AppDimensions.spacingL),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Zen illustration with multiple elements
-            _ZenIllustration(isDarkMode: isDarkMode)
-                .animate()
-                .fadeIn(duration: 600.ms, curve: Curves.easeOut)
-                .scale(
-                  begin: const Offset(0.8, 0.8),
-                  end: const Offset(1.0, 1.0),
-                  duration: 500.ms,
-                  curve: Curves.easeOutBack,
-                ),
+            ExcludeSemantics(
+              child: _ZenIllustration(isDarkMode: isDarkMode)
+                  .animate()
+                  .fadeIn(duration: 600.ms, curve: Curves.easeOut)
+                  .scale(
+                    begin: const Offset(0.8, 0.8),
+                    end: const Offset(1.0, 1.0),
+                    duration: 500.ms,
+                    curve: Curves.easeOutBack,
+                  ),
+            ),
 
             const SizedBox(height: AppDimensions.spacingXxl),
 
             // Title
-            Text(
-              'No Affirmations Yet',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            )
-                .animate()
-                .fadeIn(delay: 200.ms, duration: 400.ms)
-                .slideY(begin: 0.3, end: 0, duration: 400.ms),
+            ExcludeSemantics(
+              child: Text(
+                'No Affirmations Yet',
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              )
+                  .animate()
+                  .fadeIn(delay: 200.ms, duration: 400.ms)
+                  .slideY(begin: 0.3, end: 0, duration: 400.ms),
+            ),
 
             const SizedBox(height: AppDimensions.spacingM),
 
             // Subtitle with encouraging message
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppDimensions.spacingL,
-              ),
-              child: Text(
-                'Start your journey of self-affirmation.\nCreate your first positive thought to begin.',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: isDarkMode ? AppColors.stone : AppColors.stone,
-                  height: 1.6,
+            ExcludeSemantics(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppDimensions.spacingL,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            )
-                .animate()
-                .fadeIn(delay: 300.ms, duration: 400.ms)
-                .slideY(begin: 0.3, end: 0, duration: 400.ms),
+                child: Text(
+                  'Start your journey of self-affirmation.\nCreate your first positive thought to begin.',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    color: isDarkMode ? AppColors.stone : AppColors.stone,
+                    height: 1.6,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              )
+                  .animate()
+                  .fadeIn(delay: 300.ms, duration: 400.ms)
+                  .slideY(begin: 0.3, end: 0, duration: 400.ms),
+            ),
 
             const SizedBox(height: AppDimensions.spacingXxl),
 
             // Call-to-action button
-            FilledButton.icon(
-              onPressed: onAddAffirmation,
-              icon: const Icon(Icons.add_circle_outline),
-              label: const Text('Create Your First Affirmation'),
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(280, AppDimensions.minTouchTarget + 4),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.spacingXl,
-                  vertical: AppDimensions.spacingM + 2,
+            Semantics(
+              button: true,
+              enabled: true,
+              label: 'Create Your First Affirmation',
+              hint: 'Tap to create a new affirmation',
+              child: FilledButton.icon(
+                onPressed: onAddAffirmation,
+                icon: const Icon(Icons.add_circle_outline),
+                label: const Text('Create Your First Affirmation'),
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size(280, AppDimensions.minTouchTarget + 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.spacingXl,
+                    vertical: AppDimensions.spacingM + 2,
+                  ),
+                  elevation: 2,
+                  shadowColor: AppColors.softSage.withValues(alpha: 0.3),
                 ),
-                elevation: 2,
-                shadowColor: AppColors.softSage.withValues(alpha: 0.3),
-              ),
-            )
-                .animate()
-                .fadeIn(delay: 400.ms, duration: 400.ms)
-                .slideY(begin: 0.3, end: 0, duration: 400.ms)
-                .shimmer(
-                  delay: 1500.ms,
-                  duration: 1500.ms,
-                  color: Colors.white.withValues(alpha: 0.1),
-                ),
+              )
+                  .animate()
+                  .fadeIn(delay: 400.ms, duration: 400.ms)
+                  .slideY(begin: 0.3, end: 0, duration: 400.ms)
+                  .shimmer(
+                    delay: 1500.ms,
+                    duration: 1500.ms,
+                    color: Colors.white.withValues(alpha: 0.1),
+                  ),
+            ),
           ],
         ),
+      ),
       ),
     );
   }

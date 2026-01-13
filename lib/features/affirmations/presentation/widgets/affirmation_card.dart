@@ -5,6 +5,7 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import '../../../../core/constants/colors.dart';
 import '../../../../core/constants/dimensions.dart';
 import '../../../../core/theme/text_styles.dart';
@@ -69,7 +70,23 @@ class AffirmationCard extends StatelessWidget {
     final accentColor = AppColors.softSage;
     final mutedColor = AppColors.stone;
 
-    return Card(
+    // Build semantic label for VoiceOver
+    String semanticLabel = 'Affirmation: ${affirmation.text}';
+    if (onEdit != null || onDelete != null) {
+      semanticLabel += '. Swipe up or down for actions';
+    }
+
+    return Semantics(
+      label: semanticLabel,
+      button: onTap != null,
+      enabled: true,
+      customSemanticsActions: {
+        if (onEdit != null)
+          const CustomSemanticsAction(label: 'Edit'): () => onEdit!(),
+        if (onDelete != null)
+          const CustomSemanticsAction(label: 'Delete'): () => onDelete!(),
+      },
+      child: Card(
       margin: const EdgeInsets.symmetric(
         horizontal: AppDimensions.spacingM,
         vertical: AppDimensions.spacingS,
@@ -79,16 +96,17 @@ class AffirmationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
       ),
       color: cardColor,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
-        splashColor: accentColor.withValues(alpha: 0.1),
-        highlightColor: accentColor.withValues(alpha: 0.05),
-        child: Padding(
-          padding: const EdgeInsets.all(AppDimensions.spacingM),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+      child: ExcludeSemantics(
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
+          splashColor: accentColor.withValues(alpha: 0.1),
+          highlightColor: accentColor.withValues(alpha: 0.05),
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimensions.spacingM),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
               // Affirmation text with Playfair Display for elegant display
               // Multi-line support with proper line breaks and wrapping
               // Soft wrap ensures text wraps naturally at word boundaries
@@ -147,7 +165,8 @@ class AffirmationCard extends StatelessWidget {
                   ],
                 ),
               ],
-            ],
+              ],
+            ),
           ),
         ),
       ),

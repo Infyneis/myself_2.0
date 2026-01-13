@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T15:25:01.185Z",
+  "lastUpdated": "2026-01-13T15:27:52.468Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 51,
-    "totalSessions": 78,
-    "totalTimeMs": 15386232,
-    "totalTimeFormatted": "4h 16m",
-    "averageFeatureTimeMs": 291414,
-    "averageFeatureTimeFormatted": "4m 51s",
-    "averageSessionTimeMs": 197259,
-    "averageSessionTimeFormatted": "3m 17s"
+    "completedFeatures": 52,
+    "totalSessions": 79,
+    "totalTimeMs": 15555511,
+    "totalTimeFormatted": "4h 19m",
+    "averageFeatureTimeMs": 289066,
+    "averageFeatureTimeFormatted": "4m 49s",
+    "averageSessionTimeMs": 196905,
+    "averageSessionTimeFormatted": "3m 16s"
   },
   "features": [
     {
@@ -827,6 +827,20 @@
         "84d629bfc38761141006d082867bd394a93ca4d2"
       ],
       "durationFormatted": "3m 55s"
+    },
+    {
+      "featureId": "SEC-004",
+      "featureName": "SEC-004",
+      "description": "Verify no third-party SDKs that collect user data are included",
+      "category": "security",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T15:25:03.188Z",
+      "completedAt": "2026-01-13T15:27:52.467Z",
+      "durationMs": 169279,
+      "sessionId": "session-mkcqtmj8-f8hqig",
+      "sessionsCount": 1,
+      "commits": [],
+      "durationFormatted": "2m 49s"
     }
   ],
   "sessions": [
@@ -2099,6 +2113,21 @@
         "84d629bfc38761141006d082867bd394a93ca4d2"
       ],
       "durationFormatted": "3m 55s"
+    },
+    {
+      "sessionId": "session-mkcqtmj8-f8hqig",
+      "startedAt": "2026-01-13T15:25:03.188Z",
+      "endedAt": "2026-01-13T15:27:52.467Z",
+      "durationMs": 169279,
+      "featuresWorkedOn": [
+        "SEC-004"
+      ],
+      "featuresCompleted": [
+        "SEC-004"
+      ],
+      "status": "completed",
+      "commits": [],
+      "durationFormatted": "2m 49s"
     }
   ],
   "byCategory": {
@@ -2128,17 +2157,17 @@
     },
     "security": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 734629,
-      "averageTimeMs": 244876
+      "completed": 4,
+      "totalTimeMs": 903908,
+      "averageTimeMs": 225977
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 38,
-      "totalTimeMs": 10918534,
-      "averageTimeMs": 287330
+      "completed": 39,
+      "totalTimeMs": 11087813,
+      "averageTimeMs": 284303
     },
     "should-have": {
       "total": 0,
