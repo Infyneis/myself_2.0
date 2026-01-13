@@ -7,14 +7,18 @@
 library;
 
 import 'package:flutter/material.dart';
+
 import 'app.dart';
+import 'core/storage/hive_service.dart';
 
 /// Main entry point for Myself 2.0.
-void main() {
+void main() async {
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // TODO: Initialize Hive (INFRA-003)
+  // Initialize Hive for local storage
+  await HiveService.initialize();
+
   // TODO: Initialize providers (INFRA-004)
 
   runApp(const MyselfApp());

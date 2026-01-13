@@ -28,7 +28,7 @@
       "description": "Configure Hive for local storage with proper initialization, type adapters for Affirmation model, and platform-specific paths",
       "category": "infrastructure",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-017", "FR-018"]
     },
     {

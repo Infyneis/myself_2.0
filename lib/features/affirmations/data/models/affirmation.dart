@@ -4,6 +4,13 @@
 /// Based on REQUIREMENTS.md Section 9.2
 library;
 
+import 'package:hive/hive.dart';
+
+part 'affirmation.g.dart';
+
+/// Hive type ID for Affirmation model.
+const int affirmationTypeId = 0;
+
 /// Represents a single affirmation.
 ///
 /// Each affirmation has:
@@ -12,11 +19,10 @@ library;
 /// - Creation and update timestamps
 /// - Display count for future analytics
 /// - Active status to enable/disable individual affirmations
-///
-/// Note: Hive type adapter will be implemented in INFRA-003.
-class Affirmation {
+@HiveType(typeId: affirmationTypeId)
+class Affirmation extends HiveObject {
   /// Creates a new Affirmation instance.
-  const Affirmation({
+  Affirmation({
     required this.id,
     required this.text,
     required this.createdAt,
@@ -26,22 +32,28 @@ class Affirmation {
   });
 
   /// Unique identifier (UUID)
+  @HiveField(0)
   final String id;
 
   /// Affirmation text content (max 280 characters)
-  final String text;
+  @HiveField(1)
+  String text;
 
   /// Timestamp when the affirmation was created
+  @HiveField(2)
   final DateTime createdAt;
 
   /// Timestamp when the affirmation was last updated
-  final DateTime updatedAt;
+  @HiveField(3)
+  DateTime updatedAt;
 
   /// Number of times this affirmation has been displayed (for future analytics)
-  final int displayCount;
+  @HiveField(4)
+  int displayCount;
 
   /// Whether this affirmation is active and should be included in rotation
-  final bool isActive;
+  @HiveField(5)
+  bool isActive;
 
   /// Creates a copy of this affirmation with the given fields replaced.
   Affirmation copyWith({

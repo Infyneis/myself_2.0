@@ -8,6 +8,9 @@ export 'constants/colors.dart';
 export 'constants/dimensions.dart';
 export 'constants/strings.dart';
 
+// Storage
+export 'storage/hive_service.dart';
+
 // Theme
 export 'theme/app_theme.dart';
 export 'theme/text_styles.dart';
