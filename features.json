@@ -118,7 +118,7 @@
       "description": "Implement GetRandomAffirmation use case that selects a random active affirmation, avoiding immediate repetition",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-008", "FR-014"]
     },
     {
