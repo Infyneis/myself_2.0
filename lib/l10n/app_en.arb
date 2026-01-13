@@ -1,0 +1,386 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Myself 2.0",
+  "@appTitle": {
+    "description": "The application title displayed in the app bar"
+  },
+
+  "myAffirmations": "My Affirmations",
+  "@myAffirmations": {
+    "description": "Label for button to view all affirmations"
+  },
+  "myAffirmationsHint": "Navigate to view all your affirmations",
+  "@myAffirmationsHint": {
+    "description": "Accessibility hint for affirmations list button"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Label for settings button and screen"
+  },
+  "settingsHint": "Navigate to app settings",
+  "@settingsHint": {
+    "description": "Accessibility hint for settings button"
+  },
+
+  "tapToRefresh": "Tap to refresh",
+  "@tapToRefresh": {
+    "description": "Instruction to tap for a new affirmation"
+  },
+  "swipeToRefresh": "Swipe to refresh",
+  "@swipeToRefresh": {
+    "description": "Instruction to swipe for a new affirmation"
+  },
+  "refresh": "Refresh",
+  "@refresh": {
+    "description": "Label for refresh button"
+  },
+  "refreshAffirmation": "Refresh affirmation",
+  "@refreshAffirmation": {
+    "description": "Accessibility label for refresh button"
+  },
+  "showNewAffirmation": "Show a new affirmation",
+  "@showNewAffirmation": {
+    "description": "Accessibility hint for refresh button"
+  },
+  "createFirstAffirmation": "Create Your First Affirmation",
+  "@createFirstAffirmation": {
+    "description": "Button label prompting user to create first affirmation"
+  },
+
+  "affirmations": "Affirmations",
+  "@affirmations": {
+    "description": "Title for affirmations list screen"
+  },
+  "addAffirmation": "Add Affirmation",
+  "@addAffirmation": {
+    "description": "Label for button to add a new affirmation"
+  },
+  "createNewAffirmation": "Create a new affirmation",
+  "@createNewAffirmation": {
+    "description": "Accessibility hint for add affirmation button"
+  },
+  "editAffirmation": "Edit affirmation",
+  "@editAffirmation": {
+    "description": "Label for edit affirmation button"
+  },
+  "deleteAffirmation": "Delete affirmation",
+  "@deleteAffirmation": {
+    "description": "Label for delete affirmation button"
+  },
+
+  "newAffirmation": "New Affirmation",
+  "@newAffirmation": {
+    "description": "Title for creating a new affirmation"
+  },
+  "editAffirmationTitle": "Edit Affirmation",
+  "@editAffirmationTitle": {
+    "description": "Title for editing an existing affirmation"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Label for save button"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Label for cancel button"
+  },
+  "affirmationPlaceholder": "Enter your affirmation...",
+  "@affirmationPlaceholder": {
+    "description": "Placeholder text for affirmation input field"
+  },
+  "charactersRemaining": "{count} characters remaining",
+  "@charactersRemaining": {
+    "description": "Shows how many characters are left",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "charactersOver": "{count} characters over limit",
+  "@charactersOver": {
+    "description": "Shows how many characters over the limit",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "unsavedChanges": "Unsaved Changes",
+  "@unsavedChanges": {
+    "description": "Dialog title for unsaved changes warning"
+  },
+  "unsavedChangesMessage": "You have unsaved changes. Are you sure you want to leave?",
+  "@unsavedChangesMessage": {
+    "description": "Message asking user to confirm leaving with unsaved changes"
+  },
+  "leave": "Leave",
+  "@leave": {
+    "description": "Button to leave screen without saving"
+  },
+  "stayAndEdit": "Stay and Edit",
+  "@stayAndEdit": {
+    "description": "Button to stay on screen and continue editing"
+  },
+  "affirmationCannotBeEmpty": "Affirmation cannot be empty",
+  "@affirmationCannotBeEmpty": {
+    "description": "Error message when trying to save empty affirmation"
+  },
+  "affirmationTooLong": "Affirmation exceeds 280 characters",
+  "@affirmationTooLong": {
+    "description": "Error message when affirmation is too long"
+  },
+  "affirmationSaved": "Affirmation saved successfully",
+  "@affirmationSaved": {
+    "description": "Success message after saving affirmation"
+  },
+
+  "deleteAffirmationTitle": "Delete Affirmation?",
+  "@deleteAffirmationTitle": {
+    "description": "Title for delete confirmation dialog"
+  },
+  "deleteAffirmationMessage": "Are you sure you want to delete this affirmation? This action cannot be undone.",
+  "@deleteAffirmationMessage": {
+    "description": "Message asking user to confirm deletion"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Button to confirm deletion"
+  },
+  "affirmationDeleted": "Affirmation deleted",
+  "@affirmationDeleted": {
+    "description": "Message shown after affirmation is deleted"
+  },
+
+  "noAffirmationsYet": "No Affirmations Yet",
+  "@noAffirmationsYet": {
+    "description": "Title shown when user has no affirmations"
+  },
+  "createFirstAffirmationMessage": "Start your journey by creating your first affirmation. It will appear here and on your home widget.",
+  "@createFirstAffirmationMessage": {
+    "description": "Message encouraging user to create first affirmation"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Button label to start creating affirmations"
+  },
+
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Section header for appearance settings"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Label for theme setting"
+  },
+  "chooseTheme": "Choose your preferred theme",
+  "@chooseTheme": {
+    "description": "Description for theme setting"
+  },
+  "themeLight": "Light",
+  "@themeLight": {
+    "description": "Label for light theme option"
+  },
+  "themeLightDescription": "Bright and clear",
+  "@themeLightDescription": {
+    "description": "Description for light theme"
+  },
+  "themeDark": "Dark",
+  "@themeDark": {
+    "description": "Label for dark theme option"
+  },
+  "themeDarkDescription": "Easy on the eyes",
+  "@themeDarkDescription": {
+    "description": "Description for dark theme"
+  },
+  "themeSystem": "System",
+  "@themeSystem": {
+    "description": "Label for system theme option"
+  },
+  "themeSystemDescription": "Matches your device",
+  "@themeSystemDescription": {
+    "description": "Description for system theme"
+  },
+  "fontSize": "Font Size",
+  "@fontSize": {
+    "description": "Label for font size setting"
+  },
+  "fontSizeDescription": "Adjust text size for better readability",
+  "@fontSizeDescription": {
+    "description": "Description for font size setting"
+  },
+  "fontSizeSmall": "Small",
+  "@fontSizeSmall": {
+    "description": "Label for small font size"
+  },
+  "fontSizeDefault": "Default",
+  "@fontSizeDefault": {
+    "description": "Label for default font size"
+  },
+  "fontSizeLarge": "Large",
+  "@fontSizeLarge": {
+    "description": "Label for large font size"
+  },
+  "fontSizeExtraLarge": "Extra Large",
+  "@fontSizeExtraLarge": {
+    "description": "Label for extra large font size"
+  },
+
+  "widgetSettings": "Widget Settings",
+  "@widgetSettings": {
+    "description": "Section header for widget settings"
+  },
+  "refreshMode": "Refresh Mode",
+  "@refreshMode": {
+    "description": "Label for refresh mode setting"
+  },
+  "refreshModeDescription": "When to show a new affirmation",
+  "@refreshModeDescription": {
+    "description": "Description for refresh mode setting"
+  },
+  "refreshModeUnlock": "Every Unlock",
+  "@refreshModeUnlock": {
+    "description": "Label for unlock refresh mode"
+  },
+  "refreshModeUnlockDescription": "New affirmation each time you unlock your phone",
+  "@refreshModeUnlockDescription": {
+    "description": "Description for unlock refresh mode"
+  },
+  "refreshModeHourly": "Hourly",
+  "@refreshModeHourly": {
+    "description": "Label for hourly refresh mode"
+  },
+  "refreshModeHourlyDescription": "New affirmation every hour",
+  "@refreshModeHourlyDescription": {
+    "description": "Description for hourly refresh mode"
+  },
+  "refreshModeDaily": "Daily",
+  "@refreshModeDaily": {
+    "description": "Label for daily refresh mode"
+  },
+  "refreshModeDailyDescription": "New affirmation once a day",
+  "@refreshModeDailyDescription": {
+    "description": "Description for daily refresh mode"
+  },
+  "widgetRotation": "Widget Rotation",
+  "@widgetRotation": {
+    "description": "Label for widget rotation setting"
+  },
+  "widgetRotationDescription": "Allow affirmations to change on home widget",
+  "@widgetRotationDescription": {
+    "description": "Description for widget rotation setting"
+  },
+  "enabled": "Enabled",
+  "@enabled": {
+    "description": "Label for enabled state"
+  },
+  "disabled": "Disabled",
+  "@disabled": {
+    "description": "Label for disabled state"
+  },
+
+  "preferences": "Preferences",
+  "@preferences": {
+    "description": "Section header for preferences"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Label for language setting"
+  },
+  "languageDescription": "Choose your preferred language",
+  "@languageDescription": {
+    "description": "Description for language setting"
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Label for English language option"
+  },
+  "languageFrench": "Français",
+  "@languageFrench": {
+    "description": "Label for French language option"
+  },
+
+  "welcomeTitle": "Welcome to Myself 2.0",
+  "@welcomeTitle": {
+    "description": "Title for welcome screen"
+  },
+  "welcomeSubtitle": "Transform through repetition and intention",
+  "@welcomeSubtitle": {
+    "description": "Subtitle for welcome screen"
+  },
+  "welcomeDescription": "Myself 2.0 helps you become who you want to be through the power of daily affirmations.\n\nSee yourself, become yourself.",
+  "@welcomeDescription": {
+    "description": "Description on welcome screen"
+  },
+  "letsBegin": "Let's Begin",
+  "@letsBegin": {
+    "description": "Button to start onboarding"
+  },
+  "congratulations": "Congratulations!",
+  "@congratulations": {
+    "description": "Success message title"
+  },
+  "firstAffirmationCreated": "You've created your first affirmation",
+  "@firstAffirmationCreated": {
+    "description": "Success message for creating first affirmation"
+  },
+  "continueButton": "Continue",
+  "@continueButton": {
+    "description": "Button to continue onboarding"
+  },
+  "widgetSetupTitle": "Add to Your Home Screen",
+  "@widgetSetupTitle": {
+    "description": "Title for widget setup instructions"
+  },
+  "widgetSetupDescription": "See your affirmations every time you unlock your phone by adding the Myself widget to your home screen.",
+  "@widgetSetupDescription": {
+    "description": "Description for widget setup"
+  },
+  "widgetSetupIosInstructions": "1. Long press on your home screen\n2. Tap the + button in the top corner\n3. Search for \"Myself\"\n4. Choose your preferred widget size\n5. Tap \"Add Widget\"",
+  "@widgetSetupIosInstructions": {
+    "description": "Instructions for adding widget on iOS"
+  },
+  "widgetSetupAndroidInstructions": "1. Long press on your home screen\n2. Tap \"Widgets\"\n3. Find \"Myself\" in the list\n4. Long press and drag to your home screen\n5. Choose your preferred size",
+  "@widgetSetupAndroidInstructions": {
+    "description": "Instructions for adding widget on Android"
+  },
+  "gotIt": "Got It",
+  "@gotIt": {
+    "description": "Button to acknowledge widget setup instructions"
+  },
+  "skipForNow": "Skip for Now",
+  "@skipForNow": {
+    "description": "Button to skip widget setup"
+  },
+
+  "errorLoadingAffirmations": "Error loading affirmations",
+  "@errorLoadingAffirmations": {
+    "description": "Error message when affirmations fail to load"
+  },
+  "errorSavingAffirmation": "Error saving affirmation",
+  "@errorSavingAffirmation": {
+    "description": "Error message when affirmation fails to save"
+  },
+  "errorDeletingAffirmation": "Error deleting affirmation",
+  "@errorDeletingAffirmation": {
+    "description": "Error message when affirmation fails to delete"
+  },
+  "tryAgain": "Try Again",
+  "@tryAgain": {
+    "description": "Button to retry an action"
+  },
+
+  "affirmationCard": "Affirmation card",
+  "@affirmationCard": {
+    "description": "Accessibility label for affirmation card"
+  },
+  "closeButton": "Close",
+  "@closeButton": {
+    "description": "Accessibility label for close button"
+  },
+  "backButton": "Back",
+  "@backButton": {
+    "description": "Accessibility label for back button"
+  }
+}

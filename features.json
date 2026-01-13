@@ -647,7 +647,7 @@
       "description": "Configure Flutter localization with intl package, ARB files for French and English",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "FR-024"
       ]

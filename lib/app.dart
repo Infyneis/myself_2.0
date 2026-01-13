@@ -4,6 +4,7 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'core/theme/app_theme.dart';
@@ -11,6 +12,7 @@ import 'features/affirmations/presentation/screens/home_screen.dart';
 import 'features/onboarding/presentation/screens/onboarding_flow.dart';
 import 'features/settings/data/settings_model.dart' as settings_model;
 import 'features/settings/presentation/providers/settings_provider.dart';
+import 'generated/l10n/app_localizations.dart';
 
 /// Main application widget.
 ///
@@ -71,6 +73,23 @@ class _MyselfAppState extends State<MyselfApp> {
         return MaterialApp(
           title: 'Myself 2.0',
           debugShowCheckedModeBanner: false,
+
+          // Localization configuration (L10N-001)
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'), // English
+            Locale('fr'), // French
+          ],
+          // Use the language from settings
+          // If language is 'system', locale is null which makes Flutter use device locale
+          locale: settingsProvider.language != 'system'
+              ? Locale(settingsProvider.language)
+              : null,
 
           // Theme configuration using SettingsProvider
           theme: AppTheme.lightTheme,

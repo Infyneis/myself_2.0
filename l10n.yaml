@@ -1,0 +1,22 @@
+# L10n configuration for Myself 2.0
+# This file configures Flutter's localization code generation
+
+# Directory where ARB files are stored
+arb-dir: lib/l10n
+
+# Template ARB file (base language)
+template-arb-file: app_en.arb
+
+# Output directory for generated localization files
+output-dir: lib/generated/l10n
+
+# Class name for the generated localizations
+output-class: AppLocalizations
+
+# Localization delegate class name
+output-localization-file: app_localizations.dart
+
+# Preferred supported locales
+preferred-supported-locales:
+  - en
+  - fr
