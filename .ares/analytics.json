@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T15:07:45.054Z",
+  "lastUpdated": "2026-01-13T15:12:40.545Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 47,
-    "totalSessions": 74,
-    "totalTimeMs": 14358115,
-    "totalTimeFormatted": "3h 59m",
-    "averageFeatureTimeMs": 294341,
+    "completedFeatures": 48,
+    "totalSessions": 75,
+    "totalTimeMs": 14651603,
+    "totalTimeFormatted": "4h 4m",
+    "averageFeatureTimeMs": 294323,
     "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 194029,
-    "averageSessionTimeFormatted": "3m 14s"
+    "averageSessionTimeMs": 195355,
+    "averageSessionTimeFormatted": "3m 15s"
   },
   "features": [
     {
@@ -763,6 +763,22 @@
         "8e50082b242eb23fe7e6954a377de5d11343c79f"
       ],
       "durationFormatted": "4m 55s"
+    },
+    {
+      "featureId": "PERF-004",
+      "featureName": "PERF-004",
+      "description": "Ensure 100% of features work offline without internet connection",
+      "category": "performance",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T15:07:47.056Z",
+      "completedAt": "2026-01-13T15:12:40.544Z",
+      "durationMs": 293488,
+      "sessionId": "session-mkcq7f1s-3c59tt",
+      "sessionsCount": 1,
+      "commits": [
+        "14e624a3d23bc10b8bbdf80301caf838fdde1047"
+      ],
+      "durationFormatted": "4m 53s"
     }
   ],
   "sessions": [
@@ -1967,6 +1983,23 @@
         "8e50082b242eb23fe7e6954a377de5d11343c79f"
       ],
       "durationFormatted": "4m 55s"
+    },
+    {
+      "sessionId": "session-mkcq7f1s-3c59tt",
+      "startedAt": "2026-01-13T15:07:47.056Z",
+      "endedAt": "2026-01-13T15:12:40.544Z",
+      "durationMs": 293488,
+      "featuresWorkedOn": [
+        "PERF-004"
+      ],
+      "featuresCompleted": [
+        "PERF-004"
+      ],
+      "status": "completed",
+      "commits": [
+        "14e624a3d23bc10b8bbdf80301caf838fdde1047"
+      ],
+      "durationFormatted": "4m 53s"
     }
   ],
   "byCategory": {
@@ -1990,17 +2023,17 @@
     },
     "performance": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 930425,
-      "averageTimeMs": 310142
+      "completed": 4,
+      "totalTimeMs": 1223913,
+      "averageTimeMs": 305978
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 35,
-      "totalTimeMs": 10126180,
-      "averageTimeMs": 289319
+      "completed": 36,
+      "totalTimeMs": 10419668,
+      "averageTimeMs": 289435
     },
     "should-have": {
       "total": 0,
