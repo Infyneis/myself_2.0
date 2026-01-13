@@ -781,7 +781,7 @@
       "description": "Add dartdoc comments to all public APIs, classes, and methods",
       "category": "documentation",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
