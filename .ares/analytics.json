@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:40:59.904Z",
+  "lastUpdated": "2026-01-13T10:43:39.606Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 13,
-    "totalSessions": 14,
-    "totalTimeMs": 6535873,
-    "totalTimeFormatted": "1h 48m",
-    "averageFeatureTimeMs": 475133,
-    "averageFeatureTimeFormatted": "7m 55s",
-    "averageSessionTimeMs": 466848,
-    "averageSessionTimeFormatted": "7m 46s"
+    "completedFeatures": 14,
+    "totalSessions": 15,
+    "totalTimeMs": 6693571,
+    "totalTimeFormatted": "1h 51m",
+    "averageFeatureTimeMs": 452459,
+    "averageFeatureTimeFormatted": "7m 32s",
+    "averageSessionTimeMs": 446238,
+    "averageSessionTimeFormatted": "7m 26s"
   },
   "features": [
     {
@@ -221,6 +221,22 @@
         "f5cc3c2cd7a7e7c6ce4aa253753042c727d23afd"
       ],
       "durationFormatted": "4m 33s"
+    },
+    {
+      "featureId": "FUNC-010",
+      "featureName": "FUNC-010",
+      "description": "Implement settings storage for theme, refreshMode, and language preferences using Hive",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T10:41:01.907Z",
+      "completedAt": "2026-01-13T10:43:39.605Z",
+      "durationMs": 157698,
+      "sessionId": "session-mkcgodeb-n986if",
+      "sessionsCount": 1,
+      "commits": [
+        "9b72eb5020fc02e7619507ec4aee20327bfa8336"
+      ],
+      "durationFormatted": "2m 37s"
     }
   ],
   "sessions": [
@@ -459,6 +475,23 @@
         "f5cc3c2cd7a7e7c6ce4aa253753042c727d23afd"
       ],
       "durationFormatted": "4m 33s"
+    },
+    {
+      "sessionId": "session-mkcgodeb-n986if",
+      "startedAt": "2026-01-13T10:41:01.907Z",
+      "endedAt": "2026-01-13T10:43:39.605Z",
+      "durationMs": 157698,
+      "featuresWorkedOn": [
+        "FUNC-010"
+      ],
+      "featuresCompleted": [
+        "FUNC-010"
+      ],
+      "status": "completed",
+      "commits": [
+        "9b72eb5020fc02e7619507ec4aee20327bfa8336"
+      ],
+      "durationFormatted": "2m 37s"
     }
   ],
   "byCategory": {
@@ -470,17 +503,17 @@
     },
     "functional": {
       "total": 0,
-      "completed": 9,
-      "totalTimeMs": 3353831,
-      "averageTimeMs": 372648
+      "completed": 10,
+      "totalTimeMs": 3511529,
+      "averageTimeMs": 351153
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 11,
-      "totalTimeMs": 4873956,
-      "averageTimeMs": 443087
+      "completed": 12,
+      "totalTimeMs": 5031654,
+      "averageTimeMs": 419305
     },
     "should-have": {
       "total": 0,
