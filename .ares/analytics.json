@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:00:17.648Z",
+  "lastUpdated": "2026-01-13T10:05:27.041Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 8,
-    "totalSessions": 8,
-    "totalTimeMs": 4105637,
-    "totalTimeFormatted": "1h 8m",
-    "averageFeatureTimeMs": 513205,
-    "averageFeatureTimeFormatted": "8m 33s",
-    "averageSessionTimeMs": 513205,
-    "averageSessionTimeFormatted": "8m 33s"
+    "completedFeatures": 9,
+    "totalSessions": 9,
+    "totalTimeMs": 4413027,
+    "totalTimeFormatted": "1h 13m",
+    "averageFeatureTimeMs": 490336,
+    "averageFeatureTimeFormatted": "8m 10s",
+    "averageSessionTimeMs": 490336,
+    "averageSessionTimeFormatted": "8m 10s"
   },
   "features": [
     {
@@ -141,6 +141,22 @@
         "393269d2881726d13fcd2a51ad2b925250b7291b"
       ],
       "durationFormatted": "6m 1s"
+    },
+    {
+      "featureId": "FUNC-005",
+      "featureName": "FUNC-005",
+      "description": "Implement functionality to view all saved affirmations in a scrollable list with proper empty state handling",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T10:00:19.650Z",
+      "completedAt": "2026-01-13T10:05:27.040Z",
+      "durationMs": 307390,
+      "sessionId": "session-mkcf80xu-e5ua2x",
+      "sessionsCount": 1,
+      "commits": [
+        "0c23b50d58361c313ccba110ddcf79861c1a0845"
+      ],
+      "durationFormatted": "5m 7s"
     }
   ],
   "sessions": [
@@ -279,6 +295,23 @@
         "393269d2881726d13fcd2a51ad2b925250b7291b"
       ],
       "durationFormatted": "6m 1s"
+    },
+    {
+      "sessionId": "session-mkcf80xu-e5ua2x",
+      "startedAt": "2026-01-13T10:00:19.650Z",
+      "endedAt": "2026-01-13T10:05:27.040Z",
+      "durationMs": 307390,
+      "featuresWorkedOn": [
+        "FUNC-005"
+      ],
+      "featuresCompleted": [
+        "FUNC-005"
+      ],
+      "status": "completed",
+      "commits": [
+        "0c23b50d58361c313ccba110ddcf79861c1a0845"
+      ],
+      "durationFormatted": "5m 7s"
     }
   ],
   "byCategory": {
@@ -290,17 +323,17 @@
     },
     "functional": {
       "total": 0,
-      "completed": 4,
-      "totalTimeMs": 1282745,
-      "averageTimeMs": 320686
+      "completed": 5,
+      "totalTimeMs": 1590135,
+      "averageTimeMs": 318027
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 8,
-      "totalTimeMs": 4105637,
-      "averageTimeMs": 513205
+      "completed": 9,
+      "totalTimeMs": 4413027,
+      "averageTimeMs": 490336
     }
   }
 }
