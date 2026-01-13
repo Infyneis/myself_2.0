@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:43:39.606Z",
+  "lastUpdated": "2026-01-13T10:48:29.871Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 14,
-    "totalSessions": 15,
-    "totalTimeMs": 6693571,
-    "totalTimeFormatted": "1h 51m",
-    "averageFeatureTimeMs": 452459,
-    "averageFeatureTimeFormatted": "7m 32s",
-    "averageSessionTimeMs": 446238,
-    "averageSessionTimeFormatted": "7m 26s"
+    "completedFeatures": 15,
+    "totalSessions": 16,
+    "totalTimeMs": 6981831,
+    "totalTimeFormatted": "1h 56m",
+    "averageFeatureTimeMs": 441512,
+    "averageFeatureTimeFormatted": "7m 21s",
+    "averageSessionTimeMs": 436364,
+    "averageSessionTimeFormatted": "7m 16s"
   },
   "features": [
     {
@@ -237,6 +237,22 @@
         "9b72eb5020fc02e7619507ec4aee20327bfa8336"
       ],
       "durationFormatted": "2m 37s"
+    },
+    {
+      "featureId": "FUNC-011",
+      "featureName": "FUNC-011",
+      "description": "Implement export functionality to save affirmations to a text file",
+      "category": "functional",
+      "priority": "could-have",
+      "startedAt": "2026-01-13T10:43:41.609Z",
+      "completedAt": "2026-01-13T10:48:29.869Z",
+      "durationMs": 288260,
+      "sessionId": "session-mkcgrsmh-m9dbnu",
+      "sessionsCount": 1,
+      "commits": [
+        "4634fca0725b60c7f79f28a558025500b9855f33"
+      ],
+      "durationFormatted": "4m 48s"
     }
   ],
   "sessions": [
@@ -492,6 +508,23 @@
         "9b72eb5020fc02e7619507ec4aee20327bfa8336"
       ],
       "durationFormatted": "2m 37s"
+    },
+    {
+      "sessionId": "session-mkcgrsmh-m9dbnu",
+      "startedAt": "2026-01-13T10:43:41.609Z",
+      "endedAt": "2026-01-13T10:48:29.869Z",
+      "durationMs": 288260,
+      "featuresWorkedOn": [
+        "FUNC-011"
+      ],
+      "featuresCompleted": [
+        "FUNC-011"
+      ],
+      "status": "completed",
+      "commits": [
+        "4634fca0725b60c7f79f28a558025500b9855f33"
+      ],
+      "durationFormatted": "4m 48s"
     }
   ],
   "byCategory": {
@@ -503,9 +536,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 10,
-      "totalTimeMs": 3511529,
-      "averageTimeMs": 351153
+      "completed": 11,
+      "totalTimeMs": 3799789,
+      "averageTimeMs": 345435
     }
   },
   "byPriority": {
@@ -523,9 +556,9 @@
     },
     "could-have": {
       "total": 0,
-      "completed": 1,
-      "totalTimeMs": 855738,
-      "averageTimeMs": 855738
+      "completed": 2,
+      "totalTimeMs": 1143998,
+      "averageTimeMs": 571999
     }
   }
 }
