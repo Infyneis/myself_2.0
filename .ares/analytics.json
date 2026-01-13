@@ -1,16 +1,16 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:17:55.701Z",
+  "lastUpdated": "2026-01-13T20:21:19.222Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 65,
-    "totalSessions": 100,
-    "totalTimeMs": 19875169,
-    "totalTimeFormatted": "5h 31m",
-    "averageFeatureTimeMs": 296658,
-    "averageFeatureTimeFormatted": "4m 56s",
-    "averageSessionTimeMs": 198752,
+    "completedFeatures": 66,
+    "totalSessions": 101,
+    "totalTimeMs": 20076683,
+    "totalTimeFormatted": "5h 34m",
+    "averageFeatureTimeMs": 295216,
+    "averageFeatureTimeFormatted": "4m 55s",
+    "averageSessionTimeMs": 198779,
     "averageSessionTimeFormatted": "3m 18s"
   },
   "features": [
@@ -1049,6 +1049,22 @@
         "2f529e0fef0d43d670e373e7ff12d4f0dc03c29e"
       ],
       "durationFormatted": "7m 29s"
+    },
+    {
+      "featureId": "TEST-005",
+      "featureName": "TEST-005",
+      "description": "Write widget tests for affirmation list screen rendering and interactions",
+      "category": "testing",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T20:17:57.707Z",
+      "completedAt": "2026-01-13T20:21:19.221Z",
+      "durationMs": 201514,
+      "sessionId": "session-mkd1ab48-mwruvn",
+      "sessionsCount": 1,
+      "commits": [
+        "4d288cd2fb64b049a94094b38cd96530aacce84a"
+      ],
+      "durationFormatted": "3m 21s"
     }
   ],
   "sessions": [
@@ -2677,6 +2693,23 @@
         "2f529e0fef0d43d670e373e7ff12d4f0dc03c29e"
       ],
       "durationFormatted": "7m 29s"
+    },
+    {
+      "sessionId": "session-mkd1ab48-mwruvn",
+      "startedAt": "2026-01-13T20:17:57.707Z",
+      "endedAt": "2026-01-13T20:21:19.221Z",
+      "durationMs": 201514,
+      "featuresWorkedOn": [
+        "TEST-005"
+      ],
+      "featuresCompleted": [
+        "TEST-005"
+      ],
+      "status": "completed",
+      "commits": [
+        "4d288cd2fb64b049a94094b38cd96530aacce84a"
+      ],
+      "durationFormatted": "3m 21s"
     }
   ],
   "byCategory": {
@@ -2712,17 +2745,17 @@
     },
     "testing": {
       "total": 0,
-      "completed": 4,
-      "totalTimeMs": 772021,
-      "averageTimeMs": 193005
+      "completed": 5,
+      "totalTimeMs": 973535,
+      "averageTimeMs": 194707
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 49,
-      "totalTimeMs": 14329155,
-      "averageTimeMs": 292432
+      "completed": 50,
+      "totalTimeMs": 14530669,
+      "averageTimeMs": 290613
     },
     "should-have": {
       "total": 0,
