@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:42:48.134Z",
+  "lastUpdated": "2026-01-13T14:47:46.940Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 42,
-    "totalSessions": 69,
-    "totalTimeMs": 12871211,
-    "totalTimeFormatted": "3h 34m",
-    "averageFeatureTimeMs": 293979,
-    "averageFeatureTimeFormatted": "4m 53s",
-    "averageSessionTimeMs": 186539,
-    "averageSessionTimeFormatted": "3m 6s"
+    "completedFeatures": 43,
+    "totalSessions": 70,
+    "totalTimeMs": 13168014,
+    "totalTimeFormatted": "3h 39m",
+    "averageFeatureTimeMs": 294045,
+    "averageFeatureTimeFormatted": "4m 54s",
+    "averageSessionTimeMs": 188114,
+    "averageSessionTimeFormatted": "3m 8s"
   },
   "features": [
     {
@@ -683,6 +683,22 @@
         "ca1fbcee1cd6a474433674cb7ae34e2b6f1f24f2"
       ],
       "durationFormatted": "4m 14s"
+    },
+    {
+      "featureId": "WIDGET-011",
+      "featureName": "WIDGET-011",
+      "description": "Implement setting to enable/disable widget affirmation rotation",
+      "category": "functional",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T14:42:50.136Z",
+      "completedAt": "2026-01-13T14:47:46.939Z",
+      "durationMs": 296803,
+      "sessionId": "session-mkcpbc0o-dduizr",
+      "sessionsCount": 1,
+      "commits": [
+        "085ddf6c075de9b5ffe3e508383af6db009e2e0d"
+      ],
+      "durationFormatted": "4m 56s"
     }
   ],
   "sessions": [
@@ -1802,6 +1818,23 @@
         "ca1fbcee1cd6a474433674cb7ae34e2b6f1f24f2"
       ],
       "durationFormatted": "4m 14s"
+    },
+    {
+      "sessionId": "session-mkcpbc0o-dduizr",
+      "startedAt": "2026-01-13T14:42:50.136Z",
+      "endedAt": "2026-01-13T14:47:46.939Z",
+      "durationMs": 296803,
+      "featuresWorkedOn": [
+        "WIDGET-011"
+      ],
+      "featuresCompleted": [
+        "WIDGET-011"
+      ],
+      "status": "completed",
+      "commits": [
+        "085ddf6c075de9b5ffe3e508383af6db009e2e0d"
+      ],
+      "durationFormatted": "4m 56s"
     }
   ],
   "byCategory": {
@@ -1813,9 +1846,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 21,
-      "totalTimeMs": 6566008,
-      "averageTimeMs": 312667
+      "completed": 22,
+      "totalTimeMs": 6862811,
+      "averageTimeMs": 311946
     },
     "ui": {
       "total": 0,
@@ -1833,9 +1866,9 @@
     },
     "should-have": {
       "total": 0,
-      "completed": 7,
-      "totalTimeMs": 1620291,
-      "averageTimeMs": 231470
+      "completed": 8,
+      "totalTimeMs": 1917094,
+      "averageTimeMs": 239637
     },
     "could-have": {
       "total": 0,
