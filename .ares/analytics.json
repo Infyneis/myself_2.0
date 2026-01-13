@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T09:38:46.890Z",
+  "lastUpdated": "2026-01-13T09:43:35.411Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 4,
-    "totalSessions": 4,
-    "totalTimeMs": 2822892,
-    "totalTimeFormatted": "47m 2s",
-    "averageFeatureTimeMs": 705723,
-    "averageFeatureTimeFormatted": "11m 45s",
-    "averageSessionTimeMs": 705723,
-    "averageSessionTimeFormatted": "11m 45s"
+    "completedFeatures": 5,
+    "totalSessions": 5,
+    "totalTimeMs": 3109412,
+    "totalTimeFormatted": "51m 49s",
+    "averageFeatureTimeMs": 621882,
+    "averageFeatureTimeFormatted": "10m 21s",
+    "averageSessionTimeMs": 621882,
+    "averageSessionTimeFormatted": "10m 21s"
   },
   "features": [
     {
@@ -77,6 +77,22 @@
         "f7702cc25e9aa1b0b581683b5a3046b7acdf9a3d"
       ],
       "durationFormatted": "7m 26s"
+    },
+    {
+      "featureId": "FUNC-001",
+      "featureName": "FUNC-001",
+      "description": "Create Affirmation class with id (UUID), text (max 280 chars), createdAt, updatedAt, displayCount, isActive fields. Include Hive type adapter",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T09:38:48.891Z",
+      "completedAt": "2026-01-13T09:43:35.411Z",
+      "durationMs": 286520,
+      "sessionId": "session-mkcegczf-3703hb",
+      "sessionsCount": 1,
+      "commits": [
+        "64a3ce520af600e8bccce3fdb3fe9a73e07394ab"
+      ],
+      "durationFormatted": "4m 46s"
     }
   ],
   "sessions": [
@@ -147,6 +163,23 @@
         "f7702cc25e9aa1b0b581683b5a3046b7acdf9a3d"
       ],
       "durationFormatted": "7m 26s"
+    },
+    {
+      "sessionId": "session-mkcegczf-3703hb",
+      "startedAt": "2026-01-13T09:38:48.891Z",
+      "endedAt": "2026-01-13T09:43:35.411Z",
+      "durationMs": 286520,
+      "featuresWorkedOn": [
+        "FUNC-001"
+      ],
+      "featuresCompleted": [
+        "FUNC-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "64a3ce520af600e8bccce3fdb3fe9a73e07394ab"
+      ],
+      "durationFormatted": "4m 46s"
     }
   ],
   "byCategory": {
@@ -155,14 +188,20 @@
       "completed": 4,
       "totalTimeMs": 2822892,
       "averageTimeMs": 705723
+    },
+    "functional": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 286520,
+      "averageTimeMs": 286520
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 4,
-      "totalTimeMs": 2822892,
-      "averageTimeMs": 705723
+      "completed": 5,
+      "totalTimeMs": 3109412,
+      "averageTimeMs": 621882
     }
   }
 }
