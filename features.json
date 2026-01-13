@@ -136,7 +136,7 @@
       "description": "Implement export functionality to save affirmations to a text file",
       "category": "functional",
       "priority": "could-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-019"]
     },
     {

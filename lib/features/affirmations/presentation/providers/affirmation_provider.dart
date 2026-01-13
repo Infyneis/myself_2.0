@@ -10,6 +10,7 @@ import '../../data/repositories/affirmation_repository.dart';
 import '../../domain/usecases/create_affirmation.dart';
 import '../../domain/usecases/delete_affirmation.dart';
 import '../../domain/usecases/edit_affirmation.dart';
+import '../../domain/usecases/export_affirmations.dart';
 import '../../domain/usecases/get_random_affirmation.dart';
 
 /// Provider for managing affirmation state.
@@ -19,6 +20,7 @@ import '../../domain/usecases/get_random_affirmation.dart';
 /// - Currently displayed affirmation
 /// - CRUD operations
 /// - Random selection functionality
+/// - Export functionality
 ///
 /// Note: Full implementation will be completed in INFRA-004.
 class AffirmationProvider extends ChangeNotifier {
@@ -29,6 +31,7 @@ class AffirmationProvider extends ChangeNotifier {
     CreateAffirmationUseCase? createAffirmationUseCase,
     EditAffirmationUseCase? editAffirmationUseCase,
     DeleteAffirmationUseCase? deleteAffirmationUseCase,
+    ExportAffirmationsUseCase? exportAffirmationsUseCase,
   })  : _repository = repository,
         _getRandomAffirmation = getRandomAffirmationUseCase,
         _createAffirmationUseCase = createAffirmationUseCase ??
@@ -36,13 +39,16 @@ class AffirmationProvider extends ChangeNotifier {
         _editAffirmationUseCase = editAffirmationUseCase ??
             EditAffirmationUseCase(repository: repository),
         _deleteAffirmationUseCase = deleteAffirmationUseCase ??
-            DeleteAffirmationUseCase(repository: repository);
+            DeleteAffirmationUseCase(repository: repository),
+        _exportAffirmationsUseCase = exportAffirmationsUseCase ??
+            ExportAffirmationsUseCase(repository: repository);
 
   final AffirmationRepository _repository;
   final GetRandomAffirmation? _getRandomAffirmation;
   final CreateAffirmationUseCase _createAffirmationUseCase;
   final EditAffirmationUseCase _editAffirmationUseCase;
   final DeleteAffirmationUseCase _deleteAffirmationUseCase;
+  final ExportAffirmationsUseCase _exportAffirmationsUseCase;
 
   List<Affirmation> _affirmations = [];
   Affirmation? _currentAffirmation;
@@ -337,6 +343,56 @@ class AffirmationProvider extends ChangeNotifier {
       // Revert on error - reload from storage
       await loadAffirmations();
       return false;
+    }
+  }
+
+  /// Exports all affirmations to a text file.
+  ///
+  /// This method:
+  /// - Retrieves all affirmations from storage
+  /// - Formats them as a human-readable text file
+  /// - Saves the file to the device's documents directory
+  ///
+  /// [fileName] is optional custom filename without extension.
+  /// If not provided, generates a timestamped filename.
+  ///
+  /// Returns a tuple of (success, filePath) where:
+  /// - `success` is `true` if export was successful
+  /// - `filePath` is the path to the exported file (null on failure)
+  ///
+  /// Check [error] property for failure details.
+  ///
+  /// Example:
+  /// ```dart
+  /// final (success, filePath) = await provider.exportAffirmations();
+  /// if (success) {
+  ///   print('Exported to: $filePath');
+  /// } else {
+  ///   print(provider.error);
+  /// }
+  /// ```
+  Future<(bool success, String? filePath)> exportAffirmations({
+    String? fileName,
+  }) async {
+    _setLoading(true);
+    try {
+      final result = await _exportAffirmationsUseCase.call(fileName: fileName);
+
+      switch (result) {
+        case ExportAffirmationsSuccess(:final filePath):
+          _error = null;
+          // Update notification without error
+          _setLoading(false);
+          return (true, filePath);
+        case ExportAffirmationsFailure(:final message):
+          _error = message;
+          _setLoading(false);
+          return (false, null);
+      }
+    } catch (e) {
+      _error = 'Failed to export affirmations: $e';
+      _setLoading(false);
+      return (false, null);
     }
   }
 
