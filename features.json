@@ -1,0 +1,701 @@
+{
+  "version": "1.0.0",
+  "projectName": "Myself 2.0",
+  "createdAt": "2026-01-13T08:42:07.105Z",
+  "updatedAt": "2026-01-13T09:45:00.000Z",
+  "features": [
+    {
+      "id": "INFRA-001",
+      "name": "Flutter Project Setup",
+      "description": "Initialize Flutter project with proper structure, pubspec.yaml dependencies (provider, hive, home_widget, uuid, intl, google_fonts, flutter_animate), and basic configuration",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-007"]
+    },
+    {
+      "id": "INFRA-002",
+      "name": "Project Architecture Setup",
+      "description": "Implement feature-based folder structure: lib/core/, lib/features/affirmations/, lib/features/settings/, lib/features/onboarding/, lib/widgets/native_widget/",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "INFRA-003",
+      "name": "Hive Database Setup",
+      "description": "Configure Hive for local storage with proper initialization, type adapters for Affirmation model, and platform-specific paths",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-017", "FR-018"]
+    },
+    {
+      "id": "INFRA-004",
+      "name": "State Management Setup",
+      "description": "Set up Provider/Riverpod for state management with AffirmationProvider and SettingsProvider",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "FUNC-001",
+      "name": "Affirmation Data Model",
+      "description": "Create Affirmation class with id (UUID), text (max 280 chars), createdAt, updatedAt, displayCount, isActive fields. Include Hive type adapter",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-006"]
+    },
+    {
+      "id": "FUNC-002",
+      "name": "Create Affirmation",
+      "description": "Implement functionality to create new affirmations with free-form text input, character limit validation (280 chars), and UUID generation",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-001", "FR-006"]
+    },
+    {
+      "id": "FUNC-003",
+      "name": "Edit Affirmation",
+      "description": "Implement functionality to edit existing affirmations, updating the updatedAt timestamp and preserving other metadata",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-002"]
+    },
+    {
+      "id": "FUNC-004",
+      "name": "Delete Affirmation",
+      "description": "Implement functionality to delete affirmations with confirmation dialog",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-003"]
+    },
+    {
+      "id": "FUNC-005",
+      "name": "List Affirmations",
+      "description": "Implement functionality to view all saved affirmations in a scrollable list with proper empty state handling",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-004"]
+    },
+    {
+      "id": "FUNC-006",
+      "name": "Multi-line Affirmation Support",
+      "description": "Support multi-line text input and display for affirmations",
+      "category": "functional",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-005"]
+    },
+    {
+      "id": "FUNC-007",
+      "name": "Reorder Affirmations",
+      "description": "Implement drag-and-drop reordering of affirmations in the list view",
+      "category": "functional",
+      "priority": "could-have",
+      "passes": false,
+      "requirementIds": ["FR-007"]
+    },
+    {
+      "id": "FUNC-008",
+      "name": "Affirmation Repository",
+      "description": "Create AffirmationRepository for CRUD operations with Hive, abstracting storage implementation",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-017", "FR-018"]
+    },
+    {
+      "id": "FUNC-009",
+      "name": "Random Affirmation Selection",
+      "description": "Implement GetRandomAffirmation use case that selects a random active affirmation, avoiding immediate repetition",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-008", "FR-014"]
+    },
+    {
+      "id": "FUNC-010",
+      "name": "Settings Persistence",
+      "description": "Implement settings storage for theme, refreshMode, and language preferences using Hive",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-022", "FR-023", "FR-024", "FR-025"]
+    },
+    {
+      "id": "FUNC-011",
+      "name": "Export Affirmations",
+      "description": "Implement export functionality to save affirmations to a text file",
+      "category": "functional",
+      "priority": "could-have",
+      "passes": false,
+      "requirementIds": ["FR-019"]
+    },
+    {
+      "id": "FUNC-012",
+      "name": "Import Affirmations",
+      "description": "Implement import functionality to load affirmations from a text file",
+      "category": "functional",
+      "priority": "could-have",
+      "passes": false,
+      "requirementIds": ["FR-020"]
+    },
+    {
+      "id": "UI-001",
+      "name": "App Theme Configuration",
+      "description": "Configure AppTheme with zen color palette (Cloud White, Deep Night, Soft Sage, etc.), typography (Playfair Display, Inter), and consistent styling",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "UI-002",
+      "name": "Dark/Light Mode Support",
+      "description": "Implement theme switching between light, dark, and system modes with proper color adaptation",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-025"]
+    },
+    {
+      "id": "UI-003",
+      "name": "Home Screen",
+      "description": "Create main home screen displaying a random affirmation with zen animation, navigation to affirmation list, and settings",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-014"]
+    },
+    {
+      "id": "UI-004",
+      "name": "Affirmation Display Animation",
+      "description": "Implement subtle fade-in animation (300-500ms) for affirmation transitions and optional breathing animation",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-014"]
+    },
+    {
+      "id": "UI-005",
+      "name": "Swipe/Tap to Refresh Affirmation",
+      "description": "Enable swipe or tap gesture on home screen to display another random affirmation with smooth transition",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-015"]
+    },
+    {
+      "id": "UI-006",
+      "name": "Manual Refresh Button",
+      "description": "Add refresh button on home screen to cycle through affirmations",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-016"]
+    },
+    {
+      "id": "UI-007",
+      "name": "Affirmation List Screen",
+      "description": "Create screen displaying all affirmations in a card-based list with edit/delete actions",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-004"]
+    },
+    {
+      "id": "UI-008",
+      "name": "Affirmation Edit Screen",
+      "description": "Create screen for creating/editing affirmations with text input, character counter, and save/cancel actions",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-001", "FR-002"]
+    },
+    {
+      "id": "UI-009",
+      "name": "Affirmation Card Widget",
+      "description": "Create reusable AffirmationCard widget with zen styling, rounded corners (16px), soft elevation, and proper text display",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "UI-010",
+      "name": "Affirmation Input Widget",
+      "description": "Create reusable AffirmationInput widget with multi-line support, character limit indicator, and validation",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-001", "FR-005", "FR-006"]
+    },
+    {
+      "id": "UI-011",
+      "name": "Settings Screen",
+      "description": "Create settings screen with theme toggle, refresh interval options, language selection, and font size adjustment",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-022", "FR-023", "FR-024", "FR-025", "FR-026"]
+    },
+    {
+      "id": "UI-012",
+      "name": "Empty State UI",
+      "description": "Design and implement empty state for affirmation list with illustration and 'Create Your First Affirmation' prompt",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-012"]
+    },
+    {
+      "id": "UI-013",
+      "name": "Onboarding Welcome Screen",
+      "description": "Create welcome screen with illustration and brief app explanation for first-time users",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "UI-014",
+      "name": "Onboarding Flow",
+      "description": "Implement complete first-launch onboarding: welcome -> create first affirmation -> success animation -> widget setup instructions",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "UI-015",
+      "name": "Success Animation",
+      "description": "Create success animation displayed after creating first affirmation during onboarding",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "UI-016",
+      "name": "Delete Confirmation Dialog",
+      "description": "Implement confirmation dialog for affirmation deletion with cancel/confirm actions",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-003"]
+    },
+    {
+      "id": "UI-017",
+      "name": "Font Size Adjustment",
+      "description": "Implement font size adjustment setting for accessibility with preview",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-026"]
+    },
+    {
+      "id": "WIDGET-001",
+      "name": "Home Widget Package Integration",
+      "description": "Integrate home_widget package and configure platform channels for iOS and Android widget communication",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-008"]
+    },
+    {
+      "id": "WIDGET-002",
+      "name": "Widget Data Sharing",
+      "description": "Implement data sharing between Flutter app and native widgets using SharedDefaults (iOS) and SharedPreferences (Android)",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-008", "FR-013"]
+    },
+    {
+      "id": "WIDGET-003",
+      "name": "iOS Widget Extension",
+      "description": "Create iOS WidgetKit extension with SwiftUI for small (2x2), medium (4x2), and large (4x4) widget sizes",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-010"]
+    },
+    {
+      "id": "WIDGET-004",
+      "name": "iOS Widget Timeline Provider",
+      "description": "Implement TimelineProvider for iOS widget with refresh on device unlock events",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-009"]
+    },
+    {
+      "id": "WIDGET-005",
+      "name": "Android Widget Provider",
+      "description": "Create Android AppWidgetProvider with Kotlin for small, medium, and large widget sizes",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-010"]
+    },
+    {
+      "id": "WIDGET-006",
+      "name": "Android Unlock Broadcast Receiver",
+      "description": "Implement BroadcastReceiver for ACTION_USER_PRESENT to update widget on phone unlock",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-009"]
+    },
+    {
+      "id": "WIDGET-007",
+      "name": "Widget Tap to Open App",
+      "description": "Configure widget tap action to launch main application",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-011"]
+    },
+    {
+      "id": "WIDGET-008",
+      "name": "Widget Placeholder State",
+      "description": "Display placeholder text when no affirmations exist in the widget",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-012"]
+    },
+    {
+      "id": "WIDGET-009",
+      "name": "Widget Real-time Updates",
+      "description": "Trigger widget refresh when affirmations are added, modified, or deleted in the app",
+      "category": "functional",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-013"]
+    },
+    {
+      "id": "WIDGET-010",
+      "name": "Widget Theme Support",
+      "description": "Adapt widget appearance to system light/dark mode with translucent background and blur effect",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "WIDGET-011",
+      "name": "Widget Rotation Toggle",
+      "description": "Implement setting to enable/disable widget affirmation rotation",
+      "category": "functional",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-022"]
+    },
+    {
+      "id": "WIDGET-012",
+      "name": "Widget Refresh Interval Setting",
+      "description": "Implement setting for refresh interval: every unlock, hourly, or daily",
+      "category": "functional",
+      "priority": "could-have",
+      "passes": false,
+      "requirementIds": ["FR-023"]
+    },
+    {
+      "id": "PERF-001",
+      "name": "App Cold Start Optimization",
+      "description": "Optimize app initialization to achieve cold start time under 2 seconds",
+      "category": "performance",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-001"]
+    },
+    {
+      "id": "PERF-002",
+      "name": "Widget Update Latency",
+      "description": "Ensure widget updates complete within 500ms of trigger event",
+      "category": "performance",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-002"]
+    },
+    {
+      "id": "PERF-003",
+      "name": "Memory Footprint Optimization",
+      "description": "Optimize memory usage to stay under 50MB footprint",
+      "category": "performance",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-003"]
+    },
+    {
+      "id": "PERF-004",
+      "name": "Offline Functionality",
+      "description": "Ensure 100% of features work offline without internet connection",
+      "category": "performance",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-004"]
+    },
+    {
+      "id": "SEC-001",
+      "name": "No Data Collection",
+      "description": "Verify no analytics, tracking, or data collection is implemented in v1",
+      "category": "security",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-009"]
+    },
+    {
+      "id": "SEC-002",
+      "name": "No Internet Permission for Core",
+      "description": "Ensure core functionality works without internet permission",
+      "category": "security",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-010"]
+    },
+    {
+      "id": "SEC-003",
+      "name": "Local Data Encryption",
+      "description": "Implement platform-native encryption for local data storage",
+      "category": "security",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["NFR-011"]
+    },
+    {
+      "id": "SEC-004",
+      "name": "No Third-party Data SDKs",
+      "description": "Verify no third-party SDKs that collect user data are included",
+      "category": "security",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-012"]
+    },
+    {
+      "id": "A11Y-001",
+      "name": "VoiceOver Support",
+      "description": "Implement full VoiceOver support for iOS with proper semantic labels",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-013"]
+    },
+    {
+      "id": "A11Y-002",
+      "name": "TalkBack Support",
+      "description": "Implement full TalkBack support for Android with proper content descriptions",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-013"]
+    },
+    {
+      "id": "A11Y-003",
+      "name": "Touch Target Size",
+      "description": "Ensure all interactive elements have minimum 44x44 points touch target",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-014"]
+    },
+    {
+      "id": "A11Y-004",
+      "name": "Color Contrast",
+      "description": "Verify all text meets minimum 4.5:1 color contrast ratio",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-015"]
+    },
+    {
+      "id": "A11Y-005",
+      "name": "System Font Scaling",
+      "description": "Support system font scaling for users with visual impairments",
+      "category": "ui",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["NFR-016"]
+    },
+    {
+      "id": "L10N-001",
+      "name": "Localization Setup",
+      "description": "Configure Flutter localization with intl package, ARB files for French and English",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-024"]
+    },
+    {
+      "id": "L10N-002",
+      "name": "French Translations",
+      "description": "Implement all UI strings in French (primary language)",
+      "category": "functional",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["FR-024"]
+    },
+    {
+      "id": "L10N-003",
+      "name": "English Translations",
+      "description": "Implement all UI strings in English (secondary language)",
+      "category": "functional",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-024"]
+    },
+    {
+      "id": "L10N-004",
+      "name": "Language Selection",
+      "description": "Implement language selection setting with immediate UI update",
+      "category": "functional",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": ["FR-024"]
+    },
+    {
+      "id": "TEST-001",
+      "name": "Affirmation CRUD Unit Tests",
+      "description": "Write unit tests for all Affirmation CRUD operations in repository",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-002",
+      "name": "Random Selection Unit Tests",
+      "description": "Write unit tests for random affirmation selection algorithm",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-003",
+      "name": "Data Persistence Unit Tests",
+      "description": "Write unit tests for data persistence layer with Hive",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-004",
+      "name": "Home Screen Widget Tests",
+      "description": "Write widget tests for home screen rendering and interactions",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-005",
+      "name": "Affirmation List Widget Tests",
+      "description": "Write widget tests for affirmation list screen rendering and interactions",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-006",
+      "name": "Affirmation Edit Widget Tests",
+      "description": "Write widget tests for affirmation create/edit screen",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-007",
+      "name": "Theme Switching Widget Tests",
+      "description": "Write widget tests for theme switching functionality",
+      "category": "testing",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-008",
+      "name": "Onboarding Integration Tests",
+      "description": "Write integration tests for complete onboarding user flow",
+      "category": "testing",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-009",
+      "name": "Affirmation CRUD Integration Tests",
+      "description": "Write integration tests for full create, edit, delete user flows",
+      "category": "testing",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "TEST-010",
+      "name": "Widget Data Sync Integration Tests",
+      "description": "Write integration tests for widget and app data synchronization",
+      "category": "testing",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "DOC-001",
+      "name": "Code Documentation",
+      "description": "Add dartdoc comments to all public APIs, classes, and methods",
+      "category": "documentation",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "DOC-002",
+      "name": "Widget Setup Instructions",
+      "description": "Create in-app instructions for adding home screen widget on iOS and Android",
+      "category": "documentation",
+      "priority": "should-have",
+      "passes": false,
+      "requirementIds": []
+    },
+    {
+      "id": "COMPAT-001",
+      "name": "iOS 14+ Compatibility",
+      "description": "Ensure app runs correctly on iOS 14.0 and above",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-005"]
+    },
+    {
+      "id": "COMPAT-002",
+      "name": "Android 8+ Compatibility",
+      "description": "Ensure app runs correctly on Android 8.0 (API 26) and above",
+      "category": "infrastructure",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-006"]
+    },
+    {
+      "id": "COMPAT-003",
+      "name": "Screen Size Support",
+      "description": "Ensure responsive layout works on screens from 4 to 13 inches",
+      "category": "ui",
+      "priority": "must-have",
+      "passes": false,
+      "requirementIds": ["NFR-008"]
+    }
+  ]
+}
