@@ -1,16 +1,16 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:25:12.624Z",
+  "lastUpdated": "2026-01-13T14:28:20.842Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 38,
-    "totalSessions": 65,
-    "totalTimeMs": 11823715,
-    "totalTimeFormatted": "3h 17m",
-    "averageFeatureTimeMs": 297358,
-    "averageFeatureTimeFormatted": "4m 57s",
-    "averageSessionTimeMs": 181903,
+    "completedFeatures": 39,
+    "totalSessions": 66,
+    "totalTimeMs": 12009930,
+    "totalTimeFormatted": "3h 20m",
+    "averageFeatureTimeMs": 294508,
+    "averageFeatureTimeFormatted": "4m 54s",
+    "averageSessionTimeMs": 181969,
     "averageSessionTimeFormatted": "3m 1s"
   },
   "features": [
@@ -619,6 +619,22 @@
         "7a51796d8efff70009b5e52309c53b8a73e550a2"
       ],
       "durationFormatted": "2m 17s"
+    },
+    {
+      "featureId": "WIDGET-007",
+      "featureName": "WIDGET-007",
+      "description": "Configure widget tap action to launch main application",
+      "category": "functional",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:25:14.627Z",
+      "completedAt": "2026-01-13T14:28:20.842Z",
+      "durationMs": 186215,
+      "sessionId": "session-mkcoopkz-ypda3k",
+      "sessionsCount": 1,
+      "commits": [
+        "ddf0bebe63dd825374c43fe31ed07fb339634dc0"
+      ],
+      "durationFormatted": "3m 6s"
     }
   ],
   "sessions": [
@@ -1670,6 +1686,23 @@
         "7a51796d8efff70009b5e52309c53b8a73e550a2"
       ],
       "durationFormatted": "2m 17s"
+    },
+    {
+      "sessionId": "session-mkcoopkz-ypda3k",
+      "startedAt": "2026-01-13T14:25:14.627Z",
+      "endedAt": "2026-01-13T14:28:20.842Z",
+      "durationMs": 186215,
+      "featuresWorkedOn": [
+        "WIDGET-007"
+      ],
+      "featuresCompleted": [
+        "WIDGET-007"
+      ],
+      "status": "completed",
+      "commits": [
+        "ddf0bebe63dd825374c43fe31ed07fb339634dc0"
+      ],
+      "durationFormatted": "3m 6s"
     }
   ],
   "byCategory": {
@@ -1681,9 +1714,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 18,
-      "totalTimeMs": 5773244,
-      "averageTimeMs": 320736
+      "completed": 19,
+      "totalTimeMs": 5959459,
+      "averageTimeMs": 313656
     },
     "ui": {
       "total": 0,
@@ -1695,9 +1728,9 @@
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 29,
-      "totalTimeMs": 8425160,
-      "averageTimeMs": 290523
+      "completed": 30,
+      "totalTimeMs": 8611375,
+      "averageTimeMs": 287046
     },
     "should-have": {
       "total": 0,

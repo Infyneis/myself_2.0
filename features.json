@@ -370,7 +370,7 @@
       "description": "Display placeholder text when no affirmations exist in the widget",
       "category": "functional",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-012"]
     },
     {
