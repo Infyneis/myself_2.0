@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:58:27.031Z",
+  "lastUpdated": "2026-01-13T10:58:31.423Z",
   "summary": {
     "totalFeatures": 0,
     "completedFeatures": 16,
-    "totalSessions": 41,
-    "totalTimeMs": 7528932,
+    "totalSessions": 42,
+    "totalTimeMs": 7531321,
     "totalTimeFormatted": "2h 5m",
     "averageFeatureTimeMs": 438109,
     "averageFeatureTimeFormatted": "7m 18s",
-    "averageSessionTimeMs": 183632,
-    "averageSessionTimeFormatted": "3m 3s"
+    "averageSessionTimeMs": 179317,
+    "averageSessionTimeFormatted": "2m 59s"
   },
   "features": [
     {
@@ -916,6 +916,21 @@
       "status": "interrupted",
       "commits": [
         "47669b6035531a7aa3da82d82aafd627a6906e0f"
+      ],
+      "durationFormatted": "2s"
+    },
+    {
+      "sessionId": "session-mkchatd6-cdg3yf",
+      "startedAt": "2026-01-13T10:58:29.034Z",
+      "endedAt": "2026-01-13T10:58:31.423Z",
+      "durationMs": 2389,
+      "featuresWorkedOn": [
+        "UI-001"
+      ],
+      "featuresCompleted": [],
+      "status": "interrupted",
+      "commits": [
+        "aa568acb001410cce3a7feb2402e485d115a4fd4"
       ],
       "durationFormatted": "2s"
     }
