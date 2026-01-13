@@ -11,6 +11,10 @@ import 'dart:math';
 /// Used primarily for selecting random affirmations to display
 /// while ensuring the same affirmation isn't shown twice in a row.
 class RandomSelector {
+  /// Creates a [RandomSelector] instance.
+  ///
+  /// Optionally accepts a [random] instance for testing purposes.
+  /// If not provided, uses a standard [Random] instance.
   RandomSelector({Random? random}) : _random = random ?? Random();
 
   final Random _random;

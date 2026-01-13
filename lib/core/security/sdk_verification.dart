@@ -241,6 +241,7 @@ class SdkVerification {
 
 /// Privacy information for a single dependency
 class DependencyPrivacyInfo {
+  /// Creates a [DependencyPrivacyInfo] instance with the provided details.
   const DependencyPrivacyInfo({
     required this.name,
     required this.purpose,
@@ -251,12 +252,25 @@ class DependencyPrivacyInfo {
     this.notes,
   });
 
+  /// The package name of the dependency.
   final String name;
+
+  /// The purpose or functionality this dependency provides.
   final String purpose;
+
+  /// The data collection status of this dependency.
   final DataCollectionStatus dataCollection;
+
+  /// Verification notes explaining the privacy assessment.
   final String verification;
+
+  /// The source or author of this dependency.
   final String source;
+
+  /// Whether this is a first-party (Flutter/Dart team) dependency.
   final bool isFirstParty;
+
+  /// Additional notes about this dependency (optional).
   final String? notes;
 }
 
@@ -271,12 +285,16 @@ enum DataCollectionStatus {
   /// Actively collects user data
   collects('Collects user data');
 
+  /// Creates a [DataCollectionStatus] with the given label.
   const DataCollectionStatus(this.label);
+
+  /// Human-readable label describing this data collection status.
   final String label;
 }
 
 /// Result of verification
 class VerificationResult {
+  /// Creates a [VerificationResult] with the provided verification details.
   const VerificationResult({
     required this.isCompliant,
     required this.issues,
@@ -285,9 +303,18 @@ class VerificationResult {
     required this.verifiedDate,
   });
 
+  /// Whether all dependencies are privacy-compliant.
   final bool isCompliant;
+
+  /// List of critical privacy issues found.
   final List<String> issues;
+
+  /// List of non-critical warnings.
   final List<String> warnings;
+
+  /// Total number of dependencies verified.
   final int totalDependencies;
+
+  /// Date and time when verification was performed.
   final DateTime verifiedDate;
 }

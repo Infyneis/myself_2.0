@@ -269,10 +269,22 @@ class AppTextStyles {
   }
 
   /// Font size constants for external use
+
+  /// Standard affirmation display font size (24px).
   static double get affirmationDisplaySize => _affirmationDisplaySize;
+
+  /// Large affirmation display font size (32px).
   static double get affirmationDisplayLargeSize => _affirmationDisplayLargeSize;
+
+  /// Standard body text font size (16px).
   static double get bodySize => _bodySize;
+
+  /// Heading text font size (20px).
   static double get headingSize => _headingSize;
+
+  /// Button text font size (14px).
   static double get buttonSize => _buttonSize;
+
+  /// Caption text font size (12px).
   static double get captionSize => _captionSize;
 }
