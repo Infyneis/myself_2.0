@@ -1,17 +1,19 @@
-/// Performance monitoring utilities for tracking app initialization.
+/// Performance monitoring utilities for tracking app operations.
 ///
-/// Provides tools for measuring and logging app startup performance
-/// to ensure PERF-001 requirement (cold start < 2 seconds) is met.
+/// Provides tools for measuring and logging performance of various
+/// operations to ensure performance requirements are met:
+/// - PERF-001: Cold start < 2 seconds
+/// - PERF-002: Widget updates < 500ms
 library;
 
 import 'package:flutter/foundation.dart';
 
-/// Performance monitoring utility for tracking app startup time.
+/// Performance monitoring utility for tracking operation timing.
 ///
-/// This class helps measure cold start performance and ensures
-/// the app meets the PERF-001 requirement of < 2 seconds cold start.
+/// This class helps measure operation performance and ensures
+/// the app meets performance requirements.
 ///
-/// Usage:
+/// Usage for app startup (PERF-001):
 /// ```dart
 /// void main() async {
 ///   final monitor = PerformanceMonitor.start();
@@ -22,11 +24,24 @@ import 'package:flutter/foundation.dart';
 ///   monitor.logSummary();
 /// }
 /// ```
+///
+/// Usage for widget updates (PERF-002):
+/// ```dart
+/// final monitor = PerformanceMonitor.start();
+/// await widgetService.updateWidget(...);
+/// monitor.stop();
+/// if (monitor.elapsedMs > 500) {
+///   debugPrint('⚠️ Widget update exceeded 500ms target');
+/// }
+/// ```
 class PerformanceMonitor {
   /// Creates a new performance monitor and starts timing.
-  PerformanceMonitor.start() : _startTime = DateTime.now();
+  PerformanceMonitor.start()
+      : _startTime = DateTime.now(),
+        _stopTime = null;
 
   final DateTime _startTime;
+  DateTime? _stopTime;
   final List<_Checkpoint> _checkpoints = [];
 
   /// Logs a checkpoint with a label.
@@ -44,13 +59,20 @@ class PerformanceMonitor {
     }
   }
 
+  /// Stops the performance monitor.
+  ///
+  /// This is useful for measuring discrete operations.
+  void stop() {
+    _stopTime = DateTime.now();
+  }
+
   /// Logs a summary of all checkpoints and total startup time.
   ///
   /// Highlights if the startup time exceeds the 2-second target.
   void logSummary() {
     if (!kDebugMode) return;
 
-    final totalDuration = DateTime.now().difference(_startTime);
+    final totalDuration = (_stopTime ?? DateTime.now()).difference(_startTime);
     final totalMs = totalDuration.inMilliseconds;
 
     debugPrint('');
@@ -76,11 +98,44 @@ class PerformanceMonitor {
     debugPrint('');
   }
 
+  /// Logs a summary for widget update operations.
+  ///
+  /// Highlights if the update time exceeds the 500ms target (PERF-002).
+  void logWidgetUpdateSummary({required String operation}) {
+    if (!kDebugMode) return;
+
+    final totalDuration = (_stopTime ?? DateTime.now()).difference(_startTime);
+    final totalMs = totalDuration.inMilliseconds;
+
+    final passed = totalMs < 500;
+    final icon = passed ? '✅' : '⚠️';
+
+    debugPrint(
+      'Widget Update [$operation]: ${totalMs}ms $icon ${passed ? "PASSED" : "WARNING: Exceeded 500ms target"}',
+    );
+
+    if (_checkpoints.isNotEmpty) {
+      for (final checkpoint in _checkpoints) {
+        debugPrint(
+          '  • ${checkpoint.label.padRight(30)} ${checkpoint.duration.inMilliseconds}ms',
+        );
+      }
+    }
+  }
+
   /// Gets the total elapsed time since start.
-  Duration get elapsed => DateTime.now().difference(_startTime);
+  Duration get elapsed => (_stopTime ?? DateTime.now()).difference(_startTime);
 
   /// Gets the total elapsed time in milliseconds.
   int get elapsedMs => elapsed.inMilliseconds;
+
+  /// Checks if the elapsed time is under a target in milliseconds.
+  ///
+  /// Useful for assertions and validation.
+  bool isUnder(int targetMs) => elapsedMs < targetMs;
+
+  /// Checks if the monitor has been stopped.
+  bool get isStopped => _stopTime != null;
 }
 
 /// Internal class representing a performance checkpoint.

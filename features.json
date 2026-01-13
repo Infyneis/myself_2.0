@@ -424,7 +424,7 @@
       "description": "Ensure widget updates complete within 500ms of trigger event",
       "category": "performance",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["NFR-002"]
     },
     {

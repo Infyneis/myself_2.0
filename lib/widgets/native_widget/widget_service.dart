@@ -31,8 +31,10 @@ library;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:home_widget/home_widget.dart';
 
+import '../../core/utils/performance_monitor.dart';
 import 'android/android_widget_config.dart';
 import 'ios/ios_widget_config.dart';
 
@@ -77,39 +79,61 @@ class WidgetService {
   /// [affirmationId] - The ID of the affirmation for tracking.
   ///
   /// Returns true if the update was successful, false otherwise.
+  ///
+  /// ## Performance (PERF-002)
+  /// This method is optimized to complete within 500ms:
+  /// - Batches all data saves together to minimize I/O operations
+  /// - Uses Future.wait() for parallel operations where possible
+  /// - Monitors execution time in debug mode
   Future<bool> updateWidget({
     required String affirmationText,
     required String affirmationId,
   }) async {
+    final monitor = kDebugMode ? PerformanceMonitor.start() : null;
+
     try {
-      // Save data to shared storage
-      await HomeWidget.saveWidgetData<String>(
-        Platform.isIOS
-            ? IosWidgetConfig.affirmationTextKey
-            : AndroidWidgetConfig.affirmationTextKey,
-        affirmationText,
-      );
+      monitor?.logCheckpoint('Start updateWidget');
 
-      await HomeWidget.saveWidgetData<String>(
-        Platform.isIOS
-            ? IosWidgetConfig.affirmationIdKey
-            : AndroidWidgetConfig.affirmationIdKey,
-        affirmationId,
-      );
+      // Batch save operations to reduce I/O overhead
+      final textKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationTextKey
+          : AndroidWidgetConfig.affirmationTextKey;
+      final idKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationIdKey
+          : AndroidWidgetConfig.affirmationIdKey;
+      final updateKey = Platform.isIOS
+          ? IosWidgetConfig.lastUpdateKey
+          : AndroidWidgetConfig.lastUpdateKey;
 
-      await HomeWidget.saveWidgetData<String>(
-        Platform.isIOS
-            ? IosWidgetConfig.lastUpdateKey
-            : AndroidWidgetConfig.lastUpdateKey,
-        DateTime.now().toIso8601String(),
-      );
+      // Execute all saves in parallel for better performance
+      await Future.wait([
+        HomeWidget.saveWidgetData<String>(textKey, affirmationText),
+        HomeWidget.saveWidgetData<String>(idKey, affirmationId),
+        HomeWidget.saveWidgetData<String>(
+          updateKey,
+          DateTime.now().toIso8601String(),
+        ),
+      ]);
+
+      monitor?.logCheckpoint('Data saved');
 
       // Trigger widget update
-      return await _updateNativeWidget();
+      final result = await _updateNativeWidget();
+
+      monitor?.stop();
+      monitor?.logWidgetUpdateSummary(operation: 'updateWidget');
+
+      return result;
     } catch (e) {
       // Log error but don't throw - widget functionality is optional
       // ignore: avoid_print
       print('Warning: Failed to update widget: $e');
+
+      monitor?.stop();
+      if (kDebugMode && monitor != null) {
+        debugPrint('Widget update failed after ${monitor.elapsedMs}ms');
+      }
+
       return false;
     }
   }
@@ -229,13 +253,20 @@ class WidgetService {
   /// - Android: SharedPreferences
   ///
   /// Returns true if settings were successfully shared, false otherwise.
+  ///
+  /// ## Performance (PERF-002)
+  /// Optimized to complete within 500ms using parallel save operations.
   Future<bool> shareSettings({
     required String themeMode,
     required bool widgetRotationEnabled,
     required double fontSizeMultiplier,
     String refreshMode = 'onUnlock',
   }) async {
+    final monitor = kDebugMode ? PerformanceMonitor.start() : null;
+
     try {
+      monitor?.logCheckpoint('Start shareSettings');
+
       final themeModeKey = Platform.isIOS
           ? IosWidgetConfig.themeModeKey
           : AndroidWidgetConfig.themeModeKey;
@@ -249,16 +280,32 @@ class WidgetService {
           ? IosWidgetConfig.refreshModeKey
           : AndroidWidgetConfig.refreshModeKey;
 
-      await HomeWidget.saveWidgetData<String>(themeModeKey, themeMode);
-      await HomeWidget.saveWidgetData<bool>(rotationKey, widgetRotationEnabled);
-      await HomeWidget.saveWidgetData<double>(fontSizeKey, fontSizeMultiplier);
-      await HomeWidget.saveWidgetData<String>(refreshModeKey, refreshMode);
+      // Execute all saves in parallel for better performance
+      await Future.wait([
+        HomeWidget.saveWidgetData<String>(themeModeKey, themeMode),
+        HomeWidget.saveWidgetData<bool>(rotationKey, widgetRotationEnabled),
+        HomeWidget.saveWidgetData<double>(fontSizeKey, fontSizeMultiplier),
+        HomeWidget.saveWidgetData<String>(refreshModeKey, refreshMode),
+      ]);
+
+      monitor?.logCheckpoint('Settings saved');
 
       // Trigger widget update to reflect new settings
-      return await _updateNativeWidget();
+      final result = await _updateNativeWidget();
+
+      monitor?.stop();
+      monitor?.logWidgetUpdateSummary(operation: 'shareSettings');
+
+      return result;
     } catch (e) {
       // ignore: avoid_print
       print('Warning: Failed to share settings with widget: $e');
+
+      monitor?.stop();
+      if (kDebugMode && monitor != null) {
+        debugPrint('Share settings failed after ${monitor.elapsedMs}ms');
+      }
+
       return false;
     }
   }
@@ -321,10 +368,17 @@ class WidgetService {
   ///                  Each map should have 'id' and 'text' keys at minimum.
   ///
   /// Returns true if affirmations were successfully shared, false otherwise.
+  ///
+  /// ## Performance (PERF-002)
+  /// Optimized to complete within 500ms using parallel save operations.
   Future<bool> shareAffirmationsList(
     List<Map<String, dynamic>> affirmations,
   ) async {
+    final monitor = kDebugMode ? PerformanceMonitor.start() : null;
+
     try {
+      monitor?.logCheckpoint('Start shareAffirmationsList');
+
       final listKey = Platform.isIOS
           ? IosWidgetConfig.affirmationsListKey
           : AndroidWidgetConfig.affirmationsListKey;
@@ -335,21 +389,38 @@ class WidgetService {
           ? IosWidgetConfig.hasAffirmationsKey
           : AndroidWidgetConfig.hasAffirmationsKey;
 
-      // Serialize affirmations list to JSON string
+      // Serialize affirmations list to JSON string (pre-compute)
       final jsonString = jsonEncode(affirmations);
+      final count = affirmations.length;
+      final hasAffirmations = affirmations.isNotEmpty;
 
-      await HomeWidget.saveWidgetData<String>(listKey, jsonString);
-      await HomeWidget.saveWidgetData<int>(countKey, affirmations.length);
-      await HomeWidget.saveWidgetData<bool>(
-        hasAffirmationsKey,
-        affirmations.isNotEmpty,
-      );
+      monitor?.logCheckpoint('JSON serialized');
+
+      // Execute all saves in parallel for better performance
+      await Future.wait([
+        HomeWidget.saveWidgetData<String>(listKey, jsonString),
+        HomeWidget.saveWidgetData<int>(countKey, count),
+        HomeWidget.saveWidgetData<bool>(hasAffirmationsKey, hasAffirmations),
+      ]);
+
+      monitor?.logCheckpoint('List data saved');
 
       // Trigger widget update
-      return await _updateNativeWidget();
+      final result = await _updateNativeWidget();
+
+      monitor?.stop();
+      monitor?.logWidgetUpdateSummary(operation: 'shareAffirmationsList');
+
+      return result;
     } catch (e) {
       // ignore: avoid_print
       print('Warning: Failed to share affirmations list with widget: $e');
+
+      monitor?.stop();
+      if (kDebugMode && monitor != null) {
+        debugPrint('Share affirmations list failed after ${monitor.elapsedMs}ms');
+      }
+
       return false;
     }
   }
@@ -417,6 +488,13 @@ class WidgetService {
   /// in a single call. Useful for initial setup or after significant data changes.
   ///
   /// Returns true if all data was successfully shared, false otherwise.
+  ///
+  /// ## Performance (PERF-002)
+  /// This method is heavily optimized to complete within 500ms:
+  /// - All data saves are batched into a single Future.wait() call
+  /// - No intermediate widget updates (only one update at the end)
+  /// - Pre-computes all values before any I/O operations
+  /// - Uses parallel execution for maximum throughput
   Future<bool> shareAllWidgetData({
     String? affirmationText,
     String? affirmationId,
@@ -426,35 +504,98 @@ class WidgetService {
     String refreshMode = 'onUnlock',
     List<Map<String, dynamic>>? affirmationsList,
   }) async {
+    final monitor = kDebugMode ? PerformanceMonitor.start() : null;
+
     try {
-      // Share current affirmation if provided
-      if (affirmationText != null && affirmationId != null) {
-        await updateWidget(
-          affirmationText: affirmationText,
-          affirmationId: affirmationId,
-        );
-      } else {
-        // Clear current affirmation
-        await clearWidget();
-      }
+      monitor?.logCheckpoint('Start shareAllWidgetData');
 
-      // Share settings
-      await shareSettings(
-        themeMode: themeMode,
-        widgetRotationEnabled: widgetRotationEnabled,
-        fontSizeMultiplier: fontSizeMultiplier,
-        refreshMode: refreshMode,
-      );
+      // Pre-compute all keys to avoid platform checks during I/O
+      final textKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationTextKey
+          : AndroidWidgetConfig.affirmationTextKey;
+      final idKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationIdKey
+          : AndroidWidgetConfig.affirmationIdKey;
+      final updateKey = Platform.isIOS
+          ? IosWidgetConfig.lastUpdateKey
+          : AndroidWidgetConfig.lastUpdateKey;
+      final themeModeKey = Platform.isIOS
+          ? IosWidgetConfig.themeModeKey
+          : AndroidWidgetConfig.themeModeKey;
+      final rotationKey = Platform.isIOS
+          ? IosWidgetConfig.widgetRotationEnabledKey
+          : AndroidWidgetConfig.widgetRotationEnabledKey;
+      final fontSizeKey = Platform.isIOS
+          ? IosWidgetConfig.fontSizeMultiplierKey
+          : AndroidWidgetConfig.fontSizeMultiplierKey;
+      final refreshModeKey = Platform.isIOS
+          ? IosWidgetConfig.refreshModeKey
+          : AndroidWidgetConfig.refreshModeKey;
+      final listKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationsListKey
+          : AndroidWidgetConfig.affirmationsListKey;
+      final countKey = Platform.isIOS
+          ? IosWidgetConfig.affirmationsCountKey
+          : AndroidWidgetConfig.affirmationsCountKey;
+      final hasAffirmationsKey = Platform.isIOS
+          ? IosWidgetConfig.hasAffirmationsKey
+          : AndroidWidgetConfig.hasAffirmationsKey;
 
-      // Share affirmations list if provided
-      if (affirmationsList != null) {
-        await shareAffirmationsList(affirmationsList);
-      }
+      // Pre-compute all values
+      final now = DateTime.now().toIso8601String();
+      final jsonString = affirmationsList != null
+          ? jsonEncode(affirmationsList)
+          : null;
+      final count = affirmationsList?.length ?? 0;
+      final hasAffirmations = affirmationsList?.isNotEmpty ?? false;
 
-      return true;
+      monitor?.logCheckpoint('Values pre-computed');
+
+      // Batch ALL saves into a single parallel operation
+      // This is the key optimization - no intermediate widget updates
+      final futures = <Future<void>>[
+        // Current affirmation data
+        if (affirmationText != null && affirmationId != null) ...[
+          HomeWidget.saveWidgetData<String>(textKey, affirmationText),
+          HomeWidget.saveWidgetData<String>(idKey, affirmationId),
+          HomeWidget.saveWidgetData<String>(updateKey, now),
+        ] else ...[
+          HomeWidget.saveWidgetData<String?>(textKey, null),
+          HomeWidget.saveWidgetData<String?>(idKey, null),
+        ],
+        // Settings data
+        HomeWidget.saveWidgetData<String>(themeModeKey, themeMode),
+        HomeWidget.saveWidgetData<bool>(rotationKey, widgetRotationEnabled),
+        HomeWidget.saveWidgetData<double>(fontSizeKey, fontSizeMultiplier),
+        HomeWidget.saveWidgetData<String>(refreshModeKey, refreshMode),
+        // List data
+        if (affirmationsList != null && jsonString != null) ...[
+          HomeWidget.saveWidgetData<String>(listKey, jsonString),
+          HomeWidget.saveWidgetData<int>(countKey, count),
+          HomeWidget.saveWidgetData<bool>(hasAffirmationsKey, hasAffirmations),
+        ],
+      ];
+
+      await Future.wait(futures);
+
+      monitor?.logCheckpoint('All data saved');
+
+      // Single widget update at the end
+      final result = await _updateNativeWidget();
+
+      monitor?.stop();
+      monitor?.logWidgetUpdateSummary(operation: 'shareAllWidgetData');
+
+      return result;
     } catch (e) {
       // ignore: avoid_print
       print('Warning: Failed to share all widget data: $e');
+
+      monitor?.stop();
+      if (kDebugMode && monitor != null) {
+        debugPrint('Share all widget data failed after ${monitor.elapsedMs}ms');
+      }
+
       return false;
     }
   }

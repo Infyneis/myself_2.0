@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T14:52:08.618Z",
+  "lastUpdated": "2026-01-13T14:57:38.570Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 44,
-    "totalSessions": 71,
-    "totalTimeMs": 13427690,
-    "totalTimeFormatted": "3h 43m",
-    "averageFeatureTimeMs": 293263,
-    "averageFeatureTimeFormatted": "4m 53s",
-    "averageSessionTimeMs": 189122,
-    "averageSessionTimeFormatted": "3m 9s"
+    "completedFeatures": 45,
+    "totalSessions": 72,
+    "totalTimeMs": 13755639,
+    "totalTimeFormatted": "3h 49m",
+    "averageFeatureTimeMs": 294034,
+    "averageFeatureTimeFormatted": "4m 54s",
+    "averageSessionTimeMs": 191051,
+    "averageSessionTimeFormatted": "3m 11s"
   },
   "features": [
     {
@@ -715,6 +715,22 @@
         "47607e924da05ba2b2be4c8d53e338a7fdf23804"
       ],
       "durationFormatted": "4m 19s"
+    },
+    {
+      "featureId": "PERF-001",
+      "featureName": "PERF-001",
+      "description": "Optimize app initialization to achieve cold start time under 2 seconds",
+      "category": "performance",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T14:52:10.619Z",
+      "completedAt": "2026-01-13T14:57:38.568Z",
+      "durationMs": 327949,
+      "sessionId": "session-mkcpnchn-3zfbj5",
+      "sessionsCount": 1,
+      "commits": [
+        "ff2d25982a6d2c253b6750d0ddc4d9da7077a7d8"
+      ],
+      "durationFormatted": "5m 27s"
     }
   ],
   "sessions": [
@@ -1868,6 +1884,23 @@
         "47607e924da05ba2b2be4c8d53e338a7fdf23804"
       ],
       "durationFormatted": "4m 19s"
+    },
+    {
+      "sessionId": "session-mkcpnchn-3zfbj5",
+      "startedAt": "2026-01-13T14:52:10.619Z",
+      "endedAt": "2026-01-13T14:57:38.568Z",
+      "durationMs": 327949,
+      "featuresWorkedOn": [
+        "PERF-001"
+      ],
+      "featuresCompleted": [
+        "PERF-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "ff2d25982a6d2c253b6750d0ddc4d9da7077a7d8"
+      ],
+      "durationFormatted": "5m 27s"
     }
   ],
   "byCategory": {
@@ -1888,14 +1921,20 @@
       "completed": 17,
       "totalTimeMs": 2958212,
       "averageTimeMs": 174012
+    },
+    "performance": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 327949,
+      "averageTimeMs": 327949
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 32,
-      "totalTimeMs": 9195755,
-      "averageTimeMs": 287367
+      "completed": 33,
+      "totalTimeMs": 9523704,
+      "averageTimeMs": 288597
     },
     "should-have": {
       "total": 0,
