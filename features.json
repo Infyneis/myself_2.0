@@ -603,7 +603,7 @@
       "description": "Implement full TalkBack support for Android with proper content descriptions",
       "category": "ui",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": [
         "NFR-013"
       ]
