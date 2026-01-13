@@ -199,7 +199,7 @@
       "description": "Add refresh button on home screen to cycle through affirmations",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-016"]
     },
     {
