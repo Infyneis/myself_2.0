@@ -35,6 +35,7 @@ class IosWidgetConfig {
   static const String themeModeKey = 'theme_mode';
   static const String widgetRotationEnabledKey = 'widget_rotation_enabled';
   static const String fontSizeMultiplierKey = 'font_size_multiplier';
+  static const String refreshModeKey = 'refresh_mode';
 
   /// Shared defaults keys for multiple affirmations (for larger widgets)
   static const String affirmationsListKey = 'affirmations_list';

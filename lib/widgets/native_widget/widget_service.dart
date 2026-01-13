@@ -222,6 +222,7 @@ class WidgetService {
   /// - Theme mode (light/dark/system)
   /// - Widget rotation enabled status
   /// - Font size multiplier for accessibility
+  /// - Refresh mode (onUnlock/hourly/daily)
   ///
   /// Data is stored in:
   /// - iOS: UserDefaults within the App Group
@@ -232,6 +233,7 @@ class WidgetService {
     required String themeMode,
     required bool widgetRotationEnabled,
     required double fontSizeMultiplier,
+    String refreshMode = 'onUnlock',
   }) async {
     try {
       final themeModeKey = Platform.isIOS
@@ -243,10 +245,14 @@ class WidgetService {
       final fontSizeKey = Platform.isIOS
           ? IosWidgetConfig.fontSizeMultiplierKey
           : AndroidWidgetConfig.fontSizeMultiplierKey;
+      final refreshModeKey = Platform.isIOS
+          ? IosWidgetConfig.refreshModeKey
+          : AndroidWidgetConfig.refreshModeKey;
 
       await HomeWidget.saveWidgetData<String>(themeModeKey, themeMode);
       await HomeWidget.saveWidgetData<bool>(rotationKey, widgetRotationEnabled);
       await HomeWidget.saveWidgetData<double>(fontSizeKey, fontSizeMultiplier);
+      await HomeWidget.saveWidgetData<String>(refreshModeKey, refreshMode);
 
       // Trigger widget update to reflect new settings
       return await _updateNativeWidget();
@@ -417,6 +423,7 @@ class WidgetService {
     required String themeMode,
     required bool widgetRotationEnabled,
     required double fontSizeMultiplier,
+    String refreshMode = 'onUnlock',
     List<Map<String, dynamic>>? affirmationsList,
   }) async {
     try {
@@ -436,6 +443,7 @@ class WidgetService {
         themeMode: themeMode,
         widgetRotationEnabled: widgetRotationEnabled,
         fontSizeMultiplier: fontSizeMultiplier,
+        refreshMode: refreshMode,
       );
 
       // Share affirmations list if provided

@@ -4,8 +4,9 @@ This directory contains the iOS WidgetKit extension for displaying affirmations 
 
 ## Feature Implementation
 
-**Feature ID:** WIDGET-003
-**Description:** Create iOS WidgetKit extension with SwiftUI for small (2x2), medium (4x2), and large (4x4) widget sizes
+**Primary Features:**
+- **WIDGET-003:** Create iOS WidgetKit extension with SwiftUI for small (2x2), medium (4x2), and large (4x4) widget sizes ✅
+- **WIDGET-004:** Implement TimelineProvider for iOS widget with refresh on device unlock events ✅
 
 ## Files Included
 
@@ -138,16 +139,51 @@ The widget reads data from the App Group shared UserDefaults:
 - `theme_mode` - Theme setting (light/dark/system)
 - `font_size_multiplier` - Font size for accessibility
 - `has_affirmations` - Whether any affirmations exist
+- `refresh_mode` - Widget refresh mode (onUnlock/hourly/daily) - **NEW in WIDGET-004**
 
 ### App Group ID:
 `group.com.infyneis.myself_2_0`
 
 ## Widget Update Mechanism
 
-The widget timeline is updated:
-1. When the Flutter app calls `HomeWidget.updateWidget()`
-2. Via the WidgetService in the Flutter app
-3. Policy is set to `.atEnd` - widget stays current until next update
+### Timeline Refresh Strategy (WIDGET-004)
+
+Due to iOS system limitations, widgets cannot directly detect device unlock events. Instead, we use a multi-layered refresh strategy:
+
+#### 1. Timeline-based Refresh
+- Provides multiple timeline entries throughout the day
+- Uses `.after()` policy with strategic intervals
+- Refresh intervals based on user setting:
+  - **"On Unlock" mode:** Every 30 minutes (default)
+  - **"Hourly" mode:** Every 60 minutes
+  - **"Daily" mode:** Every 24 hours
+
+#### 2. App Lifecycle Refresh
+- Widget timelines reload when app enters foreground
+- Implemented in `AppDelegate.swift`:
+  - `applicationWillEnterForeground(_:)` - Reloads timelines
+  - `applicationDidBecomeActive(_:)` - Additional reload for edge cases
+- Provides near-instant updates after device unlock (when user opens app)
+
+#### 3. Background App Refresh
+- Leverages iOS Background App Refresh capability
+- Updates widget periodically even when app is not in foreground
+- Implemented in `AppDelegate.swift`:
+  - `application(_:performFetchWithCompletionHandler:)` - Background fetch handler
+
+#### 4. Manual Updates from Flutter
+- When the Flutter app calls `HomeWidget.updateWidget()`
+- Via the WidgetService in the Flutter app
+- Triggered on data changes (affirmation create/update/delete)
+
+### How It Works
+
+When a user unlocks their device:
+1. If they open the Myself app, the AppDelegate lifecycle methods trigger an immediate widget timeline reload
+2. If they don't open the app, the timeline-based refresh ensures a fresh affirmation appears within the configured interval (default: 30 minutes)
+3. Background app refresh provides additional updates throughout the day
+
+This multi-layered approach ensures users see fresh affirmations regularly, simulating an "on unlock" experience while respecting iOS system limitations and battery life.
 
 ## Troubleshooting
 
@@ -198,10 +234,11 @@ Use the preview provider in Xcode:
 ## Future Enhancements
 
 See related features:
-- **WIDGET-004:** Timeline Provider with unlock event refresh
 - **WIDGET-007:** Tap to open app functionality
 - **WIDGET-008:** Enhanced placeholder states
 - **WIDGET-010:** Advanced theme support
+- **WIDGET-011:** Widget rotation toggle
+- **WIDGET-012:** Widget refresh interval setting (partially implemented in WIDGET-004)
 
 ## License
 

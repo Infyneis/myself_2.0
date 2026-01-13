@@ -65,6 +65,7 @@ class WidgetDataSync {
       themeMode: settings.themeMode.name,
       widgetRotationEnabled: settings.widgetRotationEnabled,
       fontSizeMultiplier: settings.fontSizeMultiplier,
+      refreshMode: settings.refreshMode.name,
     );
   }
 
@@ -120,6 +121,7 @@ class WidgetDataSync {
       themeMode: settings.themeMode.name,
       widgetRotationEnabled: settings.widgetRotationEnabled,
       fontSizeMultiplier: settings.fontSizeMultiplier,
+      refreshMode: settings.refreshMode.name,
       affirmationsList: activeAffirmations,
     );
   }
