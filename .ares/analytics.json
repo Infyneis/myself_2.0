@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:10:24.233Z",
+  "lastUpdated": "2026-01-13T20:17:55.701Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 64,
-    "totalSessions": 99,
-    "totalTimeMs": 19425706,
-    "totalTimeFormatted": "5h 23m",
-    "averageFeatureTimeMs": 294270,
-    "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 196219,
-    "averageSessionTimeFormatted": "3m 16s"
+    "completedFeatures": 65,
+    "totalSessions": 100,
+    "totalTimeMs": 19875169,
+    "totalTimeFormatted": "5h 31m",
+    "averageFeatureTimeMs": 296658,
+    "averageFeatureTimeFormatted": "4m 56s",
+    "averageSessionTimeMs": 198752,
+    "averageSessionTimeFormatted": "3m 18s"
   },
   "features": [
     {
@@ -1033,6 +1033,22 @@
         "82c1cc80fcc83cc1c26f8bb022124c5b4039494a"
       ],
       "durationFormatted": "3m 8s"
+    },
+    {
+      "featureId": "TEST-004",
+      "featureName": "TEST-004",
+      "description": "Write widget tests for home screen rendering and interactions",
+      "category": "testing",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T20:10:26.237Z",
+      "completedAt": "2026-01-13T20:17:55.700Z",
+      "durationMs": 449463,
+      "sessionId": "session-mkd10mrg-ssxgbe",
+      "sessionsCount": 1,
+      "commits": [
+        "2f529e0fef0d43d670e373e7ff12d4f0dc03c29e"
+      ],
+      "durationFormatted": "7m 29s"
     }
   ],
   "sessions": [
@@ -2644,6 +2660,23 @@
         "82c1cc80fcc83cc1c26f8bb022124c5b4039494a"
       ],
       "durationFormatted": "3m 8s"
+    },
+    {
+      "sessionId": "session-mkd10mrg-ssxgbe",
+      "startedAt": "2026-01-13T20:10:26.237Z",
+      "endedAt": "2026-01-13T20:17:55.700Z",
+      "durationMs": 449463,
+      "featuresWorkedOn": [
+        "TEST-004"
+      ],
+      "featuresCompleted": [
+        "TEST-004"
+      ],
+      "status": "completed",
+      "commits": [
+        "2f529e0fef0d43d670e373e7ff12d4f0dc03c29e"
+      ],
+      "durationFormatted": "7m 29s"
     }
   ],
   "byCategory": {
@@ -2679,17 +2712,17 @@
     },
     "testing": {
       "total": 0,
-      "completed": 3,
-      "totalTimeMs": 322558,
-      "averageTimeMs": 107519
+      "completed": 4,
+      "totalTimeMs": 772021,
+      "averageTimeMs": 193005
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 48,
-      "totalTimeMs": 13879692,
-      "averageTimeMs": 289160
+      "completed": 49,
+      "totalTimeMs": 14329155,
+      "averageTimeMs": 292432
     },
     "should-have": {
       "total": 0,
