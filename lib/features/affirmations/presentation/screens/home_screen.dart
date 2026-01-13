@@ -9,6 +9,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../../settings/presentation/providers/settings_provider.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
 import '../providers/affirmation_provider.dart';
 import '../widgets/empty_affirmations_state.dart';
@@ -176,69 +177,120 @@ class _HomeScreenState extends State<HomeScreen> {
       );
     }
 
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppDimensions.spacingL),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Main affirmation card with zen animation
-            Card(
-              elevation: AppDimensions.elevationSoft,
-              child: Padding(
-                padding: const EdgeInsets.all(AppDimensions.spacingXl),
-                child: Column(
-                  children: [
-                    // Affirmation text with fade-in animation
-                    Text(
-                      currentAffirmation.text,
-                      key: ValueKey(currentAffirmation.id),
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            height: 1.6,
-                            fontWeight: FontWeight.w400,
-                          ),
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                    )
-                        .animate()
-                        .fadeIn(
-                          duration: AppDimensions.animationDurationSlow.ms,
-                          curve: Curves.easeInOut,
-                        )
-                        .slideY(
-                          begin: 0.1,
-                          end: 0,
-                          duration: AppDimensions.animationDurationSlow.ms,
-                          curve: Curves.easeOut,
+    return Consumer<SettingsProvider>(
+      builder: (context, settingsProvider, _) {
+        final breathingEnabled = settingsProvider.breathingAnimationEnabled;
+
+        return Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppDimensions.spacingL),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Main affirmation card with zen animation
+                Card(
+                  elevation: AppDimensions.elevationSoft,
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppDimensions.spacingXl),
+                    child: Column(
+                      children: [
+                        // Affirmation text with fade-in animation
+                        _buildAnimatedAffirmation(
+                          context,
+                          currentAffirmation.text,
+                          currentAffirmation.id,
+                          breathingEnabled,
                         ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: AppDimensions.spacingXl),
-
-            // Helper text to guide user
-            Text(
-              'Your daily affirmation',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: 0.5),
-                    letterSpacing: 1.2,
+                      ],
+                    ),
                   ),
-              textAlign: TextAlign.center,
-            )
-                .animate()
-                .fadeIn(
-                  delay: 200.ms,
-                  duration: 400.ms,
                 ),
-          ],
-        ),
-      ),
+
+                const SizedBox(height: AppDimensions.spacingXl),
+
+                // Helper text to guide user
+                Text(
+                  'Your daily affirmation',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withValues(alpha: 0.5),
+                        letterSpacing: 1.2,
+                      ),
+                  textAlign: TextAlign.center,
+                )
+                    .animate()
+                    .fadeIn(
+                      delay: 200.ms,
+                      duration: 400.ms,
+                    ),
+              ],
+            ),
+          ),
+        );
+      },
     );
+  }
+
+  /// Builds the animated affirmation text with optional breathing animation.
+  Widget _buildAnimatedAffirmation(
+    BuildContext context,
+    String text,
+    String id,
+    bool breathingEnabled,
+  ) {
+    final textWidget = Text(
+      text,
+      key: ValueKey(id),
+      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            height: 1.6,
+            fontWeight: FontWeight.w400,
+          ),
+      textAlign: TextAlign.center,
+      softWrap: true,
+    );
+
+    // Start with fade-in and slide animation
+    if (breathingEnabled) {
+      // Add breathing animation with fade-in
+      // Using a slow, gentle breathing rhythm (4 seconds per cycle)
+      return textWidget
+          .animate(
+            onPlay: (controller) => controller.repeat(reverse: true),
+          )
+          .fadeIn(
+            duration: AppDimensions.animationDurationSlow.ms,
+            curve: Curves.easeInOut,
+          )
+          .slideY(
+            begin: 0.1,
+            end: 0,
+            duration: AppDimensions.animationDurationSlow.ms,
+            curve: Curves.easeOut,
+          )
+          .then(delay: 500.ms)
+          .scale(
+            begin: const Offset(1.0, 1.0),
+            end: const Offset(1.02, 1.02),
+            duration: 2000.ms,
+            curve: Curves.easeInOut,
+          );
+    }
+
+    // Without breathing animation, just fade-in and slide
+    return textWidget
+        .animate()
+        .fadeIn(
+          duration: AppDimensions.animationDurationSlow.ms,
+          curve: Curves.easeInOut,
+        )
+        .slideY(
+          begin: 0.1,
+          end: 0,
+          duration: AppDimensions.animationDurationSlow.ms,
+          curve: Curves.easeOut,
+        );
   }
 
   /// Navigates to the affirmation edit screen to add a new affirmation.

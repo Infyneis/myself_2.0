@@ -53,6 +53,11 @@ class MockSettingsRepository implements SettingsRepository {
   }
 
   @override
+  Future<void> updateBreathingAnimationEnabled(bool enabled) async {
+    _settings = _settings.copyWith(breathingAnimationEnabled: enabled);
+  }
+
+  @override
   Future<void> resetToDefaults() async {
     _settings = settings_model.Settings.defaultSettings;
   }

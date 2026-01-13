@@ -39,6 +39,7 @@ class Settings {
     this.language = 'fr',
     this.fontSizeMultiplier = 1.0,
     this.widgetRotationEnabled = true,
+    this.breathingAnimationEnabled = true,
   });
 
   /// Current theme mode (light, dark, or system)
@@ -56,6 +57,9 @@ class Settings {
   /// Whether widget affirmation rotation is enabled
   final bool widgetRotationEnabled;
 
+  /// Whether breathing animation is enabled for affirmations
+  final bool breathingAnimationEnabled;
+
   /// Creates a copy of settings with the given fields replaced.
   Settings copyWith({
     ThemeMode? themeMode,
@@ -63,6 +67,7 @@ class Settings {
     String? language,
     double? fontSizeMultiplier,
     bool? widgetRotationEnabled,
+    bool? breathingAnimationEnabled,
   }) {
     return Settings(
       themeMode: themeMode ?? this.themeMode,
@@ -71,6 +76,8 @@ class Settings {
       fontSizeMultiplier: fontSizeMultiplier ?? this.fontSizeMultiplier,
       widgetRotationEnabled:
           widgetRotationEnabled ?? this.widgetRotationEnabled,
+      breathingAnimationEnabled:
+          breathingAnimationEnabled ?? this.breathingAnimationEnabled,
     );
   }
 
@@ -86,7 +93,8 @@ class Settings {
           refreshMode == other.refreshMode &&
           language == other.language &&
           fontSizeMultiplier == other.fontSizeMultiplier &&
-          widgetRotationEnabled == other.widgetRotationEnabled;
+          widgetRotationEnabled == other.widgetRotationEnabled &&
+          breathingAnimationEnabled == other.breathingAnimationEnabled;
 
   @override
   int get hashCode =>
@@ -94,12 +102,14 @@ class Settings {
       refreshMode.hashCode ^
       language.hashCode ^
       fontSizeMultiplier.hashCode ^
-      widgetRotationEnabled.hashCode;
+      widgetRotationEnabled.hashCode ^
+      breathingAnimationEnabled.hashCode;
 
   @override
   String toString() {
     return 'Settings(themeMode: $themeMode, refreshMode: $refreshMode, '
         'language: $language, fontSizeMultiplier: $fontSizeMultiplier, '
-        'widgetRotationEnabled: $widgetRotationEnabled)';
+        'widgetRotationEnabled: $widgetRotationEnabled, '
+        'breathingAnimationEnabled: $breathingAnimationEnabled)';
   }
 }

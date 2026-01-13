@@ -27,6 +27,9 @@ abstract class SettingsKeys {
 
   /// Key for widget rotation enabled setting.
   static const String widgetRotationEnabled = 'widgetRotationEnabled';
+
+  /// Key for breathing animation enabled setting.
+  static const String breathingAnimationEnabled = 'breathingAnimationEnabled';
 }
 
 /// Hive-backed implementation of [SettingsRepository].
@@ -72,12 +75,18 @@ class HiveSettingsRepository implements SettingsRepository {
       defaultValue: true,
     ) as bool;
 
+    final breathingAnimationEnabled = _settingsBox.get(
+      SettingsKeys.breathingAnimationEnabled,
+      defaultValue: true,
+    ) as bool;
+
     return Settings(
       themeMode: ThemeMode.values[themeModeIndex],
       refreshMode: RefreshMode.values[refreshModeIndex],
       language: language,
       fontSizeMultiplier: fontSizeMultiplier,
       widgetRotationEnabled: widgetRotationEnabled,
+      breathingAnimationEnabled: breathingAnimationEnabled,
     );
   }
 
@@ -93,6 +102,10 @@ class HiveSettingsRepository implements SettingsRepository {
     await _settingsBox.put(
       SettingsKeys.widgetRotationEnabled,
       settings.widgetRotationEnabled,
+    );
+    await _settingsBox.put(
+      SettingsKeys.breathingAnimationEnabled,
+      settings.breathingAnimationEnabled,
     );
   }
 
@@ -119,6 +132,11 @@ class HiveSettingsRepository implements SettingsRepository {
   @override
   Future<void> updateWidgetRotationEnabled(bool enabled) async {
     await _settingsBox.put(SettingsKeys.widgetRotationEnabled, enabled);
+  }
+
+  @override
+  Future<void> updateBreathingAnimationEnabled(bool enabled) async {
+    await _settingsBox.put(SettingsKeys.breathingAnimationEnabled, enabled);
   }
 
   @override

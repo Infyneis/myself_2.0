@@ -32,6 +32,9 @@ abstract class SettingsRepository {
   /// Updates the widget rotation setting.
   Future<void> updateWidgetRotationEnabled(bool enabled);
 
+  /// Updates the breathing animation setting.
+  Future<void> updateBreathingAnimationEnabled(bool enabled);
+
   /// Resets settings to defaults.
   Future<void> resetToDefaults();
 }

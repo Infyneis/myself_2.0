@@ -41,6 +41,9 @@ class SettingsProvider extends ChangeNotifier {
   /// Whether widget rotation is enabled.
   bool get widgetRotationEnabled => _settings.widgetRotationEnabled;
 
+  /// Whether breathing animation is enabled.
+  bool get breathingAnimationEnabled => _settings.breathingAnimationEnabled;
+
   /// Whether data is currently being loaded.
   bool get isLoading => _isLoading;
 
@@ -116,6 +119,18 @@ class SettingsProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _error = 'Failed to update widget rotation: $e';
+      notifyListeners();
+    }
+  }
+
+  /// Updates the breathing animation setting.
+  Future<void> setBreathingAnimationEnabled(bool enabled) async {
+    try {
+      await _repository.updateBreathingAnimationEnabled(enabled);
+      _settings = _settings.copyWith(breathingAnimationEnabled: enabled);
+      notifyListeners();
+    } catch (e) {
+      _error = 'Failed to update breathing animation: $e';
       notifyListeners();
     }
   }
