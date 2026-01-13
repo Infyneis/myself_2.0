@@ -92,11 +92,11 @@ class AppTheme {
       colorScheme: const ColorScheme.dark(
         primary: AppColors.softSage,
         onPrimary: AppColors.deepNight,
-        secondary: AppColors.stone,
+        secondary: AppColors.stoneDark,
         onSecondary: AppColors.softWhite,
         surface: AppColors.deepNight,
         onSurface: AppColors.softWhite,
-        error: AppColors.error,
+        error: AppColors.errorDark,
         onError: AppColors.deepNight,
       ),
       textTheme: AppTextStyles.darkTextTheme,
@@ -134,7 +134,7 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.stone.withValues(alpha: 0.3),
+        fillColor: AppColors.stoneDark.withValues(alpha: 0.3),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppDimensions.borderRadiusSmall),
           borderSide: BorderSide.none,

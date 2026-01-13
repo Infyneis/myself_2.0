@@ -238,13 +238,13 @@ class AppTextStyles {
       bodyMedium: GoogleFonts.inter(
         fontSize: _bodySize,
         fontWeight: FontWeight.w400,
-        color: AppColors.stone,
+        color: AppColors.stoneDark,
         height: 1.5,
       ),
       bodySmall: GoogleFonts.inter(
         fontSize: _captionSize,
         fontWeight: FontWeight.w400,
-        color: AppColors.stone,
+        color: AppColors.stoneDark,
       ),
       // Label/button text (Inter)
       labelLarge: GoogleFonts.inter(
@@ -262,7 +262,7 @@ class AppTextStyles {
       labelSmall: GoogleFonts.inter(
         fontSize: _captionSize - 1,
         fontWeight: FontWeight.w500,
-        color: AppColors.stone,
+        color: AppColors.stoneDark,
         letterSpacing: 0.5,
       ),
     );
