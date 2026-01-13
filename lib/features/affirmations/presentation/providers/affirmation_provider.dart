@@ -291,6 +291,55 @@ class AffirmationProvider extends ChangeNotifier {
     }
   }
 
+  /// Reorders affirmations based on drag-and-drop interaction.
+  ///
+  /// This method:
+  /// - Updates the local list immediately for responsive UI
+  /// - Persists the new order to storage
+  /// - Updates sort order values for all affected affirmations
+  ///
+  /// [oldIndex] is the original position of the item being moved.
+  /// [newIndex] is the target position where the item should be placed.
+  ///
+  /// Returns `true` if reorder was successful, `false` otherwise.
+  /// Check [error] property for failure details.
+  ///
+  /// Example:
+  /// ```dart
+  /// // Move item from index 0 to index 2
+  /// final success = await provider.reorderAffirmations(0, 2);
+  /// if (!success) {
+  ///   print(provider.error);
+  /// }
+  /// ```
+  Future<bool> reorderAffirmations(int oldIndex, int newIndex) async {
+    // Adjust newIndex for removal behavior of ReorderableListView
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+
+    // Update local list immediately for responsive UI
+    final item = _affirmations[oldIndex];
+    final newList = List<Affirmation>.from(_affirmations);
+    newList.removeAt(oldIndex);
+    newList.insert(newIndex, item);
+    _affirmations = newList;
+    notifyListeners();
+
+    // Persist the new order to storage
+    try {
+      final orderedIds = _affirmations.map((a) => a.id).toList();
+      await _repository.reorder(orderedIds);
+      _error = null;
+      return true;
+    } catch (e) {
+      _error = 'Failed to save new order: $e';
+      // Revert on error - reload from storage
+      await loadAffirmations();
+      return false;
+    }
+  }
+
   void _setLoading(bool loading) {
     _isLoading = loading;
     notifyListeners();

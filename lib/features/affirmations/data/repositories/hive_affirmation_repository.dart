@@ -35,12 +35,18 @@ class HiveAffirmationRepository implements AffirmationRepository {
 
   @override
   Future<List<Affirmation>> getAll() async {
-    return _affirmationsBox.values.toList();
+    final affirmations = _affirmationsBox.values.toList();
+    // Sort by sortOrder to maintain user's custom order
+    affirmations.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+    return affirmations;
   }
 
   @override
   Future<List<Affirmation>> getActive() async {
-    return _affirmationsBox.values.where((a) => a.isActive).toList();
+    final affirmations = _affirmationsBox.values.where((a) => a.isActive).toList();
+    // Sort by sortOrder to maintain user's custom order
+    affirmations.sort((a, b) => a.sortOrder.compareTo(b.sortOrder));
+    return affirmations;
   }
 
   @override
@@ -58,6 +64,13 @@ class HiveAffirmationRepository implements AffirmationRepository {
     final id = affirmation.id.isEmpty ? _uuid.v4() : affirmation.id;
     final now = DateTime.now();
 
+    // Assign the next sort order (add to end of list)
+    final maxSortOrder = _affirmationsBox.values.isEmpty
+        ? -1
+        : _affirmationsBox.values
+            .map((a) => a.sortOrder)
+            .reduce((a, b) => a > b ? a : b);
+
     final newAffirmation = Affirmation(
       id: id,
       text: affirmation.text,
@@ -65,6 +78,7 @@ class HiveAffirmationRepository implements AffirmationRepository {
       updatedAt: now,
       displayCount: 0,
       isActive: affirmation.isActive,
+      sortOrder: maxSortOrder + 1,
     );
 
     await _affirmationsBox.put(id, newAffirmation);
@@ -104,8 +118,14 @@ class HiveAffirmationRepository implements AffirmationRepository {
 
   @override
   Future<void> reorder(List<String> orderedIds) async {
-    // For reordering, we would need to add an 'order' field to Affirmation
-    // For now, this is a placeholder implementation
-    // The full implementation will be done in FUNC-007
+    // Update sort order for each affirmation based on the new order
+    for (int i = 0; i < orderedIds.length; i++) {
+      final id = orderedIds[i];
+      final affirmation = await getById(id);
+      if (affirmation != null) {
+        final updatedAffirmation = affirmation.copyWith(sortOrder: i);
+        await _affirmationsBox.put(id, updatedAffirmation);
+      }
+    }
   }
 }

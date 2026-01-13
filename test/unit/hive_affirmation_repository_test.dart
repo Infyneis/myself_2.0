@@ -147,6 +147,7 @@ void main() {
           updatedAt: DateTime.now(),
         );
         when(() => mockUuid.v4()).thenReturn('generated-uuid');
+        when(() => mockBox.values).thenReturn([]); // Empty box for sortOrder calculation
         when(() => mockBox.put(any(), any())).thenAnswer((_) async {});
 
         // Act
@@ -155,6 +156,7 @@ void main() {
         // Assert
         expect(result.id, equals('generated-uuid'));
         expect(result.text, equals('New affirmation'));
+        expect(result.sortOrder, equals(0)); // First item gets sortOrder 0
         verify(() => mockBox.put('generated-uuid', any())).called(1);
       });
 
@@ -166,6 +168,7 @@ void main() {
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
         );
+        when(() => mockBox.values).thenReturn([]); // Empty box for sortOrder calculation
         when(() => mockBox.put(any(), any())).thenAnswer((_) async {});
 
         // Act
@@ -175,6 +178,32 @@ void main() {
         expect(result.id, equals('my-custom-id'));
         verify(() => mockBox.put('my-custom-id', any())).called(1);
         verifyNever(() => mockUuid.v4());
+      });
+
+      test('should assign next sortOrder when box has existing items', () async {
+        // Arrange
+        final existingAffirmation = Affirmation(
+          id: '1',
+          text: 'Existing',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          sortOrder: 5,
+        );
+        final newAffirmation = Affirmation(
+          id: '',
+          text: 'New affirmation',
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        );
+        when(() => mockUuid.v4()).thenReturn('generated-uuid');
+        when(() => mockBox.values).thenReturn([existingAffirmation]);
+        when(() => mockBox.put(any(), any())).thenAnswer((_) async {});
+
+        // Act
+        final result = await repository.create(newAffirmation);
+
+        // Assert
+        expect(result.sortOrder, equals(6)); // max(5) + 1
       });
     });
 

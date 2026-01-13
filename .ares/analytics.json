@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T10:05:27.041Z",
+  "lastUpdated": "2026-01-13T10:12:56.074Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 9,
-    "totalSessions": 9,
-    "totalTimeMs": 4413027,
-    "totalTimeFormatted": "1h 13m",
-    "averageFeatureTimeMs": 490336,
-    "averageFeatureTimeFormatted": "8m 10s",
-    "averageSessionTimeMs": 490336,
-    "averageSessionTimeFormatted": "8m 10s"
+    "completedFeatures": 10,
+    "totalSessions": 10,
+    "totalTimeMs": 4860056,
+    "totalTimeFormatted": "1h 21m",
+    "averageFeatureTimeMs": 486006,
+    "averageFeatureTimeFormatted": "8m 6s",
+    "averageSessionTimeMs": 486006,
+    "averageSessionTimeFormatted": "8m 6s"
   },
   "features": [
     {
@@ -157,6 +157,22 @@
         "0c23b50d58361c313ccba110ddcf79861c1a0845"
       ],
       "durationFormatted": "5m 7s"
+    },
+    {
+      "featureId": "FUNC-006",
+      "featureName": "FUNC-006",
+      "description": "Support multi-line text input and display for affirmations",
+      "category": "functional",
+      "priority": "should-have",
+      "startedAt": "2026-01-13T10:05:29.044Z",
+      "completedAt": "2026-01-13T10:12:56.073Z",
+      "durationMs": 447029,
+      "sessionId": "session-mkcfeno4-kamjbm",
+      "sessionsCount": 1,
+      "commits": [
+        "e8fe664f93fec4a3d2cb357229f52a4c59a3ff5e"
+      ],
+      "durationFormatted": "7m 27s"
     }
   ],
   "sessions": [
@@ -312,6 +328,23 @@
         "0c23b50d58361c313ccba110ddcf79861c1a0845"
       ],
       "durationFormatted": "5m 7s"
+    },
+    {
+      "sessionId": "session-mkcfeno4-kamjbm",
+      "startedAt": "2026-01-13T10:05:29.044Z",
+      "endedAt": "2026-01-13T10:12:56.073Z",
+      "durationMs": 447029,
+      "featuresWorkedOn": [
+        "FUNC-006"
+      ],
+      "featuresCompleted": [
+        "FUNC-006"
+      ],
+      "status": "completed",
+      "commits": [
+        "e8fe664f93fec4a3d2cb357229f52a4c59a3ff5e"
+      ],
+      "durationFormatted": "7m 27s"
     }
   ],
   "byCategory": {
@@ -323,9 +356,9 @@
     },
     "functional": {
       "total": 0,
-      "completed": 5,
-      "totalTimeMs": 1590135,
-      "averageTimeMs": 318027
+      "completed": 6,
+      "totalTimeMs": 2037164,
+      "averageTimeMs": 339527
     }
   },
   "byPriority": {
@@ -334,6 +367,12 @@
       "completed": 9,
       "totalTimeMs": 4413027,
       "averageTimeMs": 490336
+    },
+    "should-have": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 447029,
+      "averageTimeMs": 447029
     }
   }
 }

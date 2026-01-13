@@ -23,6 +23,7 @@ const int maxAffirmationTextLength = 280;
 /// - Creation and update timestamps
 /// - Display count for future analytics
 /// - Active status to enable/disable individual affirmations
+/// - Sort order for drag-and-drop reordering
 @HiveType(typeId: affirmationTypeId)
 class Affirmation extends HiveObject {
   /// Creates a new Affirmation instance.
@@ -35,6 +36,7 @@ class Affirmation extends HiveObject {
     required this.updatedAt,
     this.displayCount = 0,
     this.isActive = true,
+    this.sortOrder = 0,
   }) : assert(
          text.length <= maxAffirmationTextLength,
          'Affirmation text cannot exceed $maxAffirmationTextLength characters',
@@ -49,6 +51,7 @@ class Affirmation extends HiveObject {
   factory Affirmation.create({
     required String text,
     bool isActive = true,
+    int sortOrder = 0,
   }) {
     if (text.length > maxAffirmationTextLength) {
       throw ArgumentError(
@@ -65,6 +68,7 @@ class Affirmation extends HiveObject {
       updatedAt: now,
       displayCount: 0,
       isActive: isActive,
+      sortOrder: sortOrder,
     );
   }
 
@@ -92,6 +96,10 @@ class Affirmation extends HiveObject {
   @HiveField(5)
   bool isActive;
 
+  /// Sort order for drag-and-drop reordering in list view
+  @HiveField(6)
+  int sortOrder;
+
   /// Creates a copy of this affirmation with the given fields replaced.
   Affirmation copyWith({
     String? id,
@@ -100,6 +108,7 @@ class Affirmation extends HiveObject {
     DateTime? updatedAt,
     int? displayCount,
     bool? isActive,
+    int? sortOrder,
   }) {
     return Affirmation(
       id: id ?? this.id,
@@ -108,6 +117,7 @@ class Affirmation extends HiveObject {
       updatedAt: updatedAt ?? this.updatedAt,
       displayCount: displayCount ?? this.displayCount,
       isActive: isActive ?? this.isActive,
+      sortOrder: sortOrder ?? this.sortOrder,
     );
   }
 
@@ -121,7 +131,8 @@ class Affirmation extends HiveObject {
           createdAt == other.createdAt &&
           updatedAt == other.updatedAt &&
           displayCount == other.displayCount &&
-          isActive == other.isActive;
+          isActive == other.isActive &&
+          sortOrder == other.sortOrder;
 
   @override
   int get hashCode =>
@@ -130,12 +141,14 @@ class Affirmation extends HiveObject {
       createdAt.hashCode ^
       updatedAt.hashCode ^
       displayCount.hashCode ^
-      isActive.hashCode;
+      isActive.hashCode ^
+      sortOrder.hashCode;
 
   @override
   String toString() {
     return 'Affirmation(id: $id, text: $text, createdAt: $createdAt, '
-        'updatedAt: $updatedAt, displayCount: $displayCount, isActive: $isActive)';
+        'updatedAt: $updatedAt, displayCount: $displayCount, isActive: $isActive, '
+        'sortOrder: $sortOrder)';
   }
 
   /// Returns the remaining character count for this affirmation's text.

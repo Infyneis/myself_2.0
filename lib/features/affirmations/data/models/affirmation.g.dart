@@ -23,13 +23,14 @@ class AffirmationAdapter extends TypeAdapter<Affirmation> {
       updatedAt: fields[3] as DateTime,
       displayCount: fields[4] as int,
       isActive: fields[5] as bool,
+      sortOrder: (fields[6] as int?) ?? 0,
     );
   }
 
   @override
   void write(BinaryWriter writer, Affirmation obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class AffirmationAdapter extends TypeAdapter<Affirmation> {
       ..writeByte(4)
       ..write(obj.displayCount)
       ..writeByte(5)
-      ..write(obj.isActive);
+      ..write(obj.isActive)
+      ..writeByte(6)
+      ..write(obj.sortOrder);
   }
 
   @override

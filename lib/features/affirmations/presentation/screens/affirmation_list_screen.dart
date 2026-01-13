@@ -1,16 +1,18 @@
 /// Affirmation list screen.
 ///
-/// Displays all affirmations in a scrollable list.
-/// Based on REQUIREMENTS.md FR-004.
+/// Displays all affirmations in a scrollable list with drag-and-drop reordering.
+/// Based on REQUIREMENTS.md FR-004 and FUNC-007.
 library;
+
+import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/dimensions.dart';
+import '../../data/models/affirmation.dart';
 import '../helpers/delete_affirmation_helper.dart';
 import '../providers/affirmation_provider.dart';
-import '../widgets/affirmation_card.dart';
 import '../widgets/empty_affirmations_state.dart';
 import 'affirmation_edit_screen.dart';
 
@@ -116,7 +118,7 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
     );
   }
 
-  /// Builds the scrollable list of affirmation cards.
+  /// Builds the scrollable list of affirmation cards with drag-and-drop reordering.
   Widget _buildAffirmationList(
     BuildContext context,
     AffirmationProvider provider,
@@ -125,15 +127,34 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
 
     return RefreshIndicator(
       onRefresh: () => provider.loadAffirmations(),
-      child: ListView.builder(
+      child: ReorderableListView.builder(
         padding: const EdgeInsets.only(
           top: AppDimensions.spacingM,
           bottom: AppDimensions.spacingXxl + AppDimensions.minTouchTarget,
         ),
         itemCount: affirmations.length,
+        onReorder: (oldIndex, newIndex) {
+          provider.reorderAffirmations(oldIndex, newIndex);
+        },
+        proxyDecorator: (child, index, animation) {
+          return AnimatedBuilder(
+            animation: animation,
+            builder: (context, child) {
+              final elevation = lerpDouble(0, 8, animation.value);
+              return Material(
+                elevation: elevation ?? 0,
+                borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
+                child: child,
+              );
+            },
+            child: child,
+          );
+        },
         itemBuilder: (context, index) {
           final affirmation = affirmations[index];
-          return AffirmationCard(
+          return _ReorderableAffirmationCard(
+            key: ValueKey(affirmation.id),
+            index: index,
             affirmation: affirmation,
             onTap: () => _navigateToEditAffirmation(context, affirmation.id),
             onEdit: () => _navigateToEditAffirmation(context, affirmation.id),
@@ -174,6 +195,95 @@ class _AffirmationListScreenState extends State<AffirmationListScreen> {
       affirmation: affirmation,
       onSuccess: () => DeleteAffirmationHelper.showSuccessSnackBar(context),
       onError: (error) => DeleteAffirmationHelper.showErrorSnackBar(context, error),
+    );
+  }
+}
+
+/// A reorderable wrapper for AffirmationCard with drag handle.
+///
+/// This widget wraps the AffirmationCard and adds a drag handle for
+/// drag-and-drop reordering functionality.
+class _ReorderableAffirmationCard extends StatelessWidget {
+  const _ReorderableAffirmationCard({
+    super.key,
+    required this.index,
+    required this.affirmation,
+    this.onTap,
+    this.onEdit,
+    this.onDelete,
+  });
+
+  final int index;
+  final Affirmation affirmation;
+  final VoidCallback? onTap;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppDimensions.spacingM,
+        vertical: AppDimensions.spacingS,
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppDimensions.borderRadiusDefault),
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimensions.spacingM),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Drag handle on the left
+              ReorderableDragStartListener(
+                index: index,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: AppDimensions.spacingS),
+                  child: Icon(
+                    Icons.drag_handle,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ),
+              // Affirmation content
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      affirmation.text,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            height: 1.5,
+                          ),
+                      softWrap: true,
+                    ),
+                    if (onEdit != null || onDelete != null) ...[
+                      const SizedBox(height: AppDimensions.spacingS),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          if (onEdit != null)
+                            IconButton(
+                              icon: const Icon(Icons.edit_outlined),
+                              onPressed: onEdit,
+                              tooltip: 'Edit',
+                            ),
+                          if (onDelete != null)
+                            IconButton(
+                              icon: const Icon(Icons.delete_outline),
+                              onPressed: onDelete,
+                              tooltip: 'Delete',
+                            ),
+                        ],
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
