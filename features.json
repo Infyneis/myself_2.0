@@ -700,7 +700,7 @@
       "description": "Write unit tests for random affirmation selection algorithm",
       "category": "testing",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {

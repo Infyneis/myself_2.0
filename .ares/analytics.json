@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T20:04:55.651Z",
+  "lastUpdated": "2026-01-13T20:06:03.198Z",
   "summary": {
     "totalFeatures": 0,
-    "completedFeatures": 61,
-    "totalSessions": 96,
-    "totalTimeMs": 19103148,
-    "totalTimeFormatted": "5h 18m",
-    "averageFeatureTimeMs": 303455,
-    "averageFeatureTimeFormatted": "5m 3s",
-    "averageSessionTimeMs": 198991,
-    "averageSessionTimeFormatted": "3m 18s"
+    "completedFeatures": 62,
+    "totalSessions": 97,
+    "totalTimeMs": 19168685,
+    "totalTimeFormatted": "5h 19m",
+    "averageFeatureTimeMs": 299617,
+    "averageFeatureTimeFormatted": "4m 59s",
+    "averageSessionTimeMs": 197615,
+    "averageSessionTimeFormatted": "3m 17s"
   },
   "features": [
     {
@@ -985,6 +985,22 @@
         "aef0c4508f97733d72f90e39918bb8e87e3c4521"
       ],
       "durationFormatted": "6m 8s"
+    },
+    {
+      "featureId": "TEST-001",
+      "featureName": "TEST-001",
+      "description": "Write unit tests for all Affirmation CRUD operations in repository",
+      "category": "testing",
+      "priority": "must-have",
+      "startedAt": "2026-01-13T20:04:57.660Z",
+      "completedAt": "2026-01-13T20:06:03.197Z",
+      "durationMs": 65537,
+      "sessionId": "session-mkd0tl87-rn4trh",
+      "sessionsCount": 1,
+      "commits": [
+        "8a93470a03ce7bbdd3991390255077ac0e084303"
+      ],
+      "durationFormatted": "1m 5s"
     }
   ],
   "sessions": [
@@ -2545,6 +2561,23 @@
         "aef0c4508f97733d72f90e39918bb8e87e3c4521"
       ],
       "durationFormatted": "6m 8s"
+    },
+    {
+      "sessionId": "session-mkd0tl87-rn4trh",
+      "startedAt": "2026-01-13T20:04:57.660Z",
+      "endedAt": "2026-01-13T20:06:03.197Z",
+      "durationMs": 65537,
+      "featuresWorkedOn": [
+        "TEST-001"
+      ],
+      "featuresCompleted": [
+        "TEST-001"
+      ],
+      "status": "completed",
+      "commits": [
+        "8a93470a03ce7bbdd3991390255077ac0e084303"
+      ],
+      "durationFormatted": "1m 5s"
     }
   ],
   "byCategory": {
@@ -2577,14 +2610,20 @@
       "completed": 4,
       "totalTimeMs": 903908,
       "averageTimeMs": 225977
+    },
+    "testing": {
+      "total": 0,
+      "completed": 1,
+      "totalTimeMs": 65537,
+      "averageTimeMs": 65537
     }
   },
   "byPriority": {
     "must-have": {
       "total": 0,
-      "completed": 45,
-      "totalTimeMs": 13557134,
-      "averageTimeMs": 301270
+      "completed": 46,
+      "totalTimeMs": 13622671,
+      "averageTimeMs": 296145
     },
     "should-have": {
       "total": 0,
