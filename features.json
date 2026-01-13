@@ -19,7 +19,7 @@
       "description": "Implement feature-based folder structure: lib/core/, lib/features/affirmations/, lib/features/settings/, lib/features/onboarding/, lib/widgets/native_widget/",
       "category": "infrastructure",
       "priority": "must-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": []
     },
     {
