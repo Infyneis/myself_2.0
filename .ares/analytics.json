@@ -1,17 +1,17 @@
 {
   "projectName": "My Project",
   "createdAt": "2026-01-13T08:54:37.259Z",
-  "lastUpdated": "2026-01-13T16:02:03.119Z",
+  "lastUpdated": "2026-01-13T16:02:52.983Z",
   "summary": {
     "totalFeatures": 0,
     "completedFeatures": 58,
-    "totalSessions": 85,
-    "totalTimeMs": 17594139,
-    "totalTimeFormatted": "4h 53m",
+    "totalSessions": 86,
+    "totalTimeMs": 17642000,
+    "totalTimeFormatted": "4h 54m",
     "averageFeatureTimeMs": 294311,
     "averageFeatureTimeFormatted": "4m 54s",
-    "averageSessionTimeMs": 206990,
-    "averageSessionTimeFormatted": "3m 26s"
+    "averageSessionTimeMs": 205140,
+    "averageSessionTimeFormatted": "3m 25s"
   },
   "features": [
     {
@@ -2326,6 +2326,21 @@
         "2c84907d28e5c7f2cc79b9c11a4399b38cea620c"
       ],
       "durationFormatted": "6m 7s"
+    },
+    {
+      "sessionId": "session-mkcs58zm-6qgotf",
+      "startedAt": "2026-01-13T16:02:05.122Z",
+      "endedAt": "2026-01-13T16:02:52.983Z",
+      "durationMs": 47861,
+      "featuresWorkedOn": [
+        "L10N-002"
+      ],
+      "featuresCompleted": [],
+      "status": "interrupted",
+      "commits": [
+        "dddba383e707aa1b24e05a1338c826f35a7bae60"
+      ],
+      "durationFormatted": "47s"
     }
   ],
   "byCategory": {
