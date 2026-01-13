@@ -213,6 +213,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             currentAffirmation.id,
                             breathingEnabled,
                           ),
+
+                          const SizedBox(height: AppDimensions.spacingL),
+
+                          // Refresh button to cycle through affirmations
+                          _buildRefreshButton(context, provider),
                         ],
                       ),
                     ),
@@ -249,6 +254,46 @@ class _HomeScreenState extends State<HomeScreen> {
   /// Shows the next random affirmation with smooth transition.
   void _showNextAffirmation(AffirmationProvider provider) {
     provider.selectRandomAffirmation();
+  }
+
+  /// Builds the refresh button to manually cycle through affirmations.
+  Widget _buildRefreshButton(
+    BuildContext context,
+    AffirmationProvider provider,
+  ) {
+    return Container(
+      constraints: const BoxConstraints(
+        minWidth: AppDimensions.minTouchTarget,
+        minHeight: AppDimensions.minTouchTarget,
+      ),
+      child: IconButton(
+        onPressed: () => _showNextAffirmation(provider),
+        icon: const Icon(Icons.refresh_rounded),
+        tooltip: 'Next affirmation',
+        iconSize: 28,
+        style: IconButton.styleFrom(
+          foregroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context)
+              .colorScheme
+              .primary
+              .withValues(alpha: 0.1),
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(AppDimensions.spacingM),
+        ),
+      ),
+    )
+        .animate()
+        .fadeIn(
+          delay: 300.ms,
+          duration: 400.ms,
+        )
+        .scale(
+          begin: const Offset(0.8, 0.8),
+          end: const Offset(1.0, 1.0),
+          delay: 300.ms,
+          duration: 400.ms,
+          curve: Curves.easeOutBack,
+        );
   }
 
   /// Builds the animated affirmation text with optional breathing animation.
