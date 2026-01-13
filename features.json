@@ -298,7 +298,7 @@
       "description": "Implement font size adjustment setting for accessibility with preview",
       "category": "ui",
       "priority": "should-have",
-      "passes": false,
+      "passes": true,
       "requirementIds": ["FR-026"]
     },
     {

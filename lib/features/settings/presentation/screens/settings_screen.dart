@@ -518,11 +518,22 @@ class SettingsScreen extends StatelessWidget {
                       .surfaceContainerHighest
                       .withValues(alpha: 0.3),
                 ),
-                child: Text(
-                  'Preview Text',
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontSize: 16 * settingsProvider.fontSizeMultiplier,
-                      ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Sample Affirmation',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: AppDimensions.spacingS),
+                    Text(
+                      'I am becoming the best version of myself',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             ),
