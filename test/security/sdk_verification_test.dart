@@ -6,9 +6,6 @@ void main() {
     test('All dependencies should be privacy compliant', () {
       final result = SdkVerification.verifyAllDependencies();
 
-      // Print full report for documentation
-      print(SdkVerification.getSummaryReport());
-
       // Verify no issues
       expect(result.issues, isEmpty,
           reason: 'No dependencies should collect user data');

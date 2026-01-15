@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "projectName": "Myself 2.0",
   "createdAt": "2026-01-13T08:42:07.105Z",
-  "updatedAt": "2026-01-13T20:30:23.000Z",
+  "updatedAt": "2026-01-14T10:57:51.935Z",
   "features": [
     {
       "id": "INFRA-001",
@@ -825,6 +825,16 @@
       "requirementIds": [
         "NFR-008"
       ]
+    },
+    {
+      "id": "UI-018",
+      "category": "ui",
+      "description": "Add dark mode toggle to settings page",
+      "steps": [
+        "Implement the enhancement"
+      ],
+      "priority": "medium",
+      "passes": false
     }
   ]
 }

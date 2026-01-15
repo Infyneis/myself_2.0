@@ -144,7 +144,7 @@ void main() {
 
     testWidgets('shows error when text exceeds character limit', (tester) async {
       // Arrange
-      final longText = 'a' * 281; // 281 characters (exceeds 280 limit)
+      // 281 characters would exceed 280 limit, but TextField enforces maxLength
       final provider = AffirmationProvider(repository: mockRepository);
 
       // Act

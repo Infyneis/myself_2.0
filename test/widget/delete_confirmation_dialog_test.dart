@@ -1,6 +1,8 @@
 /// Widget tests for DeleteConfirmationDialog.
 ///
 /// Tests for FUNC-004 and UI-016: Delete confirmation dialog functionality.
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myself_2_0/features/affirmations/presentation/widgets/delete_confirmation_dialog.dart';

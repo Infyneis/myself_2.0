@@ -234,11 +234,9 @@ void main() {
 
   group('English vs French Comparison', () {
     late AppLocalizations enL10n;
-    late AppLocalizations frL10n;
 
     setUp(() {
       enL10n = AppLocalizationsEn();
-      frL10n = AppLocalizationsEn(); // Will load French in real app context
     });
 
     test('should have same number of strings', () {

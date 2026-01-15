@@ -2,6 +2,8 @@
 ///
 /// Tests for FUNC-004: Implement functionality to delete affirmations
 /// with confirmation dialog.
+library;
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:myself_2_0/features/affirmations/data/models/affirmation.dart';

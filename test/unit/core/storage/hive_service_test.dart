@@ -6,6 +6,8 @@
 /// - Data persistence and retrieval
 /// - Error handling and state management
 /// - Affirmation model and adapter functionality
+library;
+
 import 'dart:io';
 
 import 'package:flutter/services.dart';

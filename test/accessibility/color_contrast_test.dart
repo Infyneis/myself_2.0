@@ -26,9 +26,6 @@ void main() {
           reason: 'Primary text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Zen Black on Cloud White: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.zenBlack, AppColors.cloudWhite)})');
       });
 
       test('Primary text (Zen Black) on Soft Sage meets WCAG AA', () {
@@ -43,9 +40,6 @@ void main() {
           reason: 'Text on accent background must have at least 4.5:1 contrast. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Zen Black on Soft Sage: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.zenBlack, AppColors.softSage)})');
       });
 
       test('Secondary text (Stone) on Cloud White meets WCAG AA', () {
@@ -60,9 +54,6 @@ void main() {
           reason: 'Secondary text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Stone on Cloud White: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.stone, AppColors.cloudWhite)})');
       });
 
       test('Error text on Cloud White meets WCAG AA', () {
@@ -77,9 +68,6 @@ void main() {
           reason: 'Error text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Error on Cloud White: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.error, AppColors.cloudWhite)})');
       });
 
       test('Success text on Cloud White meets WCAG AA', () {
@@ -94,9 +82,6 @@ void main() {
           reason: 'Success text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Success on Cloud White: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.success, AppColors.cloudWhite)})');
       });
 
       test('Text on Mist Gray background meets WCAG AA', () {
@@ -111,9 +96,6 @@ void main() {
           reason: 'Text on Mist Gray must have at least 4.5:1 contrast. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Zen Black on Mist Gray: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.zenBlack, AppColors.mistGray)})');
       });
     });
 
@@ -130,9 +112,6 @@ void main() {
           reason: 'Primary text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Soft White on Deep Night: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.softWhite, AppColors.deepNight)})');
       });
 
       test('Deep Night text on Soft Sage meets WCAG AA', () {
@@ -147,9 +126,6 @@ void main() {
           reason: 'Dark text on accent must have at least 4.5:1 contrast. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Deep Night on Soft Sage: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.deepNight, AppColors.softSage)})');
       });
 
       test('Secondary text (StoneDark) on Deep Night meets WCAG AA', () {
@@ -164,9 +140,6 @@ void main() {
           reason: 'Secondary text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ StoneDark on Deep Night: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.stoneDark, AppColors.deepNight)})');
       });
 
       test('Error text (Dark) on Deep Night meets WCAG AA', () {
@@ -181,9 +154,6 @@ void main() {
           reason: 'Error text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ ErrorDark on Deep Night: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.errorDark, AppColors.deepNight)})');
       });
 
       test('Success text (Dark) on Deep Night meets WCAG AA', () {
@@ -198,9 +168,6 @@ void main() {
           reason: 'Success text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ SuccessDark on Deep Night: ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.successDark, AppColors.deepNight)})');
       });
 
     });
@@ -218,9 +185,6 @@ void main() {
           reason: 'Button text must have at least 4.5:1 contrast ratio. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Button (Zen Black on Soft Sage): ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.zenBlack, AppColors.softSage)})');
       });
 
       test('Dark mode button text (Deep Night) on Soft Sage meets WCAG AA', () {
@@ -235,9 +199,6 @@ void main() {
           reason: 'Dark mode button text must have at least 4.5:1 contrast. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Dark Button (Deep Night on Soft Sage): ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.deepNight, AppColors.softSage)})');
       });
 
       test('Error text (Cloud White) on error background meets WCAG AA for large text', () {
@@ -252,9 +213,6 @@ void main() {
           reason: 'Error indicator text (large) must have at least 3:1 contrast. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Error indicator (Cloud White on Error): ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.cloudWhite, AppColors.error)})');
       });
 
       test('Error text (Deep Night) on errorDark background meets WCAG AA for large text', () {
@@ -269,9 +227,6 @@ void main() {
           reason: 'Dark mode error indicator text (large) must have at least 3:1 contrast. '
               'Got ${ratio.toStringAsFixed(2)}:1',
         );
-
-        print('✓ Dark Error indicator (Deep Night on ErrorDark): ${ratio.toStringAsFixed(2)}:1 '
-            '(${ColorContrast.getContrastGrade(AppColors.deepNight, AppColors.errorDark)})');
       });
     });
 
@@ -292,9 +247,9 @@ void main() {
         expect(sameSame, closeTo(1.0, 0.1));
       });
 
-      test('meetsWCAG_AA_Normal correctly identifies passing combinations', () {
+      test('meetsWcagAaNormal correctly identifies passing combinations', () {
         expect(
-          ColorContrast.meetsWCAG_AA_Normal(
+          ColorContrast.meetsWcagAaNormal(
             AppColors.zenBlack,
             AppColors.cloudWhite,
           ),
@@ -302,7 +257,7 @@ void main() {
         );
 
         expect(
-          ColorContrast.meetsWCAG_AA_Normal(
+          ColorContrast.meetsWcagAaNormal(
             AppColors.softWhite,
             AppColors.deepNight,
           ),
@@ -310,9 +265,9 @@ void main() {
         );
       });
 
-      test('meetsWCAG_AA_Large correctly identifies passing combinations', () {
+      test('meetsWcagAaLarge correctly identifies passing combinations', () {
         expect(
-          ColorContrast.meetsWCAG_AA_Large(
+          ColorContrast.meetsWcagAaLarge(
             AppColors.zenBlack,
             AppColors.cloudWhite,
           ),
@@ -335,24 +290,18 @@ void main() {
     });
 
     group('Comprehensive Color Matrix', () {
-      test('All theme color combinations are documented and verified', () {
-        print('\n=== LIGHT MODE COLOR COMBINATIONS ===');
-        _printColorMatrix('Light Mode');
-
-        print('\n=== DARK MODE COLOR COMBINATIONS ===');
-        _printColorMatrix('Dark Mode');
-
-        print('\n=== SUMMARY ===');
-        print('All color combinations have been verified for WCAG 2.1 Level AA compliance.');
-        print('Minimum contrast ratio: 4.5:1 for normal text');
-        print('Minimum contrast ratio: 3.0:1 for large text (≥18pt or ≥14pt bold)');
+      test('All theme color combinations meet WCAG requirements', () {
+        // Light mode combinations
+        _verifyColorMatrix('Light Mode');
+        // Dark mode combinations
+        _verifyColorMatrix('Dark Mode');
       });
     });
   });
 }
 
-/// Helper function to print color contrast matrix.
-void _printColorMatrix(String mode) {
+/// Helper function to verify color contrast matrix without printing.
+void _verifyColorMatrix(String mode) {
   final combinations = mode == 'Light Mode'
       ? [
           ('Zen Black', AppColors.zenBlack, 'Cloud White', AppColors.cloudWhite, true),
@@ -376,10 +325,16 @@ void _printColorMatrix(String mode) {
 
   for (final combo in combinations) {
     final ratio = ColorContrast.contrastRatio(combo.$2, combo.$4);
-    final meetsAA = ColorContrast.meetsWCAG_AA_Normal(combo.$2, combo.$4);
-    final meetsLarge = ColorContrast.meetsWCAG_AA_Large(combo.$2, combo.$4);
-    final status = meetsAA ? '✓ PASS' : (meetsLarge ? '✓ PASS (Large text only)' : '✗ FAIL');
-    final note = combo.$5 ? '' : ' (Not used in app)';
-    print('$status | ${combo.$1} on ${combo.$3}: ${ratio.toStringAsFixed(2)}:1$note');
+    final meetsAA = ColorContrast.meetsWcagAaNormal(combo.$2, combo.$4);
+    final meetsLarge = ColorContrast.meetsWcagAaLarge(combo.$2, combo.$4);
+    // Verify that used combinations meet at least large text requirements
+    if (combo.$5) {
+      expect(
+        meetsAA || meetsLarge,
+        isTrue,
+        reason: '${combo.$1} on ${combo.$3} should meet WCAG requirements. '
+            'Got ${ratio.toStringAsFixed(2)}:1',
+      );
+    }
   }
 }

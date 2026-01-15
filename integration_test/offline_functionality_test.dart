@@ -4,14 +4,16 @@
 /// internet connectivity. It tests the complete user flow in offline mode.
 library;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ThemeMode;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:myself_2_0/core/storage/hive_service.dart';
+import 'package:myself_2_0/features/affirmations/data/models/affirmation.dart';
 import 'package:myself_2_0/features/affirmations/data/repositories/hive_affirmation_repository.dart';
 import 'package:myself_2_0/features/affirmations/domain/usecases/get_random_affirmation.dart';
 import 'package:myself_2_0/features/affirmations/presentation/providers/affirmation_provider.dart';
 import 'package:myself_2_0/features/settings/data/hive_settings_repository.dart';
+import 'package:myself_2_0/features/settings/data/settings_model.dart';
 import 'package:myself_2_0/features/settings/presentation/providers/settings_provider.dart';
 import 'package:myself_2_0/widgets/native_widget/widget_service.dart';
 import 'package:myself_2_0/widgets/native_widget/widget_data_sync.dart';
@@ -74,8 +76,9 @@ void main() {
       await HiveService.close();
     });
 
-    testWidgets('App launches successfully offline',
-        (WidgetTester tester) async {
+    testWidgets('App launches successfully offline', (
+      WidgetTester tester,
+    ) async {
       // GIVEN: App is in offline mode (simulated by no network calls)
       // WHEN: App is launched
       await tester.pumpWidget(
@@ -99,20 +102,24 @@ void main() {
       expect(find.byType(MaterialApp), findsOneWidget);
     });
 
-    testWidgets('Create affirmation works offline',
-        (WidgetTester tester) async {
+    testWidgets('Create affirmation works offline', (
+      WidgetTester tester,
+    ) async {
       // GIVEN: App is running offline
       await affirmationProvider.loadAffirmations();
 
       // WHEN: User creates a new affirmation
-      const testAffirmation = 'I am capable of achieving my goals offline';
+      final testAffirmation = Affirmation.create(
+        text: 'I am capable of achieving my goals offline',
+      );
       await affirmationProvider.createAffirmation(testAffirmation);
 
       // THEN: Affirmation should be created and stored locally
       expect(affirmationProvider.affirmations.length, greaterThan(0));
       expect(
-        affirmationProvider.affirmations
-            .any((a) => a.text == testAffirmation),
+        affirmationProvider.affirmations.any(
+          (a) => a.text == testAffirmation.text,
+        ),
         isTrue,
         reason: 'Affirmation should be created in local storage',
       );
@@ -133,14 +140,16 @@ void main() {
 
       // THEN: Affirmation should be updated locally
       await affirmationProvider.loadAffirmations();
-      final updated = affirmationProvider.affirmations
-          .firstWhere((a) => a.id == affirmation.id);
+      final updated = affirmationProvider.affirmations.firstWhere(
+        (a) => a.id == affirmation.id,
+      );
       expect(updated.text, equals(updatedText));
       expect(updated.text, isNot(equals(originalText)));
     });
 
-    testWidgets('Delete affirmation works offline',
-        (WidgetTester tester) async {
+    testWidgets('Delete affirmation works offline', (
+      WidgetTester tester,
+    ) async {
       // GIVEN: An existing affirmation
       await affirmationProvider.loadAffirmations();
       final initialCount = affirmationProvider.affirmations.length;
@@ -153,37 +162,43 @@ void main() {
 
       // THEN: Affirmation should be removed from local storage
       await affirmationProvider.loadAffirmations();
+      expect(affirmationProvider.affirmations.length, equals(initialCount - 1));
       expect(
-        affirmationProvider.affirmations.length,
-        equals(initialCount - 1),
-      );
-      expect(
-        affirmationProvider.affirmations
-            .any((a) => a.id == affirmationToDelete.id),
+        affirmationProvider.affirmations.any(
+          (a) => a.id == affirmationToDelete.id,
+        ),
         isFalse,
       );
     });
 
-    testWidgets('Random affirmation selection works offline',
-        (WidgetTester tester) async {
+    testWidgets('Random affirmation selection works offline', (
+      WidgetTester tester,
+    ) async {
       // GIVEN: Multiple affirmations exist
       await affirmationProvider.loadAffirmations();
 
       // Ensure we have multiple affirmations
       if (affirmationProvider.affirmations.length < 3) {
-        await affirmationProvider.createAffirmation('Affirmation 1');
-        await affirmationProvider.createAffirmation('Affirmation 2');
-        await affirmationProvider.createAffirmation('Affirmation 3');
+        await affirmationProvider.createAffirmation(
+          Affirmation.create(text: 'Affirmation 1'),
+        );
+        await affirmationProvider.createAffirmation(
+          Affirmation.create(text: 'Affirmation 2'),
+        );
+        await affirmationProvider.createAffirmation(
+          Affirmation.create(text: 'Affirmation 3'),
+        );
       }
 
       // WHEN: User requests a random affirmation
-      await affirmationProvider.getRandomAffirmation();
+      await affirmationProvider.selectRandomAffirmation();
 
       // THEN: A random affirmation should be selected without network
       expect(affirmationProvider.currentAffirmation, isNotNull);
       expect(
-        affirmationProvider.affirmations
-            .contains(affirmationProvider.currentAffirmation),
+        affirmationProvider.affirmations.contains(
+          affirmationProvider.currentAffirmation,
+        ),
         isTrue,
         reason: 'Random affirmation should come from local storage',
       );
@@ -208,14 +223,16 @@ void main() {
       expect(settingsProvider.themeMode, equals(newTheme));
     });
 
-    testWidgets('Settings persistence works offline',
-        (WidgetTester tester) async {
+    testWidgets('Settings persistence works offline', (
+      WidgetTester tester,
+    ) async {
       // GIVEN: Current settings
       final initialRefreshMode = settingsProvider.refreshMode;
 
       // WHEN: User changes settings
-      final newRefreshMode =
-          initialRefreshMode == 'every_unlock' ? 'hourly' : 'every_unlock';
+      final newRefreshMode = initialRefreshMode == RefreshMode.onUnlock
+          ? RefreshMode.hourly
+          : RefreshMode.onUnlock;
       await settingsProvider.setRefreshMode(newRefreshMode);
 
       // THEN: Settings should be persisted locally
@@ -232,7 +249,9 @@ void main() {
       expect(affirmationProvider.affirmations.isNotEmpty, isTrue);
 
       // WHEN: User creates/updates affirmation (triggers widget sync)
-      const newAffirmation = 'Widget sync test offline';
+      final newAffirmation = Affirmation.create(
+        text: 'Widget sync test offline',
+      );
       await affirmationProvider.createAffirmation(newAffirmation);
 
       // THEN: Widget data should be synced via local storage
@@ -291,11 +310,7 @@ void main() {
       // 10. ✅ Widget updates on unlock
 
       // All these actions work without network connectivity
-      expect(
-        true,
-        isTrue,
-        reason: 'Complete user flow works offline',
-      );
+      expect(true, isTrue, reason: 'Complete user flow works offline');
     });
   });
 
@@ -309,11 +324,7 @@ void main() {
       // - WebSocket connections
       // - API client instances
 
-      expect(
-        true,
-        isTrue,
-        reason: 'Codebase contains no network calls',
-      );
+      expect(true, isTrue, reason: 'Codebase contains no network calls');
     });
 
     test('Local storage only', () {
@@ -323,11 +334,7 @@ void main() {
       // - Widget data: SharedPreferences/UserDefaults
       // - Exports: Local file system
 
-      expect(
-        true,
-        isTrue,
-        reason: 'All data stored locally',
-      );
+      expect(true, isTrue, reason: 'All data stored locally');
     });
   });
 }

@@ -5,7 +5,6 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myself_2_0/features/affirmations/data/models/affirmation.dart';
 import 'package:myself_2_0/features/affirmations/presentation/widgets/affirmation_card.dart';
@@ -49,7 +48,7 @@ void main() {
 
       // Verify it's marked as a button (tappable)
       expect(
-        semantics.hasFlag(SemanticsFlag.isButton),
+        semantics.flagsCollection.isButton,
         isTrue,
         reason: 'TalkBack should identify this as an actionable button',
       );
@@ -207,7 +206,7 @@ void main() {
 
       final semantics = tester.getSemantics(loadingFinder);
       expect(
-        semantics.hasFlag(SemanticsFlag.isLiveRegion),
+        semantics.flagsCollection.isLiveRegion,
         isTrue,
         reason: 'TalkBack should announce loading state immediately',
       );
@@ -247,7 +246,7 @@ void main() {
 
       var semantics = tester.getSemantics(switchFinder);
       expect(
-        semantics.hasFlag(SemanticsFlag.hasToggledState),
+        semantics.flagsCollection.hasToggledState,
         isTrue,
         reason: 'TalkBack should recognize this as a toggle',
       );
@@ -259,7 +258,7 @@ void main() {
       // Verify state changed
       semantics = tester.getSemantics(switchFinder);
       expect(
-        semantics.hasFlag(SemanticsFlag.isToggled),
+        semantics.flagsCollection.isToggled,
         isTrue,
         reason: 'TalkBack should announce the new toggled state',
       );
@@ -297,7 +296,7 @@ void main() {
       // Initial state - not selected
       var semantics = tester.getSemantics(optionFinder);
       expect(
-        semantics.hasFlag(SemanticsFlag.isSelected),
+        semantics.flagsCollection.isSelected,
         isFalse,
         reason: 'TalkBack should announce item as not selected',
       );
@@ -309,7 +308,7 @@ void main() {
       // Verify selected state
       semantics = tester.getSemantics(optionFinder);
       expect(
-        semantics.hasFlag(SemanticsFlag.isSelected),
+        semantics.flagsCollection.isSelected,
         isTrue,
         reason: 'TalkBack should announce item as selected',
       );

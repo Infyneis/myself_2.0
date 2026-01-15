@@ -21,9 +21,10 @@ class ColorContrast {
   /// Returns a value between 0 (darkest) and 1 (lightest).
   static double _relativeLuminance(Color color) {
     // Convert color to RGB values between 0 and 1
-    final r = color.red / 255.0;
-    final g = color.green / 255.0;
-    final b = color.blue / 255.0;
+    // Using new Flutter API: color.r/g/b are already normalized to 0-1
+    final r = color.r;
+    final g = color.g;
+    final b = color.b;
 
     // Apply gamma correction
     final rsRGB = r <= 0.03928 ? r / 12.92 : math.pow((r + 0.055) / 1.055, 2.4);
@@ -51,28 +52,28 @@ class ColorContrast {
   /// Check if the contrast ratio meets WCAG AA standard for normal text.
   ///
   /// Normal text requires a minimum contrast ratio of 4.5:1.
-  static bool meetsWCAG_AA_Normal(Color foreground, Color background) {
+  static bool meetsWcagAaNormal(Color foreground, Color background) {
     return contrastRatio(foreground, background) >= 4.5;
   }
 
   /// Check if the contrast ratio meets WCAG AA standard for large text.
   ///
   /// Large text (≥18pt or ≥14pt bold) requires a minimum contrast ratio of 3:1.
-  static bool meetsWCAG_AA_Large(Color foreground, Color background) {
+  static bool meetsWcagAaLarge(Color foreground, Color background) {
     return contrastRatio(foreground, background) >= 3.0;
   }
 
   /// Check if the contrast ratio meets WCAG AAA standard for normal text.
   ///
   /// WCAG AAA requires a minimum contrast ratio of 7:1 for normal text.
-  static bool meetsWCAG_AAA_Normal(Color foreground, Color background) {
+  static bool meetsWcagAaaNormal(Color foreground, Color background) {
     return contrastRatio(foreground, background) >= 7.0;
   }
 
   /// Check if the contrast ratio meets WCAG AAA standard for large text.
   ///
   /// WCAG AAA requires a minimum contrast ratio of 4.5:1 for large text.
-  static bool meetsWCAG_AAA_Large(Color foreground, Color background) {
+  static bool meetsWcagAaaLarge(Color foreground, Color background) {
     return contrastRatio(foreground, background) >= 4.5;
   }
 
@@ -95,6 +96,6 @@ class ColorContrast {
 
   /// Format a color as a hex string for display.
   static String colorToHex(Color color) {
-    return '#${color.value.toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
+    return '#${color.toARGB32().toRadixString(16).padLeft(8, '0').substring(2).toUpperCase()}';
   }
 }
