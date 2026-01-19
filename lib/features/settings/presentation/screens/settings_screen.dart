@@ -434,7 +434,6 @@ class SettingsScreen extends StatelessWidget {
               settingsProvider,
               'fr',
               l10n.languageFrench,
-              l10n.languageFrench,
               Icons.language,
             ),
             const SizedBox(height: AppDimensions.spacingS),
@@ -442,7 +441,6 @@ class SettingsScreen extends StatelessWidget {
               context,
               settingsProvider,
               'en',
-              l10n.languageEnglish,
               l10n.languageEnglish,
               Icons.language,
             ),
@@ -458,7 +456,6 @@ class SettingsScreen extends StatelessWidget {
     SettingsProvider settingsProvider,
     String languageCode,
     String label,
-    String description,
     IconData icon,
   ) {
     final isSelected = settingsProvider.language == languageCode;
@@ -468,7 +465,6 @@ class SettingsScreen extends StatelessWidget {
       enabled: true,
       selected: isSelected,
       label: '$label language',
-      hint: description,
       onTap: () async {
         await settingsProvider.setLanguage(languageCode);
       },
@@ -505,29 +501,15 @@ class SettingsScreen extends StatelessWidget {
             ),
             const SizedBox(width: AppDimensions.spacingM),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    label,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight:
-                              isSelected ? FontWeight.w600 : FontWeight.normal,
-                          color: isSelected
-                              ? Theme.of(context).colorScheme.primary
-                              : null,
-                        ),
-                  ),
-                  Text(
-                    description,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withValues(alpha: 0.6),
-                        ),
-                  ),
-                ],
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontWeight:
+                          isSelected ? FontWeight.w600 : FontWeight.normal,
+                      color: isSelected
+                          ? Theme.of(context).colorScheme.primary
+                          : null,
+                    ),
               ),
             ),
             if (isSelected)

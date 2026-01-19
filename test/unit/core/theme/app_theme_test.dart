@@ -121,14 +121,14 @@ void main() {
       expect(AppColors.softSage, const Color(0xFFA8C5B5));
       expect(AppColors.mistGray, const Color(0xFFE8EAED));
 
-      // Text colors
-      expect(AppColors.stone, const Color(0xFF6B7280));
+      // Text colors (WCAG AA compliant)
+      expect(AppColors.stone, const Color(0xFF5F6672));
       expect(AppColors.zenBlack, const Color(0xFF2D3436));
       expect(AppColors.softWhite, const Color(0xFFF1F3F4));
 
-      // Semantic colors
-      expect(AppColors.error, const Color(0xFFE57373));
-      expect(AppColors.success, const Color(0xFF81C784));
+      // Semantic colors (WCAG AA compliant)
+      expect(AppColors.error, const Color(0xFFC62828));
+      expect(AppColors.success, const Color(0xFF2E7D32));
     });
   });
 
